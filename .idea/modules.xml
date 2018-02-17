@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../http2/http2.iml" filepath="$PROJECT_DIR$/../http2/http2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/silent_alexa.iml" filepath="$PROJECT_DIR$/silent_alexa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../tutorial-http-requests-in-react/tutorial-http-requests-in-react.iml" filepath="$PROJECT_DIR$/../tutorial-http-requests-in-react/tutorial-http-requests-in-react.iml" />
+    </modules>
+  </component>
+</project>
