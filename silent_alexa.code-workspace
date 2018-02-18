@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "silent_alexa"
+		}
+	],
+	"settings": {
+		"editor.formatOnSave": true
+	}
+}
