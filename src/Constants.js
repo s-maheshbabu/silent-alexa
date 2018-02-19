@@ -1,0 +1,4 @@
+const DEFAULT_PLACEHOLDER_FOR_USER_REQUEST_STRING = 'Type your request for Alexa..';
+
+module.exports = DEFAULT_PLACEHOLDER_FOR_USER_REQUEST_STRING
+
