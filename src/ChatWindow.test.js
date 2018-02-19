@@ -6,7 +6,7 @@ import ChatWindow from './ChatWindow';
 
 const users = require('./ConversingUsers');
 
-it('renders without crashing', () => {
+it('renders ChatWindow without crashing', () => {
     mount(<ChatWindow />);
 });
 

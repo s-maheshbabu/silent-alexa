@@ -3,16 +3,17 @@ import { mount } from 'enzyme';
 
 import ChatWindow from './ChatWindow';
 import UserRequestToAlexaForm from './UserRequestToAlexaForm.js';
+import TextField from 'material-ui/TextField';
 
 const DEFAULT_PLACEHOLDER_VALUE = require('./Constants');
 
-it('renders without crashing', () => {
+it('renders UserRequestToAlexaForm without crashing', () => {
     mount(<UserRequestToAlexaForm />);
 });
 
 it('displays the right placeholder message', () => {
     const form = mount(<UserRequestToAlexaForm />);
-    expect(form.find('input').prop('placeholder')).toEqual(DEFAULT_PLACEHOLDER_VALUE);
+    expect(form.find('TextField').prop('hintText')).toEqual(DEFAULT_PLACEHOLDER_VALUE);
 });
 
 it('calls the right methods when events get triggered', () => {
