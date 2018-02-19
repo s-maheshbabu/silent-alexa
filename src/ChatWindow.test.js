@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { shallow, mount, render } from 'enzyme';
-import ReactTestUtils from 'react-dom/test-utils';
+import { shallow, mount } from 'enzyme';
 
-import ChatWindow from './ChatWindow';
 import { Message } from 'react-chat-ui';
+import ChatWindow from './ChatWindow';
 
 const users = require('./ConversingUsers');
 
@@ -71,16 +69,16 @@ it('handles gracefully when pushMessage is called with an empty or null message'
 
 it('handles the user\'s form submission with request to Alexa properly', () => {
     const chatWindow = mount(<ChatWindow />);
-    const requestToAlexaForm = chatWindow.find('form').get(0);
+    const userRequestToAlexaForm = chatWindow.find('form').get(0);
     const chatWindowInstance = chatWindow.instance();
 
     const originalState = JSON.parse(JSON.stringify(chatWindowInstance.state));
     const numberOfMessagesAlreadyInState = originalState.messages.length;
 
-    const mockRequestToAlexa = 'mock request';
+    const mockuserRequestToAlexa = 'mock request';
     const userid = 1;
     chatWindowInstance.setState({
-        requestToAlexa: mockRequestToAlexa,
+        userRequestToAlexa: mockuserRequestToAlexa,
         curr_user: userid
     });
 
@@ -92,12 +90,12 @@ it('handles the user\'s form submission with request to Alexa properly', () => {
 
     const finalState = chatWindowInstance.state;
 
-    const expectedMessage = new Message({ id: userid, message: mockRequestToAlexa, senderName: users[userid] });
+    const expectedMessage = new Message({ id: userid, message: mockuserRequestToAlexa, senderName: users[userid] });
     const finalMessages = finalState.messages;
     expect(finalMessages.length).toBe(numberOfMessagesAlreadyInState + 1);
     expect(finalMessages[numberOfMessagesAlreadyInState]).toEqual(expectedMessage);
 
-    expect(chatWindowInstance.state.requestToAlexa).toEqual('');
+    expect(chatWindowInstance.state.userRequestToAlexa).toEqual('');
 });
 
 it('handles gracefully when the input form is submitted with a null or empty request string', () => {
@@ -106,14 +104,14 @@ it('handles gracefully when the input form is submitted with a null or empty req
     const originalState = JSON.parse(JSON.stringify(chatWindow.instance().state));
     const numberOfMessagesAlreadyInState = originalState.messages.length;
 
-    const requestToAlexaForm = chatWindow.find('form').get(0);
+    const userRequestToAlexaForm = chatWindow.find('UserRequestToAlexaForm').get(0);
 
-    let nullRequestToAlexa;
+    let nulluserRequestToAlexa;
     chatWindowInstance.setState({
-        requestToAlexa: nullRequestToAlexa
+        userRequestToAlexa: nulluserRequestToAlexa
     });
 
-    chatWindow.find('form').simulate('submit', { preventDefault: jest.fn() });
+    chatWindow.find('UserRequestToAlexaForm').simulate('submit', { preventDefault: jest.fn() });
 
     const finalState = chatWindowInstance.state;
 

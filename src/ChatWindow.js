@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ChatFeed, Message } from 'react-chat-ui'
 
+import UserRequestToAlexaForm from './UserRequestToAlexaForm.js';
 const users = require('./ConversingUsers');
 
 class ChatWindow extends Component {
@@ -15,26 +16,30 @@ class ChatWindow extends Component {
           senderName: 'Alexa',
         }),
       ],
-      requestToAlexa: '',
+      userRequestToAlexa: '',
       useCustomBubble: false,
       curr_user: 0,
       is_typing: false
     };
 
-    this.onMessageSubmit = this.onMessageSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.onUserRequestToAlexaSubmit = this.onUserRequestToAlexaSubmit.bind(this);
+    this.handleChangeInUserRequestToAlexa = this.handleChangeInUserRequestToAlexa.bind(this);
   }
 
-  onMessageSubmit(e) {
-    const requestToAlexa = this.state.requestToAlexa;
+  /*
+  Once the user submits the request for Alexa, we need to update the messages
+  in the state so the chat window gets updated.
+  */
+  onUserRequestToAlexaSubmit(e) {
+    const userRequestToAlexa = this.state.userRequestToAlexa;
     e.preventDefault();
-    if (!requestToAlexa || 0 === requestToAlexa.length) {
-      console.log("Request string for Alexa was empty: " + requestToAlexa);
-      this.setState({ requestToAlexa: '' });
+    if (!userRequestToAlexa || 0 === userRequestToAlexa.length) {
+      console.log("Request string for Alexa was empty: " + userRequestToAlexa);
+      this.setState({ userRequestToAlexa: '' });
       return false;
     }
-    this.pushMessage(this.state.curr_user, requestToAlexa);
-    this.setState({ requestToAlexa: '' });
+    this.pushMessage(this.state.curr_user, userRequestToAlexa);
+    this.setState({ userRequestToAlexa: '' });
     return true;
   }
 
@@ -58,8 +63,11 @@ class ChatWindow extends Component {
     this.setState({ messages: messagesCopy });
   }
 
-  handleChange(event) {
-    this.setState({ requestToAlexa: event.target.value });
+  /*
+  Update the state as the user is typing into the input box
+  */
+  handleChangeInUserRequestToAlexa(event) {
+    this.setState({ userRequestToAlexa: event.target.value });
   }
 
   render() {
@@ -74,17 +82,15 @@ class ChatWindow extends Component {
           bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
         />
 
-        <form onSubmit={this.onMessageSubmit}>
-          <input type="text" value={this.state.requestToAlexa} onChange={this.handleChange}
-            placeholder="Type your request for Alexa..."
-            className="request-input"
-          />
-        </form>
+        <UserRequestToAlexaForm
+          value={this.state.userRequestToAlexa}
+          onChange={(e) => this.handleChangeInUserRequestToAlexa(e)}
+          onSubmit={(e) => this.onUserRequestToAlexaSubmit(e)}
+        />
 
       </div>
     );
   }
 }
-
 
 export default ChatWindow;
