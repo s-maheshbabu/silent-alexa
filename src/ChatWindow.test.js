@@ -6,16 +6,21 @@ import ChatWindow from './ChatWindow';
 
 const users = require('./ConversingUsers');
 
+let chatWindow;
+let chatWindowInstance;
+let originalState;
+beforeEach(() => {
+    chatWindow = shallow(<ChatWindow />);
+    chatWindowInstance = chatWindow.instance();
+    originalState = JSON.parse(JSON.stringify(chatWindow.instance().state));
+});
+
 it('renders ChatWindow without crashing', () => {
     mount(<ChatWindow />);
 });
 
 it('pushMessage persists a given message in state', () => {
-    const chatWindow = shallow(<ChatWindow />);
-    const chatWindowInstance = chatWindow.instance();
-
-    const numberOfMessagesAlreadyInState = 2;
-    const originalState = JSON.parse(JSON.stringify(chatWindow.instance().state));
+    const numberOfMessagesAlreadyInState = originalState.messages.length;
     expect(originalState.messages.length).toBe(numberOfMessagesAlreadyInState);
 
     const userid = 1;
@@ -31,10 +36,6 @@ it('pushMessage persists a given message in state', () => {
 });
 
 it('handles gracefully when pushMessage is called with an unknown user', () => {
-    const chatWindow = shallow(<ChatWindow />);
-    const chatWindowInstance = chatWindow.instance();
-    const originalState = JSON.parse(JSON.stringify(chatWindow.instance().state));
-
     const invalidUserid = 1000; // valid values are just 0 and 1
 
     chatWindow.instance().pushMessage(invalidUserid, 'test message');
@@ -45,10 +46,6 @@ it('handles gracefully when pushMessage is called with an unknown user', () => {
 });
 
 it('handles gracefully when pushMessage is called with an empty or null message', () => {
-    const chatWindow = shallow(<ChatWindow />);
-    const chatWindowInstance = chatWindow.instance();
-    const originalState = JSON.parse(JSON.stringify(chatWindow.instance().state));
-
     const userid = 1;
     const emptyMessage = '';
 
@@ -69,10 +66,10 @@ it('handles gracefully when pushMessage is called with an empty or null message'
 
 it('handles the user\'s form submission with request to Alexa properly', () => {
     const chatWindow = mount(<ChatWindow />);
-    const userRequestToAlexaForm = chatWindow.find('form').get(0);
     const chatWindowInstance = chatWindow.instance();
-
     const originalState = JSON.parse(JSON.stringify(chatWindowInstance.state));
+
+    const userRequestToAlexaForm = chatWindow.find('form').get(0);
     const numberOfMessagesAlreadyInState = originalState.messages.length;
 
     const mockuserRequestToAlexa = 'mock request';
@@ -99,9 +96,6 @@ it('handles the user\'s form submission with request to Alexa properly', () => {
 });
 
 it('handles gracefully when the input form is submitted with a null or empty request string', () => {
-    const chatWindow = shallow(<ChatWindow />);
-    const chatWindowInstance = chatWindow.instance();
-    const originalState = JSON.parse(JSON.stringify(chatWindow.instance().state));
     const numberOfMessagesAlreadyInState = originalState.messages.length;
 
     const userRequestToAlexaForm = chatWindow.find('UserRequestToAlexaForm').get(0);
