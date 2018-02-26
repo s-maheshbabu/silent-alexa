@@ -11,6 +11,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div className="App">
+        
           <ChatWindow />
         </div>
       </MuiThemeProvider>
