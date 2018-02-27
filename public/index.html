@@ -25,6 +25,25 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+    <!--
+      Install LoginWithAmazon SDK.
+      Reference: https://developer.amazon.com/docs/login-with-amazon/install-sdk-javascript.html
+    -->
+    <div id="amazon-root"></div>
+    <script type="text/javascript">
+
+      window.onAmazonLoginReady = function() {
+        amazon.Login.setClientId('amzn1.application-oa2-client.b7bd09596de34d37a2403a712f137e22')
+      };
+      (function(d) {
+        var a = d.createElement('script'); a.type = 'text/javascript';
+        a.async = true; a.id = 'amazon-login-sdk';
+        a.src = 'https://api-cdn.amazon.com/sdk/login1.js';
+        d.getElementById('amazon-root').appendChild(a);
+      })(document);
+
+    </script>
+
     <div id="root"></div>
     <!--
       This HTML file is a template.
