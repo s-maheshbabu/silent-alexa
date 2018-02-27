@@ -5,8 +5,9 @@ import UserRequestToAlexaForm from './UserRequestToAlexaForm.js';
 const users = require('./ConversingUsers');
 
 class ChatWindow extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log("Received access_token:" + props.access_token);
     this.state = {
       messages: [
         new Message({ id: 0, message: 'Hello Alexa!', senderName: 'You' }),
@@ -73,7 +74,6 @@ class ChatWindow extends Component {
   render() {
     return (
       <div className="ChatWindow" >
-
         <ChatFeed
           messages={this.state.messages}
           isTyping={this.state.is_typing} // Boolean: is the recipient typing
