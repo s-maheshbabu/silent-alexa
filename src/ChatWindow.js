@@ -1,29 +1,57 @@
-import React, { Component } from 'react';
-import { ChatFeed, Message } from 'react-chat-ui'
+import React, { Component } from "react";
+import { ChatFeed, Message } from "react-chat-ui";
+import ContainerDimensions from "react-container-dimensions";
 
-import UserRequestToAlexaForm from './UserRequestToAlexaForm.js';
-const users = require('./ConversingUsers');
+import UserRequestToAlexaForm from "./UserRequestToAlexaForm.js";
+import "./ChatWindow.css";
+
+const users = require("./ConversingUsers");
 
 class ChatWindow extends Component {
   constructor() {
     super();
     this.state = {
       messages: [
-        new Message({ id: 0, message: 'Hello Alexa!', senderName: 'You' }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
         new Message({
           id: 1,
-          message: 'Hey! Alexa here.',
-          senderName: 'Alexa',
+          message: "Hey! Alexa here.",
+          senderName: "Alexa"
         }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" })
       ],
-      userRequestToAlexa: '',
+      userRequestToAlexa: "",
       useCustomBubble: false,
       curr_user: 0,
       is_typing: false
     };
 
-    this.onUserRequestToAlexaSubmit = this.onUserRequestToAlexaSubmit.bind(this);
-    this.handleChangeInUserRequestToAlexa = this.handleChangeInUserRequestToAlexa.bind(this);
+    this.onUserRequestToAlexaSubmit = this.onUserRequestToAlexaSubmit.bind(
+      this
+    );
+    this.handleChangeInUserRequestToAlexa = this.handleChangeInUserRequestToAlexa.bind(
+      this
+    );
   }
 
   /*
@@ -35,11 +63,11 @@ class ChatWindow extends Component {
     e.preventDefault();
     if (!userRequestToAlexa || 0 === userRequestToAlexa.length) {
       console.log("Request string for Alexa was empty: " + userRequestToAlexa);
-      this.setState({ userRequestToAlexa: '' });
+      this.setState({ userRequestToAlexa: "" });
       return false;
     }
     this.pushMessage(this.state.curr_user, userRequestToAlexa);
-    this.setState({ userRequestToAlexa: '' });
+    this.setState({ userRequestToAlexa: "" });
     return true;
   }
 
@@ -57,7 +85,7 @@ class ChatWindow extends Component {
     const newMessage = new Message({
       id: userid,
       message,
-      senderName: users[userid],
+      senderName: users[userid]
     });
     messagesCopy.push(newMessage);
     this.setState({ messages: messagesCopy });
@@ -72,22 +100,28 @@ class ChatWindow extends Component {
 
   render() {
     return (
-      <div className="ChatWindow" >
-
-        <ChatFeed
-          messages={this.state.messages}
-          isTyping={this.state.is_typing} // Boolean: is the recipient typing
-          hasInputField={false} // Boolean: use our input, or use your own
-          showSenderName={false} // show the name of the user who sent the message
-          bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
-        />
-
-        <UserRequestToAlexaForm
-          value={this.state.userRequestToAlexa}
-          onChange={(e) => this.handleChangeInUserRequestToAlexa(e)}
-          onSubmit={(e) => this.onUserRequestToAlexaSubmit(e)}
-        />
-
+      <div className="leftpanel">
+        <div className="panel-body">
+          <ContainerDimensions>
+            {({ height }) => (
+              <ChatFeed
+                messages={this.state.messages}
+                isTyping={this.state.is_typing} // Boolean: is the recipient typing
+                hasInputField={false} // Boolean: use our input, or use your own
+                showSenderName={false} // show the name of the user who sent the message
+                bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
+                maxHeight={height}
+              />
+            )}
+          </ContainerDimensions>
+        </div>
+        <div className="chat-input">
+          <UserRequestToAlexaForm
+            value={this.state.userRequestToAlexa}
+            onChange={e => this.handleChangeInUserRequestToAlexa(e)}
+            onSubmit={e => this.onUserRequestToAlexaSubmit(e)}
+          />
+        </div>
       </div>
     );
   }
