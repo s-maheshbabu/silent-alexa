@@ -1,0 +1,22 @@
+/** Scafolding **/
+
+.leftpanel {
+  display: grid;
+  grid-template-rows: auto 30px;
+  height: calc(100vh - 60px);
+}
+
+.panel-body {
+  overflow: auto;
+}
+
+/** Styles **/
+.leftpanel {
+  border-right: 1px solid #d3c5cf;
+}
+
+.leftpanel .chat-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
