@@ -7,7 +7,6 @@ const users = require('./ConversingUsers');
 class ChatWindow extends Component {
   constructor(props) {
     super(props);
-    console.log("Received access_token:" + props.access_token);
     this.state = {
       messages: [
         new Message({ id: 0, message: 'Hello Alexa!', senderName: 'You' }),

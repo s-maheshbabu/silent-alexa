@@ -9,18 +9,22 @@ import ChatWindow from './ChatWindow.js'
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      authorization: {}
+    }
   }
 
   render() {
     return (
       <MuiThemeProvider>
         <div className="App">
-          <LoginWithAmazon setAccessToken={(access_token) => this.setState({access_token: access_token})} />
+          <LoginWithAmazon setAuthorization={(authResponse) =>
+            this.setState({authorization: {access_token: authResponse.access_token, expires_in: authResponse.expires_in}})} />
 
-          {/* This will not be rendered until access_token is available in the state */}
-          { this.state && this.state.access_token &&
-            <ChatWindow access_token={this.state.access_token}/> }
+          {/* This will not be rendered until access_token and expires_in are available in the state.
+           TODO: Replace this with routing logic i.e., route to ChatWindow on successful login */}
+          { this.state && this.state.authorization.access_token && this.state.authorization.expires_in &&
+            <ChatWindow authorization={this.state.authorization}/> }
         </div>
       </MuiThemeProvider>
     );

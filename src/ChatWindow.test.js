@@ -15,8 +15,13 @@ beforeEach(() => {
     originalState = JSON.parse(JSON.stringify(chatWindow.instance().state));
 });
 
+afterEach(() => {
+    chatWindow.unmount();
+});
+
 it('renders ChatWindow without crashing', () => {
-    mount(<ChatWindow />);
+    const wrapper = mount(<ChatWindow />);
+    wrapper.unmount();
 });
 
 it('pushMessage persists a given message in state', () => {
