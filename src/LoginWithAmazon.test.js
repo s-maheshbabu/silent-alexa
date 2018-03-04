@@ -1,6 +1,7 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
 import LoginWithAmazon from './LoginWithAmazon';
+const util = require('util')
 
 let loginWithAmazon;
 let loginWithAmazonInstance;
@@ -44,23 +45,28 @@ it('logs error message when response is undefined', () => {
     loginWithAmazonInstance.handleResponse(response)
 
     // Verify error message has been logged to console
-    expect(global.console.log).toHaveBeenCalledWith('Response is undefined')
+    expect(global.console.log).toHaveBeenCalledWith('Encountered an error on login: undefined')
 });
 
 it('logs error message when authorization request encounters an error', () => {
     global.console = {
       log: jest.fn()
-    }
+    };
 
-    let response={error: 'some_error'}
+    const response = {
+      error: 'some_error_code',
+      error_description: 'description about error as string',
+      state: {page: 'http://somePage'}
+    }
     loginWithAmazonInstance.handleResponse(response)
 
     // Verify error message has been logged to console
-    expect(global.console.log).toHaveBeenCalledWith('Encountered an error on login: some_error')
+    expect(global.console.log)
+      .toHaveBeenCalledWith('Encountered an error on login: ' + util.inspect(response, { showHidden: true, depth: null }))
 });
 
 it('calls setAuthorization when authorization request is success', () => {
-    let response={access_token: 'some_access_token', expires_in: 3600}
+    const response={access_token: 'some_access_token', expires_in: 3600}
     loginWithAmazonInstance.handleResponse(response)
 
     // Verify setAuthorization is called with the authorization response argument

@@ -21,18 +21,15 @@ class ChatWindow extends Component {
       curr_user: 0,
       is_typing: false
     };
-
-    this.onUserRequestToAlexaSubmit = this.onUserRequestToAlexaSubmit.bind(this);
-    this.handleChangeInUserRequestToAlexa = this.handleChangeInUserRequestToAlexa.bind(this);
   }
 
   /*
   Once the user submits the request for Alexa, we need to update the messages
   in the state so the chat window gets updated.
   */
-  onUserRequestToAlexaSubmit(e) {
+  onUserRequestToAlexaSubmit(event) {
     const userRequestToAlexa = this.state.userRequestToAlexa;
-    e.preventDefault();
+    event.preventDefault();
     if (!userRequestToAlexa || 0 === userRequestToAlexa.length) {
       console.log("Request string for Alexa was empty: " + userRequestToAlexa);
       this.setState({ userRequestToAlexa: '' });
@@ -43,7 +40,7 @@ class ChatWindow extends Component {
     return true;
   }
 
-  pushMessage(userid, message) {
+  pushMessage = (userid, message) => {
     if (!users[userid]) {
       console.log("Unknown userId: " + userid);
       return;

@@ -1,4 +1,5 @@
 import React from 'react';
+const util = require('util');
 
 // Options variable to request for implicit grant.
 // TODO: Logic for assigning 'deviceSerialNumber' needs to be revisited.
@@ -22,14 +23,11 @@ export default class LoginWithAmazon extends React.Component {
     window.amazon.Login.authorize(options, response => this.handleResponse(response));
   }
 
-  handleResponse(response) {
-    if(typeof response === 'undefined') {
-      console.log("Response is undefined");
-    }
-    else if(response.error) {
-      console.log("Encountered an error on login: " + response.error);
+  handleResponse = (authorizationResponse) => {
+    if(typeof authorizationResponse === 'undefined' || authorizationResponse.error) {
+      console.log("Encountered an error on login: " + util.inspect(authorizationResponse, { showHidden: true, depth: null }));
     } else {
-      this.props.setAuthorization(response);
+      this.props.setAuthorization(authorizationResponse);
     }
   }
 }
