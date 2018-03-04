@@ -1,14 +1,16 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 
-import { Message } from "react-chat-ui";
+import { ChatFeed, Message } from "react-chat-ui";
 import ChatWindow from "./ChatWindow";
 
 const users = require("./ConversingUsers");
+const CHATFEED_CONTAINER_HEIGHT = 234;
 
 let chatWindow;
 let chatWindowInstance;
 let originalState;
+
 beforeEach(() => {
   chatWindow = shallow(<ChatWindow />);
   chatWindowInstance = chatWindow.instance();
@@ -17,6 +19,26 @@ beforeEach(() => {
 
 it("renders ChatWindow without crashing", () => {
   mount(<ChatWindow />);
+});
+
+it("that it renders correctly (snapshot testing)", () => {
+  const wrapper = mount(<ChatWindow />);
+  expect(wrapper).toMatchSnapshot();
+});
+
+it("that height of container is passed to ChatFeed", () => {
+  const wrapper = mount(<ChatWindow />);
+  const chatFeed = wrapper.find(ChatFeed);
+
+  // Set height of the ChatFeed container.
+  Element.prototype.getBoundingClientRect = jest.fn(() => {
+    return {
+      height: CHATFEED_CONTAINER_HEIGHT
+    };
+  });
+
+  expect(chatFeed.length).toBe(1);
+  expect(chatFeed.prop("maxHeight")).toBe(CHATFEED_CONTAINER_HEIGHT);
 });
 
 it("pushMessage persists a given message in state", () => {

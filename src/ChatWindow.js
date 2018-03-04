@@ -18,6 +18,8 @@ class ChatWindow extends Component {
           message: "Hey! Alexa here.",
           senderName: "Alexa"
         }),
+        // Adding a bunch of dummy messages to make the ChatFeed overflow window height.
+        // This will be useful during the development phase but will be removed once we are confident about the layout.
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
         new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
@@ -106,10 +108,10 @@ class ChatWindow extends Component {
             {({ height }) => (
               <ChatFeed
                 messages={this.state.messages}
-                isTyping={this.state.is_typing} // Boolean: is the recipient typing
-                hasInputField={false} // Boolean: use our input, or use your own
+                isTyping={this.state.is_typing} // is the recipient typing
+                hasInputField={false} // use the default input field that is provided along with ChatFeed component
                 showSenderName={false} // show the name of the user who sent the message
-                bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
+                bubblesCentered={false}
                 maxHeight={height}
               />
             )}
