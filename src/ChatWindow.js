@@ -71,6 +71,7 @@ class ChatWindow extends Component {
   Update the state as the user is typing into the input box
   */
   handleChangeInUserRequestToAlexa(event) {
+    event.preventDefault();
     this.setState({ userRequestToAlexa: event.target.value });
   }
 

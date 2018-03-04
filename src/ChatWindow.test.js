@@ -9,6 +9,7 @@ const users = require("./ConversingUsers");
 let chatWindow;
 let chatWindowInstance;
 let originalState;
+
 beforeEach(() => {
   chatWindow = shallow(<ChatWindow />);
   chatWindowInstance = chatWindow.instance();
@@ -129,4 +130,26 @@ it("handles gracefully when the input form is submitted with a null or empty req
 
   // Nothing about the state should have changed.
   expect(finalState).toEqual(originalState);
+});
+
+it("handles the user's input as they are typing their request (before submission)", () => {
+  chatWindowInstance.setState({
+    userRequestToAlexa: "some initial value",
+    curr_user: 1
+  });
+
+  const expectedUserRequestToAlexa = "mock request";
+  const preventDefaultSpy = jest.fn();
+  const mockEvent = {
+    target: { value: expectedUserRequestToAlexa },
+    preventDefault: preventDefaultSpy
+  };
+  chatWindow.find("UserRequestToAlexaForm").simulate("change", mockEvent);
+
+  const finalState = chatWindowInstance.state;
+  const finalUserRequestToAlexa = finalState.userRequestToAlexa;
+
+  // Verify that preventDefault() is being called.
+  expect(preventDefaultSpy.mock.calls.length).toBe(1);
+  expect(finalUserRequestToAlexa).toEqual(expectedUserRequestToAlexa);
 });
