@@ -1,7 +1,10 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import App from './App';
-
-it('renders without crashing', () => {
+import React from "react";
+import { shallow, mount } from "enzyme";
+import App from "./App";
+it("renders without crashing", () => {
   shallow(<App />);
+});
+it("snapshot testing that it renders correctly", () => {
+  const wrapper = mount(<App />);
+  expect(wrapper).toMatchSnapshot();
 });

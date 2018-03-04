@@ -106,10 +106,10 @@ class ChatWindow extends Component {
             {({ height }) => (
               <ChatFeed
                 messages={this.state.messages}
-                isTyping={this.state.is_typing} // Boolean: is the recipient typing
-                hasInputField={false} // Boolean: use our input, or use your own
+                isTyping={this.state.is_typing} // is the recipient typing
+                hasInputField={false} // use the default input field that is provided along with ChatFeed component
                 showSenderName={false} // show the name of the user who sent the message
-                bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
+                bubblesCentered={false}
                 maxHeight={height}
               />
             )}
