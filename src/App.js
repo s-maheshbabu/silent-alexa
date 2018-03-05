@@ -11,6 +11,8 @@ class App extends Component {
     return (
       <div className="page">
         <div className="header">
+          {/* TODO: Currently the content in header-info isn't centered to the entire page but is at the center of header-info itself. 
+              It should be adjust to be at the center of the entire page. */}
           <div className="header-info">
             <span>Silent Alexa Header</span>
           </div>
