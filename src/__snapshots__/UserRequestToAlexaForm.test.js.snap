@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`that it renders correctly with props (snapshot testing) 1`] = `
+exports[`renders correctly with props (snapshot testing) 1`] = `
 <UserRequestToAlexaForm
   value="A dummy user request"
 >
@@ -981,7 +981,7 @@ exports[`that it renders correctly with props (snapshot testing) 1`] = `
 </UserRequestToAlexaForm>
 `;
 
-exports[`that it renders correctly without any props (snapshot testing) 1`] = `
+exports[`renders correctly without any props (snapshot testing) 1`] = `
 <UserRequestToAlexaForm>
   <form
     onSubmit={[Function]}
