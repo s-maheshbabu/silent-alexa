@@ -143,7 +143,6 @@ it("handles the user's input as they are typing their request (before submission
   });
 
   const expectedUserRequestToAlexa = "mock request";
-  preventDefaultSpy = jest.fn();
   const mockEvent = {
     target: { value: expectedUserRequestToAlexa },
     preventDefault: preventDefaultSpy
