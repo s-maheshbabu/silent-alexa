@@ -9,8 +9,10 @@ const users = require("./ConversingUsers");
 let chatWindow;
 let chatWindowInstance;
 let originalState;
+let preventDefaultSpy;
 
 beforeEach(() => {
+  preventDefaultSpy = jest.fn();
   chatWindow = shallow(<ChatWindow />);
   chatWindowInstance = chatWindow.instance();
   originalState = JSON.parse(JSON.stringify(chatWindow.instance().state));
@@ -86,7 +88,6 @@ it("handles the user's form submission with request to Alexa properly", () => {
     curr_user: userid
   });
 
-  const preventDefaultSpy = jest.fn();
   chatWindow
     .find("form")
     .simulate("submit", { preventDefault: preventDefaultSpy });
@@ -117,16 +118,19 @@ it("handles gracefully when the input form is submitted with a null or empty req
     .find("UserRequestToAlexaForm")
     .get(0);
 
-  let nulluserRequestToAlexa;
+  let nullUserRequestToAlexa;
   chatWindowInstance.setState({
-    userRequestToAlexa: nulluserRequestToAlexa
+    userRequestToAlexa: nullUserRequestToAlexa
   });
 
   chatWindow
     .find("UserRequestToAlexaForm")
-    .simulate("submit", { preventDefault: jest.fn() });
+    .simulate("submit", { preventDefault: preventDefaultSpy });
 
   const finalState = chatWindowInstance.state;
+
+  // Verify that preventDefault() is being called.
+  expect(preventDefaultSpy.mock.calls.length).toBe(1);
 
   // Nothing about the state should have changed.
   expect(finalState).toEqual(originalState);
@@ -139,7 +143,7 @@ it("handles the user's input as they are typing their request (before submission
   });
 
   const expectedUserRequestToAlexa = "mock request";
-  const preventDefaultSpy = jest.fn();
+  preventDefaultSpy = jest.fn();
   const mockEvent = {
     target: { value: expectedUserRequestToAlexa },
     preventDefault: preventDefaultSpy
