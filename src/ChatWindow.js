@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { ChatFeed, Message } from "react-chat-ui";
+import ContainerDimensions from "react-container-dimensions";
 
 import UserRequestToAlexaForm from "./UserRequestToAlexaForm.js";
+import "./ChatWindow.css";
+
 const users = require("./ConversingUsers");
 
 class ChatWindow extends Component {
@@ -14,7 +17,30 @@ class ChatWindow extends Component {
           id: 1,
           message: "Hey! Alexa here.",
           senderName: "Alexa"
-        })
+        }),
+        // Adding a bunch of dummy messages to make the ChatFeed overflow window height.
+        // This will be useful during the development phase but will be removed once we are confident about the layout.
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" })
       ],
       userRequestToAlexa: "",
       useCustomBubble: false,
@@ -76,20 +102,28 @@ class ChatWindow extends Component {
 
   render() {
     return (
-      <div className="ChatWindow">
-        <ChatFeed
-          messages={this.state.messages}
-          isTyping={this.state.is_typing} // Boolean: is the recipient typing
-          hasInputField={false} // Boolean: use our input, or use your own
-          showSenderName={false} // show the name of the user who sent the message
-          bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
-        />
-
-        <UserRequestToAlexaForm
-          value={this.state.userRequestToAlexa}
-          onChange={e => this.handleChangeInUserRequestToAlexa(e)}
-          onSubmit={e => this.onUserRequestToAlexaSubmit(e)}
-        />
+      <div className="leftpanel">
+        <div className="panel-body">
+          <ContainerDimensions>
+            {({ height }) => (
+              <ChatFeed
+                messages={this.state.messages}
+                isTyping={this.state.is_typing} // is the recipient typing
+                hasInputField={false} // use the default input field that is provided along with ChatFeed component
+                showSenderName={false} // show the name of the user who sent the message
+                bubblesCentered={false}
+                maxHeight={height}
+              />
+            )}
+          </ContainerDimensions>
+        </div>
+        <div className="chat-input">
+          <UserRequestToAlexaForm
+            value={this.state.userRequestToAlexa}
+            onChange={e => this.handleChangeInUserRequestToAlexa(e)}
+            onSubmit={e => this.onUserRequestToAlexaSubmit(e)}
+          />
+        </div>
       </div>
     );
   }
