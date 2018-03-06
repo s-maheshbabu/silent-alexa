@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      authenticationValues: {}
+      authenticationInfo: {}
     }
   }
 
@@ -18,20 +18,20 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div className="App">
-          <LoginWithAmazon setAuthorization={(authResponse) => this.setAuthenticationValues(authResponse)} />
+          <LoginWithAmazon setAuthenticationInfo={(authResponse) => this.setAuthenticationInfo(authResponse)} />
 
           {/* This will not be rendered until access_token and expires_in are available in the state.
            TODO: Replace this with routing logic i.e., route to ChatWindow on successful login */}
-          { this.state && this.state.authenticationValues.access_token && this.state.authenticationValues.expires_in &&
-            <ChatWindow authenticationValues={this.state.authenticationValues}/> }
+          { this.state && this.state.authenticationInfo.access_token && this.state.authenticationInfo.expires_in &&
+            <ChatWindow authenticationInfo={this.state.authenticationInfo}/> }
         </div>
       </MuiThemeProvider>
     );
   }
 
-  setAuthenticationValues(authResponse) {
-    if(authResponse !== undefined) {
-      this.setState({authenticationValues: {access_token: authResponse.access_token, expires_in: authResponse.expires_in}})
+  setAuthenticationInfo(authResponse) {
+    if(authResponse != undefined) {
+      this.setState({authenticationInfo: {access_token: authResponse.access_token, expires_in: authResponse.expires_in}})
     }
   }
 }
