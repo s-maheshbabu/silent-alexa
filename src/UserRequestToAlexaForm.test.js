@@ -11,6 +11,18 @@ it("renders UserRequestToAlexaForm without crashing", () => {
   mount(<UserRequestToAlexaForm />);
 });
 
+it("renders correctly without any props (snapshot testing)", () => {
+  const wrapper = mount(<UserRequestToAlexaForm />);
+  expect(wrapper).toMatchSnapshot();
+});
+
+it("renders correctly with props (snapshot testing)", () => {
+  const wrapper = mount(
+    <UserRequestToAlexaForm value={"A dummy user request"} />
+  );
+  expect(wrapper).toMatchSnapshot();
+});
+
 it("displays the right placeholder message", () => {
   const form = mount(<UserRequestToAlexaForm />);
   expect(form.find("TextField").prop("hintText")).toEqual(
