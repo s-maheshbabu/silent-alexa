@@ -34,9 +34,9 @@ class ChatWindow extends Component {
   Once the user submits the request for Alexa, we need to update the messages
   in the state so the chat window gets updated.
   */
-  onUserRequestToAlexaSubmit(e) {
+  onUserRequestToAlexaSubmit(event) {
     const userRequestToAlexa = this.state.userRequestToAlexa;
-    e.preventDefault();
+    event.preventDefault();
     if (!userRequestToAlexa || 0 === userRequestToAlexa.length) {
       console.log("Request string for Alexa was empty: " + userRequestToAlexa);
       this.setState({ userRequestToAlexa: "" });
@@ -71,6 +71,7 @@ class ChatWindow extends Component {
   Update the state as the user is typing into the input box
   */
   handleChangeInUserRequestToAlexa(event) {
+    event.preventDefault();
     this.setState({ userRequestToAlexa: event.target.value });
   }
 
