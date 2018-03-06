@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div className="App">
-          <LoginWithAmazon setAuthenticationInfo={(authResponse) => this.setAuthenticationInfo(authResponse)} />
+          <LoginWithAmazon populateAuthenticationInfo={(authResponse) => this.populateAuthenticationInfo(authResponse)} />
 
           {/* This will not be rendered until access_token and expires_in are available in the state.
            TODO: Replace this with routing logic i.e., route to ChatWindow on successful login */}
@@ -29,7 +29,7 @@ class App extends Component {
     );
   }
 
-  setAuthenticationInfo(authResponse) {
+  populateAuthenticationInfo(authResponse) {
     if(authResponse != undefined) {
       this.setState({authenticationInfo: {access_token: authResponse.access_token, expires_in: authResponse.expires_in}})
     }

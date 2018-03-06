@@ -29,12 +29,12 @@ it('renders chatWindow when authorizationValues state has access_token', () => {
 });
 
 it('should not change state when authorization response (implicit grant) is not defined', () => {
-  appInstance.setAuthenticationInfo();
+  appInstance.populateAuthenticationInfo();
   expect(appInstance.state).toEqual(originalState);
 });
 
 it('should change state when authorization response (implicit grant) is defined', () => {
-  appInstance.setAuthenticationInfo({access_token: "some_access_token", expires_in: 30, state: "user_defined_state"});
+  appInstance.populateAuthenticationInfo({access_token: "some_access_token", expires_in: 30, state: "user_defined_state"});
   const finalState = {
     authenticationInfo: {
       access_token: "some_access_token",

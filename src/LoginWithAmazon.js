@@ -27,7 +27,7 @@ export default class LoginWithAmazon extends React.Component {
     if(typeof authorizationResponse == 'undefined' || authorizationResponse.error) {
       console.log("Encountered an error on login: " + util.inspect(authorizationResponse, { showHidden: true, depth: null }));
     } else {
-      this.props.setAuthenticationInfo(authorizationResponse);
+      this.props.populateAuthenticationInfo(authorizationResponse);
     }
   }
 }

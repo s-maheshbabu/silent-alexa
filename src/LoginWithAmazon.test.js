@@ -5,12 +5,12 @@ const util = require('util')
 
 let loginWithAmazon;
 let loginWithAmazonInstance;
-let mockSetAuthenticationInfo;
+let mockPopulateAuthenticationInfo;
 let amazonAuthorizationSpy;
 
 beforeEach(() => {
-    mockSetAuthenticationInfo = jest.fn();
-    loginWithAmazon = mount(<LoginWithAmazon setAuthenticationInfo={mockSetAuthenticationInfo}/>);
+    mockPopulateAuthenticationInfo = jest.fn();
+    loginWithAmazon = mount(<LoginWithAmazon populateAuthenticationInfo={mockPopulateAuthenticationInfo}/>);
     loginWithAmazonInstance = loginWithAmazon.instance();
     amazonAuthorizationSpy = jest.fn();
 
@@ -65,10 +65,10 @@ it('logs error message when authorization request encounters an error', () => {
       .toHaveBeenCalledWith('Encountered an error on login: ' + util.inspect(response, { showHidden: true, depth: null }))
 });
 
-it('calls setAuthenticationInfo when authorization request is success', () => {
+it('calls populateAuthenticationInfo when authorization request is success', () => {
     const response={access_token: 'some_access_token', expires_in: 3600}
     loginWithAmazonInstance.handleResponse(response)
 
-    // Verify setAuthenticationInfo is called with the authorization response argument
-    expect(mockSetAuthenticationInfo).toHaveBeenCalledWith(response)
+    // Verify populateAuthenticationInfo is called with the authorization response argument
+    expect(mockPopulateAuthenticationInfo).toHaveBeenCalledWith(response)
 });
