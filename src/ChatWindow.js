@@ -5,8 +5,8 @@ import UserRequestToAlexaForm from './UserRequestToAlexaForm.js';
 const users = require('./ConversingUsers');
 
 class ChatWindow extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       messages: [
         new Message({ id: 0, message: 'Hello Alexa!', senderName: 'You' }),
@@ -21,15 +21,18 @@ class ChatWindow extends Component {
       curr_user: 0,
       is_typing: false
     };
+
+    this.onUserRequestToAlexaSubmit = this.onUserRequestToAlexaSubmit.bind(this);
+    this.handleChangeInUserRequestToAlexa = this.handleChangeInUserRequestToAlexa.bind(this);
   }
 
   /*
   Once the user submits the request for Alexa, we need to update the messages
   in the state so the chat window gets updated.
   */
-  onUserRequestToAlexaSubmit(event) {
+  onUserRequestToAlexaSubmit(e) {
     const userRequestToAlexa = this.state.userRequestToAlexa;
-    event.preventDefault();
+    e.preventDefault();
     if (!userRequestToAlexa || 0 === userRequestToAlexa.length) {
       console.log("Request string for Alexa was empty: " + userRequestToAlexa);
       this.setState({ userRequestToAlexa: '' });
@@ -40,7 +43,7 @@ class ChatWindow extends Component {
     return true;
   }
 
-  pushMessage = (userid, message) => {
+  pushMessage(userid, message) {
     if (!users[userid]) {
       console.log("Unknown userId: " + userid);
       return;
@@ -70,6 +73,7 @@ class ChatWindow extends Component {
   render() {
     return (
       <div className="ChatWindow" >
+
         <ChatFeed
           messages={this.state.messages}
           isTyping={this.state.is_typing} // Boolean: is the recipient typing
