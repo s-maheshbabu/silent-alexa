@@ -3,20 +3,20 @@
 exports[`snapshot testing that it renders correctly 1`] = `
 <App>
   <div
-    className="page"
+    id="page"
   >
     <div
-      className="header"
+      id="header"
     >
       <div
-        className="header-info"
+        id="header-info"
       >
         <span>
           Silent Alexa Header
         </span>
       </div>
       <div
-        className="header-controls"
+        id="header-controls"
       >
         <button>
           Login Button (Gootla)
@@ -26,7 +26,7 @@ exports[`snapshot testing that it renders correctly 1`] = `
     <MuiThemeProvider>
       <ChatWindow>
         <div
-          className="leftpanel"
+          id="leftpanel"
         >
           <div
             className="panel-body"
@@ -1982,7 +1982,7 @@ exports[`snapshot testing that it renders correctly 1`] = `
             </ContainerDimensions>
           </div>
           <div
-            className="chat-input"
+            id="chat-input"
           >
             <UserRequestToAlexaForm
               onChange={[Function]}
@@ -2969,7 +2969,7 @@ exports[`snapshot testing that it renders correctly 1`] = `
       </ChatWindow>
     </MuiThemeProvider>
     <div
-      className="rightpanel"
+      id="rightpanel"
     >
       <div
         className="panel-body"
@@ -2978,10 +2978,10 @@ exports[`snapshot testing that it renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="footer"
+      id="footer"
     >
       <div
-        className="footer-info"
+        id="footer-info"
       >
         <span>
           Footer Info Bar
@@ -2991,7 +2991,7 @@ exports[`snapshot testing that it renders correctly 1`] = `
         </span>
       </div>
       <div
-        className="footer-controls"
+        id="footer-controls"
       >
         <a
           href=""

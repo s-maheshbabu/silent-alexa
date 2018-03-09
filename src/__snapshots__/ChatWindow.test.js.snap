@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`that it renders correctly (snapshot testing) 1`] = `
+exports[`renders correctly (snapshot testing) 1`] = `
 <ChatWindow>
   <div
-    className="leftpanel"
+    id="leftpanel"
   >
     <div
       className="panel-body"
@@ -1959,7 +1959,7 @@ exports[`that it renders correctly (snapshot testing) 1`] = `
       </ContainerDimensions>
     </div>
     <div
-      className="chat-input"
+      id="chat-input"
     >
       <UserRequestToAlexaForm
         onChange={[Function]}

@@ -21,15 +21,7 @@ it("renders ChatWindow without crashing", () => {
   mount(<ChatWindow />);
 });
 
-it("that it renders correctly (snapshot testing)", () => {
-  const wrapper = mount(<ChatWindow />);
-  expect(wrapper).toMatchSnapshot();
-});
-
-it("that height of container is passed to ChatFeed", () => {
-  const wrapper = mount(<ChatWindow />);
-  const chatFeed = wrapper.find(ChatFeed);
-
+it("renders correctly (snapshot testing)", () => {
   // Set height of the ChatFeed container.
   Element.prototype.getBoundingClientRect = jest.fn(() => {
     return {
@@ -37,11 +29,30 @@ it("that height of container is passed to ChatFeed", () => {
     };
   });
 
-  expect(chatFeed.length).toBe(1);
-  expect(chatFeed.prop("maxHeight")).toBe(CHATFEED_CONTAINER_HEIGHT);
+  const wrapper = mount(<ChatWindow />);
+  expect(wrapper).toMatchSnapshot();
+
+  wrapper.unmount();
 });
 
-it("pushMessage persists a given message in state", () => {
+it("passes height of container to ChatFeed component", () => {
+  // Set height of the ChatFeed container.
+  Element.prototype.getBoundingClientRect = jest.fn(() => {
+    return {
+      height: CHATFEED_CONTAINER_HEIGHT
+    };
+  });
+
+  const wrapper = mount(<ChatWindow />);
+  const chatFeed = wrapper.find(ChatFeed);
+
+  expect(chatFeed.length).toBe(1);
+  expect(chatFeed.prop("maxHeight")).toBe(CHATFEED_CONTAINER_HEIGHT);
+
+  wrapper.unmount();
+});
+
+it("persists a given message in state when pushMessage is called", () => {
   const numberOfMessagesAlreadyInState = originalState.messages.length;
   expect(originalState.messages.length).toBe(numberOfMessagesAlreadyInState);
 

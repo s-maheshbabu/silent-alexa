@@ -32,9 +32,8 @@
   }
 }
 
-/** Scafolding **/
-
-.page {
+/** Scaffolding **/
+#page {
   display: grid;
   grid-template-columns: 1fr 300px;
   grid-template-rows: 30px auto 30px;
@@ -43,8 +42,8 @@
 
 /** Panel Module **/
 
-/** Right panel should also be moved into its own CSS file once the right panel component gets created. **/
-.rightpanel {
+/** TODO: Right panel should also be moved into its own CSS file once the right panel component gets created. **/
+#rightpanel {
   display: grid;
   grid-template-rows: auto;
   height: calc(100vh - 60px);
@@ -55,7 +54,7 @@
 }
 
 /** Header **/
-.header {
+#header {
   grid-row: 1;
   grid-column: 1 / 3;
 
@@ -63,7 +62,7 @@
   grid-template-columns: 1fr auto;
 }
 
-.header-info {
+#header-info {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -72,7 +71,7 @@
   justify-content: center;
 }
 
-.header-controls {
+#header-controls {
   display: flex;
   height: 100%;
   justify-content: flex-end;
@@ -80,7 +79,7 @@
 
 /** Footer **/
 
-.footer {
+#footer {
   grid-column: 1 / 3;
   grid-row: 3;
 
@@ -88,26 +87,25 @@
   grid-template-columns: 1fr auto;
 }
 
-.footer-info {
+#footer-info {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.footer-controls {
+#footer-controls {
   display: flex;
   height: 100%;
   justify-content: flex-end;
 }
 
-.footer-controls a {
+#footer-controls a {
   height: 100%;
   display: flex;
   align-items: center;
 }
 
 /** Styles **/
-
 body {
   margin: 0;
   padding: 0;
@@ -119,26 +117,22 @@ body {
   color: #2c313a;
 }
 
-.header {
+#header {
   align-items: center;
   border-top: 1px solid #c5cad3;
 }
 
-.footer {
+#footer {
   align-items: center;
   border-top: 1px solid #c5cad3;
 }
 
-.footer-controls a {
+#footer-controls a {
   padding: 0 10px;
   color: initial;
   text-decoration: none;
 }
 
-.footer-controls a:hover {
+#footer-controls a:hover {
   background-color: #c5cad3;
-}
-
-#window-1 {
-  display: none;
 }

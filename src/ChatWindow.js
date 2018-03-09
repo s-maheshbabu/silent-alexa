@@ -18,7 +18,7 @@ class ChatWindow extends Component {
           message: "Hey! Alexa here.",
           senderName: "Alexa"
         }),
-        // Adding a bunch of dummy messages to make the ChatFeed overflow window height.
+        // TODO Adding a bunch of dummy messages to make the ChatFeed overflow window height.
         // This will be useful during the development phase but will be removed once we are confident about the layout.
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
         new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
@@ -102,7 +102,7 @@ class ChatWindow extends Component {
 
   render() {
     return (
-      <div className="leftpanel">
+      <div id="leftpanel">
         <div className="panel-body">
           <ContainerDimensions>
             {({ height }) => (
@@ -117,7 +117,7 @@ class ChatWindow extends Component {
             )}
           </ContainerDimensions>
         </div>
-        <div className="chat-input">
+        <div id="chat-input">
           <UserRequestToAlexaForm
             value={this.state.userRequestToAlexa}
             onChange={e => this.handleChangeInUserRequestToAlexa(e)}
