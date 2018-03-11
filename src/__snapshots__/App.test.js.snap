@@ -18,9 +18,21 @@ exports[`snapshot testing that it renders correctly 1`] = `
       <div
         id="header-controls"
       >
-        <button>
-          Login Button (Gootla)
-        </button>
+        <LoginWithAmazon
+          updateAuthenticationInfo={[Function]}
+        >
+          <button
+            onClick={[Function]}
+            type="button"
+          >
+            <img
+              alt="loginImage"
+              height="20"
+              src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
+              width="106"
+            />
+          </button>
+        </LoginWithAmazon>
       </div>
     </div>
     <MuiThemeProvider>
@@ -36,7 +48,7 @@ exports[`snapshot testing that it renders correctly 1`] = `
                 bubblesCentered={false}
                 hasInputField={false}
                 isTyping={false}
-                maxHeight={234}
+                maxHeight={0}
                 messages={
                   Array [
                     Message {
@@ -173,7 +185,7 @@ exports[`snapshot testing that it renders correctly 1`] = `
                     className="chat-history"
                     style={
                       Object {
-                        "maxHeight": 234,
+                        "maxHeight": 0,
                         "overflow": "auto",
                       }
                     }

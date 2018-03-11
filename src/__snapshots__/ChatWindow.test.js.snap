@@ -13,7 +13,7 @@ exports[`renders correctly (snapshot testing) 1`] = `
           bubblesCentered={false}
           hasInputField={false}
           isTyping={false}
-          maxHeight={234}
+          maxHeight={0}
           messages={
             Array [
               Message {
@@ -150,7 +150,7 @@ exports[`renders correctly (snapshot testing) 1`] = `
               className="chat-history"
               style={
                 Object {
-                  "maxHeight": 234,
+                  "maxHeight": 0,
                   "overflow": "auto",
                 }
               }
