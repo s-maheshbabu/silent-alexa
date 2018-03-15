@@ -6,6 +6,7 @@ import "./App.css";
 
 import ChatWindow from "./ChatWindow.js";
 import LoginWithAmazon from "./LoginWithAmazon.js";
+const util = require("util");
 
 class App extends Component {
 
@@ -57,8 +58,9 @@ class App extends Component {
   }
 
   handleAuthenticationInfoUpdate = function(authResponse) {
-    if(authResponse != undefined) {
-      console.log(authResponse);
+    if(!authResponse || authResponse.error) {
+      console.log("Encountered an error on login: " + util.inspect(authResponse, { showHidden: true, depth: null }));
+    } else {
       this.setState({authenticationInfo: {access_token: authResponse.access_token, expires_in: authResponse.expires_in}})
     }
   }

@@ -22,8 +22,29 @@ it("snapshot testing that it renders correctly", () => {
 });
 
 it("should not change state when authorization response (implicit grant) is not defined", () => {
+  global.console = {
+    log: jest.fn()
+  }
   appInstance.handleAuthenticationInfoUpdate();
   expect(appInstance.state).toEqual(originalState);
+  expect(global.console.log).toHaveBeenCalledWith("Encountered an error on login: undefined");
+});
+
+it("should not change state when authorization fails (implicit grant)", () => {
+  global.console = {
+    log: jest.fn()
+  }
+  const util = require("util");
+  const response = {
+    error: "some_error_code",
+    error_description: "description about error as string",
+    state: {page: "http://somePage"}
+  }
+  appInstance.handleAuthenticationInfoUpdate(response);
+  expect(appInstance.state).toEqual(originalState);
+  // Verify error message has been logged to console
+  expect(global.console.log)
+    .toHaveBeenCalledWith("Encountered an error on login: " + util.inspect(response, { showHidden: true, depth: null }))
 });
 
 it("should change state when authorization response (implicit grant) is defined", () => {
