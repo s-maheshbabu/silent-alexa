@@ -37,12 +37,10 @@ export function extractAlexaTextResponse(alexaRawResponse) {
   try {
     avsDirective = JSON.parse(avsDirectiveBuffer);
   } catch (e) {
-    console.error(
-      "JSON parse error: " + util.inspect(e, { showHidden: true, depth: null })
-    );
     throw new IllegalArgumentError(
-      "Given directive couldn't be parsed to a JSON object. Input: " +
-        avsDirectiveBuffer.toString()
+      `Given directive couldn't be parsed to a JSON object. Input: " ${avsDirectiveBuffer.toString()}
+      StackTrace:
+      ${util.inspect(e, { showHidden: true, depth: null })}`
     );
   }
 

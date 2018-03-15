@@ -25,19 +25,19 @@ it("handles the invalid case where the directive in the AVS response is not a we
   testIllegalArgumentHandling(testData.directive_not_valid_json.rawData);
 });
 
-it("handles the invalid case where the directive in the AVS response is well formatted but doesn't contain the 'directive' key.", () => {
+it("handles the invalid case where the directive in the AVS response is well formatted json but doesn't contain the 'directive' key.", () => {
   testIllegalArgumentHandling(
     testData.directive_key_doesnt_exist_in_avs_directive.rawData
   );
 });
 
-it("handles the invalid case where the directive in the AVS response is well formatted but doesn't contain the 'payload' key.", () => {
+it("handles the invalid case where the directive in the AVS response is well formatted json but doesn't contain the 'payload' key.", () => {
   testIllegalArgumentHandling(
     testData.payload_key_doesnt_exist_in_avs_directive.rawData
   );
 });
 
-it("handles the invalid case where the directive in the AVS response is well formatted but doesn't contain the 'caption' key.", () => {
+it("handles the invalid case where the directive in the AVS response is well formatted json but doesn't contain the 'caption' key.", () => {
   testIllegalArgumentHandling(
     testData.caption_key_doesnt_exist_in_avs_directive.rawData
   );

@@ -11,7 +11,7 @@ Content-Type: application/json; charset=UTF-8
   };
 }
 
-// Invalid case where multi-part message is well formatted but there is no body in the first part.
+// Invalid case where multi-part message is well formatted JSON but there is no body in the first part.
 {
   const rawData = String.raw`--------abcde123
 Content-Type: application/json; charset=UTF-8
@@ -46,7 +46,7 @@ second-part-of-multi-part-message
   };
 }
 
-// Invalid case where the AVS directive is well formatted but doesn't contain the 'directive' key.
+// Invalid case where the AVS directive is well formatted JSON but doesn't contain the 'directive' key.
 {
   const anyKeyThatIsNot_directive = "notDirective";
   const rawData = String.raw`--------abcde123
@@ -65,7 +65,7 @@ second-part-of-multi-part-message
   };
 }
 
-// Invalid case where the AVS directive is well formatted but doesn't contain the 'payload' key.
+// Invalid case where the AVS directive is well formatted JSON but doesn't contain the 'payload' key.
 {
   const anyKeyThatIsNot_payload = "notPayload";
   const rawData = String.raw`--------abcde123
@@ -84,7 +84,7 @@ second-part-of-multi-part-message
   };
 }
 
-// Invalid case where the AVS directive is well formatted but doesn't contain the 'caption' key.
+// Invalid case where the AVS directive is well formatted JSON but doesn't contain the 'caption' key.
 {
   const anyKeyThatIsNot_caption = "notCaption";
   const rawData = String.raw`--------abcde123
