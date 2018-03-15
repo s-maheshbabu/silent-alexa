@@ -1,6 +1,8 @@
 import React from "react";
-import {mount} from "enzyme";
+import { mount } from "enzyme";
 import Body from "./Body";
+
+jest.mock("./AVSGateway");
 
 it("renders Body without crashing", () => {
   mount(<Body />);
