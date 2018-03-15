@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`calls fetch with the right options when trying to send a happy case TextMessage event and extracts the response string 1`] = `
+Object {
+  "body": "--silent-alexa-http-boundary
+    Content-Disposition: form-data; name=\\"metadata\\"
+    Content-Type: application/json; charset=UTF-8
+
+    {\\"event\\":{\\"header\\":{\\"namespace\\":\\"Text\\",\\"name\\":\\"TextMessage\\",\\"messageId\\":\\"mock-uuid-generated-for-testing\\"},\\"payload\\":{\\"textMessage\\":\\"user request to Alexa\\"}}}",
+  "cache": "no-store",
+  "headers": Object {
+    "Authorization": "Bearer a mock access_token",
+    "content-type": "multipart/form-data; boundary=silent-alexa-http-boundary",
+  },
+  "method": "POST",
+}
+`;
+
+exports[`handles the happy case where Alexa returns an empty response. This can happen when Alexa has nothing to say, for example, in response to user saying 'shutup'. 1`] = `
+Object {
+  "body": "--silent-alexa-http-boundary
+    Content-Disposition: form-data; name=\\"metadata\\"
+    Content-Type: application/json; charset=UTF-8
+
+    {\\"event\\":{\\"header\\":{\\"namespace\\":\\"Text\\",\\"name\\":\\"TextMessage\\",\\"messageId\\":\\"mock-uuid-generated-for-testing\\"},\\"payload\\":{\\"textMessage\\":\\"user request to Alexa\\"}}}",
+  "cache": "no-store",
+  "headers": Object {
+    "Authorization": "Bearer a mock access_token",
+    "content-type": "multipart/form-data; boundary=silent-alexa-http-boundary",
+  },
+  "method": "POST",
+}
+`;

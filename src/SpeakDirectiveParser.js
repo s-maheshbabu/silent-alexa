@@ -11,6 +11,10 @@ import IllegalArgumentError from "./errors/IllegalArgumentError";
  *
  * @param {String} alexaRawResponse The multi-part response from AVS. This
  * should not be empty or undefined.
+ *
+ * @throws IllegalArgumentError if Alexa's response couldn't be parsed out
+ * of the input. The failure could be because the input is not well formatted
+ * or doesn't contain the right fields to fetch Alexa's response.
  */
 export function extractAlexaTextResponse(alexaRawResponse) {
   if (!alexaRawResponse) {
