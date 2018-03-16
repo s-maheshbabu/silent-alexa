@@ -20,6 +20,9 @@ export function extractAlexaTextResponse(alexaRawResponse) {
   }
 
   const parsedResponse = httpMessageParser(alexaRawResponse);
+  // TODO: !parsedResponse and !parsedResponse.multipart[0].body conditions weren't tested because
+  // I couldn't figure out how to mock httpMessageParser responses. While it is safe for now because
+  // the library appears to always return a response that contains a body, it needs to be tested.
   if (
     !parsedResponse ||
     !parsedResponse.multipart ||
@@ -36,11 +39,11 @@ export function extractAlexaTextResponse(alexaRawResponse) {
   let avsDirective;
   try {
     avsDirective = JSON.parse(avsDirectiveBuffer);
-  } catch (e) {
+  } catch (error) {
     throw new IllegalArgumentError(
       `Given directive couldn't be parsed to a JSON object. Input: " ${avsDirectiveBuffer.toString()}
       StackTrace:
-      ${util.inspect(e, { showHidden: true, depth: null })}`
+      ${util.inspect(error, { showHidden: true, depth: null })}`
     );
   }
 
