@@ -6,6 +6,14 @@ import ChatWindow from "./ChatWindow";
 
 const users = require("./ConversingUsers");
 const CHATFEED_CONTAINER_HEIGHT = 234;
+const CHATFEED_CONTAINER_HEIGHT_DEFAULT = 0;
+const setHeightElement = function(height) {
+  Element.prototype.getBoundingClientRect = jest.fn(() => {
+    return {
+      height: height
+    };
+  });
+};
 
 let chatWindow;
 let chatWindowInstance;
@@ -24,13 +32,6 @@ it("renders ChatWindow without crashing", () => {
 });
 
 it("renders correctly (snapshot testing)", () => {
-  // Set height of the ChatFeed container.
-  Element.prototype.getBoundingClientRect = jest.fn(() => {
-    return {
-      height: CHATFEED_CONTAINER_HEIGHT
-    };
-  });
-
   const wrapper = mount(<ChatWindow />);
   expect(wrapper).toMatchSnapshot();
 
@@ -38,12 +39,8 @@ it("renders correctly (snapshot testing)", () => {
 });
 
 it("passes height of container to ChatFeed component", () => {
-  // Set height of the ChatFeed container.
-  Element.prototype.getBoundingClientRect = jest.fn(() => {
-    return {
-      height: CHATFEED_CONTAINER_HEIGHT
-    };
-  });
+  // Set `height` element.
+  setHeightElement(CHATFEED_CONTAINER_HEIGHT);
 
   const wrapper = mount(<ChatWindow />);
   const chatFeed = wrapper.find(ChatFeed);
@@ -52,6 +49,9 @@ it("passes height of container to ChatFeed component", () => {
   expect(chatFeed.prop("maxHeight")).toBe(CHATFEED_CONTAINER_HEIGHT);
 
   wrapper.unmount();
+
+  //Reset `height` element
+  setHeightElement(CHATFEED_CONTAINER_HEIGHT_DEFAULT);
 });
 
 it("persists a given message in state when pushMessage is called", () => {

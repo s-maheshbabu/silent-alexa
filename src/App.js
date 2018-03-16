@@ -5,8 +5,17 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import ChatWindow from "./ChatWindow.js";
+import LoginWithAmazon from "./LoginWithAmazon.js";
+const util = require("util");
 
 class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      authenticationInfo: {}
+    }
+  }
   render() {
     return (
       <div id="page">
@@ -17,7 +26,7 @@ class App extends Component {
             <span>Silent Alexa Header</span>
           </div>
           <div id="header-controls">
-            <button>Login Button (Gootla)</button>
+            <LoginWithAmazon updateAuthenticationInfo={(authResponse) => this.handleAuthenticationInfoUpdate(authResponse)} />
           </div>
         </div>
 
@@ -46,6 +55,14 @@ class App extends Component {
         </div>
       </div>
     );
+  }
+
+  handleAuthenticationInfoUpdate = function(authResponse) {
+    if(!authResponse || authResponse.error) {
+      console.log("Encountered an error on login: " + util.inspect(authResponse, { showHidden: true, depth: null }));
+    } else {
+      this.setState({authenticationInfo: {access_token: authResponse.access_token, expires_in: authResponse.expires_in}})
+    }
   }
 }
 
