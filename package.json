@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "http-message-parser": "0.0.22",
+    "immutable": "^4.0.0-rc.9",
     "material-ui": "^0.20.0",
     "react": "^16.2.0",
     "react-chat-ui": "^0.3.0",
@@ -23,6 +25,8 @@
     "react-addons-test-utils": "^15.6.2"
   },
   "jest": {
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }
