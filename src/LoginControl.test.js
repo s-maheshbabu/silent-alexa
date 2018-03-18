@@ -1,45 +1,45 @@
 import React from "react";
-import {shallow, mount} from "enzyme";
-import LoginWithAmazon from "./LoginWithAmazon";
+import { shallow, mount } from "enzyme";
+import LoginControl from "./LoginControl";
 const util = require("util")
 
-let loginWithAmazon;
-let loginWithAmazonInstance;
+let loginControl;
+let loginControlInstance;
 let mockUpdateAuthenticationInfo;
 let amazonAuthorizationSpy;
 
 beforeEach(() => {
-    mockUpdateAuthenticationInfo = jest.fn();
-    loginWithAmazon = shallow(<LoginWithAmazon updateAuthenticationInfo={mockUpdateAuthenticationInfo}/>);
-    loginWithAmazonInstance = loginWithAmazon.instance();
-    amazonAuthorizationSpy = jest.fn();
+  mockUpdateAuthenticationInfo = jest.fn();
+  loginControl = shallow(<LoginControl updateAuthenticationInfo={mockUpdateAuthenticationInfo} />);
+  loginControlInstance = loginControl.instance();
+  amazonAuthorizationSpy = jest.fn();
 
-    Object.defineProperty(window, "amazon", {
-        value: { Login: { authorize: amazonAuthorizationSpy } },
-        writable: true
-    });
+  Object.defineProperty(window, "amazon", {
+    value: { Login: { authorize: amazonAuthorizationSpy } },
+    writable: true
+  });
 });
 
 it("renders without crashing", () => {
-    shallow(<LoginWithAmazon />);
+  shallow(<LoginControl />);
 });
 
 it("renders correctly (snapshot testing)", () => {
-  const wrapper = mount(<LoginWithAmazon />);
+  const wrapper = mount(<LoginControl />);
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();
 });
 
 it("verifies amazon authorization is called when login button is clicked", () => {
-    mount(<LoginWithAmazon />).find("button").simulate("click");
+  mount(<LoginControl />).find("button").simulate("click");
 
-    // Verify authorize called once
-    expect(amazonAuthorizationSpy.mock.calls.length).toBe(1);
+  // Verify authorize called once
+  expect(amazonAuthorizationSpy.mock.calls.length).toBe(1);
 });
 
 it("verifies updateAuthenticationInfo is called when handleResponse is called", () => {
-    const response = "Some response body";
-    loginWithAmazonInstance.handleResponse(response);
-    expect(mockUpdateAuthenticationInfo).toHaveBeenCalledWith(response);
+  const response = "Some response body";
+  loginControlInstance.handleResponse(response);
+  expect(mockUpdateAuthenticationInfo).toHaveBeenCalledWith(response);
 });
