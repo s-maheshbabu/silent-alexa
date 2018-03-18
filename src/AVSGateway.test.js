@@ -28,7 +28,6 @@ const fetchMock = require("fetch-mock");
 
 const unitUnderTest = new AVSGateway();
 
-beforeEach(() => {});
 afterEach(() => {
   fetchMock.restore();
 });
