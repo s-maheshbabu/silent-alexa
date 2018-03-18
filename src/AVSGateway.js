@@ -32,6 +32,8 @@ class AVSGateway {
    * @returns The text response from Alexa. An empty response is possible if Alexa
    * said nothing. If an error happens while communicating to AVS or while parsing
    * the responses, a canned human-readable error message is returned.
+   *
+   * @throws IllegalArgumentError if the input is missing or invalid.
    */
   async sendTextMessageEvent(userRequestToAlexa, accessToken) {
     if (!userRequestToAlexa || !accessToken) {
