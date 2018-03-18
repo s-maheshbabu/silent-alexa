@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import {shallow, mount} from "enzyme";
 import App from "./App";
 
 let app;
@@ -38,20 +38,20 @@ it("should not change state when authorization fails (implicit grant)", () => {
   const response = {
     error: "some_error_code",
     error_description: "description about error as string",
-    state: { page: "http://somePage" }
+    state: {page: "http://somePage"}
   }
   appInstance.handleAuthenticationInfoUpdate(response);
   expect(appInstance.state).toEqual(originalState);
   // Verify error message has been logged to console
   expect(global.console.log)
-    .toHaveBeenCalledWith("Encountered an error on login: " + util.inspect(response, { showHidden: true, depth: null }))
+    .toHaveBeenCalledWith("Encountered an error on login: " + util.inspect(response, {showHidden: true, depth: null}))
 });
 
 it("should change state when authorization response (implicit grant) is defined", () => {
-  const authResponse = { access_token: "some_access_token", expires_in: 30, state: "user_defined_state" };
+  const authResponse = {access_token: "some_access_token", expires_in: 30, state: "user_defined_state"};
   appInstance.handleAuthenticationInfoUpdate(authResponse);
   const finalState = {
-    authenticationInfo: { access_token: authResponse.access_token, expires_in: authResponse.expires_in }
+    authenticationInfo: {access_token: authResponse.access_token, expires_in: authResponse.expires_in}
   };
   expect(appInstance.state).toEqual(finalState);
 });

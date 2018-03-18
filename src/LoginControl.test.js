@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import {shallow, mount} from "enzyme";
 import LoginControl from "./LoginControl";
 const util = require("util")
 
@@ -15,7 +15,7 @@ beforeEach(() => {
   amazonAuthorizationSpy = jest.fn();
 
   Object.defineProperty(window, "amazon", {
-    value: { Login: { authorize: amazonAuthorizationSpy } },
+    value: {Login: {authorize: amazonAuthorizationSpy}},
     writable: true
   });
 });

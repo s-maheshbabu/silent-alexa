@@ -3,8 +3,8 @@ import React from "react";
 // Options variable to request for implicit grant.
 // TODO: Logic for assigning 'deviceSerialNumber' needs to be revisited.
 const options = {
-    scope : ["alexa:all", "profile"],
-    scope_data : {"alexa:all":{"productID":"Silent_Alexa","productInstanceAttributes":{"deviceSerialNumber":"12345"}}}
+  scope: ["alexa:all", "profile"],
+  scope_data: {"alexa:all": {"productID": "Silent_Alexa", "productInstanceAttributes": {"deviceSerialNumber": "12345"}}}
 };
 export default class LoginWithAmazon extends React.Component {
   render() {

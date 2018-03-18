@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 import logo from "./logo.svg";
@@ -59,9 +59,9 @@ class App extends Component {
 
   handleAuthenticationInfoUpdate = function (authResponse) {
     if (!authResponse || authResponse.error) {
-      console.log("Encountered an error on login: " + util.inspect(authResponse, { showHidden: true, depth: null }));
+      console.log("Encountered an error on login: " + util.inspect(authResponse, {showHidden: true, depth: null}));
     } else {
-      this.setState({ authenticationInfo: { access_token: authResponse.access_token, expires_in: authResponse.expires_in } })
+      this.setState({authenticationInfo: {access_token: authResponse.access_token, expires_in: authResponse.expires_in}})
     }
   }
 }
