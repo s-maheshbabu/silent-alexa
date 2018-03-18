@@ -1,18 +1,16 @@
-import React from "react";
+import React, {Component} from "react";
+import LoginButton from "./LoginButton.js"
 
 // Options variable to request for implicit grant.
 // TODO: Logic for assigning 'deviceSerialNumber' needs to be revisited.
-const options = {
+const options = Object.freeze({
   scope: ["alexa:all", "profile"],
   scope_data: {"alexa:all": {"productID": "Silent_Alexa", "productInstanceAttributes": {"deviceSerialNumber": "12345"}}}
-};
-export default class LoginWithAmazon extends React.Component {
+});
+export default class LoginControl extends React.Component {
   render() {
     return (
-      <button type="button" onClick={() => this.handleLogin()}>
-        <img alt="loginImage" src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
-          width="106" height="20" />
-      </button>
+      <LoginButton onClick={() => this.handleLogin()} />
     )
   }
 

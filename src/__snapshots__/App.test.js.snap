@@ -5,36 +5,44 @@ exports[`snapshot testing that it renders correctly 1`] = `
   <div
     id="page"
   >
-    <div
-      id="header"
+    <Header
+      updateAuthenticationInfo={[Function]}
     >
       <div
-        id="header-info"
+        id="header"
       >
-        <span>
-          Silent Alexa Header
-        </span>
-      </div>
-      <div
-        id="header-controls"
-      >
-        <LoginWithAmazon
-          updateAuthenticationInfo={[Function]}
+        <div
+          id="header-info"
         >
-          <button
-            onClick={[Function]}
-            type="button"
+          <span>
+            Silent Alexa Header
+          </span>
+        </div>
+        <div
+          id="header-controls"
+        >
+          <LoginControl
+            updateAuthenticationInfo={[Function]}
           >
-            <img
-              alt="loginImage"
-              height="20"
-              src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
-              width="106"
-            />
-          </button>
-        </LoginWithAmazon>
+            <LoginButton
+              onClick={[Function]}
+            >
+              <button
+                onClick={[Function]}
+                type="button"
+              >
+                <img
+                  alt="loginImage"
+                  height="20"
+                  src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
+                  width="106"
+                />
+              </button>
+            </LoginButton>
+          </LoginControl>
+        </div>
       </div>
-    </div>
+    </Header>
     <MuiThemeProvider>
       <ChatWindow>
         <div
@@ -2989,59 +2997,61 @@ exports[`snapshot testing that it renders correctly 1`] = `
         Right side content
       </div>
     </div>
-    <div
-      id="footer"
-    >
+    <Footer>
       <div
-        id="footer-info"
+        id="footer"
       >
-        <span>
-          Footer Info Bar
-        </span>
-        <span>
-           That Collapses
-        </span>
+        <div
+          id="footer-info"
+        >
+          <span>
+            Footer Info Bar
+          </span>
+          <span>
+             That Collapses
+          </span>
+        </div>
+        <div
+          id="footer-controls"
+        >
+          <a
+            href=""
+          >
+            Controls,
+          </a>
+          <a
+            href=""
+          >
+            icons
+          </a>
+          <a
+            href=""
+          >
+            and
+          </a>
+          <a
+            href=""
+          >
+            links
+          </a>
+          <a
+            href=""
+          >
+            can
+          </a>
+          <a
+            href=""
+          >
+            go
+          </a>
+          <a
+            href=""
+          >
+            here
+          </a>
+        </div>
       </div>
-      <div
-        id="footer-controls"
-      >
-        <a
-          href=""
-        >
-          Controls,
-        </a>
-        <a
-          href=""
-        >
-          icons
-        </a>
-        <a
-          href=""
-        >
-          and
-        </a>
-        <a
-          href=""
-        >
-          links
-        </a>
-        <a
-          href=""
-        >
-          can
-        </a>
-        <a
-          href=""
-        >
-          go
-        </a>
-        <a
-          href=""
-        >
-          here
-        </a>
-      </div>
-    </div>
+    </Footer>
   </div>
 </App>
 `;
