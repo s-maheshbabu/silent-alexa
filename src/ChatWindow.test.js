@@ -4,7 +4,8 @@ import { shallow, mount } from "enzyme";
 import { ChatFeed, Message } from "react-chat-ui";
 import ChatWindow from "./ChatWindow";
 
-const users = require("./ConversingUsers");
+import { users, userIds } from "./ConversingUsers";
+
 const CHATFEED_CONTAINER_HEIGHT = 234;
 const CHATFEED_CONTAINER_HEIGHT_DEFAULT = 0;
 const setHeightElement = function(height) {
@@ -58,15 +59,15 @@ it("persists a given message in state when pushMessage is called", () => {
   const numberOfMessagesAlreadyInState = originalState.messages.length;
   expect(originalState.messages.length).toBe(numberOfMessagesAlreadyInState);
 
-  const userid = 1;
+  const user = users.get(userIds.YOU);
   const message = "test message";
   const expectedMessage = new Message({
-    id: userid,
+    id: user.id,
     message,
-    senderName: users[userid]
+    senderName: user.name
   });
 
-  chatWindow.instance().pushMessage(userid, message);
+  chatWindow.instance().pushMessage(user.id, message);
   const finalState = chatWindow.instance().state;
 
   const finalMessages = finalState.messages;
@@ -114,10 +115,10 @@ it("handles the user's form submission with request to Alexa properly", () => {
   const numberOfMessagesAlreadyInState = originalState.messages.length;
 
   const mockuserRequestToAlexa = "mock request";
-  const userid = 1;
+  const user = users.get(userIds.YOU);
   chatWindowInstance.setState({
     userRequestToAlexa: mockuserRequestToAlexa,
-    curr_user: userid
+    curr_user: user.id
   });
 
   chatWindow
@@ -130,9 +131,9 @@ it("handles the user's form submission with request to Alexa properly", () => {
   const finalState = chatWindowInstance.state;
 
   const expectedMessage = new Message({
-    id: userid,
+    id: user.id,
     message: mockuserRequestToAlexa,
-    senderName: users[userid]
+    senderName: user.name
   });
   const finalMessages = finalState.messages;
   expect(finalMessages.length).toBe(numberOfMessagesAlreadyInState + 1);

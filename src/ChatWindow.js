@@ -5,7 +5,7 @@ import ContainerDimensions from "react-container-dimensions";
 import UserRequestToAlexaForm from "./UserRequestToAlexaForm.js";
 import "./ChatWindow.css";
 
-const users = require("./ConversingUsers");
+import { users, userIds } from "./ConversingUsers";
 
 class ChatWindow extends Component {
   constructor() {
@@ -44,7 +44,7 @@ class ChatWindow extends Component {
       ],
       userRequestToAlexa: "",
       useCustomBubble: false,
-      curr_user: 0,
+      curr_user_id: userIds.YOU,
       is_typing: false
     };
 
@@ -68,13 +68,14 @@ class ChatWindow extends Component {
       this.setState({ userRequestToAlexa: "" });
       return false;
     }
-    this.pushMessage(this.state.curr_user, userRequestToAlexa);
+    this.pushMessage(this.state.curr_user_id, userRequestToAlexa);
     this.setState({ userRequestToAlexa: "" });
     return true;
   }
 
   pushMessage(userid, message) {
-    if (!users[userid]) {
+    const user = users.get(userid);
+    if (!user) {
       console.log("Unknown userId: " + userid);
       return;
     }
@@ -85,9 +86,9 @@ class ChatWindow extends Component {
 
     const messagesCopy = this.state.messages.slice(); // for immutability
     const newMessage = new Message({
-      id: userid,
+      id: user.id,
       message,
-      senderName: users[userid]
+      senderName: user.name
     });
     messagesCopy.push(newMessage);
     this.setState({ messages: messagesCopy });
