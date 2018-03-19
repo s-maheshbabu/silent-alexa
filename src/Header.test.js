@@ -1,5 +1,5 @@
 import React from "react";
-import {shallow, mount} from "enzyme";
+import {mount} from "enzyme";
 import Header from "./Header.js";
 
 it("renders Header without crashing", () => {
