@@ -1,0 +1,9 @@
+#rightpanel {
+  display: grid;
+  grid-template-rows: auto;
+  height: calc(100vh - 60px);
+}
+
+.panel-body {
+  overflow: auto;
+}
