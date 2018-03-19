@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 import logo from "./logo.svg";
 import "./App.css";
 
 import ChatWindow from "./ChatWindow.js";
-import LoginWithAmazon from "./LoginWithAmazon.js";
+import LoginControl from "./LoginControl.js";
 const util = require("util");
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
             <span>Silent Alexa Header</span>
           </div>
           <div id="header-controls">
-            <LoginWithAmazon updateAuthenticationInfo={(authResponse) => this.handleAuthenticationInfoUpdate(authResponse)} />
+            <LoginControl updateAuthenticationInfo={(authResponse) => this.handleAuthenticationInfoUpdate(authResponse)} />
           </div>
         </div>
 
@@ -57,9 +57,9 @@ class App extends Component {
     );
   }
 
-  handleAuthenticationInfoUpdate = function(authResponse) {
-    if(!authResponse || authResponse.error) {
-      console.log("Encountered an error on login: " + util.inspect(authResponse, { showHidden: true, depth: null }));
+  handleAuthenticationInfoUpdate = function (authResponse) {
+    if (!authResponse || authResponse.error) {
+      console.log("Encountered an error on login: " + util.inspect(authResponse, {showHidden: true, depth: null}));
     } else {
       this.setState({authenticationInfo: {access_token: authResponse.access_token, expires_in: authResponse.expires_in}})
     }

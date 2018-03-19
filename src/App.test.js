@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import {shallow, mount} from "enzyme";
 import App from "./App";
 
 let app;
@@ -7,9 +7,9 @@ let appInstance;
 let originalState;
 
 beforeEach(() => {
-     app = shallow(<App />);
-     appInstance = app.instance();
-     originalState = JSON.parse(JSON.stringify(app.instance().state));
+  app = shallow(<App />);
+  appInstance = app.instance();
+  originalState = JSON.parse(JSON.stringify(app.instance().state));
 });
 
 it("renders without crashing", () => {
@@ -44,7 +44,7 @@ it("should not change state when authorization fails (implicit grant)", () => {
   expect(appInstance.state).toEqual(originalState);
   // Verify error message has been logged to console
   expect(global.console.log)
-    .toHaveBeenCalledWith("Encountered an error on login: " + util.inspect(response, { showHidden: true, depth: null }))
+    .toHaveBeenCalledWith("Encountered an error on login: " + util.inspect(response, {showHidden: true, depth: null}))
 });
 
 it("should change state when authorization response (implicit grant) is defined", () => {
