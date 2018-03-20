@@ -59,15 +59,16 @@ it("persists a given message in state when pushMessage is called", () => {
   const numberOfMessagesAlreadyInState = originalState.messages.length;
   expect(originalState.messages.length).toBe(numberOfMessagesAlreadyInState);
 
-  const user = users.get(userIds.YOU);
+  const userId = userIds.YOU;
+  const user = users.get(userId);
   const message = "test message";
   const expectedMessage = new Message({
-    id: user.id,
+    id: userId,
     message,
     senderName: user.name
   });
 
-  chatWindow.instance().pushMessage(user.id, message);
+  chatWindow.instance().pushMessage(userId, message);
   const finalState = chatWindow.instance().state;
 
   const finalMessages = finalState.messages;
@@ -115,10 +116,11 @@ it("handles the user's form submission with request to Alexa properly", () => {
   const numberOfMessagesAlreadyInState = originalState.messages.length;
 
   const mockuserRequestToAlexa = "mock request";
-  const user = users.get(userIds.YOU);
+  const userId = userIds.YOU;
+  const user = users.get(userId);
   chatWindowInstance.setState({
     userRequestToAlexa: mockuserRequestToAlexa,
-    curr_user: user.id
+    curr_user: userId
   });
 
   chatWindow
@@ -131,7 +133,7 @@ it("handles the user's form submission with request to Alexa properly", () => {
   const finalState = chatWindowInstance.state;
 
   const expectedMessage = new Message({
-    id: user.id,
+    id: userId,
     message: mockuserRequestToAlexa,
     senderName: user.name
   });

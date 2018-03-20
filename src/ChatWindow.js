@@ -86,7 +86,7 @@ class ChatWindow extends Component {
 
     const messagesCopy = this.state.messages.slice(); // for immutability
     const newMessage = new Message({
-      id: user.id,
+      id: userid,
       message,
       senderName: user.name
     });
