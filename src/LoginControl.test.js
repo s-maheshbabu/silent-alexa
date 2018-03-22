@@ -31,14 +31,14 @@ it("renders correctly (snapshot testing)", () => {
   wrapper.unmount();
 });
 
-it("verifies amazon authorization is called when login button is clicked", () => {
+it("verifies that amazon authorization is called when login button is clicked", () => {
   mount(<LoginControl />).find("LoginButton").find("button").simulate("click");
 
   // Verify authorize called once
   expect(amazonAuthorizationSpy.mock.calls.length).toBe(1);
 });
 
-it("verifies updateAuthenticationInfo is called when handleResponse is called", () => {
+it("verifies that updateAuthenticationInfo is called when handleResponse is called", () => {
   const response = "Some response body";
   loginControlInstance.handleResponse(response);
   expect(mockUpdateAuthenticationInfo).toHaveBeenCalledWith(response);

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import LoginButton from "./LoginButton.js"
+import LoginButton from "./LoginButton"
 
 // Options variable to request for implicit grant.
 // TODO: Logic for assigning 'deviceSerialNumber' needs to be revisited.

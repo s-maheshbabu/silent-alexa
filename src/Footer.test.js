@@ -1,6 +1,6 @@
 import React from "react";
 import {mount} from "enzyme";
-import Footer from "./Footer.js";
+import Footer from "./Footer";
 
 it("renders Footer without crashing", () => {
   mount(<Footer />);

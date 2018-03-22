@@ -1,6 +1,6 @@
 import React from "react";
 import {mount} from "enzyme";
-import RightPanel from "./RightPanel.js";
+import RightPanel from "./RightPanel";
 
 it("renders RightPanel without crashing", () => {
   mount(<RightPanel />);

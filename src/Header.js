@@ -1,6 +1,6 @@
 import React from "react";
 import "./Header.css";
-import LoginControl from "./LoginControl.js";
+import LoginControl from "./LoginControl";
 
 export default function Header(props) {
   return (

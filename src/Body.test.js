@@ -1,6 +1,6 @@
 import React from "react";
 import {mount} from "enzyme";
-import Body from "./Body.js";
+import Body from "./Body";
 
 it("renders Body without crashing", () => {
   mount(<Body />);

@@ -1,8 +1,8 @@
 import React from "react";
-import { mount } from "enzyme";
+import {mount} from "enzyme";
 
 import ChatWindow from "./ChatWindow";
-import UserRequestToAlexaForm from "./UserRequestToAlexaForm.js";
+import UserRequestToAlexaForm from "./UserRequestToAlexaForm";
 import TextField from "material-ui/TextField";
 
 const DEFAULT_PLACEHOLDER_VALUE = require("./Constants");

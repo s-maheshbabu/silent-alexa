@@ -1,11 +1,9 @@
 import React, {Component} from "react";
-
-import logo from "./logo.svg";
 import "./App.css";
 
-import Header from "./Header.js";
-import Body from "./Body.js";
-import Footer from "./Footer.js";
+import Header from "./Header";
+import Body from "./Body";
+import Footer from "./Footer";
 const util = require("util");
 
 class App extends Component {
