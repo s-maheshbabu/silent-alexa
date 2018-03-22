@@ -4,7 +4,8 @@ import { shallow, mount } from "enzyme";
 import { ChatFeed, Message } from "react-chat-ui";
 import ChatWindow from "./ChatWindow";
 
-const users = require("./ConversingUsers");
+import { users, userIds } from "./ConversingUsers";
+
 const CHATFEED_CONTAINER_HEIGHT = 234;
 const CHATFEED_CONTAINER_HEIGHT_DEFAULT = 0;
 const setHeightElement = function(height) {
@@ -24,7 +25,7 @@ beforeEach(() => {
   preventDefaultSpy = jest.fn();
   chatWindow = shallow(<ChatWindow />);
   chatWindowInstance = chatWindow.instance();
-  originalState = JSON.parse(JSON.stringify(chatWindow.instance().state));
+  originalState = JSON.parse(JSON.stringify(chatWindowInstance.state));
 });
 
 it("renders ChatWindow without crashing", () => {
@@ -58,16 +59,17 @@ it("persists a given message in state when pushMessage is called", () => {
   const numberOfMessagesAlreadyInState = originalState.messages.length;
   expect(originalState.messages.length).toBe(numberOfMessagesAlreadyInState);
 
-  const userid = 1;
+  const userId = userIds.YOU;
+  const user = users.get(userId);
   const message = "test message";
   const expectedMessage = new Message({
-    id: userid,
+    id: userId,
     message,
-    senderName: users[userid]
+    senderName: user.name
   });
 
-  chatWindow.instance().pushMessage(userid, message);
-  const finalState = chatWindow.instance().state;
+  chatWindowInstance.pushMessage(userId, message);
+  const finalState = chatWindowInstance.state;
 
   const finalMessages = finalState.messages;
   expect(finalMessages.length).toBe(numberOfMessagesAlreadyInState + 1);
@@ -79,8 +81,8 @@ it("persists a given message in state when pushMessage is called", () => {
 it("handles gracefully when pushMessage is called with an unknown user", () => {
   const invalidUserid = 1000; // valid values are just 0 and 1
 
-  chatWindow.instance().pushMessage(invalidUserid, "test message");
-  const finalState = chatWindow.instance().state;
+  chatWindowInstance.pushMessage(invalidUserid, "test message");
+  const finalState = chatWindowInstance.state;
 
   // Nothing about the state should have changed.
   expect(finalState).toEqual(originalState);
@@ -90,16 +92,16 @@ it("handles gracefully when pushMessage is called with an empty or null message"
   const userid = 1;
   const emptyMessage = "";
 
-  chatWindow.instance().pushMessage(userid, emptyMessage);
-  let finalState = chatWindow.instance().state;
+  chatWindowInstance.pushMessage(userid, emptyMessage);
+  let finalState = chatWindowInstance.state;
 
   // Nothing about the state should have changed.
   expect(finalState).toEqual(originalState);
 
   let nullMessage;
 
-  chatWindow.instance().pushMessage(userid, nullMessage);
-  finalState = chatWindow.instance().state;
+  chatWindowInstance.pushMessage(userid, nullMessage);
+  finalState = chatWindowInstance.state;
 
   // Nothing about the state should have changed.
   expect(finalState).toEqual(originalState);
@@ -114,10 +116,11 @@ it("handles the user's form submission with request to Alexa properly", () => {
   const numberOfMessagesAlreadyInState = originalState.messages.length;
 
   const mockuserRequestToAlexa = "mock request";
-  const userid = 1;
+  const userId = userIds.YOU;
+  const user = users.get(userId);
   chatWindowInstance.setState({
     userRequestToAlexa: mockuserRequestToAlexa,
-    curr_user: userid
+    curr_user: userId
   });
 
   chatWindow
@@ -130,9 +133,9 @@ it("handles the user's form submission with request to Alexa properly", () => {
   const finalState = chatWindowInstance.state;
 
   const expectedMessage = new Message({
-    id: userid,
+    id: userId,
     message: mockuserRequestToAlexa,
-    senderName: users[userid]
+    senderName: user.name
   });
   const finalMessages = finalState.messages;
   expect(finalMessages.length).toBe(numberOfMessagesAlreadyInState + 1);
