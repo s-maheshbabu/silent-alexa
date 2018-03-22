@@ -32,8 +32,8 @@ afterEach(() => {
   fetchMock.restore();
 });
 
-test("that sending a testRequest throws if the message itself is empty", async () => {
-  expect.assertions(2);
+test("that sending a testRequest throws if the message itself is empty or undefined.", async () => {
+  expect.assertions(3);
 
   const testMessage = "";
   await expect(unitUnderTest.sendTextMessageEvent(testMessage)).rejects.toEqual(
@@ -44,10 +44,14 @@ test("that sending a testRequest throws if the message itself is empty", async (
   await expect(unitUnderTest.sendTextMessageEvent(nullMessage)).rejects.toEqual(
     expect.any(IllegalArgumentError)
   );
+
+  await expect(unitUnderTest.sendTextMessageEvent(undefined)).rejects.toEqual(
+    expect.any(IllegalArgumentError)
+  );
 });
 
-test("that sending a testRequest throws if the accessToken empty", async () => {
-  expect.assertions(2);
+test("that sending a testRequest throws if the accessToken empty or undefined.", async () => {
+  expect.assertions(3);
 
   const userRequestToAlexa = "user request to Alexa";
   const accessToken = "";
@@ -59,6 +63,10 @@ test("that sending a testRequest throws if the accessToken empty", async () => {
   let nullAccessToken;
   await expect(
     unitUnderTest.sendTextMessageEvent(userRequestToAlexa, nullAccessToken)
+  ).rejects.toEqual(expect.any(IllegalArgumentError));
+
+  await expect(
+    unitUnderTest.sendTextMessageEvent(userRequestToAlexa, undefined)
   ).rejects.toEqual(expect.any(IllegalArgumentError));
 });
 

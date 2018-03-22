@@ -7,8 +7,15 @@ import IllegalArgumentError from "./errors/IllegalArgumentError";
 const uuid = require("uuid/v4");
 const util = require("util");
 const { hasIn } = require("immutable");
+const sprintf = require("sprintf-js").sprintf;
 
 const parser = require("./SpeakDirectiveParser");
+
+const AVS_REQUEST_BODY = `--silent-alexa-http-boundary
+Content-Disposition: form-data; name="metadata"
+Content-Type: application/json; charset=UTF-8
+
+%s`;
 
 // TODO: Once the region setting is made configurable by the user, the URLS
 // need to ge generated as against hard coded.
@@ -24,10 +31,9 @@ class AVSGateway {
   /**
    * Sends the TextMessage event to AVS and extracts Alexa's response.
    *
-   * @param {String} userRequestToAlexa The multi-part response from AVS. This
-   * should not be empty or undefined.
-   * @param {String} accessToken The multi-part response from AVS. This
-   * should not be empty or undefined.
+   * @param {String} userRequestToAlexa The request string that the user typed
+   * as a request for Alexa.
+   * @param {String} accessToken The access token to communicate with AVS.
    *
    * @returns The text response from Alexa. An empty response is possible if Alexa
    * said nothing. If an error happens while communicating to AVS or while parsing
@@ -104,11 +110,7 @@ class AVSGateway {
   }
 
   buildTextMessageFetchRequestOptions(testMessageEvent, accessToken) {
-    const data = `--silent-alexa-http-boundary
-    Content-Disposition: form-data; name="metadata"
-    Content-Type: application/json; charset=UTF-8
-
-    ${testMessageEvent}`;
+    const data = sprintf(AVS_REQUEST_BODY, testMessageEvent);
 
     return {
       body: data,
