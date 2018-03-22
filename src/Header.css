@@ -1,0 +1,23 @@
+/** Scaffolding **/
+#header {
+  grid-row: 1;
+  grid-column: 1 / 3;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+#header-info {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  display: flex;
+  justify-content: center;
+}
+
+#header-controls {
+  display: flex;
+  height: 100%;
+  justify-content: flex-end;
+}

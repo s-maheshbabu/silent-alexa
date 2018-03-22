@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { ChatFeed, Message } from "react-chat-ui";
 import ContainerDimensions from "react-container-dimensions";
 
-import UserRequestToAlexaForm from "./UserRequestToAlexaForm.js";
+import UserRequestToAlexaForm from "./UserRequestToAlexaForm";
 import "./ChatWindow.css";
 
 import { users, userIds } from "./ConversingUsers";

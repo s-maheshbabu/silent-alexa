@@ -1,108 +1,9 @@
-/* TODO The App related CSS should be deleted */
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 /** Scaffolding **/
 #page {
   display: grid;
   grid-template-columns: 1fr 300px;
   grid-template-rows: 30px auto 30px;
   height: 100vh;
-}
-
-/** Panel Module **/
-
-/** TODO: Right panel should also be moved into its own CSS file once the right panel component gets created. **/
-#rightpanel {
-  display: grid;
-  grid-template-rows: auto;
-  height: calc(100vh - 60px);
-}
-
-.panel-body {
-  overflow: auto;
-}
-
-/** Header **/
-#header {
-  grid-row: 1;
-  grid-column: 1 / 3;
-
-  display: grid;
-  grid-template-columns: 1fr auto;
-}
-
-#header-info {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-
-  display: flex;
-  justify-content: center;
-}
-
-#header-controls {
-  display: flex;
-  height: 100%;
-  justify-content: flex-end;
-}
-
-/** Footer **/
-
-#footer {
-  grid-column: 1 / 3;
-  grid-row: 3;
-
-  display: grid;
-  grid-template-columns: 1fr auto;
-}
-
-#footer-info {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-#footer-controls {
-  display: flex;
-  height: 100%;
-  justify-content: flex-end;
-}
-
-#footer-controls a {
-  height: 100%;
-  display: flex;
-  align-items: center;
 }
 
 /** Styles **/
@@ -115,24 +16,4 @@ body {
     "Helvetica Neue", Arial, sans-serif;
   font-size: 0.8rem;
   color: #2c313a;
-}
-
-#header {
-  align-items: center;
-  border-top: 1px solid #c5cad3;
-}
-
-#footer {
-  align-items: center;
-  border-top: 1px solid #c5cad3;
-}
-
-#footer-controls a {
-  padding: 0 10px;
-  color: initial;
-  text-decoration: none;
-}
-
-#footer-controls a:hover {
-  background-color: #c5cad3;
 }
