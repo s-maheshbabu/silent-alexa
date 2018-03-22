@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {ChatFeed, Message} from "react-chat-ui";
+import React, { Component } from "react";
+import { ChatFeed, Message } from "react-chat-ui";
 import ContainerDimensions from "react-container-dimensions";
 
 import UserRequestToAlexaForm from "./UserRequestToAlexaForm";
@@ -12,7 +12,7 @@ class ChatWindow extends Component {
     super();
     this.state = {
       messages: [
-        new Message({id: 0, message: "Hello Alexa!", senderName: "You"}),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
         new Message({
           id: 1,
           message: "Hey! Alexa here.",
@@ -20,27 +20,27 @@ class ChatWindow extends Component {
         }),
         // TODO Adding a bunch of dummy messages to make the ChatFeed overflow window height.
         // This will be useful during the development phase but will be removed once we are confident about the layout.
-        new Message({id: 0, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 1, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 0, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 1, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 0, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 1, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 0, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 1, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 0, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 1, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 0, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 1, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 0, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 1, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 0, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 1, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 0, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 1, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 0, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 1, message: "Hello Alexa!", senderName: "You"}),
-        new Message({id: 0, message: "Hello Alexa!", senderName: "You"})
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" })
       ],
       userRequestToAlexa: "",
       useCustomBubble: false,
@@ -65,11 +65,11 @@ class ChatWindow extends Component {
     event.preventDefault();
     if (!userRequestToAlexa || 0 === userRequestToAlexa.length) {
       console.log("Request string for Alexa was empty: " + userRequestToAlexa);
-      this.setState({userRequestToAlexa: ""});
+      this.setState({ userRequestToAlexa: "" });
       return false;
     }
     this.pushMessage(this.state.curr_user, userRequestToAlexa);
-    this.setState({userRequestToAlexa: ""});
+    this.setState({ userRequestToAlexa: "" });
     return true;
   }
 
@@ -90,7 +90,7 @@ class ChatWindow extends Component {
       senderName: users[userid]
     });
     messagesCopy.push(newMessage);
-    this.setState({messages: messagesCopy});
+    this.setState({ messages: messagesCopy });
   }
 
   /*
@@ -98,7 +98,7 @@ class ChatWindow extends Component {
   */
   handleChangeInUserRequestToAlexa(event) {
     event.preventDefault();
-    this.setState({userRequestToAlexa: event.target.value});
+    this.setState({ userRequestToAlexa: event.target.value });
   }
 
   render() {
@@ -106,7 +106,7 @@ class ChatWindow extends Component {
       <div id="leftpanel">
         <div className="panel-body">
           <ContainerDimensions>
-            {({height}) => (
+            {({ height }) => (
               <ChatFeed
                 messages={this.state.messages}
                 isTyping={this.state.is_typing} // is the recipient typing
