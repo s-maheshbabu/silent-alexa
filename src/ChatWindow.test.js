@@ -25,7 +25,7 @@ beforeEach(() => {
   preventDefaultSpy = jest.fn();
   chatWindow = shallow(<ChatWindow />);
   chatWindowInstance = chatWindow.instance();
-  originalState = JSON.parse(JSON.stringify(chatWindow.instance().state));
+  originalState = JSON.parse(JSON.stringify(chatWindowInstance.state));
 });
 
 it("renders ChatWindow without crashing", () => {
@@ -68,8 +68,8 @@ it("persists a given message in state when pushMessage is called", () => {
     senderName: user.name
   });
 
-  chatWindow.instance().pushMessage(userId, message);
-  const finalState = chatWindow.instance().state;
+  chatWindowInstance.pushMessage(userId, message);
+  const finalState = chatWindowInstance.state;
 
   const finalMessages = finalState.messages;
   expect(finalMessages.length).toBe(numberOfMessagesAlreadyInState + 1);
@@ -81,8 +81,8 @@ it("persists a given message in state when pushMessage is called", () => {
 it("handles gracefully when pushMessage is called with an unknown user", () => {
   const invalidUserid = 1000; // valid values are just 0 and 1
 
-  chatWindow.instance().pushMessage(invalidUserid, "test message");
-  const finalState = chatWindow.instance().state;
+  chatWindowInstance.pushMessage(invalidUserid, "test message");
+  const finalState = chatWindowInstance.state;
 
   // Nothing about the state should have changed.
   expect(finalState).toEqual(originalState);
@@ -92,16 +92,16 @@ it("handles gracefully when pushMessage is called with an empty or null message"
   const userid = 1;
   const emptyMessage = "";
 
-  chatWindow.instance().pushMessage(userid, emptyMessage);
-  let finalState = chatWindow.instance().state;
+  chatWindowInstance.pushMessage(userid, emptyMessage);
+  let finalState = chatWindowInstance.state;
 
   // Nothing about the state should have changed.
   expect(finalState).toEqual(originalState);
 
   let nullMessage;
 
-  chatWindow.instance().pushMessage(userid, nullMessage);
-  finalState = chatWindow.instance().state;
+  chatWindowInstance.pushMessage(userid, nullMessage);
+  finalState = chatWindowInstance.state;
 
   // Nothing about the state should have changed.
   expect(finalState).toEqual(originalState);

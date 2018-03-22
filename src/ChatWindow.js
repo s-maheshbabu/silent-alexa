@@ -73,10 +73,10 @@ class ChatWindow extends Component {
     return true;
   }
 
-  pushMessage(userid, message) {
-    const user = users.get(userid);
+  pushMessage(userId, message) {
+    const user = users.get(userId);
     if (!user) {
-      console.log("Unknown userId: " + userid);
+      console.log("Unknown userId: " + userId);
       return;
     }
     if (!message || 0 === message.length) {
@@ -86,7 +86,7 @@ class ChatWindow extends Component {
 
     const messagesCopy = this.state.messages.slice(); // for immutability
     const newMessage = new Message({
-      id: userid,
+      id: userId,
       message,
       senderName: user.name
     });
