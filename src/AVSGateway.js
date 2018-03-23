@@ -60,7 +60,6 @@ class AVSGateway {
 
     let isOk = false;
     let payload;
-    let responseFromAlexa = ERROR_MESSAGE;
     await fetch(EVENTS_URL, requestOptions)
       .then(response => {
         if (response.ok) {
@@ -80,11 +79,11 @@ class AVSGateway {
 
     if (isOk) {
       try {
-        responseFromAlexa = parser.extractAlexaTextResponse(payload);
-        if (!responseFromAlexa)
-          responseFromAlexa = cannedResponses.EMPTY_RESPONSE_FROM_ALEXA;
+        let textResponseFromAlexa = parser.extractAlexaTextResponse(payload);
+        if (!textResponseFromAlexa)
+          textResponseFromAlexa = cannedResponses.EMPTY_RESPONSE_FROM_ALEXA;
 
-        return responseFromAlexa;
+        return textResponseFromAlexa;
       } catch (error) {
         console.log(
           "Encountered an error while trying to parse the speak directive from AVS." +
