@@ -70,6 +70,7 @@ class ChatWindow extends Component {
     }
     this.pushMessage(this.state.curr_user_id, userRequestToAlexa);
     this.setState({ userRequestToAlexa: "" });
+
     return true;
   }
 
