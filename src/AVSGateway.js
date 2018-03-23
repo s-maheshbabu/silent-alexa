@@ -101,12 +101,11 @@ class AVSGateway {
     if (hasIn(errorPayload, ["payload", "code"]))
       errorCode = errorPayload.payload.code;
 
-    const notSetValue = "no canned response found for given error code";
-    let cannedResponse = cannedErrorResponses.get(errorCode, notSetValue);
-    if (cannedResponse === notSetValue) {
-      return cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR);
-    }
-    return cannedResponse;
+    return cannedErrorResponses.get(
+      errorCode,
+      // default value to return if errorCode doesn't exist
+      cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR)
+    );
   }
 
   buildTextMessageFetchRequestOptions(testMessageEvent, accessToken) {
@@ -140,4 +139,7 @@ class AVSGateway {
   }
 }
 
-export default AVSGateway;
+module.exports = {
+  AVSGateway: AVSGateway,
+  EVENTS_URL: EVENTS_URL
+};

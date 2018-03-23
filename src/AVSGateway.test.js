@@ -1,9 +1,8 @@
 import React from "react";
 
-import AVSGateway from "./AVSGateway";
+import { AVSGateway, EVENTS_URL } from "./AVSGateway";
 import IllegalArgumentError from "./errors/IllegalArgumentError";
 
-import { urls, paths } from "./AVSEndPoints";
 import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";
 import { cannedResponses } from "./CannedResponses";
 
@@ -32,7 +31,7 @@ afterEach(() => {
   fetchMock.restore();
 });
 
-test("that sending a testRequest throws if the message itself is empty or undefined.", async () => {
+test("that sending a testRequest throws if the message itself is null, empty or undefined.", async () => {
   expect.assertions(3);
 
   const testMessage = "";
@@ -50,7 +49,7 @@ test("that sending a testRequest throws if the message itself is empty or undefi
   );
 });
 
-test("that sending a testRequest throws if the accessToken empty or undefined.", async () => {
+test("that sending a testRequest throws if the accessToken is null, empty or undefined.", async () => {
   expect.assertions(3);
 
   const userRequestToAlexa = "user request to Alexa";
@@ -99,7 +98,7 @@ it("handles gracefully if AVS returns an unexpected error code", async () => {
   const access_token = "a mock access_token";
   const errorCode = "an unexpected error code";
 
-  fetchMock.postOnce(urls.NA + paths.EVENTS, {
+  fetchMock.postOnce(EVENTS_URL, {
     status: 500,
     body: {
       header: {
@@ -128,7 +127,7 @@ it("handles gracefully when the http response is 'ok' and then we fail to parse 
   const userRequestToAlexa = "user request to Alexa";
   const access_token = "a mock access_token";
 
-  fetchMock.postOnce(urls.NA + paths.EVENTS, {
+  fetchMock.postOnce(EVENTS_URL, {
     status: 200,
     body: undefined // response.text() will parse pretty much anything you throw at it. The only way I found to make it fail is to pass it undefined as input.
   });
@@ -151,7 +150,7 @@ it("handles gracefully when the speak directive parser throws an error", async (
     throw new IllegalArgumentError("simulating an illegal argument error");
   });
 
-  fetchMock.postOnce(urls.NA + paths.EVENTS, {
+  fetchMock.postOnce(EVENTS_URL, {
     status: 200,
     body: testData.happy_case.rawData
   });
@@ -169,7 +168,7 @@ it("handles gracefully when the http response is not 'ok' and then we fail to pa
   const userRequestToAlexa = "user request to Alexa";
   const access_token = "a mock access_token";
 
-  fetchMock.postOnce(urls.NA + paths.EVENTS, {
+  fetchMock.postOnce(EVENTS_URL, {
     status: 500,
     body: "invalid json string"
   });
@@ -187,7 +186,7 @@ it("calls fetch with the right options when trying to send a happy case TextMess
   const userRequestToAlexa = "user request to Alexa";
   const access_token = "a mock access_token";
 
-  fetchMock.postOnce(urls.NA + paths.EVENTS, testData.happy_case.rawData);
+  fetchMock.postOnce(EVENTS_URL, testData.happy_case.rawData);
 
   await unitUnderTest
     .sendTextMessageEvent(userRequestToAlexa, access_token)
@@ -204,7 +203,7 @@ it("handles the happy case where Alexa returns an empty response. This can happe
   const access_token = "a mock access_token";
 
   fetchMock.postOnce(
-    urls.NA + paths.EVENTS,
+    EVENTS_URL,
     testData.happy_case_when_alexa_chooses_to_say_nothing.rawData
   );
 
@@ -229,7 +228,7 @@ const testErrorResponseFromAVSHandling = async (
   const userRequestToAlexa = "user request to Alexa";
   const access_token = "a mock access_token";
 
-  fetchMock.postOnce(urls.NA + paths.EVENTS, {
+  fetchMock.postOnce(EVENTS_URL, {
     status: httpErrorCode,
     body: {
       header: {
