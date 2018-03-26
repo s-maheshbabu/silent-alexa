@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { ChatFeed, Message } from "react-chat-ui";
 import ContainerDimensions from "react-container-dimensions";
 
-import AVSGateway from "./AVSGateway";
 import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";
 
 import UserRequestToAlexaForm from "./UserRequestToAlexaForm";
@@ -10,6 +9,7 @@ import "./ChatWindow.css";
 
 import { users, userIds } from "./ConversingUsers";
 
+import AVSGateway from "./AVSGateway";
 const avs = new AVSGateway();
 
 class ChatWindow extends Component {
@@ -78,9 +78,9 @@ class ChatWindow extends Component {
 
     // TODO: Send the actual access token once we integrate ChatWindow with the
     // state object that contains the real access token. For now, not passing
-    // an access token which means AVS will throw an error.
+    // an access_token which means AVS will throw an error.
     avs
-      .sendTextMessageEvent(userRequestToAlexa /*, "access token"*/)
+      .sendTextMessageEvent(userRequestToAlexa /*, "access_token"*/)
       .then(response => {
         this.pushMessage(userIds.ALEXA, response);
       })

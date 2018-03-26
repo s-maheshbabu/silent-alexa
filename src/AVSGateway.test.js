@@ -1,6 +1,7 @@
 import React from "react";
 
-import { AVSGateway, EVENTS_URL } from "./AVSGateway";
+import AVSGateway from "./AVSGateway";
+import { EVENTS_URL } from "./AVSGateway";
 import IllegalArgumentError from "./errors/IllegalArgumentError";
 
 import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";

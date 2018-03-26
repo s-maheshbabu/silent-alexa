@@ -195,8 +195,10 @@ it("handles the user's input as they are typing their request (before submission
 });
 
 /**
- * Verifies that the given input results in an {IllegalArgumentError} when parsed.
- * @param {String} input The multi part response string that needs to be parsed.
+ * Helper method to test the interaction with Alexa. Will simulate a user request and
+ * verify that the expected messages are populated into the state.
+ * @param {Message} expectedAlexaResponse The expected response from Alexa to be verified
+ * against.
  */
 const testOnUserRequestToAlexaSubmitHandling = (
   expectedAlexaResponse,

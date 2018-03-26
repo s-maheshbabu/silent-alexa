@@ -6,8 +6,6 @@ let app;
 let appInstance;
 let originalState;
 
-jest.mock("./AVSGateway");
-
 beforeEach(() => {
   app = shallow(<App />);
   appInstance = app.instance();

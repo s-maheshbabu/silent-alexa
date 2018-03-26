@@ -7,8 +7,6 @@ import TextField from "material-ui/TextField";
 
 const DEFAULT_PLACEHOLDER_VALUE = require("./Constants");
 
-jest.mock("./AVSGateway");
-
 it("renders UserRequestToAlexaForm without crashing", () => {
   mount(<UserRequestToAlexaForm />);
 });
