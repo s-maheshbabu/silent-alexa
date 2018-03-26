@@ -44,7 +44,9 @@ exports[`snapshot testing that it renders correctly 1`] = `
       </div>
     </Header>
     <Body>
-      <MuiThemeProvider>
+      <MuiThemeProvider
+        key="muiThemeProvider"
+      >
         <ChatWindow>
           <div
             id="leftpanel"
@@ -2989,7 +2991,9 @@ exports[`snapshot testing that it renders correctly 1`] = `
           </div>
         </ChatWindow>
       </MuiThemeProvider>
-      <RightPanel>
+      <RightPanel
+        key="rightPanel"
+      >
         <div
           id="rightpanel"
         >
