@@ -21,9 +21,6 @@ Content-Type: application/json; charset=UTF-8
 // need to ge generated as against hard coded.
 const EVENTS_URL = urls.NA + paths.EVENTS;
 
-// Default error repsonse if we encounter any unexpected errors.
-const ERROR_MESSAGE = cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR);
-
 /**
  * Manages interactions with AVS
  */
