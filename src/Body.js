@@ -7,11 +7,11 @@ export default class Body extends Component {
   render() {
     return (
       [
-        <MuiThemeProvider>
+        <MuiThemeProvider key="muiThemeProvider">
           <ChatWindow />
         </MuiThemeProvider>,
 
-        <RightPanel />
+        <RightPanel key="rightPanel" />
       ]
     )
   }
