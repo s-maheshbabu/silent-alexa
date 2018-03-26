@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly (snapshot testing) 1`] = `
-<LoginControl>
+exports[`renders LoginButton when isLoggedIn returns false (snapshot testing) 1`] = `
+<LoginControl
+  isLoggedIn={[Function]}
+>
   <LoginButton
     onClick={[Function]}
   >
@@ -17,5 +19,22 @@ exports[`renders correctly (snapshot testing) 1`] = `
       />
     </button>
   </LoginButton>
+</LoginControl>
+`;
+
+exports[`renders LogoutButton when isLoggedIn returns true (snapshot testing) 1`] = `
+<LoginControl
+  isLoggedIn={[Function]}
+>
+  <LogoutButton
+    onClick={[Function]}
+  >
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Logout
+    </button>
+  </LogoutButton>
 </LoginControl>
 `;

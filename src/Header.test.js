@@ -2,12 +2,28 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import Header from "./Header";
 
+const mockIsLoggedIn = jest.fn();
+
+beforeEach(() => {
+  mockIsLoggedIn.mockReset();
+});
+
 it("renders Header without crashing", () => {
-  mount(<Header />);
+  mockIsLoggedIn.mockReturnValueOnce(false);
+  mount(<Header isLoggedIn={() => mockIsLoggedIn} />);
 });
 
 it("renders correctly (snapshot testing)", () => {
-  const wrapper = mount(<Header />);
+  mockIsLoggedIn.mockReturnValueOnce(false);
+  const wrapper = mount(<Header isLoggedIn={mockIsLoggedIn} />);
+  expect(wrapper).toMatchSnapshot();
+
+  wrapper.unmount();
+});
+
+it("renders correctly logout (snapshot testing)", () => {
+  mockIsLoggedIn.mockReturnValueOnce(true);
+  const wrapper = mount(<Header isLoggedIn={() => mockIsLoggedIn} />);
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();
@@ -15,7 +31,7 @@ it("renders correctly (snapshot testing)", () => {
 
 it("verifies that updateAuthenticationInfo function is passed to LoginControl component", () => {
   const mockCallback = jest.fn();
-  const header = shallow(<Header updateAuthenticationInfo={mockCallback} />);
+  const header = shallow(<Header isLoggedIn={jest.fn()} updateAuthenticationInfo={mockCallback} />);
 
   // Verify that LoginControl is passed on updateAuthenticationInfo property
   const loginControlFunctionProp = header

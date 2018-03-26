@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly (snapshot testing) 1`] = `
-<Header>
+<Header
+  isLoggedIn={[Function]}
+>
   <div
     id="header"
   >
@@ -16,6 +18,7 @@ exports[`renders correctly (snapshot testing) 1`] = `
       id="header-controls"
     >
       <LoginControl
+        isLoggedIn={[Function]}
         updateAuthenticationInfo={[Function]}
       >
         <LoginButton
@@ -33,6 +36,43 @@ exports[`renders correctly (snapshot testing) 1`] = `
             />
           </button>
         </LoginButton>
+      </LoginControl>
+    </div>
+  </div>
+</Header>
+`;
+
+exports[`renders correctly logout (snapshot testing) 1`] = `
+<Header
+  isLoggedIn={[Function]}
+>
+  <div
+    id="header"
+  >
+    <div
+      id="header-info"
+    >
+      <span>
+        Silent Alexa Header
+      </span>
+    </div>
+    <div
+      id="header-controls"
+    >
+      <LoginControl
+        isLoggedIn={[Function]}
+        updateAuthenticationInfo={[Function]}
+      >
+        <LogoutButton
+          onClick={[Function]}
+        >
+          <button
+            onClick={[Function]}
+            type="button"
+          >
+            Logout
+          </button>
+        </LogoutButton>
       </LoginControl>
     </div>
   </div>

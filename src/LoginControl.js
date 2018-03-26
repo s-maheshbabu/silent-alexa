@@ -1,5 +1,6 @@
 import React from "react";
 import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
 
 // Options variable to request for implicit grant.
 // TODO: Logic for assigning 'deviceSerialNumber' needs to be revisited.
@@ -14,7 +15,11 @@ const options = Object.freeze({
 });
 export default class LoginControl extends React.Component {
   render() {
-    return <LoginButton onClick={() => this.handleLogin()} />;
+    if (!this.props.isLoggedIn()) {
+      return <LoginButton onClick={() => this.handleLogin()} />
+    } else {
+      return <LogoutButton onClick={() => this.handleLogout()} />
+    }
   }
 
   handleLogin() {
@@ -27,5 +32,9 @@ export default class LoginControl extends React.Component {
 
   handleResponse = authorizationResponse => {
     this.props.updateAuthenticationInfo(authorizationResponse);
-  };
+  }
+
+  handleLogout = () => {
+    this.props.updateAuthenticationInfo();
+  }
 }

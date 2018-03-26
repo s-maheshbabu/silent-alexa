@@ -16,9 +16,17 @@ it("renders without crashing", () => {
   shallow(<App />);
 });
 
-it("snapshot testing that it renders correctly", () => {
+it("renders correctly (snapshot testing)", () => {
   const wrapper = mount(<App />);
   expect(wrapper).toMatchSnapshot();
+  wrapper.unmount();
+});
+
+it("renders LogoutButton when authenticationInfo state changes", () => {
+  const wrapper = mount(<App />);
+  wrapper.setState({authenticationInfo: {access_token: "some_access_token", expires_in: "30"}});
+  expect(wrapper).toMatchSnapshot();
+  wrapper.unmount();
 });
 
 it("should not change state when authorization response (implicit grant) is not defined", () => {
@@ -27,9 +35,6 @@ it("should not change state when authorization response (implicit grant) is not 
   };
   appInstance.handleAuthenticationInfoUpdate();
   expect(appInstance.state).toEqual(originalState);
-  expect(global.console.log).toHaveBeenCalledWith(
-    "Encountered an error on login: undefined"
-  );
 });
 
 it("should not change state when authorization fails (implicit grant)", () => {
