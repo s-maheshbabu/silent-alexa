@@ -19,7 +19,7 @@ Content-Type: application/json; charset=UTF-8
 
 // TODO: Once the region setting is made configurable by the user, the URLS
 // need to ge generated as against hard coded.
-const EVENTS_URL = urls.NA + paths.EVENTS;
+export const EVENTS_URL = urls.NA + paths.EVENTS;
 
 // Default error repsonse if we encounter any unexpected errors.
 const ERROR_MESSAGE = cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR);
@@ -27,7 +27,7 @@ const ERROR_MESSAGE = cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR);
 /**
  * Manages interactions with AVS
  */
-class AVSGateway {
+export default class AVSGateway {
   /**
    * Sends the TextMessage event to AVS and extracts Alexa's response.
    *
@@ -137,8 +137,3 @@ class AVSGateway {
     };
   }
 }
-
-module.exports = {
-  AVSGateway: AVSGateway,
-  EVENTS_URL: EVENTS_URL
-};

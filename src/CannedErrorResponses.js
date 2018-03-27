@@ -17,7 +17,8 @@ const cannedErrorResponses = Map({
     "a canned response for INTERNAL_SERVICE_EXCEPTION",
   "N/A": "a canned response for N/A Exception",
 
-  UNKNOWN_ERROR: "a canned response for UNKNOWN_ERROR"
+  UNKNOWN_ERROR:
+    "a canned response for UNKNOWN_ERROR. This shouldn't ever happen. Don't show it as an Alexa bubble."
 });
 
 const customErrorCodes = Object.freeze({

@@ -1,8 +1,8 @@
+import IllegalArgumentError from "./errors/IllegalArgumentError";
+
 const httpMessageParser = require("http-message-parser");
 const { hasIn } = require("immutable");
 const util = require("util");
-
-import IllegalArgumentError from "./errors/IllegalArgumentError";
 
 /**
  * This method parses the multi-part AVS responses and extracts the

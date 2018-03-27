@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import { ChatFeed, Message } from "react-chat-ui";
 import ContainerDimensions from "react-container-dimensions";
 
+import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";
+
 import UserRequestToAlexaForm from "./UserRequestToAlexaForm";
 import "./ChatWindow.css";
 
 import { users, userIds } from "./ConversingUsers";
+
+import AVSGateway from "./AVSGateway";
+const avs = new AVSGateway();
 
 class ChatWindow extends Component {
   constructor() {
@@ -70,6 +75,23 @@ class ChatWindow extends Component {
     }
     this.pushMessage(this.state.curr_user_id, userRequestToAlexa);
     this.setState({ userRequestToAlexa: "" });
+
+    // TODO: Send the actual access token once we integrate ChatWindow with the
+    // state object that contains the real access token. For now, not passing
+    // an access_token which means AVS will throw an error.
+    avs
+      .sendTextMessageEvent(userRequestToAlexa /*, "access_token"*/)
+      .then(response => {
+        this.pushMessage(userIds.ALEXA, response);
+      })
+      .catch(error => {
+        // TODO: Don't show this as an Alexa bubble. It also doesn't make to show it as a user bubble.
+        // Need to find a way to represent this error on the UI.
+        this.pushMessage(
+          userIds.ALEXA,
+          cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR)
+        );
+      });
 
     return true;
   }
