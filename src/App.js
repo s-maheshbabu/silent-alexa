@@ -21,7 +21,7 @@ class App extends Component {
             this.handleAuthenticationInfoUpdate(authResponse)
           }
         />
-        <Body />
+        <Body authenticationInfo={this.state.authenticationInfo} />
         <Footer />
       </div>
     );
