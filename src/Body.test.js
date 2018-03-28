@@ -12,3 +12,14 @@ it("renders correctly (snapshot testing)", () => {
 
   wrapper.unmount();
 });
+
+it("verifies that authenticationInfo is passed to ChatWindow component", () => {
+  const mockAuthenticationInfo = {};
+  const body = mount(<Body authenticationInfo={mockAuthenticationInfo} />);
+
+  // Verify that ChatWindow recieves authenticationInfo property
+  const authenticationInfoProp = body
+    .find("ChatWindow")
+    .prop("authenticationInfo");
+  expect(authenticationInfoProp).toBe(mockAuthenticationInfo);
+});
