@@ -11,7 +11,11 @@ export default function Header(props) {
         <span>Silent Alexa Header</span>
       </div>
       <div id="header-controls">
-        <LoginControl updateAuthenticationInfo={(authResponse) => props.updateAuthenticationInfo(authResponse)} />
+        <LoginControl
+          updateAuthenticationInfo={authResponse =>
+            props.updateAuthenticationInfo(authResponse)
+          }
+        />
       </div>
     </div>
   );

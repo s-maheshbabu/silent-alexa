@@ -1,5 +1,5 @@
 import React from "react";
-import {mount} from "enzyme";
+import { mount } from "enzyme";
 import RightPanel from "./RightPanel";
 
 it("renders RightPanel without crashing", () => {
