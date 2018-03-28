@@ -21,6 +21,18 @@ it("snapshot testing that it renders correctly", () => {
   expect(wrapper).toMatchSnapshot();
 });
 
+it("verifies that authenticationInfo is passed to Body component", () => {
+  const wrapper = mount(<App />);
+  const originalAuthenticationInfo = wrapper.instance().state
+    .authenticationInfo;
+
+  // Verify that ChatWindow recieves authenticationInfo property
+  const authenticationInfoProp = wrapper
+    .find("Body")
+    .prop("authenticationInfo");
+  expect(authenticationInfoProp).toBe(originalAuthenticationInfo);
+});
+
 it("should not change state when authorization response (implicit grant) is not defined", () => {
   global.console = {
     log: jest.fn()

@@ -7,7 +7,7 @@ export default class Body extends Component {
   render() {
     return [
       <MuiThemeProvider key="muiThemeProvider">
-        <ChatWindow />
+        <ChatWindow authenticationInfo={this.props.authenticationInfo} />
       </MuiThemeProvider>,
 
       <RightPanel key="rightPanel" />
