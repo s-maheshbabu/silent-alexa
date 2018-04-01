@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly (snapshot testing) 1`] = `
+<ChatBubble
+  bubbleStyles={
+    Object {
+      "chatbubble": Object {
+        "background": "mediumslateblue",
+      },
+      "text": Object {
+        "fontSize": 20,
+      },
+      "userBubble": Object {
+        "background": "lightcoral",
+      },
+    }
+  }
+/>
+`;

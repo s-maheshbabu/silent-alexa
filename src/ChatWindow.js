@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { ChatFeed, Message } from "react-chat-ui";
 import ContainerDimensions from "react-container-dimensions";
 
+import ChatBubble from "./ChatBubble";
 import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";
 
 import UserRequestToAlexaForm from "./UserRequestToAlexaForm";
@@ -26,29 +27,28 @@ class ChatWindow extends Component {
         // TODO Adding a bunch of dummy messages to make the ChatFeed overflow window height.
         // This will be useful during the development phase but will be removed once we are confident about the layout.
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "You" }),
+        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
         new Message({ id: 0, message: "Hello Alexa!", senderName: "You" })
       ],
       userRequestToAlexa: "",
-      useCustomBubble: false,
       curr_user_id: userIds.YOU,
       is_typing: false
     };
@@ -138,6 +138,7 @@ class ChatWindow extends Component {
                 showSenderName={false} // show the name of the user who sent the message
                 bubblesCentered={false}
                 maxHeight={height}
+                chatBubble={ChatBubble}
               />
             )}
           </ContainerDimensions>
