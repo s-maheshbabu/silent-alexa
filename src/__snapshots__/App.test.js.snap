@@ -43,11 +43,15 @@ exports[`snapshot testing that it renders correctly 1`] = `
         </div>
       </div>
     </Header>
-    <Body>
+    <Body
+      authenticationInfo={Object {}}
+    >
       <MuiThemeProvider
         key="muiThemeProvider"
       >
-        <ChatWindow>
+        <ChatWindow
+          authenticationInfo={Object {}}
+        >
           <div
             id="leftpanel"
           >
