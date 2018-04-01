@@ -117,7 +117,7 @@ it("handles gracefully when pushMessage is called with an empty or null message"
   expect(finalState).toEqual(originalState);
 });
 
-test("that when a user submits from, we call AVSGateway with their request even if the access_token is not available.", () => {
+test("that when a user submits the form, we call AVSGateway with their request even if the access_token is not available.", () => {
   const authInfoWithMissingAccessToken = { access_token: undefined };
   let missingAuthInfo;
   const invalidAuthenticationInfoObjects = [

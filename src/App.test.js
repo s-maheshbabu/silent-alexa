@@ -26,7 +26,7 @@ it("verifies that authenticationInfo is passed to Body component", () => {
   const originalAuthenticationInfo = wrapper.instance().state
     .authenticationInfo;
 
-  // Verify that ChatWindow recieves authenticationInfo property
+  // Verify that Body recieves authenticationInfo property
   const authenticationInfoProp = wrapper
     .find("Body")
     .prop("authenticationInfo");
