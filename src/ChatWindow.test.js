@@ -14,7 +14,7 @@ import { users, userIds } from "./ConversingUsers";
 
 const CHATFEED_CONTAINER_HEIGHT = 234;
 const CHATFEED_CONTAINER_HEIGHT_DEFAULT = 0;
-const setHeightElement = function(height) {
+const setHeightElement = function (height) {
   Element.prototype.getBoundingClientRect = jest.fn(() => {
     return {
       height: height

@@ -47,7 +47,7 @@ it("should not change state when authorization fails (implicit grant)", () => {
   // Verify error message has been logged to console
   expect(global.console.log).toHaveBeenCalledWith(
     "Encountered an error on login: " +
-      util.inspect(response, { showHidden: true, depth: null })
+    util.inspect(response, { showHidden: true, depth: null })
   );
 });
 

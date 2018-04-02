@@ -27,11 +27,11 @@ class App extends Component {
     );
   }
 
-  handleAuthenticationInfoUpdate = function(authResponse) {
+  handleAuthenticationInfoUpdate = function (authResponse) {
     if (!authResponse || authResponse.error) {
       console.log(
         "Encountered an error on login: " +
-          util.inspect(authResponse, { showHidden: true, depth: null })
+        util.inspect(authResponse, { showHidden: true, depth: null })
       );
     } else {
       this.setState({

@@ -2,5 +2,6 @@
   "editor.formatOnSave": true,
   "editor.detectIndentation": false,
   "editor.tabSize": 2,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false
+  "html.format.wrapLineLength": 120,
+  "files.insertFinalNewline": true
 }
