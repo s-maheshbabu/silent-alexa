@@ -1,13 +1,9 @@
 import React from "react";
-import { mount } from "enzyme";
+import { shallow } from "enzyme";
 import RightPanel from "./RightPanel";
 
 it("renders RightPanel without crashing", () => {
-  mount(<RightPanel />);
-});
-
-it("renders correctly (snapshot testing)", () => {
-  const wrapper = mount(<RightPanel />);
+  const wrapper = shallow(<RightPanel />);
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();

@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 
 import ChatWindow from "./ChatWindow";
 import UserRequestToAlexaForm from "./UserRequestToAlexaForm";
@@ -8,11 +8,7 @@ import TextField from "material-ui/TextField";
 const DEFAULT_PLACEHOLDER_VALUE = require("./Constants");
 
 it("renders UserRequestToAlexaForm without crashing", () => {
-  mount(<UserRequestToAlexaForm />);
-});
-
-it("renders correctly without any props (snapshot testing)", () => {
-  const wrapper = mount(<UserRequestToAlexaForm />);
+  const wrapper = shallow(<UserRequestToAlexaForm />);
   expect(wrapper).toMatchSnapshot();
 });
 
@@ -24,7 +20,7 @@ it("renders correctly with props (snapshot testing)", () => {
 });
 
 it("displays the right placeholder message", () => {
-  const form = mount(<UserRequestToAlexaForm />);
+  const form = shallow(<UserRequestToAlexaForm />);
   expect(form.find("TextField").prop("hintText")).toEqual(
     DEFAULT_PLACEHOLDER_VALUE
   );

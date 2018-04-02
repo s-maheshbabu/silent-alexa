@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import App from "./App";
 
 let app;
@@ -12,13 +12,10 @@ beforeEach(() => {
   originalState = JSON.parse(JSON.stringify(app.instance().state));
 });
 
-it("renders without crashing", () => {
-  shallow(<App />);
-});
-
-it("snapshot testing that it renders correctly", () => {
-  const wrapper = mount(<App />);
+it("renders correctly without crashing", () => {
+  const wrapper = shallow(<App />);
   expect(wrapper).toMatchSnapshot();
+  wrapper.unmount();
 });
 
 it("should not change state when authorization response (implicit grant) is not defined", () => {

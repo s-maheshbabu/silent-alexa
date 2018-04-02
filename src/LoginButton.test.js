@@ -1,13 +1,9 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import LoginButton from "./LoginButton";
 
 it("renders LoginButton without crashing", () => {
-  mount(<LoginButton />);
-});
-
-it("renders correctly (snapshot testing)", () => {
-  const wrapper = mount(<LoginButton />);
+  const wrapper = shallow(<LoginButton />);
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();

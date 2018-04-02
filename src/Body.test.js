@@ -1,13 +1,9 @@
 import React from "react";
-import { mount } from "enzyme";
+import { shallow } from "enzyme";
 import Body from "./Body";
 
-it("renders Body without crashing", () => {
-  mount(<Body />);
-});
-
-it("renders correctly (snapshot testing)", () => {
-  const wrapper = mount(<Body />);
+it("renders correctly without crashing", () => {
+  const wrapper = shallow(<Body />);
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();

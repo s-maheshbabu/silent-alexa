@@ -1,13 +1,9 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import Header from "./Header";
 
 it("renders Header without crashing", () => {
-  mount(<Header />);
-});
-
-it("renders correctly (snapshot testing)", () => {
-  const wrapper = mount(<Header />);
+  const wrapper = shallow(<Header />);
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();

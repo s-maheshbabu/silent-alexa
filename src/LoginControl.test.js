@@ -23,11 +23,7 @@ beforeEach(() => {
 });
 
 it("renders without crashing", () => {
-  shallow(<LoginControl />);
-});
-
-it("renders correctly (snapshot testing)", () => {
-  const wrapper = mount(<LoginControl />);
+  const wrapper = shallow(<LoginControl />);
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();

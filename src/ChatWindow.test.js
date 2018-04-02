@@ -38,12 +38,8 @@ beforeEach(() => {
   originalState = JSON.parse(JSON.stringify(chatWindowInstance.state));
 });
 
-it("renders ChatWindow without crashing", () => {
-  mount(<ChatWindow />);
-});
-
-it("renders correctly (snapshot testing)", () => {
-  const wrapper = mount(<ChatWindow />);
+it("renders correctly without crashing", () => {
+  const wrapper = shallow(<ChatWindow />);
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();

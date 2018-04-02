@@ -1,40 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly (snapshot testing) 1`] = `
-<Header>
+exports[`renders Header without crashing 1`] = `
+<div
+  id="header"
+>
   <div
-    id="header"
+    id="header-info"
   >
-    <div
-      id="header-info"
-    >
-      <span>
-        Silent Alexa Header
-      </span>
-    </div>
-    <div
-      id="header-controls"
-    >
-      <LoginControl
-        updateAuthenticationInfo={[Function]}
-      >
-        <LoginButton
-          onClick={[Function]}
-        >
-          <button
-            onClick={[Function]}
-            type="button"
-          >
-            <img
-              alt="loginImage"
-              height="20"
-              src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
-              width="106"
-            />
-          </button>
-        </LoginButton>
-      </LoginControl>
-    </div>
+    <span>
+      Silent Alexa Header
+    </span>
   </div>
-</Header>
+  <div
+    id="header-controls"
+  >
+    <LoginControl
+      updateAuthenticationInfo={[Function]}
+    />
+  </div>
+</div>
 `;
