@@ -1,15 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly (snapshot testing) 1`] = `
-<RightPanel>
+exports[`renders RightPanel without crashing 1`] = `
+<div
+  id="rightpanel"
+>
   <div
-    id="rightpanel"
+    className="panel-body"
   >
-    <div
-      className="panel-body"
-    >
-      Right side content
-    </div>
+    Right side content
   </div>
-</RightPanel>
+</div>
 `;
