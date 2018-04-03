@@ -9,7 +9,7 @@ it("renders correctly without crashing", () => {
   wrapper.unmount();
 });
 
-// TODO: We should use shallow here instead of mount. However, because
+// TODO: We should use shallow or render here instead of mount. However, because
 // Body is a component that returns an array of elements, enzyme doesn't
 // yet support this feature.
 
