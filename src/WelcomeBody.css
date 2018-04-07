@@ -1,0 +1,11 @@
+/** Scaffolding **/
+#welcomeBody {
+  grid-column: 1 / 3;
+  grid-template-rows: auto;
+  height: calc(100vh - 60px);
+}
+
+.panel-body {
+  overflow: auto;
+  text-align: center;
+}

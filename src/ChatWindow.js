@@ -139,13 +139,6 @@ class ChatWindow extends Component {
       userRequestToAlexa: "",
       is_typing: false
     };
-
-    this.onUserRequestToAlexaSubmit = this.onUserRequestToAlexaSubmit.bind(
-      this
-    );
-    this.handleChangeInUserRequestToAlexa = this.handleChangeInUserRequestToAlexa.bind(
-      this
-    );
   }
 
   /*
@@ -167,9 +160,12 @@ class ChatWindow extends Component {
     // If authenticationInfo is defined, then access_token is defined.
     if (this.props.authenticationInfo) {
       access_token = this.props.authenticationInfo.getAccessToken();
+    } else {
+      // Do not make a call to avs if access_token is undefined. Redirect the user to login screen.
+      this.props.clearAuthenticationInfo();
+      return false;
     }
 
-    // TODO: Do not make a call to avs if access_token is undefined. Redirect the user to login screen.
     avs
       .sendTextMessageEvent(userRequestToAlexa, access_token)
       .then(response => {

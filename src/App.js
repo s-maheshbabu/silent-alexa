@@ -24,7 +24,11 @@ class App extends Component {
             this.updateAuthenticationInfo(authenticationInfo)
           }
         />
-        <Body authenticationInfo={this.state.authenticationInfo} />
+        <Body
+          authenticationInfo={this.state.authenticationInfo}
+          isAuthenticationInfoValid={() => this.isAuthenticationInfoValid()}
+          clearAuthenticationInfo={() => this.clearAuthenticationInfo()}
+        />
         <Footer />
       </div>
     );

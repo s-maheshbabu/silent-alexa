@@ -42,7 +42,6 @@ it("renders LoginControl with LogoutButton component when isAuthenticationInfoVa
   const wrapper = shallow(
     <LoginControl isAuthenticationInfoValid={mockIsAuthenticationInfoValid} />
   );
-
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();
@@ -66,7 +65,6 @@ it("verifies that props are passed to LogoutButton Component", () => {
       clearAuthenticationInfo={mockClearAuthenticationInfo}
     />
   );
-
   expect(Object.keys(loginControl.find("LogoutButton").props()).length).toBe(1);
   const onClickProp = loginControl.find("LogoutButton").prop("onClick");
   const handleLogoutSpy = jest.spyOn(loginControl.instance(), "handleLogout");

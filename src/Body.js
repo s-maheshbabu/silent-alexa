@@ -1,16 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import ChatWindow from "./ChatWindow";
 import RightPanel from "./RightPanel";
+import WelcomeBody from "./WelcomeBody";
 
-export default class Body extends Component {
-  render() {
+export default function Body(props) {
+  if (props.isAuthenticationInfoValid()) {
     return [
       <MuiThemeProvider key="muiThemeProvider">
-        <ChatWindow authenticationInfo={this.props.authenticationInfo} />
+        <ChatWindow
+          authenticationInfo={props.authenticationInfo}
+          clearAuthenticationInfo={props.clearAuthenticationInfo}
+        />
       </MuiThemeProvider>,
 
       <RightPanel key="rightPanel" />
     ];
   }
+
+  return <WelcomeBody />;
 }

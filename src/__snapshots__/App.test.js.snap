@@ -9,7 +9,10 @@ exports[`renders correctly without crashing 1`] = `
     isAuthenticationInfoValid={[Function]}
     updateAuthenticationInfo={[Function]}
   />
-  <Body />
+  <Body
+    clearAuthenticationInfo={[Function]}
+    isAuthenticationInfoValid={[Function]}
+  />
   <Footer />
 </div>
 `;
