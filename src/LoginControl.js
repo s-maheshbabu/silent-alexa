@@ -1,5 +1,7 @@
 import React from "react";
 import LoginButton from "./LoginButton";
+import AuthenticationInfo from "./AuthenticationInfo";
+import util from "util";
 
 // Options variable to request for implicit grant.
 // TODO: Logic for assigning 'deviceSerialNumber' needs to be revisited.
@@ -26,6 +28,23 @@ export default class LoginControl extends React.Component {
   }
 
   handleResponse = authorizationResponse => {
-    this.props.updateAuthenticationInfo(authorizationResponse);
+    // Call updateAuthenticationInfo only if authorizationResponse is valid
+    if (this.isAuthResponseValid(authorizationResponse)) {
+      this.props.updateAuthenticationInfo(
+        new AuthenticationInfo(authorizationResponse)
+      );
+    }
   };
+
+  isAuthResponseValid(authResponse) {
+    if (authResponse && authResponse.access_token && authResponse.expires_in) {
+      return true;
+    } else {
+      console.log(
+        "Encountered an error on login: " +
+          util.inspect(authResponse, { showHidden: true, depth: null })
+      );
+      return false;
+    }
+  }
 }

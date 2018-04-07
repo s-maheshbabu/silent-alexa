@@ -1,6 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import App from "./App";
+import AuthenticationInfo from "./AuthenticationInfo";
 
 let app;
 let appInstance;
@@ -9,7 +10,7 @@ let originalState;
 beforeEach(() => {
   app = shallow(<App />);
   appInstance = app.instance();
-  originalState = JSON.parse(JSON.stringify(app.instance().state));
+  originalState = appInstance.state;
 });
 
 it("renders correctly without crashing", () => {
@@ -30,48 +31,45 @@ it("verifies that authenticationInfo is passed to Body component", () => {
   expect(authenticationInfoProp).toBe(originalAuthenticationInfo);
 });
 
-it("should not change state when authorization response (implicit grant) is not defined", () => {
-  global.console = {
-    log: jest.fn()
-  };
-  appInstance.handleAuthenticationInfoUpdate();
-  expect(appInstance.state).toEqual(originalState);
-  expect(global.console.log).toHaveBeenCalledWith(
-    "Encountered an error on login: undefined"
+it("verifies that updateAuthenticationInfo function is passed to Header component", () => {
+  const updateAuthenticationInfoSpy = jest.spyOn(
+    appInstance,
+    "updateAuthenticationInfo"
   );
+
+  // Verify that Header is passed on updateAuthenticationInfo property
+  const headerUpdateAuthenticationInfoProp = app
+    .find("Header")
+    .prop("updateAuthenticationInfo");
+  expect(headerUpdateAuthenticationInfoProp.length).toBe(1);
+
+  // Verify that calling prop function passed to header calls updateAuthenticationInfo
+  headerUpdateAuthenticationInfoProp();
+  expect(updateAuthenticationInfoSpy).toHaveBeenCalled();
 });
 
-it("should not change state when authorization fails (implicit grant)", () => {
-  global.console = {
-    log: jest.fn()
-  };
-  const util = require("util");
-  const response = {
-    error: "some_error_code",
-    error_description: "description about error as string",
-    state: { page: "http://somePage" }
-  };
-  appInstance.handleAuthenticationInfoUpdate(response);
-  expect(appInstance.state).toEqual(originalState);
-  // Verify error message has been logged to console
-  expect(global.console.log).toHaveBeenCalledWith(
-    "Encountered an error on login: " +
-      util.inspect(response, { showHidden: true, depth: null })
-  );
+it("should not change state when authorizationInfo instance (implicit grant) is not valid", () => {
+  const invalidAuthenticationInfo = new AuthenticationInfo();
+  let undefinedAuthenticationInfo;
+  const invalidAuthenticationInfoObjects = [
+    invalidAuthenticationInfo,
+    undefinedAuthenticationInfo
+  ];
+  for (let i = 0; i < invalidAuthenticationInfoObjects.length; i++) {
+    appInstance.updateAuthenticationInfo(invalidAuthenticationInfoObjects[i]);
+    expect(appInstance.state).toBe(originalState);
+  }
 });
 
-it("should change state when authorization response (implicit grant) is defined", () => {
+it("should change state when authorizationInfo instance (implicit grant) is defined and valid", () => {
   const authResponse = {
     access_token: "some_access_token",
-    expires_in: 30,
-    state: "user_defined_state"
+    expires_in: 30
   };
-  appInstance.handleAuthenticationInfoUpdate(authResponse);
-  const finalState = {
-    authenticationInfo: {
-      access_token: authResponse.access_token,
-      expires_in: authResponse.expires_in
-    }
+  const authInfo = new AuthenticationInfo(authResponse);
+  const expectedState = {
+    authenticationInfo: authInfo
   };
-  expect(appInstance.state).toEqual(finalState);
+  appInstance.updateAuthenticationInfo(authInfo);
+  expect(appInstance.state).toEqual(expectedState);
 });

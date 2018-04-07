@@ -164,7 +164,7 @@ class ChatWindow extends Component {
     this.pushMessage(chatterIds.USER, userRequestToAlexa);
     this.setState({ userRequestToAlexa: "" });
 
-    const access_token = getIn(this.props.authenticationInfo, ["access_token"]);
+    const access_token = this.props.authenticationInfo.getAccessToken();
     avs
       .sendTextMessageEvent(userRequestToAlexa, access_token)
       .then(response => {
