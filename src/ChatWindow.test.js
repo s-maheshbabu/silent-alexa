@@ -10,11 +10,11 @@ import {
   mockAlexaSuccessResponse
 } from "./AVSGateway";
 
-import { users, userIds } from "./ConversingUsers";
+import { chatters, chatterIds } from "./ConversingUsers";
 
 const CHATFEED_CONTAINER_HEIGHT = 234;
 const CHATFEED_CONTAINER_HEIGHT_DEFAULT = 0;
-const setHeightElement = function (height) {
+const setHeightElement = function(height) {
   Element.prototype.getBoundingClientRect = jest.fn(() => {
     return {
       height: height
@@ -65,8 +65,8 @@ it("persists a given message in state when pushMessage is called", () => {
   const numberOfMessagesAlreadyInState = originalState.messages.length;
   expect(originalState.messages.length).toBe(numberOfMessagesAlreadyInState);
 
-  const userId = userIds.YOU;
-  const user = users.get(userId);
+  const userId = chatterIds.USER;
+  const user = chatters.get(userId);
   const message = "test message";
   const expectedMessage = new Message({
     id: userId,
@@ -114,8 +114,8 @@ it("handles gracefully when pushMessage is called with an empty or null message"
 });
 
 it("handles the user's form submission with request to Alexa and populates the state with the user request and Alexa's response", done => {
-  const alexaId = userIds.ALEXA;
-  const alexa = users.get(alexaId);
+  const alexaId = chatterIds.ALEXA;
+  const alexa = chatters.get(alexaId);
   let expectedAlexaResponse = new Message({
     id: alexaId,
     message: mockAlexaSuccessResponse,
@@ -133,8 +133,8 @@ it("handles the case when AVS throws an error in response to a user request. We 
     )
   );
 
-  const alexaId = userIds.ALEXA;
-  const alexa = users.get(alexaId);
+  const alexaId = chatterIds.ALEXA;
+  const alexa = chatters.get(alexaId);
   let expectedAlexaResponse = new Message({
     id: alexaId,
     message: cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR),
@@ -208,8 +208,8 @@ const testOnUserRequestToAlexaSubmitHandling = (
   const numberOfMessagesAlreadyInState = originalState.messages.length;
 
   const mockuserRequestToAlexa = "mock request";
-  const userId = userIds.YOU;
-  const user = users.get(userId);
+  const userId = chatterIds.USER;
+  const user = chatters.get(userId);
   chatWindowInstance.setState({
     userRequestToAlexa: mockuserRequestToAlexa,
     curr_user: userId
