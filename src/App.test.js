@@ -18,6 +18,18 @@ it("renders correctly without crashing", () => {
   wrapper.unmount();
 });
 
+it("verifies that authenticationInfo is passed to Body component", () => {
+  const wrapper = shallow(<App />);
+  const originalAuthenticationInfo = wrapper.instance().state
+    .authenticationInfo;
+
+  // Verify that Body recieves authenticationInfo property
+  const authenticationInfoProp = wrapper
+    .find("Body")
+    .prop("authenticationInfo");
+  expect(authenticationInfoProp).toBe(originalAuthenticationInfo);
+});
+
 it("should not change state when authorization response (implicit grant) is not defined", () => {
   global.console = {
     log: jest.fn()
@@ -44,7 +56,7 @@ it("should not change state when authorization fails (implicit grant)", () => {
   // Verify error message has been logged to console
   expect(global.console.log).toHaveBeenCalledWith(
     "Encountered an error on login: " +
-    util.inspect(response, { showHidden: true, depth: null })
+      util.inspect(response, { showHidden: true, depth: null })
   );
 });
 

@@ -11,6 +11,7 @@ import { users, userIds } from "./ConversingUsers";
 
 import AVSGateway from "./AVSGateway";
 const avs = new AVSGateway();
+const { getIn } = require("immutable");
 
 class ChatWindow extends Component {
   constructor() {
@@ -76,11 +77,9 @@ class ChatWindow extends Component {
     this.pushMessage(this.state.curr_user_id, userRequestToAlexa);
     this.setState({ userRequestToAlexa: "" });
 
-    // TODO: Send the actual access token once we integrate ChatWindow with the
-    // state object that contains the real access token. For now, not passing
-    // an access_token which means AVS will throw an error.
+    const access_token = getIn(this.props.authenticationInfo, ["access_token"]);
     avs
-      .sendTextMessageEvent(userRequestToAlexa /*, "access_token"*/)
+      .sendTextMessageEvent(userRequestToAlexa, access_token)
       .then(response => {
         this.pushMessage(userIds.ALEXA, response);
       })
