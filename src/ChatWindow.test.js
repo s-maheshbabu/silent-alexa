@@ -4,6 +4,7 @@ import { shallow, mount } from "enzyme";
 import { ChatFeed, Message } from "react-chat-ui";
 import ChatWindow from "./ChatWindow";
 import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";
+import AuthenticationInfo from "./AuthenticationInfo";
 
 import {
   mockSendTextMessageEventFunction,
@@ -14,6 +15,10 @@ import { chatters, chatterIds } from "./Chatters";
 
 const CHATFEED_CONTAINER_HEIGHT = 234;
 const CHATFEED_CONTAINER_HEIGHT_DEFAULT = 0;
+const authenticationInfo = new AuthenticationInfo({
+  access_token: "a dummy access token",
+  expires_in: "30"
+});
 const setHeightElement = function(height) {
   Element.prototype.getBoundingClientRect = jest.fn(() => {
     return {
@@ -114,22 +119,18 @@ it("handles gracefully when pushMessage is called with an empty or null message"
 });
 
 test("that when a user submits the form, we call AVSGateway with their request even if the access_token is not available.", () => {
-  const authInfoWithMissingAccessTokenKey = {
-    a_key_that_is_not_access_token: ""
-  };
-  const authInfoWithMissingAccessTokenValue = { access_token: undefined };
-  let missingAuthInfo;
-  const invalidAuthenticationInfoObjects = [
-    authInfoWithMissingAccessTokenKey,
-    authInfoWithMissingAccessTokenValue,
-    missingAuthInfo
+  const chatWindowWithNoAuthenticationInfoProp = mount(<ChatWindow />);
+  const chatWindowWithUndefinedAuthenticationInfoProp = mount(
+    <ChatWindow authenticationInfo={undefined} />
+  );
+
+  const chatWindowWrappers = [
+    chatWindowWithNoAuthenticationInfoProp,
+    chatWindowWithUndefinedAuthenticationInfoProp
   ];
 
-  for (let i = 0; i < invalidAuthenticationInfoObjects.length; i++) {
-    const authenticationInfo = invalidAuthenticationInfoObjects[i];
-    const chatWindow = mount(
-      <ChatWindow authenticationInfo={authenticationInfo} />
-    );
+  for (let i = 0; i < chatWindowWrappers.length; i++) {
+    const chatWindow = chatWindowWrappers[i];
     const chatWindowInstance = chatWindow.instance();
 
     const userRequestToAlexaForm = chatWindow.find("form").get(0);
@@ -156,8 +157,6 @@ test("that when a user submits the form, we call AVSGateway with their request e
 });
 
 it("handles the user's form submission with request to Alexa and populates the state with the user request and Alexa's response", done => {
-  const authenticationInfo = { access_token: "a dummy access token" };
-
   const alexaId = chatterIds.ALEXA;
   const alexa = chatters.get(alexaId);
 
@@ -175,8 +174,6 @@ it("handles the user's form submission with request to Alexa and populates the s
 });
 
 it("handles the case when AVS throws an error in response to a user request. We should populate the state with the user request and a canned response.", done => {
-  const authenticationInfo = { access_token: "a dummy access token" };
-
   // mock the AVSGateway to throw an error.
   mockSendTextMessageEventFunction.mockImplementation(() =>
     Promise.reject(
@@ -283,7 +280,7 @@ const testOnUserRequestToAlexaSubmitHandling = (
   expect(mockSendTextMessageEventFunction).toHaveBeenCalledTimes(1);
   expect(mockSendTextMessageEventFunction).toHaveBeenCalledWith(
     userRequestToAlexa,
-    authenticationInfo.access_token
+    authenticationInfo.getAccessToken()
   );
 
   let expectedUserMessage = new Message({

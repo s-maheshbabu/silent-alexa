@@ -7,9 +7,7 @@ exports[`renders correctly without crashing 1`] = `
   <Header
     updateAuthenticationInfo={[Function]}
   />
-  <Body
-    authenticationInfo={Object {}}
-  />
+  <Body />
   <Footer />
 </div>
 `;
