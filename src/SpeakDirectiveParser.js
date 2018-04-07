@@ -35,7 +35,7 @@ export function extractAlexaTextResponse(alexaRawResponse) {
   ) {
     throw new IllegalArgumentError(
       "Given response is not a valid multi-part message. Input: " +
-        alexaRawResponse
+       alexaRawResponse
     );
   }
 
