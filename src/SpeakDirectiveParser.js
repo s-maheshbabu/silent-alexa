@@ -31,11 +31,11 @@ export function extractAlexaTextResponse(alexaRawResponse) {
     !parsedResponse ||
     !parsedResponse.multipart ||
     !parsedResponse.multipart[0].body ||
-    parsedResponse.multipart[0].body.length == 0
+    parsedResponse.multipart[0].body.length === 0
   ) {
     throw new IllegalArgumentError(
       "Given response is not a valid multi-part message. Input: " +
-      alexaRawResponse
+        alexaRawResponse
     );
   }
 
@@ -54,7 +54,7 @@ export function extractAlexaTextResponse(alexaRawResponse) {
   if (!hasIn(avsDirective, ["directive", "payload", "caption"]))
     throw new IllegalArgumentError(
       "Given directive doesn't contain the expected path directive.payload.caption. Input: " +
-      avsDirective
+        avsDirective
     );
 
   return avsDirective.directive.payload.caption;
