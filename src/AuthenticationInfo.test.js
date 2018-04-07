@@ -8,6 +8,7 @@ it("verifes that instance is created if lwaResponse has all the required fields"
   };
 
   const authenticationInfo = new AuthenticationInfo(lwaResponse);
+
   expect(authenticationInfo.getAccessToken()).toBe(lwaResponse.access_token);
 });
 

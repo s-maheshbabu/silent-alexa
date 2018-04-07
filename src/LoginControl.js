@@ -1,5 +1,6 @@
 import React from "react";
 import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
 import AuthenticationInfo from "./AuthenticationInfo";
 import util from "util";
 
@@ -16,7 +17,11 @@ export const options = Object.freeze({
 });
 export default class LoginControl extends React.Component {
   render() {
-    return <LoginButton onClick={() => this.handleLogin()} />;
+    if (this.props.isAuthenticationInfoValid()) {
+      return <LogoutButton onClick={() => this.handleLogout()} />;
+    } else {
+      return <LoginButton onClick={() => this.handleLogin()} />;
+    }
   }
 
   handleLogin() {
@@ -25,6 +30,10 @@ export default class LoginControl extends React.Component {
     window.amazon.Login.authorize(options, response =>
       this.handleLWAResponse(response)
     );
+  }
+
+  handleLogout() {
+    this.props.clearAuthenticationInfo();
   }
 
   handleLWAResponse = lwaResponse => {

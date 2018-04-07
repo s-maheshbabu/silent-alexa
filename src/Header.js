@@ -12,6 +12,8 @@ export default function Header(props) {
       </div>
       <div id="header-controls">
         <LoginControl
+          isAuthenticationInfoValid={() => props.isAuthenticationInfoValid()}
+          clearAuthenticationInfo={() => props.clearAuthenticationInfo()}
           updateAuthenticationInfo={authenticationInfo =>
             props.updateAuthenticationInfo(authenticationInfo)
           }

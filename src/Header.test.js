@@ -9,20 +9,51 @@ it("renders Header without crashing", () => {
   wrapper.unmount();
 });
 
-it("verifies that updateAuthenticationInfo function is passed to LoginControl component", () => {
-  const mockCallback = jest.fn();
-  const header = shallow(<Header updateAuthenticationInfo={mockCallback} />);
+it("verifies that props are passed to LoginControl component", () => {
+  const mockIsAuthenticationInfoValid = jest.fn();
+  const mockClearAuthenticationInfo = jest.fn();
+  const mockUpdateAuthenticationInfo = jest.fn();
+  const header = shallow(
+    <Header
+      isAuthenticationInfoValid={mockIsAuthenticationInfoValid}
+      clearAuthenticationInfo={mockClearAuthenticationInfo}
+      updateAuthenticationInfo={mockUpdateAuthenticationInfo}
+    />
+  );
+
+  // Verify that only desired number of props are passed on to LoginControl
+  expect(Object.keys(header.find("LoginControl").props()).length).toBe(3);
+
+  // Verify that LoginControl is passed on isAuthenticationInfoValid property
+  const isAuthenticationInfoValidProp = header
+    .find("LoginControl")
+    .prop("isAuthenticationInfoValid");
+  expect(isAuthenticationInfoValidProp).toBeDefined();
+
+  // Verify that calling isAuthenticationInfoValid prop function calls the mockIsAuthenticationInfoValid
+  isAuthenticationInfoValidProp();
+  expect(mockIsAuthenticationInfoValid.mock.calls.length).toEqual(1);
+
+  // Verify that LoginControl is passed on clearAuthenticationInfo property
+  const clearAuthenticationInfoProp = header
+    .find("LoginControl")
+    .prop("clearAuthenticationInfo");
+  expect(clearAuthenticationInfoProp).toBeDefined();
+
+  // Verify that calling clearAuthenticationInfo prop function calls the mockClearAuthenticationInfo
+  clearAuthenticationInfoProp();
+  expect(mockClearAuthenticationInfo).toHaveBeenCalledTimes(1);
 
   // Verify that LoginControl is passed on updateAuthenticationInfo property
-  const loginControlFunctionProp = header
+  const updateAuthenticationInfoProp = header
     .find("LoginControl")
     .prop("updateAuthenticationInfo");
 
-  expect(loginControlFunctionProp.length).toBe(1);
+  expect(updateAuthenticationInfoProp.length).toBe(1);
 
-  // Verify that calling prop function passed to loginControl calls the mockCallback
+  // Verify that calling updateAuthenticationInfo prop function calls the mockUpdateAuthenticationInfo
   let dummyArgument = "dummy argument";
-  loginControlFunctionProp(dummyArgument);
+  updateAuthenticationInfoProp(dummyArgument);
 
-  expect(mockCallback).toHaveBeenCalledWith(dummyArgument);
+  expect(mockUpdateAuthenticationInfo).toHaveBeenCalledWith(dummyArgument);
 });

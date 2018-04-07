@@ -18,6 +18,8 @@ class App extends Component {
     return (
       <div id="page">
         <Header
+          isAuthenticationInfoValid={() => this.isAuthenticationInfoValid()}
+          clearAuthenticationInfo={() => this.clearAuthenticationInfo()}
           updateAuthenticationInfo={authenticationInfo =>
             this.updateAuthenticationInfo(authenticationInfo)
           }
@@ -50,6 +52,25 @@ class App extends Component {
       );
     }
   };
+
+  /**
+   * @returns true if the authenticationInfo is defined and instance of {@link AuthenticationInfo}.
+   *          false, otherwise.
+   * TODO: Add {@link  AuthenticationInfo#isValid} functionality when available.
+   */
+  isAuthenticationInfoValid() {
+    return (
+      this.state.authenticationInfo &&
+      this.state.authenticationInfo instanceof AuthenticationInfo
+    );
+  }
+
+  /**
+   * Clears authenticationInfo prop in the component's state
+   */
+  clearAuthenticationInfo() {
+    this.setState({ authenticationInfo: undefined });
+  }
 }
 
 export default App;

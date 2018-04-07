@@ -7,7 +7,9 @@ import util from "util";
 let loginControl;
 let loginControlInstance;
 const mockUpdateAuthenticationInfo = jest.fn();
+const mockClearAuthenticationInfo = jest.fn();
 const mockLWAModule = jest.fn();
+const mockIsAuthenticationInfoValid = jest.fn();
 
 beforeEach(() => {
   jest.resetAllMocks();
@@ -16,13 +18,30 @@ beforeEach(() => {
     writable: true
   });
   loginControl = shallow(
-    <LoginControl updateAuthenticationInfo={mockUpdateAuthenticationInfo} />
+    <LoginControl
+      isAuthenticationInfoValid={mockIsAuthenticationInfoValid}
+      clearAuthenticationInfo={mockClearAuthenticationInfo}
+      updateAuthenticationInfo={mockUpdateAuthenticationInfo}
+    />
   );
   loginControlInstance = loginControl.instance();
 });
 
-it("renders without crashing", () => {
-  const wrapper = shallow(<LoginControl />);
+it("renders LoginControl with LoginButton component", () => {
+  mockIsAuthenticationInfoValid.mockReturnValueOnce(false);
+  const wrapper = shallow(
+    <LoginControl isAuthenticationInfoValid={mockIsAuthenticationInfoValid} />
+  );
+  expect(wrapper).toMatchSnapshot();
+
+  wrapper.unmount();
+});
+
+it("renders LoginControl with LogoutButton component", () => {
+  mockIsAuthenticationInfoValid.mockReturnValueOnce(true);
+  const wrapper = shallow(
+    <LoginControl isAuthenticationInfoValid={mockIsAuthenticationInfoValid} />
+  );
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();
@@ -36,6 +55,28 @@ it("verifies that props are passed to LoginButton Component", () => {
   onClickProp();
 
   expect(handleLoginSpy).toHaveBeenCalledTimes(1);
+});
+
+it("verifies that props are passed to LogoutButton Component", () => {
+  mockIsAuthenticationInfoValid.mockReturnValueOnce(true);
+  const loginControl = shallow(
+    <LoginControl
+      isAuthenticationInfoValid={mockIsAuthenticationInfoValid}
+      clearAuthenticationInfo={mockClearAuthenticationInfo}
+    />
+  );
+  expect(Object.keys(loginControl.find("LogoutButton").props()).length).toBe(1);
+  const onClickProp = loginControl.find("LogoutButton").prop("onClick");
+  const handleLogoutSpy = jest.spyOn(loginControl.instance(), "handleLogout");
+  onClickProp();
+  expect(handleLogoutSpy).toHaveBeenCalled();
+});
+
+it("verifies that clearAuthenticationInfo is called when handleLogout is called", () => {
+  loginControlInstance.handleLogout();
+
+  // Verify authorize called once
+  expect(mockClearAuthenticationInfo.mock.calls.length).toBe(1);
 });
 
 it("verifies that lwa authorization is called when handleLogin is called", () => {

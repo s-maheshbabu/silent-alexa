@@ -25,28 +25,56 @@ it("verifies that authenticationInfo is passed to Body component", () => {
     .authenticationInfo;
 
   // Verify that Body recieves authenticationInfo property
-  const authenticationInfoProp = wrapper
-    .find("Body")
-    .prop("authenticationInfo");
-  expect(authenticationInfoProp).toBe(originalAuthenticationInfo);
+  expect(Object.keys(wrapper.find("Body").props()).length).toBe(1);
+  expect(wrapper.find("Body").prop("authenticationInfo")).toBe(
+    originalAuthenticationInfo
+  );
 });
 
-it("verifies that updateAuthenticationInfo function is passed to Header component", () => {
+it("verifies that props are passed to Header component", () => {
   const updateAuthenticationInfoSpy = jest.spyOn(
     appInstance,
     "updateAuthenticationInfo"
   );
+  const clearAuthenticationInfoSpy = jest.spyOn(
+    appInstance,
+    "clearAuthenticationInfo"
+  );
+  const isAuthenticationInfoValidSpy = jest.spyOn(
+    appInstance,
+    "isAuthenticationInfoValid"
+  );
+
+  //Verify that Header is passed desired number of properties
+  expect(Object.keys(app.find("Header").props()).length).toBe(3);
 
   // Verify that Header is passed on updateAuthenticationInfo property
-  const headerUpdateAuthenticationInfoProp = app
+  const updateAuthenticationInfoProp = app
     .find("Header")
     .prop("updateAuthenticationInfo");
-  expect(headerUpdateAuthenticationInfoProp.length).toBe(1);
 
   // Verify that calling prop function passed to header calls updateAuthenticationInfo
   const dummyArgument = "dummyArgument";
-  headerUpdateAuthenticationInfoProp(dummyArgument);
+  updateAuthenticationInfoProp(dummyArgument);
   expect(updateAuthenticationInfoSpy).toHaveBeenCalledWith(dummyArgument);
+
+  // Verify that Header is passed on clearAuthenticationInfo property
+  const clearAuthenticationInfoProp = app
+    .find("Header")
+    .prop("clearAuthenticationInfo");
+
+  // Verify that calling prop function passed to header calls clearAuthenticationInfo
+  clearAuthenticationInfoProp();
+  expect(clearAuthenticationInfoSpy).toHaveBeenCalled();
+
+  // Verify that Header is passed on isAuthenticationInfoValid property
+  const isAuthenticationInfoValidProp = app
+    .find("Header")
+    .prop("isAuthenticationInfoValid");
+
+  // Verify that calling prop function passed to header calls isAuthenticationInfoValid
+  isAuthenticationInfoValidProp();
+  expect(isAuthenticationInfoValidSpy).toHaveBeenCalled();
 });
 
 it("should not change state's authenticationInfo prop when authenticationInfo instance (implicit grant) is not valid", () => {
@@ -64,6 +92,7 @@ it("should not change state's authenticationInfo prop when authenticationInfo in
     appInstance.updateAuthenticationInfo(invalidAuthenticationInfoObjects[i]);
 
     expect(appInstance.state).toEqual(expectedState);
+    expect(appInstance.isAuthenticationInfoValid()).toBeFalsy();
   }
 });
 
@@ -73,6 +102,25 @@ it("should change state when authenticationInfo instance (implicit grant) is def
     expires_in: 30
   };
   const expectedAuthenticationInfo = new AuthenticationInfo(lwaResponse);
+
   appInstance.updateAuthenticationInfo(expectedAuthenticationInfo);
+
   expect(appInstance.state.authenticationInfo).toBe(expectedAuthenticationInfo);
+  expect(appInstance.isAuthenticationInfoValid()).toBeTruthy();
+});
+
+it("should reset authenticationInfo prop in state to undefined when clearAuthenticationInfo is called", () => {
+  appInstance.setState({ authenticationInfo: "anyAuthenticationInfo" });
+  expect(appInstance.state.authenticationInfo).toBeDefined();
+
+  appInstance.clearAuthenticationInfo();
+
+  expect(appInstance.state.authenticationInfo).toBeUndefined();
+});
+
+it("should return false when isAuthenticationInfoValid called when authenticationInfo is not instance of AuthenticationInfo", () => {
+  appInstance.setState({ authenticationInfo: "anyAuthenticationInfo" });
+
+  expect(appInstance.state.authenticationInfo).toBeDefined();
+  expect(appInstance.isAuthenticationInfoValid()).toBeFalsy();
 });
