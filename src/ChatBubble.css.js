@@ -1,4 +1,5 @@
 /*
+TODO:
 We are using CSS-in-JS style here. Ideally, we should be using CSS Modules.
 Support for CSS Modules is coming in Create React App V2 and once we start
 using it, we should migrate this to CSS modules.

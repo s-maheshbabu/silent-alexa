@@ -13,43 +13,133 @@ import { users, userIds } from "./ConversingUsers";
 import AVSGateway from "./AVSGateway";
 const avs = new AVSGateway();
 
+const USER_ID = userIds.YOU;
+const ALEXA_ID = userIds.ALEXA;
+
 class ChatWindow extends Component {
   constructor() {
     super();
     this.state = {
       messages: [
-        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
         new Message({
-          id: 1,
+          id: USER_ID,
+          message: "Hello Alexa!",
+          senderName: users.get(USER_ID).name
+        }),
+        new Message({
+          id: ALEXA_ID,
           message: "Hey! Alexa here.",
-          senderName: "Alexa"
+          senderName: users.get(ALEXA_ID).name
         }),
         // TODO Adding a bunch of dummy messages to make the ChatFeed overflow window height.
         // This will be useful during the development phase but will be removed once we are confident about the layout.
-        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
-        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
-        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
-        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
-        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
-        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
-        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
-        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
-        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
-        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" }),
-        new Message({ id: 1, message: "Hello Alexa!", senderName: "Alexa" }),
-        new Message({ id: 0, message: "Hello Alexa!", senderName: "You" })
+        new Message({
+          id: USER_ID,
+          message: "Hello Alexa!",
+          senderName: users.get(USER_ID).name
+        }),
+        new Message({
+          id: ALEXA_ID,
+          message: "Hey! Alexa here.",
+          senderName: users.get(ALEXA_ID).name
+        }),
+        new Message({
+          id: USER_ID,
+          message: "Hello Alexa!",
+          senderName: users.get(USER_ID).name
+        }),
+        new Message({
+          id: ALEXA_ID,
+          message: "Hey! Alexa here.",
+          senderName: users.get(ALEXA_ID).name
+        }),
+        new Message({
+          id: USER_ID,
+          message: "Hello Alexa!",
+          senderName: users.get(USER_ID).name
+        }),
+        new Message({
+          id: ALEXA_ID,
+          message: "Hey! Alexa here.",
+          senderName: users.get(ALEXA_ID).name
+        }),
+        new Message({
+          id: USER_ID,
+          message: "Hello Alexa!",
+          senderName: users.get(USER_ID).name
+        }),
+        new Message({
+          id: ALEXA_ID,
+          message: "Hey! Alexa here.",
+          senderName: users.get(ALEXA_ID).name
+        }),
+        new Message({
+          id: USER_ID,
+          message: "Hello Alexa!",
+          senderName: users.get(USER_ID).name
+        }),
+        new Message({
+          id: ALEXA_ID,
+          message: "Hey! Alexa here.",
+          senderName: users.get(ALEXA_ID).name
+        }),
+        new Message({
+          id: USER_ID,
+          message: "Hello Alexa!",
+          senderName: users.get(USER_ID).name
+        }),
+        new Message({
+          id: ALEXA_ID,
+          message: "Hey! Alexa here.",
+          senderName: users.get(ALEXA_ID).name
+        }),
+        new Message({
+          id: USER_ID,
+          message: "Hello Alexa!",
+          senderName: users.get(USER_ID).name
+        }),
+        new Message({
+          id: ALEXA_ID,
+          message: "Hey! Alexa here.",
+          senderName: users.get(ALEXA_ID).name
+        }),
+        new Message({
+          id: USER_ID,
+          message: "Hello Alexa!",
+          senderName: users.get(USER_ID).name
+        }),
+        new Message({
+          id: ALEXA_ID,
+          message: "Hey! Alexa here.",
+          senderName: users.get(ALEXA_ID).name
+        }),
+        new Message({
+          id: USER_ID,
+          message: "Hello Alexa!",
+          senderName: users.get(USER_ID).name
+        }),
+        new Message({
+          id: ALEXA_ID,
+          message: "Hey! Alexa here.",
+          senderName: users.get(ALEXA_ID).name
+        }),
+        new Message({
+          id: USER_ID,
+          message: "Hello Alexa!",
+          senderName: users.get(USER_ID).name
+        }),
+        new Message({
+          id: ALEXA_ID,
+          message: "Hey! Alexa here.",
+          senderName: users.get(ALEXA_ID).name
+        }),
+        new Message({
+          id: USER_ID,
+          message: "Hello Alexa!",
+          senderName: users.get(USER_ID).name
+        })
       ],
       userRequestToAlexa: "",
-      curr_user_id: userIds.YOU,
       is_typing: false
     };
 
@@ -73,7 +163,7 @@ class ChatWindow extends Component {
       this.setState({ userRequestToAlexa: "" });
       return false;
     }
-    this.pushMessage(this.state.curr_user_id, userRequestToAlexa);
+    this.pushMessage(USER_ID, userRequestToAlexa);
     this.setState({ userRequestToAlexa: "" });
 
     // TODO: Send the actual access token once we integrate ChatWindow with the
@@ -82,13 +172,13 @@ class ChatWindow extends Component {
     avs
       .sendTextMessageEvent(userRequestToAlexa /*, "access_token"*/)
       .then(response => {
-        this.pushMessage(userIds.ALEXA, response);
+        this.pushMessage(ALEXA_ID, response);
       })
       .catch(error => {
         // TODO: Don't show this as an Alexa bubble. It also doesn't make to show it as a user bubble.
         // Need to find a way to represent this error on the UI.
         this.pushMessage(
-          userIds.ALEXA,
+          ALEXA_ID,
           cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR)
         );
       });
