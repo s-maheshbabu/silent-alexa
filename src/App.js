@@ -4,13 +4,15 @@ import "./App.css";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
+import AuthenticationInfo from "./AuthenticationInfo";
 const util = require("util");
+const DEFAULT_AUTHENTICATION_INFO = new AuthenticationInfo();
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      authenticationInfo: {}
+      authenticationInfo: { DEFAULT_AUTHENTICATION_INFO }
     };
   }
   render() {
@@ -27,20 +29,9 @@ class App extends Component {
     );
   }
 
-  handleAuthenticationInfoUpdate = function (authResponse) {
-    if (!authResponse || authResponse.error) {
-      console.log(
-        "Encountered an error on login: " +
-        util.inspect(authResponse, { showHidden: true, depth: null })
-      );
-    } else {
-      this.setState({
-        authenticationInfo: {
-          access_token: authResponse.access_token,
-          expires_in: authResponse.expires_in
-        }
-      });
-    }
+  handleAuthenticationInfoUpdate = function(authResponse) {
+    const authInfo = new AuthenticationInfo(authResponse);
+    this.setState({ authenticationInfo: authInfo });
   };
 }
 

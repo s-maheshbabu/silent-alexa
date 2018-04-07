@@ -8,7 +8,13 @@ exports[`renders correctly without crashing 1`] = `
     updateAuthenticationInfo={[Function]}
   />
   <Body
-    authenticationInfo={Object {}}
+    authenticationInfo={
+      Object {
+        "DEFAULT_AUTHENTICATION_INFO": AuthenticationInfo {
+          "getAccessToken": [Function],
+        },
+      }
+    }
   />
   <Footer />
 </div>

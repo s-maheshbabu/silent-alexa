@@ -1,6 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import App from "./App";
+import AuthenticationInfo from "./AuthenticationInfo";
 
 let app;
 let appInstance;
@@ -9,7 +10,7 @@ let originalState;
 beforeEach(() => {
   app = shallow(<App />);
   appInstance = app.instance();
-  originalState = JSON.parse(JSON.stringify(app.instance().state));
+  originalState = appInstance.state;
 });
 
 it("renders correctly without crashing", () => {
@@ -35,9 +36,8 @@ it("should not change state when authorization response (implicit grant) is not 
     log: jest.fn()
   };
   appInstance.handleAuthenticationInfoUpdate();
-  expect(appInstance.state).toEqual(originalState);
-  expect(global.console.log).toHaveBeenCalledWith(
-    "Encountered an error on login: undefined"
+  expect(appInstance.state.authenticationInfo.getAccessToken()).toEqual(
+    new AuthenticationInfo().getAccessToken()
   );
 });
 
@@ -52,7 +52,9 @@ it("should not change state when authorization fails (implicit grant)", () => {
     state: { page: "http://somePage" }
   };
   appInstance.handleAuthenticationInfoUpdate(response);
-  expect(appInstance.state).toEqual(originalState);
+  expect(appInstance.state.authenticationInfo.getAccessToken()).toEqual(
+    new AuthenticationInfo().getAccessToken()
+  );
   // Verify error message has been logged to console
   expect(global.console.log).toHaveBeenCalledWith(
     "Encountered an error on login: " +
@@ -67,11 +69,9 @@ it("should change state when authorization response (implicit grant) is defined"
     state: "user_defined_state"
   };
   appInstance.handleAuthenticationInfoUpdate(authResponse);
-  const finalState = {
-    authenticationInfo: {
-      access_token: authResponse.access_token,
-      expires_in: authResponse.expires_in
-    }
-  };
-  expect(appInstance.state).toEqual(finalState);
+  const expectedAuthenticationInfo = new AuthenticationInfo(authResponse);
+  const actualAuthenticationInfo = appInstance.state.authenticationInfo;
+  expect(actualAuthenticationInfo.getAccessToken()).toEqual(
+    expectedAuthenticationInfo.getAccessToken()
+  );
 });
