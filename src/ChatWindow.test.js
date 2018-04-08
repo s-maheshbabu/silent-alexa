@@ -10,7 +10,7 @@ import {
   mockAlexaSuccessResponse
 } from "./AVSGateway";
 
-import { chatters, chatterIds } from "./ConversingUsers";
+import { chatters, chatterIds } from "./Chatters";
 
 const CHATFEED_CONTAINER_HEIGHT = 234;
 const CHATFEED_CONTAINER_HEIGHT_DEFAULT = 0;
