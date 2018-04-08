@@ -1,16 +1,18 @@
+// TODO: Rename this file to Chatters.js
+// Will do it in its own commit so as to not complicate the CRs.
 const { Map } = require("immutable");
 
-const userIds = Object.freeze({
-  YOU: 0,
+const chatterIds = Object.freeze({
+  USER: 0,
   ALEXA: 1
 });
 
-const users = Map([
-  [userIds.YOU, { name: "You" }],
-  [userIds.ALEXA, { name: "Alexa" }]
+const chatters = Map([
+  [chatterIds.USER, { name: "You" }],
+  [chatterIds.ALEXA, { name: "Alexa" }]
 ]);
 
 module.exports = {
-  userIds: userIds,
-  users: users
+  chatterIds: chatterIds,
+  chatters: chatters
 };
