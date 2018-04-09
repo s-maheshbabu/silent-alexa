@@ -5,7 +5,6 @@ import { ChatFeed, Message } from "react-chat-ui";
 import ChatWindow from "./ChatWindow";
 import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";
 import AuthenticationInfo from "./AuthenticationInfo";
-jest.mock("./AuthenticationInfo");
 
 import {
   mockSendTextMessageEventFunction,
@@ -116,13 +115,6 @@ it("handles gracefully when pushMessage is called with an empty or null message"
 });
 
 test("that when a user submits the form, we call AVSGateway with their request even if the access_token is not available.", () => {
-  AuthenticationInfo.mockImplementation(() => {
-    return {
-      getAccessToken: () => {
-        return undefined;
-      }
-    };
-  });
   const chatWindow = mount(
     <ChatWindow authenticationInfo={new AuthenticationInfo()} />
   );
@@ -151,13 +143,9 @@ test("that when a user submits the form, we call AVSGateway with their request e
 });
 
 it("handles the user's form submission with request to Alexa and populates the state with the user request and Alexa's response", done => {
-  const access_token = "a dummy access token";
-  AuthenticationInfo.mockImplementation(() => {
-    return {
-      getAccessToken: () => {
-        return access_token;
-      }
-    };
+  const authenticationInfo = new AuthenticationInfo({
+    access_token: "a dummy access token",
+    expires_in: "30"
   });
 
   const alexaId = chatterIds.ALEXA;
@@ -170,20 +158,16 @@ it("handles the user's form submission with request to Alexa and populates the s
   });
 
   testOnUserRequestToAlexaSubmitHandling(
-    access_token,
+    authenticationInfo,
     expectedAlexaResponse,
     done
   );
 });
 
 it("handles the case when AVS throws an error in response to a user request. We should populate the state with the user request and a canned response.", done => {
-  const access_token = "a dummy access token";
-  AuthenticationInfo.mockImplementation(() => {
-    return {
-      getAccessToken: () => {
-        return access_token;
-      }
-    };
+  const authenticationInfo = new AuthenticationInfo({
+    access_token: "a dummy access token",
+    expires_in: "30"
   });
   // mock the AVSGateway to throw an error.
   mockSendTextMessageEventFunction.mockImplementation(() =>
@@ -201,7 +185,7 @@ it("handles the case when AVS throws an error in response to a user request. We 
   });
 
   testOnUserRequestToAlexaSubmitHandling(
-    access_token,
+    authenticationInfo,
     expectedAlexaResponse,
     done
   );
@@ -260,12 +244,12 @@ it("handles the user's input as they are typing their request (before submission
  * against.
  */
 const testOnUserRequestToAlexaSubmitHandling = (
-  expected_access_token,
+  authenticationInfo,
   expectedAlexaResponse,
   done
 ) => {
   const chatWindow = mount(
-    <ChatWindow authenticationInfo={new AuthenticationInfo()} />
+    <ChatWindow authenticationInfo={authenticationInfo} />
   );
   const chatWindowInstance = chatWindow.instance();
   const originalState = JSON.parse(JSON.stringify(chatWindowInstance.state));
@@ -291,7 +275,7 @@ const testOnUserRequestToAlexaSubmitHandling = (
   expect(mockSendTextMessageEventFunction).toHaveBeenCalledTimes(1);
   expect(mockSendTextMessageEventFunction).toHaveBeenCalledWith(
     userRequestToAlexa,
-    expected_access_token
+    authenticationInfo.getAccessToken()
   );
 
   let expectedUserMessage = new Message({
