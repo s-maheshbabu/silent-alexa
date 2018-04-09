@@ -8,7 +8,7 @@ import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";
 import UserRequestToAlexaForm from "./UserRequestToAlexaForm";
 import "./ChatWindow.css";
 
-import { chatters, chatterIds } from "./ConversingUsers";
+import { chatters, chatterIds } from "./Chatters";
 
 import AVSGateway from "./AVSGateway";
 const avs = new AVSGateway();
