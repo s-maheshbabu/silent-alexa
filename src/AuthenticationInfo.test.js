@@ -5,7 +5,7 @@ it("verifes that isValid returns true if authResponse has all the required field
     access_token: "some_access_token",
     expires_in: "30"
   };
-  var authenticationInfo = new AuthenticationInfo(authResponse);
+  const authenticationInfo = new AuthenticationInfo(authResponse);
   expect(authenticationInfo.getAccessToken()).toBe(authResponse.access_token);
   expect(authenticationInfo.isValid()).toBe(true);
 });
