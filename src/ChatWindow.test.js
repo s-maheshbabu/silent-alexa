@@ -134,7 +134,7 @@ test("that when a user submits the form, we call AVSGateway with their request e
   const userRequestToAlexa = "a dummy user request";
   chatWindowInstance.setState({
     userRequestToAlexa: userRequestToAlexa,
-    curr_user: users.get(userIds.YOU)
+    curr_user: chatters.get(chatterIds.YOU)
   });
 
   chatWindow
