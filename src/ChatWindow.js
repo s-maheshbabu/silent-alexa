@@ -12,7 +12,6 @@ import { chatters, chatterIds } from "./Chatters";
 
 import AVSGateway from "./AVSGateway";
 const avs = new AVSGateway();
-const { getIn } = require("immutable");
 
 class ChatWindow extends Component {
   constructor() {
@@ -164,7 +163,13 @@ class ChatWindow extends Component {
     this.pushMessage(chatterIds.USER, userRequestToAlexa);
     this.setState({ userRequestToAlexa: "" });
 
-    const access_token = getIn(this.props.authenticationInfo, ["access_token"]);
+    let access_token;
+    // If authenticationInfo is defined, then access_token is defined.
+    if (this.props.authenticationInfo) {
+      access_token = this.props.authenticationInfo.getAccessToken();
+    }
+
+    // TODO: Do not make a call to avs if access_token is undefined.
     avs
       .sendTextMessageEvent(userRequestToAlexa, access_token)
       .then(response => {

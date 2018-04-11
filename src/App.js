@@ -4,21 +4,21 @@ import "./App.css";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
-const util = require("util");
+import AuthenticationInfo from "./AuthenticationInfo";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      authenticationInfo: {}
+      authenticationInfo: undefined
     };
   }
   render() {
     return (
       <div id="page">
         <Header
-          updateAuthenticationInfo={authResponse =>
-            this.handleAuthenticationInfoUpdate(authResponse)
+          updateAuthenticationInfo={authenticationInfo =>
+            this.updateAuthenticationInfo(authenticationInfo)
           }
         />
         <Body authenticationInfo={this.state.authenticationInfo} />
@@ -27,19 +27,20 @@ class App extends Component {
     );
   }
 
-  handleAuthenticationInfoUpdate = function (authResponse) {
-    if (!authResponse || authResponse.error) {
-      console.log(
-        "Encountered an error on login: " +
-        util.inspect(authResponse, { showHidden: true, depth: null })
-      );
+  /**
+   * Updates authenticationInfo prop in the component's state
+   * @param authenticationInfo Instance of AuthenticationInfo
+   */
+  updateAuthenticationInfo = function(authenticationInfo) {
+    if (
+      authenticationInfo &&
+      authenticationInfo instanceof AuthenticationInfo
+    ) {
+      this.setState({ authenticationInfo: authenticationInfo });
     } else {
-      this.setState({
-        authenticationInfo: {
-          access_token: authResponse.access_token,
-          expires_in: authResponse.expires_in
-        }
-      });
+      console.log(
+        "Ignoring authenticationInfo update as an invalid authenticationInfo object is received."
+      );
     }
   };
 }

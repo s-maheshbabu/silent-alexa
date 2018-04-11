@@ -12,8 +12,8 @@ export default function Header(props) {
       </div>
       <div id="header-controls">
         <LoginControl
-          updateAuthenticationInfo={authResponse =>
-            props.updateAuthenticationInfo(authResponse)
+          updateAuthenticationInfo={authenticationInfo =>
+            props.updateAuthenticationInfo(authenticationInfo)
           }
         />
       </div>
