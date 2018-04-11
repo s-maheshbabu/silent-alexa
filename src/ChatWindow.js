@@ -168,6 +168,8 @@ class ChatWindow extends Component {
     if (this.props.authenticationInfo) {
       access_token = this.props.authenticationInfo.getAccessToken();
     }
+
+    // TODO: Do not make a call to avs if access_token is undefined.
     avs
       .sendTextMessageEvent(userRequestToAlexa, access_token)
       .then(response => {

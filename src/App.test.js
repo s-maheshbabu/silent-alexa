@@ -44,9 +44,9 @@ it("verifies that updateAuthenticationInfo function is passed to Header componen
   expect(headerUpdateAuthenticationInfoProp.length).toBe(1);
 
   // Verify that calling prop function passed to header calls updateAuthenticationInfo
-  const someArgument = "dummyArgument";
-  headerUpdateAuthenticationInfoProp(someArgument);
-  expect(updateAuthenticationInfoSpy).toHaveBeenCalledWith(someArgument);
+  const dummyArgument = "dummyArgument";
+  headerUpdateAuthenticationInfoProp(dummyArgument);
+  expect(updateAuthenticationInfoSpy).toHaveBeenCalledWith(dummyArgument);
 });
 
 it("should not change state's authenticationInfo prop when authenticationInfo instance (implicit grant) is not valid", () => {

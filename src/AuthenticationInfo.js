@@ -26,7 +26,7 @@ export default class AuthenticationInfo {
     }
 
     /**
-     * Returns access_token without validity check.
+     * @returns access_token associated with LWA response
      */
     this.getAccessToken = function() {
       return _access_token;

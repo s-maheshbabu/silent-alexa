@@ -5,3 +5,9 @@ exports[`renders LoginButton without crashing 1`] = `
   onClick={[Function]}
 />
 `;
+
+exports[`renders without crashing 1`] = `
+<LoginButton
+  onClick={[Function]}
+/>
+`;

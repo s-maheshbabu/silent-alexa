@@ -21,8 +21,8 @@ it("verifies that updateAuthenticationInfo function is passed to LoginControl co
   expect(loginControlFunctionProp.length).toBe(1);
 
   // Verify that calling prop function passed to loginControl calls the mockCallback
-  let someDummyArgument = "some dummy argument";
-  loginControlFunctionProp(someDummyArgument);
+  let dummyArgument = "dummy argument";
+  loginControlFunctionProp(dummyArgument);
 
-  expect(mockCallback).toHaveBeenCalledWith(someDummyArgument);
+  expect(mockCallback).toHaveBeenCalledWith(dummyArgument);
 });

@@ -28,7 +28,8 @@ class App extends Component {
   }
 
   /**
-   * Update the state only if authenticationInfo is defined
+   * Updates authenticationInfo prop in the component's state
+   * @param authenticationInfo Instance of AuthenticationInfo
    */
   updateAuthenticationInfo = function(authenticationInfo) {
     if (
@@ -36,6 +37,10 @@ class App extends Component {
       authenticationInfo instanceof AuthenticationInfo
     ) {
       this.setState({ authenticationInfo: authenticationInfo });
+    } else {
+      console.log(
+        "Ignoring authenticationInfo update as an invalid authenticationInfo object is received."
+      );
     }
   };
 }

@@ -5,7 +5,7 @@ import util from "util";
 
 // Options variable to request for implicit grant.
 // TODO: Logic for assigning 'deviceSerialNumber' needs to be revisited.
-const options = Object.freeze({
+export const options = Object.freeze({
   scope: ["alexa:all", "profile"],
   scope_data: {
     "alexa:all": {
@@ -23,11 +23,11 @@ export default class LoginControl extends React.Component {
     // This returns an AuthorizeRequest object. After the request is complete, the object will
     // contain properties detailing the response
     window.amazon.Login.authorize(options, response =>
-      this.handleResponse(response)
+      this.handleLWAResponse(response)
     );
   }
 
-  handleResponse = lwaResponse => {
+  handleLWAResponse = lwaResponse => {
     // Call updateAuthenticationInfo only if lwaResponse is valid
     if (this.isLWAResponseValid(lwaResponse)) {
       this.props.updateAuthenticationInfo(new AuthenticationInfo(lwaResponse));
@@ -35,7 +35,8 @@ export default class LoginControl extends React.Component {
   };
 
   /**
-   * Returns true if LoginWithAmazon response is valid. False, otherwise.
+   * @returns true if LoginWithAmazon response is valid
+   *          false, otherwise.
    */
   isLWAResponseValid(lwaResponse) {
     if (lwaResponse && lwaResponse.access_token && lwaResponse.expires_in) {

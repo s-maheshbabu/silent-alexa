@@ -1,18 +1,18 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import LoginControl from "./LoginControl";
+import { options, default as LoginControl } from "./LoginControl";
 import AuthenticationInfo from "./AuthenticationInfo";
 const util = require("util");
 
 let loginControl;
 let loginControlInstance;
 const mockUpdateAuthenticationInfo = jest.fn();
-const mockAmazonAuthorization = jest.fn();
+const mockLWAModule = jest.fn();
 
 beforeEach(() => {
   jest.resetAllMocks();
   Object.defineProperty(window, "amazon", {
-    value: { Login: { authorize: mockAmazonAuthorization } },
+    value: { Login: { authorize: mockLWAModule } },
     writable: true
   });
   loginControl = shallow(
@@ -21,7 +21,7 @@ beforeEach(() => {
   loginControlInstance = loginControl.instance();
 });
 
-it("renders LoginButton without crashing", () => {
+it("renders without crashing", () => {
   const wrapper = shallow(<LoginControl />);
   expect(wrapper).toMatchSnapshot();
 
@@ -38,27 +38,35 @@ it("verifies that props are passed to LoginButton Component", () => {
   expect(handleLoginSpy).toHaveBeenCalledTimes(1);
 });
 
-it("verifies that amazon authorization is called when handleLogin is called", () => {
+it("verifies that lwa authorization is called when handleLogin is called", () => {
   loginControlInstance.handleLogin();
+  const handleLWAResponseSpy = jest.spyOn(
+    loginControlInstance,
+    "handleLWAResponse"
+  );
+  const dummyLWAResponse = "dummyLWAResponse";
 
-  // Verify authorize called once
-  expect(mockAmazonAuthorization.mock.calls.length).toBe(1);
+  expect(mockLWAModule.mock.calls.length).toBe(1);
+  expect(mockLWAModule.mock.calls[0][0]).toBe(options);
+  const lwaCallback = mockLWAModule.mock.calls[0][1];
+  lwaCallback(dummyLWAResponse);
+  expect(handleLWAResponseSpy).toHaveBeenCalledWith(dummyLWAResponse);
 });
 
-it("verifies that updateAuthenticationInfo is called when handleResponse is called with valid lwaResponse", () => {
-  const response = {
+it("verifies that updateAuthenticationInfo is called when handleLWAResponse is called with valid lwaResponse", () => {
+  const lwaResponse = {
     access_token: "some_access_token",
     expires_in: "30"
   };
 
-  loginControlInstance.handleResponse(response);
+  loginControlInstance.handleLWAResponse(lwaResponse);
 
   expect(mockUpdateAuthenticationInfo).toHaveBeenCalledTimes(1);
   const authenticationInfo = mockUpdateAuthenticationInfo.mock.calls[0][0];
-  expect(authenticationInfo.getAccessToken()).toBe(response.access_token);
+  expect(authenticationInfo.getAccessToken()).toBe(lwaResponse.access_token);
 });
 
-it("verifies that updateAuthenticationInfo is not called when handleResponse is called with invalid lwaResponse", () => {
+it("verifies that updateAuthenticationInfo is not called when handleLWAResponse is called with invalid lwaResponse", () => {
   const lwaResponseWithEmptyAccessToken = {
     access_token: "",
     expires_in: "30"
@@ -82,6 +90,8 @@ it("verifies that updateAuthenticationInfo is not called when handleResponse is 
 
   const invalidLWAResponseObjects = [
     lwaResponseWithEmptyAccessToken,
+    lwaResponseWithMissingAccessToken,
+    lwaResponseWithEmptyExpiresIn,
     lwaResponseWithMissingExpiresIn,
     lwaReponseWithError,
     lwaResponseEmpty,
@@ -89,7 +99,7 @@ it("verifies that updateAuthenticationInfo is not called when handleResponse is 
   ];
 
   for (let i = 0; i < invalidLWAResponseObjects.length; i++) {
-    loginControlInstance.handleResponse(invalidLWAResponseObjects[i]);
+    loginControlInstance.handleLWAResponse(invalidLWAResponseObjects[i]);
 
     expect(mockUpdateAuthenticationInfo).not.toHaveBeenCalled();
   }
