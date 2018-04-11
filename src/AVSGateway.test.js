@@ -1,4 +1,5 @@
 import React from "react";
+const { List } = require("immutable");
 
 import AVSGateway from "./AVSGateway";
 import { EVENTS_URL } from "./AVSGateway";
@@ -119,7 +120,7 @@ it("handles gracefully if AVS returns an unexpected error code", async () => {
     .sendTextMessageEvent(userRequestToAlexa, access_token)
     .then(alexaResponse => {
       expect(alexaResponse).toEqual(
-        cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR)
+        List.of(cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR))
       );
     });
 });
@@ -137,7 +138,7 @@ it("handles gracefully when the http response is 'ok' and then we fail to parse 
     .sendTextMessageEvent(userRequestToAlexa, access_token)
     .then(alexaResponse => {
       expect(alexaResponse).toEqual(
-        cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR)
+        List.of(cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR))
       );
     });
 });
@@ -160,7 +161,7 @@ it("handles gracefully when the speak directive parser throws an error", async (
     .sendTextMessageEvent(userRequestToAlexa, access_token)
     .then(alexaResponse => {
       expect(alexaResponse).toEqual(
-        cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR)
+        List.of(cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR))
       );
     });
 });
@@ -178,7 +179,7 @@ it("handles gracefully when the http response is not 'ok' and then we fail to pa
     .sendTextMessageEvent(userRequestToAlexa, access_token)
     .then(alexaResponse => {
       expect(alexaResponse).toEqual(
-        cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR)
+        List.of(cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR))
       );
     });
 });
@@ -211,7 +212,9 @@ it("handles the happy case where Alexa returns an empty response. This can happe
   await unitUnderTest
     .sendTextMessageEvent(userRequestToAlexa, access_token)
     .then(alexaResponse => {
-      expect(alexaResponse).toEqual(cannedResponses.EMPTY_RESPONSE_FROM_ALEXA);
+      expect(alexaResponse).toEqual(
+        List.of(cannedResponses.EMPTY_RESPONSE_FROM_ALEXA)
+      );
     });
 
   const requestOptionsUsed = fetchMock.lastOptions();
@@ -248,6 +251,8 @@ const testErrorResponseFromAVSHandling = async (
   await unitUnderTest
     .sendTextMessageEvent(userRequestToAlexa, access_token)
     .then(alexaResponse => {
-      expect(alexaResponse).toEqual(cannedErrorResponses.get(avsErrorCode));
+      expect(alexaResponse).toEqual(
+        List.of(cannedErrorResponses.get(avsErrorCode))
+      );
     });
 };

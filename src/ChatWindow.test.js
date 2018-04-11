@@ -1,5 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
+const { List } = require("immutable");
 
 import { ChatFeed, Message } from "react-chat-ui";
 import ChatWindow from "./ChatWindow";
@@ -8,7 +9,7 @@ import AuthenticationInfo from "./AuthenticationInfo";
 
 import {
   mockSendTextMessageEventFunction,
-  mockAlexaSuccessResponse
+  mockAlexaSuccessResponses
 } from "./AVSGateway";
 
 import { chatters, chatterIds } from "./Chatters";
@@ -160,15 +161,20 @@ it("handles the user's form submission with request to Alexa and populates the s
   const alexaId = chatterIds.ALEXA;
   const alexa = chatters.get(alexaId);
 
-  let expectedAlexaResponse = new Message({
-    id: alexaId,
-    message: mockAlexaSuccessResponse,
-    senderName: alexa.name
-  });
+  let expectedAlexaResponses = List();
+  for (let alexaResponse of mockAlexaSuccessResponses) {
+    expectedAlexaResponses = expectedAlexaResponses.push(
+      new Message({
+        id: alexaId,
+        message: alexaResponse,
+        senderName: alexa.name
+      })
+    );
+  }
 
   testOnUserRequestToAlexaSubmitHandling(
     authenticationInfo,
-    expectedAlexaResponse,
+    expectedAlexaResponses,
     done
   );
 });
@@ -183,11 +189,13 @@ it("handles the case when AVS throws an error in response to a user request. We 
 
   const alexaId = chatterIds.ALEXA;
   const alexa = chatters.get(alexaId);
-  let expectedAlexaResponse = new Message({
-    id: alexaId,
-    message: cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR),
-    senderName: alexa.name
-  });
+  const expectedAlexaResponse = List.of(
+    new Message({
+      id: alexaId,
+      message: cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR),
+      senderName: alexa.name
+    })
+  );
 
   testOnUserRequestToAlexaSubmitHandling(
     authenticationInfo,
@@ -245,12 +253,12 @@ it("handles the user's input as they are typing their request (before submission
 /**
  * Helper method to test the interaction with Alexa. Will simulate a user request and
  * verify that the expected messages are populated into the state.
- * @param {Message} expectedAlexaResponse The expected response from Alexa to be verified
+ * @param {Message} expectedAlexaResponses The expected response from Alexa to be verified
  * against.
  */
 const testOnUserRequestToAlexaSubmitHandling = (
   authenticationInfo,
-  expectedAlexaResponse,
+  expectedAlexaResponses,
   done
 ) => {
   const chatWindow = mount(
@@ -283,7 +291,7 @@ const testOnUserRequestToAlexaSubmitHandling = (
     authenticationInfo.getAccessToken()
   );
 
-  let expectedUserMessage = new Message({
+  const expectedUserMessage = new Message({
     id: userId,
     message: userRequestToAlexa,
     senderName: user.name
@@ -293,13 +301,21 @@ const testOnUserRequestToAlexaSubmitHandling = (
     const finalState = chatWindowInstance.state;
     const finalMessages = finalState.messages;
 
-    expect(finalMessages.length).toBe(numberOfMessagesAlreadyInState + 2);
-    expect(finalMessages[finalMessages.length - 2]).toEqual(
-      expectedUserMessage
+    // We should have added userMessage and all of Alexa's responses.
+    const numberOfAlexaResponses = expectedAlexaResponses.size;
+    const numberOfNewMessagesInState = 1 + numberOfAlexaResponses;
+
+    expect(finalMessages.length).toBe(
+      numberOfMessagesAlreadyInState + numberOfNewMessagesInState
     );
-    expect(finalMessages[finalMessages.length - 1]).toEqual(
-      expectedAlexaResponse
-    );
+    expect(
+      finalMessages[finalMessages.length - numberOfNewMessagesInState]
+    ).toEqual(expectedUserMessage);
+    for (let i = numberOfAlexaResponses; i > 0; i--) {
+      expect(finalMessages[finalMessages.length - i]).toEqual(
+        expectedAlexaResponses.get(numberOfAlexaResponses - i)
+      );
+    }
 
     expect(chatWindowInstance.state.userRequestToAlexa).toEqual("");
     done();

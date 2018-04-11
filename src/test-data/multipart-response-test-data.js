@@ -1,3 +1,5 @@
+const { List } = require("immutable");
+
 // Invalid case where multi-part message has just one part. This should never happen in real world.
 {
   const rawData = String.raw`--------abcde123
@@ -125,7 +127,7 @@ third-part-of-multi-part-message
 
   exports.multi_part_with_just_three_parts = {
     rawData: rawData,
-    alexaResponse: alexaResponse
+    alexaResponse: List.of(alexaResponse)
   };
 }
 
@@ -145,7 +147,7 @@ second-part-of-multi-part-message
 
   exports.happy_case = {
     rawData: rawData,
-    alexaResponse: alexaResponse
+    alexaResponse: List.of(alexaResponse)
   };
 }
 
@@ -165,6 +167,6 @@ second-part-of-multi-part-message
 
   exports.happy_case_when_alexa_chooses_to_say_nothing = {
     rawData: rawData,
-    alexaResponse: alexaResponse
+    alexaResponse: List.of(alexaResponse)
   };
 }

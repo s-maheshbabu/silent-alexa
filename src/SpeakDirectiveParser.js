@@ -1,16 +1,19 @@
 import IllegalArgumentError from "./errors/IllegalArgumentError";
 
 const httpMessageParser = require("http-message-parser");
-const { hasIn } = require("immutable");
+const { List, hasIn } = require("immutable");
 const util = require("util");
 
 /**
  * This method parses the multi-part AVS responses and extracts the
- * string representing Alexa's response. It strips away other information
+ * strings representing Alexa's responses. It strips away other information
  * like binary audio data, ssml tags etc.
  *
  * @param {String} alexaRawResponse The multi-part response from AVS. This
  * should not be empty or undefined.
+ *
+ * @returns a List of text responses from Alexa. All the responses will be
+ * valid strings but a response can be empty if Alexa chooses to say nothing.
  *
  * @throws IllegalArgumentError if Alexa's response couldn't be parsed out
  * of the input. The failure could be because the input is not well formatted
@@ -34,11 +37,12 @@ export function extractAlexaTextResponse(alexaRawResponse) {
     parsedResponse.multipart[0].body.length === 0
   ) {
     throw new IllegalArgumentError(
-      "Given response is not a valid multi-part message. Input: " +
-      alexaRawResponse
+      "Given raw response is not a valid multi-part message. Input: " +
+        alexaRawResponse
     );
   }
 
+  // TODO: https://github.com/s-maheshbabu/silent-alexa/issues/22
   const avsDirectiveBuffer = parsedResponse.multipart[0].body;
   let avsDirective;
   try {
@@ -54,8 +58,8 @@ export function extractAlexaTextResponse(alexaRawResponse) {
   if (!hasIn(avsDirective, ["directive", "payload", "caption"]))
     throw new IllegalArgumentError(
       "Given directive doesn't contain the expected path directive.payload.caption. Input: " +
-      avsDirective
+        avsDirective
     );
 
-  return avsDirective.directive.payload.caption;
+  return List.of(avsDirective.directive.payload.caption);
 }
