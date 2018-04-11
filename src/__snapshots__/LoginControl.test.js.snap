@@ -1,11 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders LoginButton without crashing 1`] = `
-<LoginButton
-  onClick={[Function]}
-/>
-`;
-
 exports[`renders without crashing 1`] = `
 <LoginButton
   onClick={[Function]}
