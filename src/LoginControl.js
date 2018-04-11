@@ -27,24 +27,24 @@ export default class LoginControl extends React.Component {
     );
   }
 
-  handleResponse = authorizationResponse => {
-    // Call updateAuthenticationInfo only if authorizationResponse is valid
-    if (this.isAuthResponseValid(authorizationResponse)) {
-      this.props.updateAuthenticationInfo(
-        new AuthenticationInfo(authorizationResponse)
-      );
+  handleResponse = lwaResponse => {
+    // Call updateAuthenticationInfo only if lwaResponse is valid
+    if (this.isLWAResponseValid(lwaResponse)) {
+      this.props.updateAuthenticationInfo(new AuthenticationInfo(lwaResponse));
     }
   };
 
-  isAuthResponseValid(authResponse) {
-    if (authResponse && authResponse.access_token && authResponse.expires_in) {
+  /**
+   * Returns true if LoginWithAmazon response is valid. False, otherwise.
+   */
+  isLWAResponseValid(lwaResponse) {
+    if (lwaResponse && lwaResponse.access_token && lwaResponse.expires_in) {
       return true;
-    } else {
-      console.log(
-        "Encountered an error on login: " +
-          util.inspect(authResponse, { showHidden: true, depth: null })
-      );
-      return false;
     }
+    console.log(
+      "Encountered an error on login: " +
+        util.inspect(lwaResponse, { showHidden: true, depth: null })
+    );
+    return false;
   }
 }

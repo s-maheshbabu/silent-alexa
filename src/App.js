@@ -5,7 +5,6 @@ import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
 import AuthenticationInfo from "./AuthenticationInfo";
-const util = require("util");
 
 class App extends Component {
   constructor(props) {
@@ -18,8 +17,8 @@ class App extends Component {
     return (
       <div id="page">
         <Header
-          updateAuthenticationInfo={authInfo =>
-            this.updateAuthenticationInfo(authInfo)
+          updateAuthenticationInfo={authenticationInfo =>
+            this.updateAuthenticationInfo(authenticationInfo)
           }
         />
         <Body authenticationInfo={this.state.authenticationInfo} />
@@ -28,10 +27,15 @@ class App extends Component {
     );
   }
 
-  updateAuthenticationInfo = function(authInfo) {
-    // Update the state only if authInfo is valid
-    if (authInfo && authInfo.isValid()) {
-      this.setState({ authenticationInfo: authInfo });
+  /**
+   * Update the state only if authenticationInfo is defined
+   */
+  updateAuthenticationInfo = function(authenticationInfo) {
+    if (
+      authenticationInfo &&
+      authenticationInfo instanceof AuthenticationInfo
+    ) {
+      this.setState({ authenticationInfo: authenticationInfo });
     }
   };
 }

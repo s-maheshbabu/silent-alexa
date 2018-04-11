@@ -6,75 +6,91 @@ const util = require("util");
 
 let loginControl;
 let loginControlInstance;
-let mockUpdateAuthenticationInfo;
-let amazonAuthorizationSpy;
+const mockUpdateAuthenticationInfo = jest.fn();
+const mockAmazonAuthorization = jest.fn();
 
 beforeEach(() => {
-  mockUpdateAuthenticationInfo = jest.fn();
+  jest.resetAllMocks();
+  Object.defineProperty(window, "amazon", {
+    value: { Login: { authorize: mockAmazonAuthorization } },
+    writable: true
+  });
   loginControl = shallow(
     <LoginControl updateAuthenticationInfo={mockUpdateAuthenticationInfo} />
   );
   loginControlInstance = loginControl.instance();
-  amazonAuthorizationSpy = jest.fn();
-
-  Object.defineProperty(window, "amazon", {
-    value: { Login: { authorize: amazonAuthorizationSpy } },
-    writable: true
-  });
 });
 
-it("renders without crashing", () => {
+it("renders LoginButton without crashing", () => {
   const wrapper = shallow(<LoginControl />);
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();
 });
 
-it("verifies that amazon authorization is called when login button is clicked", () => {
-  mount(<LoginControl />)
-    .find("LoginButton")
-    .find("button")
-    .simulate("click");
+it("verifies that props are passed to LoginButton Component", () => {
+  expect(Object.keys(loginControl.find("LoginButton").props()).length).toBe(1);
+  const onClickProp = loginControl.find("LoginButton").prop("onClick");
+  const handleLoginSpy = jest.spyOn(loginControlInstance, "handleLogin");
 
-  // Verify authorize called once
-  expect(amazonAuthorizationSpy.mock.calls.length).toBe(1);
+  onClickProp();
+
+  expect(handleLoginSpy).toHaveBeenCalledTimes(1);
 });
 
-it("verifies that updateAuthenticationInfo is called when handleResponse is called with valid authResponse", () => {
+it("verifies that amazon authorization is called when handleLogin is called", () => {
+  loginControlInstance.handleLogin();
+
+  // Verify authorize called once
+  expect(mockAmazonAuthorization.mock.calls.length).toBe(1);
+});
+
+it("verifies that updateAuthenticationInfo is called when handleResponse is called with valid lwaResponse", () => {
   const response = {
     access_token: "some_access_token",
     expires_in: "30"
   };
+
   loginControlInstance.handleResponse(response);
-  expect(mockUpdateAuthenticationInfo).toHaveBeenCalled();
-  const authInfo = mockUpdateAuthenticationInfo.mock.calls[0][0];
-  expect(authInfo.getAccessToken()).toBe(response.access_token);
+
+  expect(mockUpdateAuthenticationInfo).toHaveBeenCalledTimes(1);
+  const authenticationInfo = mockUpdateAuthenticationInfo.mock.calls[0][0];
+  expect(authenticationInfo.getAccessToken()).toBe(response.access_token);
 });
 
-it("verifies that updateAuthenticationInfo is not called when handleResponse is called with invalid authResponse", () => {
-  const authResponseWithEmptyAccessToken = {
+it("verifies that updateAuthenticationInfo is not called when handleResponse is called with invalid lwaResponse", () => {
+  const lwaResponseWithEmptyAccessToken = {
     access_token: "",
     expires_in: "30"
   };
-  const authResponseWithMissingExpiresIn = {
+  const lwaResponseWithMissingAccessToken = {
+    expires_in: "30"
+  };
+  const lwaResponseWithMissingExpiresIn = {
     access_token: "some_access_token"
   };
-  const authReponseWithError = {
+  const lwaResponseWithEmptyExpiresIn = {
+    access_token: "some_access_token",
+    expires_in: ""
+  };
+  const lwaReponseWithError = {
     error: "some_error_code",
     error_description: "description about error as string"
   };
-  const authResponseEmpty = {};
-  let authResponseUndefined;
-  const invalidAuthResponseObjects = [
-    authResponseWithEmptyAccessToken,
-    authResponseWithMissingExpiresIn,
-    authReponseWithError,
-    authResponseEmpty,
-    authResponseUndefined
+  const lwaResponseEmpty = {};
+  let lwaResponseUndefined;
+
+  const invalidLWAResponseObjects = [
+    lwaResponseWithEmptyAccessToken,
+    lwaResponseWithMissingExpiresIn,
+    lwaReponseWithError,
+    lwaResponseEmpty,
+    lwaResponseUndefined
   ];
-  for (let i = 0; i < invalidAuthResponseObjects.length; i++) {
-    expect(
-      loginControlInstance.isAuthResponseValid(invalidAuthResponseObjects[i])
-    ).toBeFalsy();
+
+  for (let i = 0; i < invalidLWAResponseObjects.length; i++) {
+    loginControlInstance.handleResponse(invalidLWAResponseObjects[i]);
+
+    expect(mockUpdateAuthenticationInfo).not.toHaveBeenCalled();
   }
 });

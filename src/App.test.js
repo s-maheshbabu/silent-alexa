@@ -44,32 +44,35 @@ it("verifies that updateAuthenticationInfo function is passed to Header componen
   expect(headerUpdateAuthenticationInfoProp.length).toBe(1);
 
   // Verify that calling prop function passed to header calls updateAuthenticationInfo
-  headerUpdateAuthenticationInfoProp();
-  expect(updateAuthenticationInfoSpy).toHaveBeenCalled();
+  const someArgument = "dummyArgument";
+  headerUpdateAuthenticationInfoProp(someArgument);
+  expect(updateAuthenticationInfoSpy).toHaveBeenCalledWith(someArgument);
 });
 
-it("should not change state when authorizationInfo instance (implicit grant) is not valid", () => {
-  const invalidAuthenticationInfo = new AuthenticationInfo();
+it("should not change state's authenticationInfo prop when authenticationInfo instance (implicit grant) is not valid", () => {
+  const notAuthenticationInfoObject = { SomeObject: "not_authentication_info" };
   let undefinedAuthenticationInfo;
+
   const invalidAuthenticationInfoObjects = [
-    invalidAuthenticationInfo,
+    notAuthenticationInfoObject,
     undefinedAuthenticationInfo
   ];
+
+  const expectedState = appInstance.state;
+
   for (let i = 0; i < invalidAuthenticationInfoObjects.length; i++) {
     appInstance.updateAuthenticationInfo(invalidAuthenticationInfoObjects[i]);
-    expect(appInstance.state).toBe(originalState);
+
+    expect(appInstance.state).toEqual(expectedState);
   }
 });
 
-it("should change state when authorizationInfo instance (implicit grant) is defined and valid", () => {
-  const authResponse = {
+it("should change state when authenticationInfo instance (implicit grant) is defined and valid", () => {
+  const lwaResponse = {
     access_token: "some_access_token",
     expires_in: 30
   };
-  const authInfo = new AuthenticationInfo(authResponse);
-  const expectedState = {
-    authenticationInfo: authInfo
-  };
-  appInstance.updateAuthenticationInfo(authInfo);
-  expect(appInstance.state).toEqual(expectedState);
+  const expectedAuthenticationInfo = new AuthenticationInfo(lwaResponse);
+  appInstance.updateAuthenticationInfo(expectedAuthenticationInfo);
+  expect(appInstance.state.authenticationInfo).toBe(expectedAuthenticationInfo);
 });

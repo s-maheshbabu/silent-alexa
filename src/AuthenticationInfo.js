@@ -1,23 +1,35 @@
-import { hasIn } from "immutable";
+import IllegalArgumentError from "./errors/IllegalArgumentError";
+import util from "util";
 
-/* 
-* Wrapper class to hold access_token and expires_in from authentication response
-*/
+/**
+ * Wrapper class to hold access_token and expires_in returned in LoginWithAmazon
+ * authorization response.
+ * Instances are created only if access_token and expires_in are defined.
+ * TODO: Add a function to validate the access_token, that takes into account the
+ * value of expires_in
+ */
 export default class AuthenticationInfo {
-  constructor(authResponse) {
-    if (authResponse && authResponse.access_token && authResponse.expires_in) {
-      var _access_token = authResponse.access_token;
-      var _expires_in = authResponse.expires_in;
+  constructor(lwaResponse) {
+    if (lwaResponse && lwaResponse.access_token && lwaResponse.expires_in) {
+      var _access_token = lwaResponse.access_token;
+      var _expires_in = lwaResponse.expires_in;
+    } else {
+      const serializedLWAResponse = util.inspect(lwaResponse, {
+        showHidden: true,
+        depth: null
+      });
+      throw new IllegalArgumentError(
+        `LoginWithAmazon Authorization response is undefined or 
+        doesnt have access_token/expires_in.
+        lwaResponse: ${serializedLWAResponse}`
+      );
     }
 
-    // Verify validity before using the access_token
+    /**
+     * Returns access_token without validity check.
+     */
     this.getAccessToken = function() {
       return _access_token;
     };
-  }
-
-  // Returns true if the accessToken is defined and is not empty.
-  isValid() {
-    return this.getAccessToken() ? true : false;
   }
 }
