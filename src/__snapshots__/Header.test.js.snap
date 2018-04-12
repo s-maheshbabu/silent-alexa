@@ -15,6 +15,8 @@ exports[`renders Header without crashing 1`] = `
     id="header-controls"
   >
     <LoginControl
+      clearAuthenticationInfo={[Function]}
+      isAuthenticationInfoValid={[Function]}
       updateAuthenticationInfo={[Function]}
     />
   </div>
