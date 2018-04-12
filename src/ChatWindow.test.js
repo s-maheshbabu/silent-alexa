@@ -253,7 +253,7 @@ it("handles the user's input as they are typing their request (before submission
 /**
  * Helper method to test the interaction with Alexa. Will simulate a user request and
  * verify that the expected messages are populated into the state.
- * @param {Message} expectedAlexaResponses The expected response from Alexa to be verified
+ * @param {Message} expectedAlexaResponses The expected responses from Alexa to be verified
  * against.
  */
 const testOnUserRequestToAlexaSubmitHandling = (
@@ -303,13 +303,13 @@ const testOnUserRequestToAlexaSubmitHandling = (
 
     // We should have added userMessage and all of Alexa's responses.
     const numberOfAlexaResponses = expectedAlexaResponses.size;
-    const numberOfNewMessagesInState = 1 + numberOfAlexaResponses;
+    const numberOfNewMessagesToGoIntoState = 1 + numberOfAlexaResponses;
 
     expect(finalMessages.length).toBe(
-      numberOfMessagesAlreadyInState + numberOfNewMessagesInState
+      numberOfMessagesAlreadyInState + numberOfNewMessagesToGoIntoState
     );
     expect(
-      finalMessages[finalMessages.length - numberOfNewMessagesInState]
+      finalMessages[finalMessages.length - numberOfNewMessagesToGoIntoState]
     ).toEqual(expectedUserMessage);
     for (let i = numberOfAlexaResponses; i > 0; i--) {
       expect(finalMessages[finalMessages.length - i]).toEqual(
