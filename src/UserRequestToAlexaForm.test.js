@@ -42,8 +42,8 @@ it("calls the right methods when events get triggered", () => {
   expect(wrapper.find("input").prop("value")).toEqual(userRequestToAlexa);
 
   wrapper.find("input").simulate("change");
-  expect(onChangeSpy.mock.calls.length).toBe(1);
+  expect(onChangeSpy).toHaveBeenCalledTimes(1);
 
   wrapper.find("form").simulate("submit");
-  expect(onSubmitSpy.mock.calls.length).toBe(1);
+  expect(onSubmitSpy).toHaveBeenCalledTimes(1);
 });

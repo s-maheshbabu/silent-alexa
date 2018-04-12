@@ -45,34 +45,34 @@ it("verifies that props are passed to Header component", () => {
     "isAuthenticationInfoValid"
   );
 
-  //Verify that Header is passed desired number of properties
+  //Verify that Header is passed desired number of props
   expect(Object.keys(app.find("Header").props()).length).toBe(3);
 
-  // Verify that Header is passed on updateAuthenticationInfo property
+  // Verify that Header is passed on updateAuthenticationInfo prop
   const updateAuthenticationInfoProp = app
     .find("Header")
     .prop("updateAuthenticationInfo");
 
-  // Verify that calling prop function passed to header calls updateAuthenticationInfo
+  // Verify that calling header's updateAuthenticationInfo prop calls updateAuthenticationInfo
   const dummyArgument = "dummyArgument";
   updateAuthenticationInfoProp(dummyArgument);
   expect(updateAuthenticationInfoSpy).toHaveBeenCalledWith(dummyArgument);
 
-  // Verify that Header is passed on clearAuthenticationInfo property
+  // Verify that Header is passed on clearAuthenticationInfo prop
   const clearAuthenticationInfoProp = app
     .find("Header")
     .prop("clearAuthenticationInfo");
 
-  // Verify that calling prop function passed to header calls clearAuthenticationInfo
+  // Verify that calling header's clearAuthenticationInfo prop calls clearAuthenticationInfo
   clearAuthenticationInfoProp();
   expect(clearAuthenticationInfoSpy).toHaveBeenCalled();
 
-  // Verify that Header is passed on isAuthenticationInfoValid property
+  // Verify that Header is passed on isAuthenticationInfoValid prop
   const isAuthenticationInfoValidProp = app
     .find("Header")
     .prop("isAuthenticationInfoValid");
 
-  // Verify that calling prop function passed to header calls isAuthenticationInfoValid
+  // Verify that calling header's isAuthenticationInfoValid prop calls isAuthenticationInfoValid
   isAuthenticationInfoValidProp();
   expect(isAuthenticationInfoValidSpy).toHaveBeenCalled();
 });
@@ -118,7 +118,7 @@ it("should reset authenticationInfo prop in state to undefined when clearAuthent
   expect(appInstance.state.authenticationInfo).toBeUndefined();
 });
 
-it("should return false when isAuthenticationInfoValid called when authenticationInfo is not instance of AuthenticationInfo", () => {
+it("verifies isAuthenticationInfoValid returns false when authenticationInfo is not an instance of AuthenticationInfo", () => {
   appInstance.setState({ authenticationInfo: "anyAuthenticationInfo" });
 
   expect(appInstance.state.authenticationInfo).toBeDefined();

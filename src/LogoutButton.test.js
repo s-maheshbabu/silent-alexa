@@ -14,9 +14,8 @@ it("verifies that the callback function is called when logout button is clicked"
   const button = shallow(<LogoutButton onClick={mockCallBack} />).find(
     "button"
   );
-  expect(button.length).toBe(1);
+  expect(button).toBeDefined();
   button.simulate("click");
 
-  // Verify mockCallBack called once
-  expect(mockCallBack.mock.calls.length).toBe(1);
+  expect(mockCallBack).toHaveBeenCalledTimes(1);
 });

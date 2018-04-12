@@ -20,12 +20,13 @@ it("verifies that the image for the button has right dimensions", () => {
   expect(image.prop("width")).toBe("106");
 });
 
-it("verifies that the callback function is called when login button is clicked", () => {
-  const mockCallBack = jest.fn();
-  const button = shallow(<LoginButton onClick={mockCallBack} />).find("button");
-  expect(button.length).toBe(1);
+it("verifies that the onClickProp function is called when login button is clicked", () => {
+  const mockOnClickProp = jest.fn();
+  const button = shallow(<LoginButton onClick={mockOnClickProp} />).find(
+    "button"
+  );
+  expect(button).toBeDefined();
   button.simulate("click");
 
-  // Verify mockCallBack called once
-  expect(mockCallBack.mock.calls.length).toBe(1);
+  expect(mockOnClickProp).toHaveBeenCalledTimes(1);
 });

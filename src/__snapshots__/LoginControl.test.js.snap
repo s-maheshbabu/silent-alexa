@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders LoginControl with LoginButton component 1`] = `
+exports[`renders LoginControl with LoginButton component when isAuthenticationInfoValid returns falsy 1`] = `
 <LoginButton
   onClick={[Function]}
 />
 `;
 
-exports[`renders LoginControl with LogoutButton component 1`] = `
+exports[`renders LoginControl with LogoutButton component when isAuthenticationInfoValid returns truthy 1`] = `
 <LogoutButton
   onClick={[Function]}
 />

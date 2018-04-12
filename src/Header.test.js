@@ -32,7 +32,7 @@ it("verifies that props are passed to LoginControl component", () => {
 
   // Verify that calling isAuthenticationInfoValid prop function calls the mockIsAuthenticationInfoValid
   isAuthenticationInfoValidProp();
-  expect(mockIsAuthenticationInfoValid.mock.calls.length).toEqual(1);
+  expect(mockIsAuthenticationInfoValid).toHaveBeenCalledTimes(1);
 
   // Verify that LoginControl is passed on clearAuthenticationInfo property
   const clearAuthenticationInfoProp = header
@@ -49,7 +49,7 @@ it("verifies that props are passed to LoginControl component", () => {
     .find("LoginControl")
     .prop("updateAuthenticationInfo");
 
-  expect(updateAuthenticationInfoProp.length).toBe(1);
+  expect(updateAuthenticationInfoProp).toBeDefined();
 
   // Verify that calling updateAuthenticationInfo prop function calls the mockUpdateAuthenticationInfo
   let dummyArgument = "dummy argument";

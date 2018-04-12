@@ -215,7 +215,7 @@ it("handles gracefully when the input form is submitted with a null or empty req
   const finalState = chatWindowInstance.state;
 
   // Verify that preventDefault() is being called.
-  expect(preventDefaultSpy.mock.calls.length).toBe(1);
+  expect(preventDefaultSpy).toHaveBeenCalledTimes(1);
 
   // Nothing about the state should have changed.
   expect(finalState).toEqual(originalState);
@@ -238,7 +238,7 @@ it("handles the user's input as they are typing their request (before submission
   const finalUserRequestToAlexa = finalState.userRequestToAlexa;
 
   // Verify that preventDefault() is being called.
-  expect(preventDefaultSpy.mock.calls.length).toBe(1);
+  expect(preventDefaultSpy).toHaveBeenCalledTimes(1);
   expect(finalUserRequestToAlexa).toEqual(expectedUserRequestToAlexa);
 });
 
@@ -275,7 +275,7 @@ const testOnUserRequestToAlexaSubmitHandling = (
     .find("form")
     .simulate("submit", { preventDefault: preventDefaultSpy });
 
-  expect(preventDefaultSpy.mock.calls.length).toBe(1);
+  expect(preventDefaultSpy).toHaveBeenCalledTimes(1);
 
   expect(mockSendTextMessageEventFunction).toHaveBeenCalledTimes(1);
   expect(mockSendTextMessageEventFunction).toHaveBeenCalledWith(

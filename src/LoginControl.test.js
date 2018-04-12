@@ -27,7 +27,7 @@ beforeEach(() => {
   loginControlInstance = loginControl.instance();
 });
 
-it("renders LoginControl with LoginButton component", () => {
+it("renders LoginControl with LoginButton component when isAuthenticationInfoValid returns falsy", () => {
   mockIsAuthenticationInfoValid.mockReturnValueOnce(false);
   const wrapper = shallow(
     <LoginControl isAuthenticationInfoValid={mockIsAuthenticationInfoValid} />
@@ -37,11 +37,12 @@ it("renders LoginControl with LoginButton component", () => {
   wrapper.unmount();
 });
 
-it("renders LoginControl with LogoutButton component", () => {
+it("renders LoginControl with LogoutButton component when isAuthenticationInfoValid returns truthy", () => {
   mockIsAuthenticationInfoValid.mockReturnValueOnce(true);
   const wrapper = shallow(
     <LoginControl isAuthenticationInfoValid={mockIsAuthenticationInfoValid} />
   );
+
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();
@@ -65,6 +66,7 @@ it("verifies that props are passed to LogoutButton Component", () => {
       clearAuthenticationInfo={mockClearAuthenticationInfo}
     />
   );
+
   expect(Object.keys(loginControl.find("LogoutButton").props()).length).toBe(1);
   const onClickProp = loginControl.find("LogoutButton").prop("onClick");
   const handleLogoutSpy = jest.spyOn(loginControl.instance(), "handleLogout");
@@ -75,8 +77,7 @@ it("verifies that props are passed to LogoutButton Component", () => {
 it("verifies that clearAuthenticationInfo is called when handleLogout is called", () => {
   loginControlInstance.handleLogout();
 
-  // Verify authorize called once
-  expect(mockClearAuthenticationInfo.mock.calls.length).toBe(1);
+  expect(mockClearAuthenticationInfo).toHaveBeenCalledTimes(1);
 });
 
 it("verifies that lwa authorization is called when handleLogin is called", () => {
@@ -87,7 +88,7 @@ it("verifies that lwa authorization is called when handleLogin is called", () =>
   );
   const dummyLWAResponse = "dummyLWAResponse";
 
-  expect(mockLWAModule.mock.calls.length).toBe(1);
+  expect(mockLWAModule).toHaveBeenCalledTimes(1);
   expect(mockLWAModule.mock.calls[0][0]).toBe(options);
   const lwaCallback = mockLWAModule.mock.calls[0][1];
   lwaCallback(dummyLWAResponse);
