@@ -161,16 +161,14 @@ it("handles the user's form submission with request to Alexa and populates the s
   const alexaId = chatterIds.ALEXA;
   const alexa = chatters.get(alexaId);
 
-  let expectedAlexaResponses = List();
-  for (let alexaResponse of mockAlexaSuccessResponses) {
-    expectedAlexaResponses = expectedAlexaResponses.push(
+  const expectedAlexaResponses = mockAlexaSuccessResponses.map(
+    alexaResponse =>
       new Message({
         id: alexaId,
         message: alexaResponse,
         senderName: alexa.name
       })
-    );
-  }
+  );
 
   testOnUserRequestToAlexaSubmitHandling(
     authenticationInfo,
