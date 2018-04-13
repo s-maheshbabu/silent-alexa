@@ -13,8 +13,8 @@ import testData from "./test-data/multipart-response-test-data";
 // A mock parser that uses the real implementation by default.
 jest.mock("./SpeakDirectiveParser", () => {
   return {
-    extractAlexaTextResponse: jest.fn(
-      require.requireActual("./SpeakDirectiveParser").extractAlexaTextResponse
+    extractAlexaTextResponses: jest.fn(
+      require.requireActual("./SpeakDirectiveParser").extractAlexaTextResponses
     )
   };
 });
@@ -148,7 +148,7 @@ it("handles gracefully when the speak directive parser throws an error", async (
   const access_token = "a mock access_token";
 
   // Mock the parser to throw an illegal argument error
-  parser.extractAlexaTextResponse.mockImplementationOnce(() => {
+  parser.extractAlexaTextResponses.mockImplementationOnce(() => {
     throw new IllegalArgumentError("simulating an illegal argument error");
   });
 
@@ -193,7 +193,7 @@ it("calls fetch with the right options when trying to send a happy case TextMess
   await unitUnderTest
     .sendTextMessageEvent(userRequestToAlexa, access_token)
     .then(alexaResponse => {
-      expect(alexaResponse).toEqual(testData.happy_case.alexaResponse);
+      expect(alexaResponse).toEqual(testData.happy_case.alexaResponses);
     });
 
   const requestOptionsUsed = fetchMock.lastOptions();

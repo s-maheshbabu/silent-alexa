@@ -97,7 +97,7 @@ Content-Type: application/json; charset=UTF-8
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: application/octet-stream
 
-second-part-of-multi-part-message
+first-part-of-multi-part-message
 --------abcde123--`;
 
   exports.caption_key_doesnt_exist_in_avs_directive = {
@@ -105,29 +105,68 @@ second-part-of-multi-part-message
   };
 }
 
-// A multi-part message with three parts. Each of the parts is valid.
-// Important to test this because usually multi-part messages from AVS have two parts but sometimes more.
+// A multi-part message with multiple parts where one part is a valid text response from Alexa and others are either valid non-text responses or parts whose Content-Type is not known.
 {
+  const validTextResponseContentType = "application/json; charset=UTF-8";
+  const validNonTextResponseContentType = "application/octet-stream";
+  const emptyContentType = "";
+  let missingContentType;
+
   const alexaResponse = "alexa success response";
   const rawData = String.raw`--------abcde123
-Content-Type: application/json; charset=UTF-8
+Content-Type: ${validTextResponseContentType}
 
 {"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"${alexaResponse}","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponse}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
-Content-Type: application/octet-stream
+Content-Type: ${validNonTextResponseContentType}
 
-second-part-of-multi-part-message
+first-part-of-multi-part-message
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
-Content-Type: application/octet-stream
+Content-Type: ${emptyContentType}
+
+second-part-of-multi-part-message
+--------abcde123--
+Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
+Content-Type: ${missingContentType}
 
 third-part-of-multi-part-message
 --------abcde123--`;
 
+  exports.multi_part_with_different_content_types = {
+    rawData: rawData,
+    alexaResponses: List.of(alexaResponse)
+  };
+}
+
+// A multi-part message with multiple valid parts where the text and audio response from Alexa is contained in those parts.
+{
+  const alexaResponseFirstPart = "alexa success response first part";
+  const alexaResponseSecondPart = "alexa success response second part";
+  const rawData = String.raw`--------abcde123
+Content-Type: application/json; charset=UTF-8
+
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"${alexaResponseFirstPart}","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponseFirstPart}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+--------abcde123
+Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
+Content-Type: application/octet-stream
+
+first-audio-part-of-multi-part-message
+--------abcde123
+Content-Type: application/json; charset=UTF-8
+
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"${alexaResponseSecondPart}","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponseSecondPart}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+--------abcde123
+Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
+Content-Type: application/octet-stream
+
+second-audio-part-of-multi-part-message
+--------abcde123--`;
+
   exports.multi_part_with_just_three_parts = {
     rawData: rawData,
-    alexaResponse: List.of(alexaResponse)
+    alexaResponses: List.of(alexaResponseFirstPart, alexaResponseSecondPart)
   };
 }
 
@@ -147,7 +186,7 @@ second-part-of-multi-part-message
 
   exports.happy_case = {
     rawData: rawData,
-    alexaResponse: List.of(alexaResponse)
+    alexaResponses: List.of(alexaResponse)
   };
 }
 
@@ -167,6 +206,6 @@ second-part-of-multi-part-message
 
   exports.happy_case_when_alexa_chooses_to_say_nothing = {
     rawData: rawData,
-    alexaResponse: List.of(alexaResponse)
+    alexaResponses: List.of(alexaResponse)
   };
 }

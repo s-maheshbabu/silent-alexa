@@ -77,7 +77,7 @@ export default class AVSGateway {
 
     if (isOk) {
       try {
-        let textResponsesFromAlexa = parser.extractAlexaTextResponse(payload);
+        let textResponsesFromAlexa = parser.extractAlexaTextResponses(payload);
         if (!textResponsesFromAlexa || !textResponsesFromAlexa.get(0))
           textResponsesFromAlexa = List.of(
             cannedResponses.EMPTY_RESPONSE_FROM_ALEXA
