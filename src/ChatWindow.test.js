@@ -302,8 +302,8 @@ const testOnUserRequestToAlexaSubmitHandling = (
     const finalMessages = finalState.messages;
 
     // We should have added userMessage and all of Alexa's responses.
-    const numberOfAlexaResponses = expectedAlexaResponses.size;
-    const numberOfNewMessagesToGoIntoState = 1 + numberOfAlexaResponses;
+    const numberOfExpectedAlexaResponses = expectedAlexaResponses.size;
+    const numberOfNewMessagesToGoIntoState = 1 + numberOfExpectedAlexaResponses;
 
     expect(finalMessages.length).toBe(
       numberOfMessagesAlreadyInState + numberOfNewMessagesToGoIntoState
@@ -311,9 +311,9 @@ const testOnUserRequestToAlexaSubmitHandling = (
     expect(
       finalMessages[finalMessages.length - numberOfNewMessagesToGoIntoState]
     ).toEqual(expectedUserMessage);
-    for (let i = numberOfAlexaResponses; i > 0; i--) {
+    for (let i = numberOfExpectedAlexaResponses; i > 0; i--) {
       expect(finalMessages[finalMessages.length - i]).toEqual(
-        expectedAlexaResponses.get(numberOfAlexaResponses - i)
+        expectedAlexaResponses.get(numberOfExpectedAlexaResponses - i)
       );
     }
 
