@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-const { List } = require("immutable");
+const { List, fromJS } = require("immutable");
 
 import { ChatFeed, Message } from "react-chat-ui";
 import ChatWindow from "./ChatWindow";
@@ -308,14 +308,12 @@ const testOnUserRequestToAlexaSubmitHandling = (
     expect(finalMessages.length).toBe(
       numberOfMessagesAlreadyInState + numberOfNewMessagesToGoIntoState
     );
+    expect(finalMessages[numberOfMessagesAlreadyInState]).toEqual(
+      expectedUserMessage
+    );
     expect(
-      finalMessages[finalMessages.length - numberOfNewMessagesToGoIntoState]
-    ).toEqual(expectedUserMessage);
-    for (let i = numberOfExpectedAlexaResponses; i > 0; i--) {
-      expect(finalMessages[finalMessages.length - i]).toEqual(
-        expectedAlexaResponses.get(numberOfExpectedAlexaResponses - i)
-      );
-    }
+      fromJS(finalMessages.slice(numberOfMessagesAlreadyInState + 1))
+    ).toEqual(expectedAlexaResponses);
 
     expect(chatWindowInstance.state.userRequestToAlexa).toEqual("");
     done();
