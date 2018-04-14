@@ -1,7 +1,7 @@
 import IllegalArgumentError from "./errors/IllegalArgumentError";
 
 const httpMessageParser = require("http-message-parser");
-const { List, hasIn, getIn, fromJS } = require("immutable");
+const { hasIn, getIn, fromJS } = require("immutable");
 const util = require("util");
 
 const TEXT_PART_CONTENT_TYPE = `application/json; charset=UTF-8`;
@@ -28,9 +28,9 @@ export function extractAlexaTextResponses(alexaRawResponse) {
   }
 
   const parsedResponse = httpMessageParser(alexaRawResponse);
-  // TODO: !parsedResponse condition isn't tested because I couldn't figure out
-  // how to mock httpMessageParser responses. While it is safe for now because
-  // the library appears to always return a response that contains a body, it needs to be tested.
+  // TODO: !parsedResponse condition isn't tested because mocking httpMessageParser responses turned
+  // out to be more involved than expected.. While it is safe for now because the library appears to
+  // always return a response that contains a body, it needs to be tested.
   if (!parsedResponse || !parsedResponse.multipart) {
     throw new IllegalArgumentError(
       "Given raw response is not a valid multi-part message. Input: " +
@@ -39,19 +39,18 @@ export function extractAlexaTextResponses(alexaRawResponse) {
   }
 
   // TODO: part.headers and part.body being undefined or null isn't tested because
-  // I couldn't figure out how to mock httpMessageParser responses. While it is safe for now because
-  // the library appears to always return a response that contains a body, it needs to be tested.
-  const textParts = new Array();
-  for (let part of parsedResponse.multipart) {
-    if (
-      TEXT_PART_CONTENT_TYPE === getIn(part, ["headers", "Content-Type"]) &&
-      part.body
-    ) {
-      textParts.push(part.body);
-    }
-  }
+  // mocking httpMessageParser responses turned out to be more involved than expected.
+  // While it is safe for now because the library appears to always return a response
+  // that contains a body, it needs to be tested.
+  const textParts = parsedResponse.multipart
+    .filter(
+      part =>
+        TEXT_PART_CONTENT_TYPE === getIn(part, ["headers", "Content-Type"]) &&
+        part.body
+    )
+    .map(part => part.body);
 
-  const alexaResponses = new Array();
+  const alexaResponses = [];
   for (let part of textParts) {
     let avsDirective;
     try {

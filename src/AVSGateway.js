@@ -78,7 +78,13 @@ export default class AVSGateway {
     if (isOk) {
       try {
         let textResponsesFromAlexa = parser.extractAlexaTextResponses(payload);
-        if (!textResponsesFromAlexa || !textResponsesFromAlexa.get(0))
+        if (
+          !textResponsesFromAlexa ||
+          // We don't anticipate Alexa to return a response in multiple parts where the first part is empty
+          // but the other parts aren't. So, the moment we see that the first part is empty, it is safe to
+          // ignore all other parts (which probably don't exist).
+          !textResponsesFromAlexa.get(0)
+        )
           textResponsesFromAlexa = List.of(
             cannedResponses.EMPTY_RESPONSE_FROM_ALEXA
           );

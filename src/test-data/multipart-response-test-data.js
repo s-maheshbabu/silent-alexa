@@ -121,17 +121,21 @@ Content-Type: ${validTextResponseContentType}
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: ${validNonTextResponseContentType}
 
-first-part-of-multi-part-message
+second-part-of-multi-part-message
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: ${emptyContentType}
 
-second-part-of-multi-part-message
+third-part-of-multi-part-message
 --------abcde123--
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: ${missingContentType}
 
-third-part-of-multi-part-message
+fourth-part-of-multi-part-message
+--------abcde123--
+Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
+
+fifth-part-of-multi-part-message
 --------abcde123--`;
 
   exports.multi_part_with_different_content_types = {
