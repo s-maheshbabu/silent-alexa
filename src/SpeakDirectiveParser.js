@@ -1,6 +1,6 @@
 import IllegalArgumentError from "./errors/IllegalArgumentError";
 
-import { List, hasIn, getIn, fromJS } from "immutable";
+import { hasIn, getIn, fromJS } from "immutable";
 import util from "util";
 import httpMessageParser from "http-message-parser";
 
