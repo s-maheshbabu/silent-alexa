@@ -1,5 +1,5 @@
 import React from "react";
-const { List } = require("immutable");
+import { List } from "immutable";
 
 import AVSGateway from "./AVSGateway";
 import { EVENTS_URL } from "./AVSGateway";

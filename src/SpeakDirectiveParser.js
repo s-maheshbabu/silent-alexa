@@ -1,8 +1,8 @@
 import IllegalArgumentError from "./errors/IllegalArgumentError";
 
-const httpMessageParser = require("http-message-parser");
-const { hasIn, getIn, fromJS } = require("immutable");
-const util = require("util");
+import { List, hasIn, getIn, fromJS } from "immutable";
+import util from "util";
+import httpMessageParser from "http-message-parser";
 
 const TEXT_PART_CONTENT_TYPE = `application/json; charset=UTF-8`;
 /**

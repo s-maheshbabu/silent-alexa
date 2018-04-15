@@ -172,10 +172,11 @@ class ChatWindow extends Component {
     // TODO: Do not make a call to avs if access_token is undefined. Redirect the user to login screen.
     avs
       .sendTextMessageEvent(userRequestToAlexa, access_token)
-      .then(alexaResponses => {
-        for (let alexaResponse of alexaResponses)
-          this.pushMessage(chatterIds.ALEXA, alexaResponse);
-      })
+      .then(alexaResponses =>
+        alexaResponses.map(alexaResponse =>
+          this.pushMessage(chatterIds.ALEXA, alexaResponse)
+        )
+      )
       .catch(error => {
         // TODO: Don't show this as an Alexa bubble. It also doesn't make sense to show it as a user bubble.
         // Need to find a way to represent this error on the UI.

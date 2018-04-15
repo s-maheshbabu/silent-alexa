@@ -3,13 +3,13 @@ import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";
 import { cannedResponses } from "./CannedResponses";
 
 import IllegalArgumentError from "./errors/IllegalArgumentError";
+import { extractAlexaTextResponse as parser } from "./SpeakDirectiveParser";
 
-const uuid = require("uuid/v4");
-const util = require("util");
-const { hasIn, List } = require("immutable");
+import { hasIn, List } from "immutable";
+import uuid from "uuid/v4";
+import util from "util";
+
 const sprintf = require("sprintf-js").sprintf;
-
-const parser = require("./SpeakDirectiveParser");
 
 const AVS_REQUEST_BODY = `--silent-alexa-http-boundary
 Content-Disposition: form-data; name="metadata"
@@ -77,7 +77,7 @@ export default class AVSGateway {
 
     if (isOk) {
       try {
-        let textResponsesFromAlexa = parser.extractAlexaTextResponses(payload);
+        let textResponsesFromAlexa = parser(payload);
         if (
           !textResponsesFromAlexa ||
           // We don't anticipate Alexa to return a response in multiple parts where the first part is empty

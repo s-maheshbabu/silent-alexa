@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-const { List } = require("immutable");
+const { List, fromJS } = require("immutable");
 
 import { ChatFeed, Message } from "react-chat-ui";
 import ChatWindow from "./ChatWindow";
@@ -161,16 +161,14 @@ it("handles the user's form submission with request to Alexa and populates the s
   const alexaId = chatterIds.ALEXA;
   const alexa = chatters.get(alexaId);
 
-  let expectedAlexaResponses = List();
-  for (let alexaResponse of mockAlexaSuccessResponses) {
-    expectedAlexaResponses = expectedAlexaResponses.push(
+  const expectedAlexaResponses = mockAlexaSuccessResponses.map(
+    alexaResponse =>
       new Message({
         id: alexaId,
         message: alexaResponse,
         senderName: alexa.name
       })
-    );
-  }
+  );
 
   testOnUserRequestToAlexaSubmitHandling(
     authenticationInfo,
@@ -302,20 +300,18 @@ const testOnUserRequestToAlexaSubmitHandling = (
     const finalMessages = finalState.messages;
 
     // We should have added userMessage and all of Alexa's responses.
-    const numberOfAlexaResponses = expectedAlexaResponses.size;
-    const numberOfNewMessagesToGoIntoState = 1 + numberOfAlexaResponses;
+    const numberOfExpectedAlexaResponses = expectedAlexaResponses.size;
+    const numberOfNewMessagesToGoIntoState = 1 + numberOfExpectedAlexaResponses;
 
     expect(finalMessages.length).toBe(
       numberOfMessagesAlreadyInState + numberOfNewMessagesToGoIntoState
     );
+    expect(finalMessages[numberOfMessagesAlreadyInState]).toEqual(
+      expectedUserMessage
+    );
     expect(
-      finalMessages[finalMessages.length - numberOfNewMessagesToGoIntoState]
-    ).toEqual(expectedUserMessage);
-    for (let i = numberOfAlexaResponses; i > 0; i--) {
-      expect(finalMessages[finalMessages.length - i]).toEqual(
-        expectedAlexaResponses.get(numberOfAlexaResponses - i)
-      );
-    }
+      fromJS(finalMessages.slice(numberOfMessagesAlreadyInState + 1))
+    ).toEqual(expectedAlexaResponses);
 
     expect(chatWindowInstance.state.userRequestToAlexa).toEqual("");
     done();
