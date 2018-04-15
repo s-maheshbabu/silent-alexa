@@ -43,25 +43,32 @@ it("handles the invalid case where the directive in the AVS response is well for
   );
 });
 
-it("handles the case where the multi-part message has three parts (because, the happy case is two parts)", () => {
+it("does not include non-text parts in Alexa's response", () => {
+  const testObject = testData.multi_part_with_different_content_types;
+
+  const alexaTextResponses = extractAlexaTextResponses(testObject.rawData);
+  expect(alexaTextResponses).toEqual(testObject.alexaResponses);
+});
+
+it("handles the case where Alexa's text response is broken into more than one part", () => {
   const testObject = testData.multi_part_with_just_three_parts;
 
   const alexaTextResponse = parser(testObject.rawData);
-  expect(alexaTextResponse).toEqual(testObject.alexaResponse);
+  expect(alexaTextResponses).toEqual(testObject.alexaResponses);
 });
 
 it("extracts Alexa's response in the happy case", () => {
   const testObject = testData.happy_case;
 
   const alexaTextResponse = parser(testObject.rawData);
-  expect(alexaTextResponse).toEqual(testObject.alexaResponse);
+  expect(alexaTextResponses).toEqual(testObject.alexaResponses);
 });
 
 it("handles gracefully when Alexa doesn't say anything in response. For ex, when user says 'stop'", () => {
   const testObject = testData.happy_case_when_alexa_chooses_to_say_nothing;
 
   const alexaTextResponse = parser(testObject.rawData);
-  expect(alexaTextResponse).toEqual(testObject.alexaResponse);
+  expect(alexaTextResponses).toEqual(testObject.alexaResponses);
 });
 
 /**
