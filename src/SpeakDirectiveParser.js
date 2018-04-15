@@ -29,7 +29,7 @@ export function extractAlexaTextResponses(alexaRawResponse) {
 
   const parsedResponse = httpMessageParser(alexaRawResponse);
   // TODO: !parsedResponse condition isn't tested because mocking httpMessageParser responses turned
-  // out to be more involved than expected.. While it is safe for now because the library appears to
+  // out to be more involved than expected. While it is safe for now because the library appears to
   // always return a response that contains a body, it needs to be tested.
   if (!parsedResponse || !parsedResponse.multipart) {
     throw new IllegalArgumentError(
