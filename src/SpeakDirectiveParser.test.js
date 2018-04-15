@@ -57,8 +57,8 @@ it("extracts Alexa's response in the happy case", () => {
   expect(alexaTextResponse).toEqual(testObject.alexaResponse);
 });
 
-it("handles gracefully when Alexa doesn't say anything in response. For ex, when user says 'stop'", () => {
-  const testObject = testData.happy_case_when_alexa_chooses_to_say_nothing;
+it("handles gracefully when Alexa doesn't say anything in her response. For ex, when user says 'stop'", () => {
+  const testObject = testData.happy_case_when_alexa_responds_with_empty_message;
 
   const alexaTextResponse = extractAlexaTextResponse(testObject.rawData);
   expect(alexaTextResponse).toEqual(testObject.alexaResponse);

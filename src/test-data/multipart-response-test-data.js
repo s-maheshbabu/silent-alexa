@@ -163,8 +163,17 @@ Content-Type: application/octet-stream
 second-part-of-multi-part-message
 --------abcde123--`;
 
-  exports.happy_case_when_alexa_chooses_to_say_nothing = {
+  exports.happy_case_when_alexa_responds_with_empty_message = {
     rawData: rawData,
     alexaResponse: alexaResponse
+  };
+}
+
+// Happy case where Alexa responds with absolutely nothing. For ex, when user says something senseless like 'dramatic ink'.
+{
+  const rawData = "";
+
+  exports.happy_case_when_alexa_responds_with_nothing = {
+    rawData: rawData
   };
 }
