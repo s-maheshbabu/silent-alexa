@@ -225,7 +225,7 @@ or responds with nothing (can happen when user says something senseless like 'dr
       .sendTextMessageEvent(userRequestToAlexa, access_token)
       .then(alexaResponse => {
         expect(alexaResponse).toEqual(
-          cannedResponses.EMPTY_RESPONSE_FROM_ALEXA
+          List.of(cannedResponses.EMPTY_RESPONSE_FROM_ALEXA)
         );
       });
 
