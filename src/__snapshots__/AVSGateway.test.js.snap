@@ -16,7 +16,25 @@ Content-Type: application/json; charset=UTF-8
 }
 `;
 
-exports[`handles the happy case where Alexa returns an empty response. This can happen when Alexa has nothing to say, for example, in response to user saying 'shutup'. 1`] = `
+exports[`handles the happy case where Alexa returns an empty response (can happen when Alexa has nothing to say, for example, in response to user saying 'shutup')
+or responds with nothing (can happen when user says something senseless like 'dramatic ink') 1`] = `
+Object {
+  "body": "--silent-alexa-http-boundary
+Content-Disposition: form-data; name=\\"metadata\\"
+Content-Type: application/json; charset=UTF-8
+
+{\\"event\\":{\\"header\\":{\\"namespace\\":\\"Text\\",\\"name\\":\\"TextMessage\\",\\"messageId\\":\\"mock-uuid-generated-for-testing\\"},\\"payload\\":{\\"textMessage\\":\\"user request to Alexa\\"}}}",
+  "cache": "no-store",
+  "headers": Object {
+    "Authorization": "Bearer a mock access_token",
+    "content-type": "multipart/form-data; boundary=silent-alexa-http-boundary",
+  },
+  "method": "POST",
+}
+`;
+
+exports[`handles the happy case where Alexa returns an empty response (can happen when Alexa has nothing to say, for example, in response to user saying 'shutup')
+or responds with nothing (can happen when user says something senseless like 'dramatic ink') 2`] = `
 Object {
   "body": "--silent-alexa-http-boundary
 Content-Disposition: form-data; name=\\"metadata\\"

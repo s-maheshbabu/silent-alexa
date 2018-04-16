@@ -77,7 +77,9 @@ export default class AVSGateway {
 
     if (isOk) {
       try {
-        let textResponsesFromAlexa = parser(payload);
+        let textResponseFromAlexa;
+        if (payload)
+          textResponseFromAlexa = parser(payload);
         if (
           !textResponsesFromAlexa ||
           // We don't anticipate Alexa to return a response in multiple parts where the first part is empty

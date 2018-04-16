@@ -200,25 +200,38 @@ it("calls fetch with the right options when trying to send a happy case TextMess
   expect(requestOptionsUsed).toMatchSnapshot();
 });
 
-it("handles the happy case where Alexa returns an empty response. This can happen when Alexa has nothing to say, for example, in response to user saying 'shutup'.", async () => {
+it(`handles the happy case where Alexa returns an empty response (can happen when Alexa has nothing to say, for example, in response to user saying 'shutup')
+or responds with nothing (can happen when user says something senseless like 'dramatic ink')`, async () => {
   const userRequestToAlexa = "user request to Alexa";
   const access_token = "a mock access_token";
 
-  fetchMock.postOnce(
-    EVENTS_URL,
-    testData.happy_case_when_alexa_chooses_to_say_nothing.rawData
-  );
+  const emptyishResponses = [
+    testData.happy_case_when_alexa_responds_with_empty_message.rawData,
+    testData.happy_case_when_alexa_responds_with_nothing.rawData
+  ];
 
-  await unitUnderTest
-    .sendTextMessageEvent(userRequestToAlexa, access_token)
-    .then(alexaResponse => {
-      expect(alexaResponse).toEqual(
-        List.of(cannedResponses.EMPTY_RESPONSE_FROM_ALEXA)
-      );
-    });
+  for (let emptyResponse of emptyishResponses) {
+    fetchMock.post(
+      EVENTS_URL,
+      new Promise(function(resolve, reject) {
+        resolve(emptyResponse);
+      }),
+      {
+        overwriteRoutes: true
+      }
+    );
 
-  const requestOptionsUsed = fetchMock.lastOptions();
-  expect(requestOptionsUsed).toMatchSnapshot();
+    await unitUnderTest
+      .sendTextMessageEvent(userRequestToAlexa, access_token)
+      .then(alexaResponse => {
+        expect(alexaResponse).toEqual(
+          cannedResponses.EMPTY_RESPONSE_FROM_ALEXA
+        );
+      });
+
+    const requestOptionsUsed = fetchMock.lastOptions();
+    expect(requestOptionsUsed).toMatchSnapshot();
+  }
 });
 
 /**
