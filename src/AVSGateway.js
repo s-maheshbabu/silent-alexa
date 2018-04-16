@@ -3,13 +3,13 @@ import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";
 import { cannedResponses } from "./CannedResponses";
 
 import IllegalArgumentError from "./errors/IllegalArgumentError";
+import { extractAlexaTextResponses as parser } from "./SpeakDirectiveParser";
 
-const uuid = require("uuid/v4");
-const util = require("util");
-const { hasIn } = require("immutable");
+import { hasIn, List } from "immutable";
+import uuid from "uuid/v4";
+import util from "util";
+
 const sprintf = require("sprintf-js").sprintf;
-
-const parser = require("./SpeakDirectiveParser");
 
 const AVS_REQUEST_BODY = `--silent-alexa-http-boundary
 Content-Disposition: form-data; name="metadata"
@@ -26,14 +26,15 @@ export const EVENTS_URL = urls.NA + paths.EVENTS;
  */
 export default class AVSGateway {
   /**
-   * Sends the TextMessage event to AVS and extracts Alexa's response.
+   * Sends the TextMessage event to AVS and extracts Alexa's responses.
    *
    * @param {String} userRequestToAlexa The request string that the user typed
-   * as a request for Alexa.
-   * @param {String} accessToken The access token to communicate with AVS.
+   * as a request for Alexa. This should not be empty or undefined.
+   * @param {String} accessToken The access token to communicate with AVS. This
+   * should not be empty of undefined.
    *
-   * @returns The text response from Alexa. An empty response is possible if Alexa
-   * said nothing. If an error happens while communicating to AVS or while parsing
+   * @returns A list of text responses from Alexa. Will never return undefined or
+   * empty list. If an error happens while communicating to AVS or while parsing
    * the responses, a canned human-readable error message is returned.
    *
    * @throws IllegalArgumentError if the input is missing or invalid.
@@ -78,11 +79,19 @@ export default class AVSGateway {
       try {
         let textResponseFromAlexa;
         if (payload)
-          textResponseFromAlexa = parser.extractAlexaTextResponse(payload);
-        if (!textResponseFromAlexa)
-          textResponseFromAlexa = cannedResponses.EMPTY_RESPONSE_FROM_ALEXA;
+          textResponseFromAlexa = parser(payload);
+        if (
+          !textResponsesFromAlexa ||
+          // We don't anticipate Alexa to return a response in multiple parts where the first part is empty
+          // but the other parts aren't. So, the moment we see that the first part is empty, it is safe to
+          // ignore all other parts (which probably don't exist).
+          !textResponsesFromAlexa.get(0)
+        )
+          textResponsesFromAlexa = List.of(
+            cannedResponses.EMPTY_RESPONSE_FROM_ALEXA
+          );
 
-        return textResponseFromAlexa;
+        return textResponsesFromAlexa;
       } catch (error) {
         console.log(
           "Encountered an error while trying to parse the speak directive from AVS." +
@@ -91,7 +100,7 @@ export default class AVSGateway {
       }
     }
 
-    return this.convertErrorToHumanReadableMessage(payload);
+    return List.of(this.convertErrorToHumanReadableMessage(payload));
   }
 
   convertErrorToHumanReadableMessage(errorPayload) {
