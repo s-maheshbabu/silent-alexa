@@ -5,7 +5,7 @@ exports[`renders without crashing 1`] = `
   id="welcome-screen"
 >
   <h1>
-     WELCOME TO SILENT ALEXA 
+     WELCOME TO SILENT ALEXA (Under Construction) 
   </h1>
   <h1>
      Login to get started 
