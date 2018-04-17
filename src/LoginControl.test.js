@@ -68,9 +68,12 @@ it("verifies that props are passed to LogoutButton Component", () => {
   );
 
   expect(Object.keys(loginControl.find("LogoutButton").props()).length).toBe(1);
+
   const onClickProp = loginControl.find("LogoutButton").prop("onClick");
   const handleLogoutSpy = jest.spyOn(loginControl.instance(), "handleLogout");
+
   onClickProp();
+
   expect(handleLogoutSpy).toHaveBeenCalled();
 });
 

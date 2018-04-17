@@ -2,8 +2,27 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import Body from "./Body";
 
-it("renders correctly without crashing", () => {
-  const wrapper = shallow(<Body />);
+const mockIsAuthenticationInfoValid = jest.fn();
+
+beforeEach(() => {
+  jest.resetAllMocks();
+});
+
+it("renders Body when isAuthenticationInfoValid returns true", () => {
+  mockIsAuthenticationInfoValid.mockReturnValueOnce(true);
+  const wrapper = shallow(
+    <Body isAuthenticationInfoValid={mockIsAuthenticationInfoValid} />
+  );
+  expect(wrapper).toMatchSnapshot();
+
+  wrapper.unmount();
+});
+
+it("renders Body when isAuthenticationInfoValid returns false", () => {
+  mockIsAuthenticationInfoValid.mockReturnValueOnce(false);
+  const wrapper = shallow(
+    <Body isAuthenticationInfoValid={mockIsAuthenticationInfoValid} />
+  );
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();
@@ -18,12 +37,32 @@ it("renders correctly without crashing", () => {
 // It is not yet released on npm though. Once enzyme version > 3.3.0 is
 // released, we need to fix this test.
 it("verifies that authenticationInfo is passed to ChatWindow component", () => {
-  const mockAuthenticationInfo = {};
-  const body = mount(<Body authenticationInfo={mockAuthenticationInfo} />);
+  mockIsAuthenticationInfoValid.mockReturnValueOnce(true);
+  const authenticationInfo = {};
+  const mockClearAuthenticationInfo = jest.fn();
+  const body = mount(
+    <Body
+      isAuthenticationInfoValid={mockIsAuthenticationInfoValid}
+      authenticationInfo={authenticationInfo}
+      clearAuthenticationInfo={mockClearAuthenticationInfo}
+    />
+  );
 
-  // Verify that ChatWindow recieves authenticationInfo property
+  // Verify that ChatWindow receives the desired number of props
+  expect(Object.keys(body.find("ChatWindow").props()).length).toBe(2);
+
+  // Verify that ChatWindow recieves authenticationInfo prop
   const authenticationInfoProp = body
     .find("ChatWindow")
     .prop("authenticationInfo");
-  expect(authenticationInfoProp).toBe(mockAuthenticationInfo);
+
+  expect(authenticationInfoProp).toBe(authenticationInfo);
+
+  // Verify that ChatWindow recieves clearAuthenticationInfo prop
+  const clearAuthenticationInfoProp = body
+    .find("ChatWindow")
+    .prop("clearAuthenticationInfo");
+  clearAuthenticationInfoProp();
+
+  expect(mockClearAuthenticationInfo).toHaveBeenCalledTimes(1);
 });

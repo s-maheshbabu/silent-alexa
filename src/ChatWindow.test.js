@@ -45,10 +45,7 @@ beforeEach(() => {
 });
 
 it("renders correctly without crashing", () => {
-  const wrapper = shallow(<ChatWindow />);
-  expect(wrapper).toMatchSnapshot();
-
-  wrapper.unmount();
+  expect(chatWindow).toMatchSnapshot();
 });
 
 it("passes height of container to ChatFeed component", () => {
@@ -119,10 +116,16 @@ it("handles gracefully when pushMessage is called with an empty or null message"
   expect(finalState).toEqual(originalState);
 });
 
-test("that when a user submits the form, we call AVSGateway with their request even if the access_token is not available.", () => {
-  const chatWindowWithNoAuthenticationInfoProp = mount(<ChatWindow />);
+test("that when a user submits the form, we do not call AVSGateway if the access_token is undefined.", () => {
+  const mockClearAuthenticationInfo = jest.fn();
+  const chatWindowWithNoAuthenticationInfoProp = mount(
+    <ChatWindow clearAuthenticationInfo={mockClearAuthenticationInfo} />
+  );
   const chatWindowWithUndefinedAuthenticationInfoProp = mount(
-    <ChatWindow authenticationInfo={undefined} />
+    <ChatWindow
+      authenticationInfo={undefined}
+      clearAuthenticationInfo={mockClearAuthenticationInfo}
+    />
   );
 
   const chatWindowWrappers = [
@@ -147,13 +150,10 @@ test("that when a user submits the form, we call AVSGateway with their request e
       .find("form")
       .simulate("submit", { preventDefault: preventDefaultSpy });
 
-    expect(mockSendTextMessageEventFunction).toHaveBeenCalledTimes(1);
-    expect(mockSendTextMessageEventFunction).toHaveBeenCalledWith(
-      userRequestToAlexa,
-      undefined
-    );
+    expect(mockSendTextMessageEventFunction).not.toHaveBeenCalled();
+    expect(mockClearAuthenticationInfo).toHaveBeenCalledTimes(1);
 
-    mockSendTextMessageEventFunction.mockClear();
+    mockClearAuthenticationInfo.mockClear();
   }
 });
 
@@ -317,3 +317,7 @@ const testOnUserRequestToAlexaSubmitHandling = (
     done();
   });
 };
+
+afterEach(() => {
+  chatWindow.unmount();
+});
