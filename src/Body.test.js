@@ -39,16 +39,30 @@ it("renders Body when isAuthenticationInfoValid returns false", () => {
 it("verifies that authenticationInfo is passed to ChatWindow component", () => {
   mockIsAuthenticationInfoValid.mockReturnValueOnce(true);
   const authenticationInfo = {};
+  const mockClearAuthenticationInfo = jest.fn();
   const body = mount(
     <Body
       isAuthenticationInfoValid={mockIsAuthenticationInfoValid}
       authenticationInfo={authenticationInfo}
+      clearAuthenticationInfo={mockClearAuthenticationInfo}
     />
   );
+
+  // Verify that ChatWindow receives the desired number of props
+  expect(Object.keys(body.find("ChatWindow").props()).length).toBe(2);
 
   // Verify that ChatWindow recieves authenticationInfo prop
   const authenticationInfoProp = body
     .find("ChatWindow")
     .prop("authenticationInfo");
+
   expect(authenticationInfoProp).toBe(authenticationInfo);
+
+  // Verify that ChatWindow recieves clearAuthenticationInfo prop
+  const clearAuthenticationInfoProp = body
+    .find("ChatWindow")
+    .prop("clearAuthenticationInfo");
+  clearAuthenticationInfoProp();
+
+  expect(mockClearAuthenticationInfo).toHaveBeenCalledTimes(1);
 });

@@ -2,7 +2,7 @@ import React from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import ChatWindow from "./ChatWindow";
 import RightPanel from "./RightPanel";
-import WelcomeBody from "./WelcomeBody";
+import WelcomeScreen from "./WelcomeScreen";
 
 export default function Body(props) {
   if (props.isAuthenticationInfoValid()) {
@@ -18,5 +18,5 @@ export default function Body(props) {
     ];
   }
 
-  return <WelcomeBody />;
+  return <WelcomeScreen />;
 }

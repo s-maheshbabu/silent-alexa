@@ -33,8 +33,8 @@ it("renders correctly without crashing", () => {
   expect(app).toMatchSnapshot();
 });
 
-it("verifies that authenticationInfo is passed to Body component", () => {
-  // Verify that Body recieves is passed desired number of props
+it("verifies that props are passed to Body component", () => {
+  // Verify that Body recieves desired number of props
   expect(Object.keys(app.find("Body").props()).length).toBe(3);
 
   // Verify that Body recieves authenticationInfo prop

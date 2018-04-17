@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders Body when isAuthenticationInfoValid returns false 1`] = `<WelcomeBody />`;
+exports[`renders Body when isAuthenticationInfoValid returns false 1`] = `<WelcomeScreen />`;
 
 exports[`renders Body when isAuthenticationInfoValid returns true 1`] = `
 Array [

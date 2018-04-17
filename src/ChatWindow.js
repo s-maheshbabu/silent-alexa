@@ -151,7 +151,7 @@ class ChatWindow extends Component {
     if (!userRequestToAlexa || 0 === userRequestToAlexa.length) {
       console.log("Request string for Alexa was empty: " + userRequestToAlexa);
       this.setState({ userRequestToAlexa: "" });
-      return false;
+      return;
     }
     this.pushMessage(chatterIds.USER, userRequestToAlexa);
     this.setState({ userRequestToAlexa: "" });
@@ -163,7 +163,7 @@ class ChatWindow extends Component {
     } else {
       // Do not make a call to avs if access_token is undefined. Redirect the user to login screen.
       this.props.clearAuthenticationInfo();
-      return false;
+      return;
     }
 
     avs
@@ -179,8 +179,6 @@ class ChatWindow extends Component {
           cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR)
         );
       });
-
-    return true;
   }
 
   pushMessage(userId, message) {
