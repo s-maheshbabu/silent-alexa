@@ -1,7 +1,7 @@
 import React from "react";
-import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
-import AuthenticationInfo from "./AuthenticationInfo";
+import LoginButton from "LoginButton";
+import LogoutButton from "LogoutButton";
+import AuthenticationInfo from "AuthenticationInfo";
 import util from "util";
 
 // Options variable to request for implicit grant.

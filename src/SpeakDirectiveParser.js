@@ -1,4 +1,4 @@
-import IllegalArgumentError from "./errors/IllegalArgumentError";
+import IllegalArgumentError from "errors/IllegalArgumentError";
 
 import { hasIn, getIn, fromJS } from "immutable";
 import util from "util";

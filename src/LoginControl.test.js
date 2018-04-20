@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import { options, default as LoginControl } from "./LoginControl";
-import AuthenticationInfo from "./AuthenticationInfo";
+import { options, default as LoginControl } from "LoginControl";
+import AuthenticationInfo from "AuthenticationInfo";
 import util from "util";
 
 let loginControl;

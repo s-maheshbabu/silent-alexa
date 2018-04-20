@@ -1,4 +1,4 @@
-import { chatters, chatterIds } from "./Chatters";
+import { chatters, chatterIds } from "Chatters";
 
 test("that all chatterIds are contained in the map and that all chatters in the map are represented in the chatterIds", () => {
   expect(Object.keys(chatterIds).length).toEqual(

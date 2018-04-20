@@ -3,16 +3,16 @@ import { shallow, mount } from "enzyme";
 const { List, fromJS } = require("immutable");
 
 import { ChatFeed, Message } from "react-chat-ui";
-import ChatWindow from "./ChatWindow";
-import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";
-import AuthenticationInfo from "./AuthenticationInfo";
+import ChatWindow from "ChatWindow";
+import { cannedErrorResponses, customErrorCodes } from "CannedErrorResponses";
+import AuthenticationInfo from "AuthenticationInfo";
 
 import {
   mockSendTextMessageEventFunction,
   mockAlexaSuccessResponses
-} from "./AVSGateway";
+} from "AVSGateway";
 
-import { chatters, chatterIds } from "./Chatters";
+import { chatters, chatterIds } from "Chatters";
 
 const CHATFEED_CONTAINER_HEIGHT = 234;
 const CHATFEED_CONTAINER_HEIGHT_DEFAULT = 0;

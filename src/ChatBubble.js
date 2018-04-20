@@ -1,7 +1,7 @@
 import React from "react";
 import { ChatBubble } from "react-chat-ui";
 
-import styles from "./ChatBubble.css.js";
+import styles from "ChatBubble.css.js";
 
 export default function(props) {
   return (

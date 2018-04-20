@@ -1,4 +1,4 @@
-import IllegalArgumentError from "./errors/IllegalArgumentError";
+import IllegalArgumentError from "errors/IllegalArgumentError";
 import util from "util";
 
 /**

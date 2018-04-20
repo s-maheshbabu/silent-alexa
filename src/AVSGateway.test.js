@@ -1,31 +1,30 @@
 import React from "react";
 import { List } from "immutable";
 
-import AVSGateway from "./AVSGateway";
-import { EVENTS_URL } from "./AVSGateway";
-import IllegalArgumentError from "./errors/IllegalArgumentError";
+import AVSGateway, { EVENTS_URL } from "./AVSGateway";
+import IllegalArgumentError from "errors/IllegalArgumentError";
 
-import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";
-import { cannedResponses } from "./CannedResponses";
+import { cannedErrorResponses, customErrorCodes } from "CannedErrorResponses";
+import { cannedResponses } from "CannedResponses";
 
-import testData from "./test-data/multipart-response-test-data";
+import testData from "test-data/multipart-response-test-data";
 
 // A mock parser that uses the real implementation by default.
-jest.mock("./SpeakDirectiveParser", () => {
+jest.mock("SpeakDirectiveParser", () => {
   return {
     extractAlexaTextResponses: jest.fn(
-      require.requireActual("./SpeakDirectiveParser").extractAlexaTextResponses
+      require.requireActual("SpeakDirectiveParser").extractAlexaTextResponses
     )
   };
 });
-const parser = require("./SpeakDirectiveParser");
+const parser = require("SpeakDirectiveParser");
 
 jest.mock("uuid/v4", () => {
   return jest.fn(() => "mock-uuid-generated-for-testing");
 });
-const uuid = require("uuid/v4");
+import uuid from "uuid/v4";
 
-const fetchMock = require("fetch-mock");
+import fetchMock from "fetch-mock";
 
 const unitUnderTest = new AVSGateway();
 

@@ -1,7 +1,7 @@
-import { extractAlexaTextResponses as parser } from "./SpeakDirectiveParser";
-import IllegalArgumentError from "./errors/IllegalArgumentError";
+import { extractAlexaTextResponses as parser } from "SpeakDirectiveParser";
+import IllegalArgumentError from "errors/IllegalArgumentError";
 
-import testData from "./test-data/multipart-response-test-data";
+import testData from "test-data/multipart-response-test-data";
 
 it("throws an error if an empty string is passed as input", () => {
   const input = "";

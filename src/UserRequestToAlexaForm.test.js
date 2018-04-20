@@ -1,11 +1,11 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 
-import ChatWindow from "./ChatWindow";
-import UserRequestToAlexaForm from "./UserRequestToAlexaForm";
+import ChatWindow from "ChatWindow";
+import UserRequestToAlexaForm from "UserRequestToAlexaForm";
 import TextField from "material-ui/TextField";
 
-const DEFAULT_PLACEHOLDER_VALUE = require("./Constants");
+const DEFAULT_PLACEHOLDER_VALUE = require("Constants");
 
 it("renders UserRequestToAlexaForm without crashing", () => {
   const wrapper = shallow(<UserRequestToAlexaForm />);

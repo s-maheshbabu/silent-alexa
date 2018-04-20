@@ -1,4 +1,4 @@
-const { List } = require("immutable");
+import { List } from "immutable";
 
 export const mockAlexaSuccessResponses = List.of(
   "mock alexa success response 1",

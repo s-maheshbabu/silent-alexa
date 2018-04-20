@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
-import App from "./App";
-import AuthenticationInfo from "./AuthenticationInfo";
+import App from "App";
+import AuthenticationInfo from "AuthenticationInfo";
 
 let app;
 let appInstance;
