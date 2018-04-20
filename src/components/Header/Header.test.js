@@ -1,6 +1,7 @@
 import React from "react";
-import { shallow } from "enzyme";
-import Header from "./Header";
+import { shallow, mount } from "enzyme";
+import Header, { _LoginControlInHeader } from "./Header";
+import ClearFix from "material-ui/internal/ClearFix";
 
 it("renders Header without crashing", () => {
   const wrapper = shallow(<Header />);
@@ -13,8 +14,8 @@ it("verifies that props are passed to LoginControl component", () => {
   const mockIsAuthenticationInfoValid = jest.fn();
   const mockClearAuthenticationInfo = jest.fn();
   const mockUpdateAuthenticationInfo = jest.fn();
-  const header = shallow(
-    <Header
+  const loginControl = shallow(
+    <_LoginControlInHeader
       isAuthenticationInfoValid={mockIsAuthenticationInfoValid}
       clearAuthenticationInfo={mockClearAuthenticationInfo}
       updateAuthenticationInfo={mockUpdateAuthenticationInfo}
@@ -22,12 +23,12 @@ it("verifies that props are passed to LoginControl component", () => {
   );
 
   // Verify that only desired number of props are passed on to LoginControl
-  expect(Object.keys(header.find("LoginControl").props()).length).toBe(3);
+  expect(Object.keys(loginControl.props()).length).toBe(3);
 
   // Verify that LoginControl is passed on isAuthenticationInfoValid prop
-  const isAuthenticationInfoValidProp = header
-    .find("LoginControl")
-    .prop("isAuthenticationInfoValid");
+  const isAuthenticationInfoValidProp = loginControl.prop(
+    "isAuthenticationInfoValid"
+  );
   expect(isAuthenticationInfoValidProp).toBeDefined();
 
   // Verify that calling isAuthenticationInfoValid prop function calls the mockIsAuthenticationInfoValid
@@ -35,9 +36,9 @@ it("verifies that props are passed to LoginControl component", () => {
   expect(mockIsAuthenticationInfoValid).toHaveBeenCalledTimes(1);
 
   // Verify that LoginControl is passed on clearAuthenticationInfo prop
-  const clearAuthenticationInfoProp = header
-    .find("LoginControl")
-    .prop("clearAuthenticationInfo");
+  const clearAuthenticationInfoProp = loginControl.prop(
+    "clearAuthenticationInfo"
+  );
   expect(clearAuthenticationInfoProp).toBeDefined();
 
   // Verify that calling clearAuthenticationInfo prop function calls the mockClearAuthenticationInfo
@@ -45,9 +46,9 @@ it("verifies that props are passed to LoginControl component", () => {
   expect(mockClearAuthenticationInfo).toHaveBeenCalledTimes(1);
 
   // Verify that LoginControl is passed on updateAuthenticationInfo prop
-  const updateAuthenticationInfoProp = header
-    .find("LoginControl")
-    .prop("updateAuthenticationInfo");
+  const updateAuthenticationInfoProp = loginControl.prop(
+    "updateAuthenticationInfo"
+  );
   expect(updateAuthenticationInfoProp).toBeDefined();
 
   // Verify that calling updateAuthenticationInfo prop function calls the mockUpdateAuthenticationInfo

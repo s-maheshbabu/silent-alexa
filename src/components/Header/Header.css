@@ -5,6 +5,21 @@
 
   display: grid;
   grid-template-columns: 1fr auto;
+  border-bottom: 5px solid;
+  /** Alexa light ring effect */
+  border-image: linear-gradient(
+      to right,
+      #5291de,
+      #5291de 40%,
+      #16eaed 42%,
+      #16eaed,
+      #16eaed 58%,
+      #5291de 60%,
+      #5291de
+    )
+    60;
+  /** fallback, when border-image can't be used TODO TODO TODO */
+  border-style: xxx;
 }
 
 #header-info {
@@ -16,8 +31,6 @@
   justify-content: center;
 }
 
-#header-controls {
-  display: flex;
-  height: 100%;
-  justify-content: flex-end;
+.app-bar {
+  background: #152939 !important;
 }

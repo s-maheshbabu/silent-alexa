@@ -19,11 +19,9 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start":
-      "NODE_PATH=src:src/components:src/avs:src/auth:src/constants react-scripts start",
+    "start": "NODE_PATH=src:src/components:src/avs:src/auth:src/constants react-scripts start",
     "build": "react-scripts build",
-    "test":
-      "NODE_PATH=src:src/components:src/avs:src/auth:src/constants react-scripts test --env=jsdom",
+    "test": "NODE_PATH=src:src/components:src/avs:src/auth:src/constants react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
@@ -35,6 +33,8 @@
     "sprintf-js": "^1.1.1"
   },
   "jest": {
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }

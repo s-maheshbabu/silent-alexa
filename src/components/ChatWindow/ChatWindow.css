@@ -2,7 +2,7 @@
 #leftpanel {
   display: grid;
   grid-template-rows: auto 30px;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 90px);
 }
 
 .panel-body {

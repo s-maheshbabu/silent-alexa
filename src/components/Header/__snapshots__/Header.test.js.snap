@@ -7,18 +7,21 @@ exports[`renders Header without crashing 1`] = `
   <div
     id="header-info"
   >
-    <span>
-      Silent Alexa Header (Under Construction)
-    </span>
-  </div>
-  <div
-    id="header-controls"
-  >
-    <LoginControl
-      clearAuthenticationInfo={[Function]}
-      isAuthenticationInfoValid={[Function]}
-      updateAuthenticationInfo={[Function]}
-    />
+    <MuiThemeProvider>
+      <AppBar
+        className="app-bar"
+        iconElementRight={
+          <LoginControl
+            clearAuthenticationInfo={[Function]}
+            isAuthenticationInfoValid={[Function]}
+            updateAuthenticationInfo={[Function]}
+          />
+        }
+        showMenuIconButton={false}
+        title="Silent Alexa (Under Construction)"
+        zDepth={1}
+      />
+    </MuiThemeProvider>
   </div>
 </div>
 `;

@@ -1,6 +1,5 @@
 import React from "react";
-import LoginButton from "LoginButton/LoginButton";
-import LogoutButton from "LogoutButton/LogoutButton";
+import HeaderFlatButton from "HeaderFlatButton/HeaderFlatButton";
 import AuthenticationInfo from "AuthenticationInfo";
 import util from "util";
 
@@ -15,12 +14,17 @@ export const options = Object.freeze({
     }
   }
 });
+
 export default class LoginControl extends React.Component {
   render() {
     if (this.props.isAuthenticationInfoValid()) {
-      return <LogoutButton onClick={() => this.handleLogout()} />;
+      return (
+        <HeaderFlatButton label="Logout" onClick={() => this.handleLogout()} />
+      );
     } else {
-      return <LoginButton onClick={() => this.handleLogin()} />;
+      return (
+        <HeaderFlatButton label="Login" onClick={() => this.handleLogin()} />
+      );
     }
   }
 

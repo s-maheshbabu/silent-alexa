@@ -1,24 +1,39 @@
 import React from "react";
 import "./Header.css";
 import LoginControl from "LoginControl/LoginControl";
+import AppBar from "material-ui/AppBar";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+
+/**
+ * Exported to facilitate testing.
+ */
+function _LoginControlInHeader(props) {
+  return (
+    <LoginControl
+      isAuthenticationInfoValid={() => props.isAuthenticationInfoValid()}
+      clearAuthenticationInfo={() => props.clearAuthenticationInfo()}
+      updateAuthenticationInfo={authenticationInfo =>
+        props.updateAuthenticationInfo(authenticationInfo)
+      }
+    />
+  );
+}
 
 export default function Header(props) {
   return (
     <div id="header">
-      {/* TODO: Currently the content in header-info isn't centered to the entire page but is at the center of header-info itself. 
-              It should be adjust to be at the center of the entire page. */}
       <div id="header-info">
-        <span>Silent Alexa Header (Under Construction)</span>
-      </div>
-      <div id="header-controls">
-        <LoginControl
-          isAuthenticationInfoValid={() => props.isAuthenticationInfoValid()}
-          clearAuthenticationInfo={() => props.clearAuthenticationInfo()}
-          updateAuthenticationInfo={authenticationInfo =>
-            props.updateAuthenticationInfo(authenticationInfo)
-          }
-        />
+        <MuiThemeProvider>
+          <AppBar
+            className="app-bar"
+            showMenuIconButton={false}
+            title="Silent Alexa (Under Construction)"
+            iconElementRight={_LoginControlInHeader(props)}
+          />
+        </MuiThemeProvider>
       </div>
     </div>
   );
 }
+
+export { _LoginControlInHeader };
