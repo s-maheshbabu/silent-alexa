@@ -2,11 +2,11 @@ import React from "react";
 import TextField from "material-ui/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
-const DEFAULT_PLACEHOLDER_VALUE = require("./Constants");
+import DEFAULT_PLACEHOLDER_VALUE from "./Constants";
+
 /*
 The input component where user's type in their requests for Alexa
 */
-
 const UserRequestToAlexaForm = props => {
   return (
     <form onSubmit={e => props.onSubmit(e)}>
