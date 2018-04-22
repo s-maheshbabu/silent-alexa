@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import LoginButton from "./LoginButton";
+import LoginButton from "LoginButton";
 
 it("renders LoginButton without crashing", () => {
   const wrapper = shallow(<LoginButton />);

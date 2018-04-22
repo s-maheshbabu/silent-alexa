@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import Body from "./Body";
+import Body from "Body";
 
 const mockIsAuthenticationInfoValid = jest.fn();
 

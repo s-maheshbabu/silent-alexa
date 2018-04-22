@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "LogoutButton";
 
 it("renders correctly (snapshot testing)", () => {
   const wrapper = shallow(<LogoutButton />);

@@ -1,9 +1,9 @@
-import { urls, paths } from "./AVSEndPoints";
-import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";
-import { cannedResponses } from "./CannedResponses";
+import { urls, paths } from "AVSEndPoints";
+import { cannedErrorResponses, customErrorCodes } from "CannedErrorResponses";
+import { cannedResponses } from "CannedResponses";
 
-import IllegalArgumentError from "./errors/IllegalArgumentError";
-import { extractAlexaTextResponses as parser } from "./SpeakDirectiveParser";
+import IllegalArgumentError from "errors/IllegalArgumentError";
+import { extractAlexaTextResponses as parser } from "SpeakDirectiveParser";
 
 import { hasIn, List } from "immutable";
 import uuid from "uuid/v4";

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import "./App.css";
+import "App.css";
 import util from "util";
 
-import Header from "./Header";
-import Body from "./Body";
-import Footer from "./Footer";
-import AuthenticationInfo from "./AuthenticationInfo";
+import Header from "Header";
+import Body from "Body";
+import Footer from "Footer";
+import AuthenticationInfo from "AuthenticationInfo";
 
 class App extends Component {
   constructor(props) {

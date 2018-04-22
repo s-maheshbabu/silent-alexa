@@ -1,5 +1,5 @@
-import AuthenticationInfo from "./AuthenticationInfo";
-import IllegalArgumentError from "./errors/IllegalArgumentError";
+import AuthenticationInfo from "AuthenticationInfo";
+import IllegalArgumentError from "errors/IllegalArgumentError";
 
 it("verifes that instance is created if lwaResponse has all the required fields", () => {
   const lwaResponse = {

@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import { ChatFeed, Message } from "react-chat-ui";
 import ContainerDimensions from "react-container-dimensions";
 
-import ChatBubble from "./ChatBubble";
-import { cannedErrorResponses, customErrorCodes } from "./CannedErrorResponses";
+import ChatBubble from "ChatBubble";
+import { cannedErrorResponses, customErrorCodes } from "CannedErrorResponses";
 
-import UserRequestToAlexaForm from "./UserRequestToAlexaForm";
-import "./ChatWindow.css";
+import UserRequestToAlexaForm from "UserRequestToAlexaForm";
+import "ChatWindow.css";
 
-import { chatters, chatterIds } from "./Chatters";
+import { chatters, chatterIds } from "Chatters";
 
-import AVSGateway from "./AVSGateway";
+import AVSGateway from "AVSGateway";
 const avs = new AVSGateway();
 
 class ChatWindow extends Component {
