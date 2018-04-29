@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import Header, { _LoginControlInHeader } from "./Header";
 import ClearFix from "material-ui/internal/ClearFix";
 

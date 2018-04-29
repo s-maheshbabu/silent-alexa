@@ -1,8 +1,9 @@
 import React from "react";
-import "./Header.css";
-import LoginControl from "LoginControl/LoginControl";
 import AppBar from "material-ui/AppBar";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+
+import LoginControl from "LoginControl/LoginControl";
+import "./Header.css";
 
 /**
  * Exported to facilitate testing.
