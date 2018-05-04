@@ -5,7 +5,7 @@
   "homepage": "https://s-maheshbabu.github.io/silent-alexa",
   "dependencies": {
     "gh-pages": "^1.1.0",
-    "http-message-parser": "0.0.22",
+    "http-message-parser": "0.0.30",
     "immutable": "^4.0.0-rc.9",
     "material-ui": "^0.20.0",
     "npm": "^5.8.0",
@@ -24,8 +24,7 @@
     "deploy": "gh-pages -d build",
     "start": "NODE_PATH=$npm_package_config_nodepath react-scripts start",
     "build": "NODE_PATH=$npm_package_config_nodepath react-scripts build",
-    "test":
-      "NODE_PATH=$npm_package_config_nodepath react-scripts test --env=jsdom",
+    "test": "NODE_PATH=$npm_package_config_nodepath react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
@@ -37,6 +36,8 @@
     "sprintf-js": "^1.1.1"
   },
   "jest": {
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }
