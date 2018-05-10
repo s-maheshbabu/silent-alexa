@@ -24,7 +24,8 @@
     "deploy": "gh-pages -d build",
     "start": "NODE_PATH=$npm_package_config_nodepath react-scripts start",
     "build": "NODE_PATH=$npm_package_config_nodepath react-scripts build",
-    "test": "NODE_PATH=$npm_package_config_nodepath react-scripts test --env=jsdom",
+    "test":
+      "NODE_PATH=$npm_package_config_nodepath react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
