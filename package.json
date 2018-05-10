@@ -16,14 +16,16 @@
     "react-scripts": "1.1.4",
     "uuid": "^3.2.1"
   },
+  "config": {
+    "nodepath": "src:src/components:src/avs:src/auth:src/constants"
+  },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start":
-      "NODE_PATH=src:src/components:src/avs:src/auth:src/constants react-scripts start",
-    "build": "react-scripts build",
+    "start": "NODE_PATH=$npm_package_config_nodepath react-scripts start",
+    "build": "NODE_PATH=$npm_package_config_nodepath react-scripts build",
     "test":
-      "NODE_PATH=src:src/components:src/avs:src/auth:src/constants react-scripts test --env=jsdom",
+      "NODE_PATH=$npm_package_config_nodepath react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
