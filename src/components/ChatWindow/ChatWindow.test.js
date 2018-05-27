@@ -1,8 +1,9 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-const { List, fromJS } = require("immutable");
+import clone from "clone";
+import { List, fromJS } from "immutable";
 
-import { ChatFeed, Message } from "react-chat-ui";
+import { ChatFeed, Message } from "monkas-chat";
 import ChatWindow from "./ChatWindow";
 import { cannedErrorResponses, customErrorCodes } from "CannedErrorResponses";
 import AuthenticationInfo from "AuthenticationInfo";
@@ -41,7 +42,7 @@ beforeEach(() => {
   preventDefaultSpy = jest.fn();
   chatWindow = shallow(<ChatWindow />);
   chatWindowInstance = chatWindow.instance();
-  originalState = JSON.parse(JSON.stringify(chatWindowInstance.state));
+  originalState = clone(chatWindowInstance.state);
 });
 
 it("renders correctly without crashing", () => {
@@ -166,7 +167,8 @@ it("handles the user's form submission with request to Alexa and populates the s
       new Message({
         id: alexaId,
         message: alexaResponse,
-        senderName: alexa.name
+        senderName: alexa.name,
+        avatar: alexa.avatar
       })
   );
 
@@ -191,7 +193,8 @@ it("handles the case when AVS throws an error in response to a user request. We 
     new Message({
       id: alexaId,
       message: cannedErrorResponses.get(customErrorCodes.UNKNOWN_ERROR),
-      senderName: alexa.name
+      senderName: alexa.name,
+      avatar: alexa.avatar
     })
   );
 
@@ -263,7 +266,7 @@ const testOnUserRequestToAlexaSubmitHandling = (
     <ChatWindow authenticationInfo={authenticationInfo} />
   );
   const chatWindowInstance = chatWindow.instance();
-  const originalState = JSON.parse(JSON.stringify(chatWindowInstance.state));
+  const originalState = clone(chatWindowInstance.state);
 
   const userRequestToAlexaForm = chatWindow.find("form").get(0);
   const numberOfMessagesAlreadyInState = originalState.messages.length;

@@ -5,13 +5,13 @@ exports[`renders correctly (snapshot testing) 1`] = `
   bubbleStyles={
     Object {
       "chatbubble": Object {
-        "background": "mediumslateblue",
+        "background": "#00ACE0",
       },
       "text": Object {
         "fontSize": 20,
       },
       "userBubble": Object {
-        "background": "lightcoral",
+        "background": "#646A72",
       },
     }
   }
