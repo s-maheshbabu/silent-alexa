@@ -48,9 +48,14 @@ it("renders LoginControl with LogoutButton component when isAuthenticationInfoVa
   wrapper.unmount();
 });
 
-it("verifies that props are passed to LoginButton Component", () => {
-  expect(Object.keys(loginControl.find("LoginButton").props()).length).toBe(1);
-  const onClickProp = loginControl.find("LoginButton").prop("onClick");
+it("verifies that props are passed to HeaderFlatButton(Login) Component", () => {
+  const button = loginControl.find("HeaderFlatButton");
+  expect(Object.keys(button.props()).length).toBe(2);
+
+  const labelProp = button.prop("label");
+  expect(labelProp).toBe("Login");
+
+  const onClickProp = button.prop("onClick");
   const handleLoginSpy = jest.spyOn(loginControlInstance, "handleLogin");
 
   onClickProp();
@@ -58,7 +63,7 @@ it("verifies that props are passed to LoginButton Component", () => {
   expect(handleLoginSpy).toHaveBeenCalledTimes(1);
 });
 
-it("verifies that props are passed to LogoutButton Component", () => {
+it("verifies that props are passed to HeaderFlatButton(Logout) Component", () => {
   mockIsAuthenticationInfoValid.mockReturnValueOnce(true);
   const loginControl = shallow(
     <LoginControl
@@ -67,9 +72,13 @@ it("verifies that props are passed to LogoutButton Component", () => {
     />
   );
 
-  expect(Object.keys(loginControl.find("LogoutButton").props()).length).toBe(1);
+  const button = loginControl.find("HeaderFlatButton");
+  expect(Object.keys(button.props()).length).toBe(2);
 
-  const onClickProp = loginControl.find("LogoutButton").prop("onClick");
+  const labelProp = button.prop("label");
+  expect(labelProp).toBe("Logout");
+
+  const onClickProp = button.prop("onClick");
   const handleLogoutSpy = jest.spyOn(loginControl.instance(), "handleLogout");
 
   onClickProp();
