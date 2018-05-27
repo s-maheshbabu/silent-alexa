@@ -1,7 +1,3 @@
-/*
-TODO: Improve Chatters tests. Current tests don't fail if the properties
-of a chatter (like their name or avatar) are changed.
-*/
 import React from "react";
 import { Map } from "immutable";
 import AlexaRingIcon from "Icons/AlexaRingIcon";
