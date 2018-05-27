@@ -5,9 +5,6 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import LoginControl from "LoginControl/LoginControl";
 import "./Header.css";
 
-/**
- * Exported to facilitate testing.
- */
 function _LoginControlInHeader(props) {
   return (
     <LoginControl
@@ -36,5 +33,3 @@ export default function Header(props) {
     </div>
   );
 }
-
-export { _LoginControlInHeader };
