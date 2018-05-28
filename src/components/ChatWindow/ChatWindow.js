@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ChatFeed, Message } from "react-chat-ui";
+import { ChatFeed, Message } from "monkas-chat";
 import ContainerDimensions from "react-container-dimensions";
 
 import ChatBubble from "ChatBubble/ChatBubble";
@@ -26,7 +26,7 @@ class ChatWindow extends Component {
         new Message({
           id: chatterIds.ALEXA,
           message: "Hey! Alexa here.",
-          senderName: chatters.get(chatterIds.ALEXA).name
+          avatar: chatters.get(chatterIds.ALEXA).avatar
         }),
         // TODO Adding a bunch of dummy messages to make the ChatFeed overflow window height.
         // This will be useful during the development phase but will be removed once we are confident about the layout.
@@ -38,7 +38,7 @@ class ChatWindow extends Component {
         new Message({
           id: chatterIds.ALEXA,
           message: "Hey! Alexa here.",
-          senderName: chatters.get(chatterIds.ALEXA).name
+          avatar: chatters.get(chatterIds.ALEXA).avatar
         }),
         new Message({
           id: chatterIds.USER,
@@ -48,7 +48,7 @@ class ChatWindow extends Component {
         new Message({
           id: chatterIds.ALEXA,
           message: "Hey! Alexa here.",
-          senderName: chatters.get(chatterIds.ALEXA).name
+          avatar: chatters.get(chatterIds.ALEXA).avatar
         }),
         new Message({
           id: chatterIds.USER,
@@ -58,7 +58,7 @@ class ChatWindow extends Component {
         new Message({
           id: chatterIds.ALEXA,
           message: "Hey! Alexa here.",
-          senderName: chatters.get(chatterIds.ALEXA).name
+          avatar: chatters.get(chatterIds.ALEXA).avatar
         }),
         new Message({
           id: chatterIds.USER,
@@ -68,7 +68,7 @@ class ChatWindow extends Component {
         new Message({
           id: chatterIds.ALEXA,
           message: "Hey! Alexa here.",
-          senderName: chatters.get(chatterIds.ALEXA).name
+          avatar: chatters.get(chatterIds.ALEXA).avatar
         }),
         new Message({
           id: chatterIds.USER,
@@ -78,7 +78,7 @@ class ChatWindow extends Component {
         new Message({
           id: chatterIds.ALEXA,
           message: "Hey! Alexa here.",
-          senderName: chatters.get(chatterIds.ALEXA).name
+          avatar: chatters.get(chatterIds.ALEXA).avatar
         }),
         new Message({
           id: chatterIds.USER,
@@ -88,7 +88,7 @@ class ChatWindow extends Component {
         new Message({
           id: chatterIds.ALEXA,
           message: "Hey! Alexa here.",
-          senderName: chatters.get(chatterIds.ALEXA).name
+          avatar: chatters.get(chatterIds.ALEXA).avatar
         }),
         new Message({
           id: chatterIds.USER,
@@ -98,7 +98,7 @@ class ChatWindow extends Component {
         new Message({
           id: chatterIds.ALEXA,
           message: "Hey! Alexa here.",
-          senderName: chatters.get(chatterIds.ALEXA).name
+          avatar: chatters.get(chatterIds.ALEXA).avatar
         }),
         new Message({
           id: chatterIds.USER,
@@ -108,7 +108,7 @@ class ChatWindow extends Component {
         new Message({
           id: chatterIds.ALEXA,
           message: "Hey! Alexa here.",
-          senderName: chatters.get(chatterIds.ALEXA).name
+          avatar: chatters.get(chatterIds.ALEXA).avatar
         }),
         new Message({
           id: chatterIds.USER,
@@ -118,7 +118,7 @@ class ChatWindow extends Component {
         new Message({
           id: chatterIds.ALEXA,
           message: "Hey! Alexa here.",
-          senderName: chatters.get(chatterIds.ALEXA).name
+          avatar: chatters.get(chatterIds.ALEXA).avatar
         }),
         new Message({
           id: chatterIds.USER,
@@ -128,7 +128,7 @@ class ChatWindow extends Component {
         new Message({
           id: chatterIds.ALEXA,
           message: "Hey! Alexa here.",
-          senderName: chatters.get(chatterIds.ALEXA).name
+          avatar: chatters.get(chatterIds.ALEXA).avatar
         }),
         new Message({
           id: chatterIds.USER,
@@ -198,7 +198,8 @@ class ChatWindow extends Component {
     const newMessage = new Message({
       id: userId,
       message,
-      senderName: user.name
+      senderName: user.name,
+      avatar: user.avatar
     });
     messagesCopy.push(newMessage);
     this.setState({ messages: messagesCopy });
@@ -222,7 +223,7 @@ class ChatWindow extends Component {
                 messages={this.state.messages}
                 isTyping={this.state.is_typing} // is the recipient typing
                 hasInputField={false} // use the default input field that is provided along with ChatFeed component
-                showSenderName={false} // show the name of the user who sent the message
+                showSenderName={true} // show the name of the user who sent the message
                 bubblesCentered={false}
                 maxHeight={height}
                 chatBubble={ChatBubble}

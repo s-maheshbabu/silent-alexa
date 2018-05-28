@@ -4,10 +4,10 @@ export default {
       fontSize: 20
     },
     chatbubble: {
-      background: "mediumslateblue"
+      background: "#00ACE0"
     },
     userBubble: {
-      background: "lightcoral"
+      background: "#646A72"
     }
   }
 };

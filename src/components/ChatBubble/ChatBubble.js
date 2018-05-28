@@ -1,5 +1,5 @@
 import React from "react";
-import { ChatBubble } from "react-chat-ui";
+import { ChatBubble } from "monkas-chat";
 
 import styles from "./ChatBubble.css.js";
 
