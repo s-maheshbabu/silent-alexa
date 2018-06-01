@@ -28,15 +28,18 @@
 /** Styles **/
 #footer {
   align-items: center;
-  border-top: 1px solid #c5cad3;
+  border-top: 1px solid #435360;
+
+  background-color: #152939;
+  color: #ffffff;
 }
 
 #footer-controls a {
   padding: 0 10px;
-  color: initial;
+  color: #ffffff;
   text-decoration: none;
 }
 
 #footer-controls a:hover {
-  background-color: #c5cad3;
+  background-color: #435360;
 }

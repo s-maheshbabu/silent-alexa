@@ -9,7 +9,7 @@ export default function Footer() {
         <span> That Collapses</span>
       </div>
       <div id="footer-controls">
-        <a href="">Controls,</a>
+        <a href="">Clickable</a>
         <a href="">icons</a>
         <a href="">and</a>
         <a href="">links</a>
