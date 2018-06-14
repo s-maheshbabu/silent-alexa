@@ -10,9 +10,6 @@ function _LoginControlInHeader(props) {
     <LoginControl
       isAuthenticationInfoValid={() => props.isAuthenticationInfoValid()}
       clearAuthenticationInfo={() => props.clearAuthenticationInfo()}
-      updateAuthenticationInfo={authenticationInfo =>
-        props.updateAuthenticationInfo(authenticationInfo)
-      }
     />
   );
 }

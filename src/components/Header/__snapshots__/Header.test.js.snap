@@ -14,7 +14,6 @@ exports[`renders Header without crashing 1`] = `
           <LoginControl
             clearAuthenticationInfo={[Function]}
             isAuthenticationInfoValid={[Function]}
-            updateAuthenticationInfo={[Function]}
           />
         }
         showMenuIconButton={false}
