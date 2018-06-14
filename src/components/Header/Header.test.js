@@ -14,12 +14,10 @@ it("renders Header without crashing", () => {
 it("verifies that props are passed to LoginControl component", () => {
   const mockIsAuthenticationInfoValid = jest.fn();
   const mockClearAuthenticationInfo = jest.fn();
-  const mockUpdateAuthenticationInfo = jest.fn();
   const header = shallow(
     <Header
       isAuthenticationInfoValid={mockIsAuthenticationInfoValid}
       clearAuthenticationInfo={mockClearAuthenticationInfo}
-      updateAuthenticationInfo={mockUpdateAuthenticationInfo}
     />
   );
   const loginControl = header
@@ -28,7 +26,7 @@ it("verifies that props are passed to LoginControl component", () => {
     .prop("iconElementRight");
 
   // Verify that only desired number of props are passed on to LoginControl
-  expect(Object.keys(loginControl.props).length).toBe(3);
+  expect(Object.keys(loginControl.props).length).toBe(2);
 
   // Verify that LoginControl is passed on isAuthenticationInfoValid prop
   const isAuthenticationInfoValidProp =
@@ -47,15 +45,4 @@ it("verifies that props are passed to LoginControl component", () => {
   // Verify that calling clearAuthenticationInfo prop function calls the mockClearAuthenticationInfo
   clearAuthenticationInfoProp();
   expect(mockClearAuthenticationInfo).toHaveBeenCalledTimes(1);
-
-  // Verify that LoginControl is passed on updateAuthenticationInfo prop
-  const updateAuthenticationInfoProp =
-    loginControl.props["updateAuthenticationInfo"];
-  expect(updateAuthenticationInfoProp).toBeDefined();
-
-  // Verify that calling updateAuthenticationInfo prop function calls the mockUpdateAuthenticationInfo
-  let dummyArgument = "dummy argument";
-  updateAuthenticationInfoProp(dummyArgument);
-
-  expect(mockUpdateAuthenticationInfo).toHaveBeenCalledWith(dummyArgument);
 });

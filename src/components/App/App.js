@@ -5,6 +5,7 @@ import util from "util";
 import Header from "Header/Header";
 import Body from "Body/Body";
 import Footer from "Footer/Footer";
+import Routes from "Routes/Routes";
 import AuthenticationInfo from "AuthenticationInfo";
 
 class App extends Component {
@@ -17,12 +18,14 @@ class App extends Component {
   render() {
     return (
       <div id="page">
-        <Header
-          isAuthenticationInfoValid={() => this.isAuthenticationInfoValid()}
-          clearAuthenticationInfo={() => this.clearAuthenticationInfo()}
+        <Routes
           updateAuthenticationInfo={authenticationInfo =>
             this.updateAuthenticationInfo(authenticationInfo)
           }
+        />
+        <Header
+          isAuthenticationInfoValid={() => this.isAuthenticationInfoValid()}
+          clearAuthenticationInfo={() => this.clearAuthenticationInfo()}
         />
         <Body
           authenticationInfo={this.state.authenticationInfo}
