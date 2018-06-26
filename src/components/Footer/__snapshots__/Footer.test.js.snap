@@ -20,7 +20,7 @@ exports[`renders Footer without crashing 1`] = `
     <a
       href=""
     >
-      Controls,
+      Clickable
     </a>
     <a
       href=""
