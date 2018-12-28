@@ -14,8 +14,8 @@ export const options = Object.freeze({
   popup: false
 });
 
-// Redirect URI to handle the response from LoginWithAmazon
-export const redirectUri = "http://localhost:3000/authresponse";
+// Redirect path to handle the response from LoginWithAmazon
+export const REDIRECT_PATH = "authresponse";
 
 export default class LoginControl extends React.Component {
   render() {
@@ -31,9 +31,12 @@ export default class LoginControl extends React.Component {
   }
 
   handleLogin() {
-    // The authorization service will redirect the user-agent to redirectURI
+    // The authorization service will redirect the user-agent to the redirect path
     // which will contain an authorization response as a URI fragment
-    window.amazon.Login.authorize(options, redirectUri);
+    window.amazon.Login.authorize(
+      options,
+      window.location.href + REDIRECT_PATH
+    );
   }
 
   handleLogout() {

@@ -1,11 +1,7 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 import LoginHandler from "./LoginHandler";
-import AuthenticationInfo from "AuthenticationInfo";
-import util from "util";
 
-let loginHandler;
-let loginHandlerInstance;
 const mockUpdateAuthenticationInfo = jest.fn();
 
 beforeEach(() => {
@@ -38,53 +34,37 @@ it("expects updateAuthenticationInfo to be called when LoginHandler is mounted",
   wrapper.unmount();
 });
 
-it("expects updateAuthenticationInfo to not be called when LoginHandler is mounted", () => {
-  const lwaResponse = "error_token=some_access_token&expires_in=30";
-  const routeProps = { location: { hash: lwaResponse } };
+it("expects updateAuthenticationInfo to not be called when LoginHandler is mounted with invalid parameters", () => {
+  const invalidLwaResponse = "error_token=some_access_token&expires_in=30";
+  const lwaResponse = "access_token=some_access_token&expires_in=30";
+  const routePropsWithInvalidLwaResponse = {
+    location: { hash: invalidLwaResponse }
+  };
   const routePropsNoLocation = { not_location: { hash: lwaResponse } };
   const routePropsNoHash = { location: { not_hash: lwaResponse } };
   const routePropsNoLwaResponse = { location: { hash: {} } };
 
-  const wrapperWithInvalidLwaResponse = mount(
-    <LoginHandler
-      updateAuthenticationInfo={mockUpdateAuthenticationInfo}
-      {...routeProps}
-    />
-  );
+  const allRoutePropsObjects = [
+    routePropsWithInvalidLwaResponse,
+    routePropsNoLocation,
+    routePropsNoHash,
+    routePropsNoLwaResponse
+  ];
+
+  allRoutePropsObjects.map(routeProps => {
+    const wrapper = mount(
+      <LoginHandler
+        updateAuthenticationInfo={mockUpdateAuthenticationInfo}
+        {...routeProps}
+      />
+    );
+    expect(mockUpdateAuthenticationInfo).not.toHaveBeenCalled();
+    wrapper.unmount();
+  });
+
   const wrapperWithNoRouteProps = mount(
     <LoginHandler updateAuthenticationInfo={mockUpdateAuthenticationInfo} />
   );
-
-  const wrapperWithNoLocationInRouteProps = mount(
-    <LoginHandler
-      updateAuthenticationInfo={mockUpdateAuthenticationInfo}
-      {...routePropsNoLocation}
-    />
-  );
-
-  const wrapperWithNoHashInRouteProps = mount(
-    <LoginHandler
-      updateAuthenticationInfo={mockUpdateAuthenticationInfo}
-      {...routePropsNoHash}
-    />
-  );
-
-  const wrapperWithNoLwaResponseInRouteProps = mount(
-    <LoginHandler
-      updateAuthenticationInfo={mockUpdateAuthenticationInfo}
-      {...routePropsNoLwaResponse}
-    />
-  );
-
-  const wrappers = [
-    wrapperWithInvalidLwaResponse,
-    wrapperWithNoHashInRouteProps,
-    wrapperWithNoLocationInRouteProps,
-    wrapperWithNoLwaResponseInRouteProps,
-    wrapperWithNoRouteProps
-  ];
-
   expect(mockUpdateAuthenticationInfo).not.toHaveBeenCalled();
-
-  wrappers.map(wrapper => wrapper.unmount());
+  wrapperWithNoRouteProps.unmount();
 });

@@ -1,8 +1,10 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import { options, redirectUri, default as LoginControl } from "./LoginControl";
-import AuthenticationInfo from "AuthenticationInfo";
-import util from "util";
+import {
+  options,
+  REDIRECT_PATH,
+  default as LoginControl
+} from "./LoginControl";
 
 let loginControl;
 let loginControlInstance;
@@ -95,5 +97,7 @@ it("verifies that lwa authorization is called when handleLogin is called", () =>
 
   expect(mockLWAModule).toHaveBeenCalledTimes(1);
   expect(mockLWAModule.mock.calls[0][0]).toBe(options);
-  expect(mockLWAModule.mock.calls[0][1]).toBe(redirectUri);
+  expect(mockLWAModule.mock.calls[0][1]).toBe(
+    window.location.href + REDIRECT_PATH
+  );
 });

@@ -15,7 +15,7 @@ export default function Routes(props) {
       // to home. https://github.com/s-maheshbabu/silent-alexa/issues/55
       <Route
         exact
-        path="*"
+        path="/:foo+"
         render={routeProps => <DefaultRedirect {...routeProps} />}
       />
     </Switch>
