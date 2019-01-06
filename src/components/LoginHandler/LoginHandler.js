@@ -29,13 +29,18 @@ export default class LoginHandler extends React.Component {
    *          false, otherwise.
    */
   isLWAResponseValid(lwaResponse) {
-    if (lwaResponse && lwaResponse.access_token && lwaResponse.expires_in) {
-      return true;
+    if (
+      !lwaResponse ||
+      !lwaResponse.access_token ||
+      !lwaResponse.expires_in ||
+      lwaResponse.expires_in < 0
+    ) {
+      console.log(
+        "Encountered an error on login: " +
+          util.inspect(lwaResponse, { showHidden: true, depth: null })
+      );
+      return false;
     }
-    console.log(
-      "Encountered an error on login: " +
-        util.inspect(lwaResponse, { showHidden: true, depth: null })
-    );
-    return false;
+    return true;
   }
 }

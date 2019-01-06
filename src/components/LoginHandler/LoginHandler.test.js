@@ -35,17 +35,29 @@ it("expects updateAuthenticationInfo to be called when LoginHandler is mounted",
 });
 
 it("expects updateAuthenticationInfo to not be called when LoginHandler is mounted with invalid parameters", () => {
-  const invalidLwaResponse = "error_token=some_access_token&expires_in=30";
+  const lwaResponseWithNoAccessToken =
+    "error_token=some_access_token&expires_in=30";
+  const lwaResponseWithNoExpiresIn = "access_token=some_access_token";
+  const lwaResponseWithInvalidExpiresIn =
+    "access_token=some_access_token&expires_in=-30";
   const lwaResponse = "access_token=some_access_token&expires_in=30";
-  const routePropsWithInvalidLwaResponse = {
-    location: { hash: invalidLwaResponse }
+  const routePropsWithlwaResponseNoAccessToken = {
+    location: { hash: lwaResponseWithNoAccessToken }
+  };
+  const routePropsWithlwaResponseNoExpiresIn = {
+    location: { hash: lwaResponseWithNoExpiresIn }
+  };
+  const routePropsWithlwaResponseInvalidExpiresIn = {
+    location: { hash: lwaResponseWithInvalidExpiresIn }
   };
   const routePropsNoLocation = { not_location: { hash: lwaResponse } };
   const routePropsNoHash = { location: { not_hash: lwaResponse } };
   const routePropsNoLwaResponse = { location: { hash: {} } };
 
   const allRoutePropsObjects = [
-    routePropsWithInvalidLwaResponse,
+    routePropsWithlwaResponseNoAccessToken,
+    routePropsWithlwaResponseNoExpiresIn,
+    routePropsWithlwaResponseInvalidExpiresIn,
     routePropsNoLocation,
     routePropsNoHash,
     routePropsNoLwaResponse
@@ -61,7 +73,9 @@ it("expects updateAuthenticationInfo to not be called when LoginHandler is mount
     expect(mockUpdateAuthenticationInfo).not.toHaveBeenCalled();
     wrapper.unmount();
   });
+});
 
+it("expects updateAuthenticationInfo to not be called when LoginHandler is mounted with invalid parameters", () => {
   const wrapperWithNoRouteProps = mount(
     <LoginHandler updateAuthenticationInfo={mockUpdateAuthenticationInfo} />
   );
