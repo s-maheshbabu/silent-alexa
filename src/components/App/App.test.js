@@ -63,17 +63,7 @@ it("verifies that props are passed to Body component", () => {
 
 it("verifies that props are passed to Header component", () => {
   //Verify that Header receives desired number of props
-  expect(Object.keys(app.find("Header").props()).length).toBe(3);
-
-  // Verify that Header receives updateAuthenticationInfo prop
-  const updateAuthenticationInfoProp = app
-    .find("Header")
-    .prop("updateAuthenticationInfo");
-
-  // Verify that calling header's updateAuthenticationInfo prop calls updateAuthenticationInfo
-  const dummyArgument = "dummyArgument";
-  updateAuthenticationInfoProp(dummyArgument);
-  expect(updateAuthenticationInfoSpy).toHaveBeenCalledWith(dummyArgument);
+  expect(Object.keys(app.find("Header").props()).length).toBe(2);
 
   // Verify that Header receives clearAuthenticationInfo prop
   const clearAuthenticationInfoProp = app
@@ -92,6 +82,21 @@ it("verifies that props are passed to Header component", () => {
   // Verify that calling header's isAuthenticationInfoValid prop calls isAuthenticationInfoValid
   isAuthenticationInfoValidProp();
   expect(isAuthenticationInfoValidSpy).toHaveBeenCalledTimes(1);
+});
+
+it("verifies that props are passed to Routes component", () => {
+  //Verify that Router receives desired number of props
+  expect(Object.keys(app.find("Routes").props()).length).toBe(1);
+
+  // Verify that Router receives updateAuthenticationInfo prop
+  const updateAuthenticationInfoProp = app
+    .find("Routes")
+    .prop("updateAuthenticationInfo");
+
+  // Verify that calling router's updateAuthenticationInfo prop calls updateAuthenticationInfo
+  const dummyArgument = "dummyArgument";
+  updateAuthenticationInfoProp(dummyArgument);
+  expect(updateAuthenticationInfoSpy).toHaveBeenCalledWith(dummyArgument);
 });
 
 it("should not change state's authenticationInfo prop when authenticationInfo instance (implicit grant) is not valid", () => {
