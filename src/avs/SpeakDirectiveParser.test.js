@@ -43,6 +43,18 @@ it("handles the invalid case where the directive in the AVS response is well for
   );
 });
 
+it("handles the invalid case where the directive in the AVS response is well formatted json but doesn't contain the 'header' key.", () => {
+  testIllegalArgumentHandling(
+    testData.header_key_doesnt_exist_in_avs_directive.rawData
+  );
+});
+
+it("handles the invalid case where the directive in the AVS response is well formatted json but doesn't contain the 'name' key.", () => {
+  testIllegalArgumentHandling(
+    testData.name_key_doesnt_exist_in_avs_directive.rawData
+  );
+});
+
 it("does not include non-text parts in Alexa's response", () => {
   const testObject = testData.multi_part_with_different_content_types;
 
@@ -52,6 +64,13 @@ it("does not include non-text parts in Alexa's response", () => {
 
 it("handles the case where Alexa's text response is broken into more than one part", () => {
   const testObject = testData.multi_part_with_just_three_parts;
+
+  const alexaTextResponses = parser(testObject.rawData);
+  expect(alexaTextResponses).toEqual(testObject.alexaResponses);
+});
+
+it("handles the case where there are non-Speak directives.", () => {
+  const testObject = testData.non_speak_directives;
 
   const alexaTextResponses = parser(testObject.rawData);
   expect(alexaTextResponses).toEqual(testObject.alexaResponses);
