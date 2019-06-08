@@ -105,6 +105,44 @@ first-part-of-multi-part-message
   };
 }
 
+// Invalid case where the AVS directive is well formatted JSON but doesn't contain the 'header' key.
+{
+  const anyKeyThatIsNot_header = "notHeader";
+  const rawData = String.raw`--------abcde123
+Content-Type: application/json; charset=UTF-8
+
+{"directive":{"${anyKeyThatIsNot_header}":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"caption","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+--------abcde123
+Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
+Content-Type: application/octet-stream
+
+first-part-of-multi-part-message
+--------abcde123--`;
+
+  exports.header_key_doesnt_exist_in_avs_directive = {
+    rawData: rawData
+  };
+}
+
+// Invalid case where the AVS directive is well formatted JSON but doesn't contain the 'name' key.
+{
+  const anyKeyThatIsNot_name = "notName";
+  const rawData = String.raw`--------abcde123
+Content-Type: application/json; charset=UTF-8
+
+{"directive":{"header":{"namespace":"SpeechSynthesizer","${anyKeyThatIsNot_name}":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"caption","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+--------abcde123
+Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
+Content-Type: application/octet-stream
+
+first-part-of-multi-part-message
+--------abcde123--`;
+
+  exports.name_key_doesnt_exist_in_avs_directive = {
+    rawData: rawData
+  };
+}
+
 // A multi-part message with multiple parts where one part is a valid text response from Alexa and others are either valid non-text responses or parts whose Content-Type is not known.
 {
   const validTextResponseContentType = "application/json; charset=UTF-8";
@@ -171,6 +209,32 @@ second-audio-part-of-multi-part-message
   exports.multi_part_with_just_three_parts = {
     rawData: rawData,
     alexaResponses: List.of(alexaResponseFirstPart, alexaResponseSecondPart)
+  };
+}
+
+// Happy case with a combination of Speak directive, a non-Speak directive and directive without a type (directive.header.name) defined directives
+{
+  const anyTypeThatIsNot_Speak = "notSpeak";
+
+  const alexaResponse = "alexa success response";
+  const rawData = String.raw`--------abcde123
+Content-Type: application/json; charset=UTF-8
+
+{"directive":{"header":{"namespace":"SpeechRecognizer","name":"${anyTypeThatIsNot_Speak}","messageId":"c506fe5f-8296-4618-a52e-2045cb1a6bdd"},"payload":{"timeoutInMilliseconds":8000}}}
+--------abcde123
+Content-Type: application/json; charset=UTF-8
+
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"${alexaResponse}","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponse}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+--------abcde123
+Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
+Content-Type: application/octet-stream
+
+second-part-of-multi-part-message
+--------abcde123`;
+
+  exports.non_speak_directives = {
+    rawData: rawData,
+    alexaResponses: List.of(alexaResponse)
   };
 }
 

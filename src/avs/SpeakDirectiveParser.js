@@ -7,8 +7,9 @@ import httpMessageParser from "http-message-parser";
 const TEXT_PART_CONTENT_TYPE = `application/json; charset=UTF-8`;
 /**
  * This method parses the multi-part AVS responses and extracts the
- * strings representing Alexa's responses. It strips away other information
- * like binary audio data, ssml tags etc.
+ * strings representing Alexa's responses from 'Speak' directives.
+ * It strips away other information like binary audio data, ssml
+ * tags etc in the 'Speak' directives.
  *
  * @param {String} alexaRawResponse The multi-part response from AVS. This
  * should not be empty or undefined.
@@ -63,14 +64,38 @@ export function extractAlexaTextResponses(alexaRawResponse) {
       );
     }
 
+    _validateDirective(avsDirective);
+    // Directives that are not Speak directives (for ex, ExpectSpeech** directive) will be skipped for now. Tracking
+    // item to handle ExpectSpeech directives - https://github.com/s-maheshbabu/silent-alexa/issues/62
+    // ** https://developer.amazon.com/docs/alexa-voice-service/speechrecognizer.html#expectspeech
+    if (!_isSpeakDirective(avsDirective)) {
+      console.log(
+        "A non-Speak directive was encountered. Skipping the directive. " +
+          util.inspect(avsDirective, { showHidden: true, depth: null })
+      );
+      continue;
+    }
+
     if (!hasIn(avsDirective, ["directive", "payload", "caption"]))
       throw new IllegalArgumentError(
-        "Given directive doesn't contain the expected path directive.payload.caption. Input: " +
-          avsDirective
+        "Given Speak directive doesn't contain the expected path directive.payload.caption. Input: " +
+          `${util.inspect(avsDirective, { showHidden: true, depth: null })}`
       );
 
     alexaResponses.push(avsDirective.directive.payload.caption);
   }
 
   return fromJS(alexaResponses);
+}
+
+function _validateDirective(avsDirective) {
+  if (!hasIn(avsDirective, ["directive", "header", "name"]))
+    throw new IllegalArgumentError(
+      "Given directive doesn't declare a type at directive.header.name. Input: " +
+        `${util.inspect(avsDirective, { showHidden: true, depth: null })}`
+    );
+}
+
+function _isSpeakDirective(avsDirective) {
+  return avsDirective.directive.header.name === "Speak";
 }
