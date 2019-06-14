@@ -2,7 +2,7 @@
   "name": "silent_alexa",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://s-maheshbabu.github.io",
+  "homepage": "https://s-maheshbabu.github.io/silent-alexa",
   "dependencies": {
     "gh-pages": "^1.1.0",
     "http-message-parser": "0.0.30",
