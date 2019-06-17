@@ -20,7 +20,7 @@ export default class LoginHandler extends React.Component {
     }
 
     if (this.props.history) {
-      this.props.history.push("/");
+      this.props.history.push("/chat");
     }
   }
 
