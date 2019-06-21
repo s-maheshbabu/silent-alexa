@@ -1,8 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import LoginHandler from "LoginHandler/LoginHandler";
-import PageNotFound from "PageNotFound/PageNotFound";
-import Body from "Header/Header";
 
 export default function Routes(props) {
   return (
@@ -10,6 +8,11 @@ export default function Routes(props) {
       <Route
         exact
         path="/authresponse"
+        render={routeProps => <LoginHandler {...routeProps} {...props} />}
+      />
+      <Route
+        exact
+        path="/silent-alexa/authresponse"
         render={routeProps => <LoginHandler {...routeProps} {...props} />}
       />
     </Switch>

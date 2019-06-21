@@ -15,6 +15,14 @@ class App extends Component {
       authenticationInfo: undefined
     };
   }
+
+  componentWillUnmount() {
+    console.log("App Component Was Unmounted");
+  }
+  componentDidMount() {
+    console.log("App Component Was Mounted");
+  }
+
   render() {
     return (
       <div id="page">
@@ -42,6 +50,7 @@ class App extends Component {
    * @param authenticationInfo Instance of AuthenticationInfo
    */
   updateAuthenticationInfo = function(authenticationInfo) {
+    console.log("Update Auth Called: " + authenticationInfo);
     if (
       authenticationInfo &&
       authenticationInfo instanceof AuthenticationInfo
@@ -66,6 +75,7 @@ class App extends Component {
    * TODO: Incorporate {@link  AuthenticationInfo#isValid} functionality when available.
    */
   isAuthenticationInfoValid() {
+    console.log("IsAuthValid Called: " + this.state.authenticationInfo);
     return (
       this.state.authenticationInfo &&
       this.state.authenticationInfo instanceof AuthenticationInfo
@@ -76,6 +86,7 @@ class App extends Component {
    * Clears authenticationInfo prop in the component's state
    */
   clearAuthenticationInfo() {
+    console.log("Clear Auth Called");
     this.setState({ authenticationInfo: undefined });
   }
 }

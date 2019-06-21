@@ -15,7 +15,7 @@ export const options = Object.freeze({
 });
 
 // Redirect path to handle the response from LoginWithAmazon
-export const REDIRECT_PATH = "authresponse";
+export const REDIRECT_PATH = "/authresponse";
 
 export default class LoginControl extends React.Component {
   render() {
@@ -35,7 +35,7 @@ export default class LoginControl extends React.Component {
     // which will contain an authorization response as a URI fragment
     window.amazon.Login.authorize(
       options,
-      window.location.href + REDIRECT_PATH
+      window.location.href.replace(/\/+$/, "") + REDIRECT_PATH
     );
   }
 
