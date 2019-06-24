@@ -1,5 +1,6 @@
 import React from "react";
 import HeaderFlatButton from "HeaderFlatButton/HeaderFlatButton";
+import AuthenticationInfo from "AuthenticationInfo";
 
 // Options variable to request for implicit grant.
 // TODO: Logic for assigning 'deviceSerialNumber' needs to be revisited.
@@ -19,7 +20,7 @@ export const REDIRECT_PATH = "authresponse";
 
 export default class LoginControl extends React.Component {
   render() {
-    if (this.props.isAuthenticationInfoValid()) {
+    if (AuthenticationInfo.isPresent()) {
       return (
         <HeaderFlatButton label="Logout" onClick={() => this.handleLogout()} />
       );
@@ -40,6 +41,7 @@ export default class LoginControl extends React.Component {
   }
 
   handleLogout() {
-    this.props.clearAuthenticationInfo();
+    AuthenticationInfo.clear();
+    // TODO: Also, redirect the user to the login page.
   }
 }

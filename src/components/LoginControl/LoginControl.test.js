@@ -1,5 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
+import AuthenticationInfo from "AuthenticationInfo";
 import {
   options,
   REDIRECT_PATH,
@@ -12,36 +13,31 @@ const mockClearAuthenticationInfo = jest.fn();
 const mockLWAModule = jest.fn();
 const mockIsAuthenticationInfoValid = jest.fn();
 
+jest.mock("AuthenticationInfo");
+
 beforeEach(() => {
   jest.resetAllMocks();
   Object.defineProperty(window, "amazon", {
     value: { Login: { authorize: mockLWAModule } },
     writable: true
   });
-  loginControl = shallow(
-    <LoginControl
-      isAuthenticationInfoValid={mockIsAuthenticationInfoValid}
-      clearAuthenticationInfo={mockClearAuthenticationInfo}
-    />
-  );
+  loginControl = shallow(<LoginControl />);
   loginControlInstance = loginControl.instance();
 });
 
-it("renders LoginControl with LoginButton component when isAuthenticationInfoValid returns falsy", () => {
-  mockIsAuthenticationInfoValid.mockReturnValueOnce(false);
-  const wrapper = shallow(
-    <LoginControl isAuthenticationInfoValid={mockIsAuthenticationInfoValid} />
-  );
+it("renders LoginControl with LoginButton component when AuthenticationInfo is not present", () => {
+  const isPresentMock = jest.spyOn(AuthenticationInfo, "isPresent");
+  isPresentMock.mockImplementation(() => false);
+  const wrapper = shallow(<LoginControl />);
   expect(wrapper).toMatchSnapshot();
 
   wrapper.unmount();
 });
 
-it("renders LoginControl with LogoutButton component when isAuthenticationInfoValid returns truthy", () => {
-  mockIsAuthenticationInfoValid.mockReturnValueOnce(true);
-  const wrapper = shallow(
-    <LoginControl isAuthenticationInfoValid={mockIsAuthenticationInfoValid} />
-  );
+it("renders LoginControl with LogoutButton component when AuthenticationInfo is present", () => {
+  const isPresentMock = jest.spyOn(AuthenticationInfo, "isPresent");
+  isPresentMock.mockImplementation(() => true);
+  const wrapper = shallow(<LoginControl />);
 
   expect(wrapper).toMatchSnapshot();
 
@@ -49,6 +45,9 @@ it("renders LoginControl with LogoutButton component when isAuthenticationInfoVa
 });
 
 it("verifies that props are passed to HeaderFlatButton(Login) Component", () => {
+  const isPresentMock = jest.spyOn(AuthenticationInfo, "isPresent");
+  isPresentMock.mockImplementation(() => false);
+
   const button = loginControl.find("HeaderFlatButton");
   expect(Object.keys(button.props()).length).toBe(2);
 
@@ -64,13 +63,10 @@ it("verifies that props are passed to HeaderFlatButton(Login) Component", () => 
 });
 
 it("verifies that props are passed to HeaderFlatButton(Logout) Component", () => {
-  mockIsAuthenticationInfoValid.mockReturnValueOnce(true);
-  const loginControl = shallow(
-    <LoginControl
-      isAuthenticationInfoValid={mockIsAuthenticationInfoValid}
-      clearAuthenticationInfo={mockClearAuthenticationInfo}
-    />
-  );
+  const isPresentMock = jest.spyOn(AuthenticationInfo, "isPresent");
+  isPresentMock.mockImplementation(() => true);
+
+  const loginControl = shallow(<LoginControl />);
 
   const button = loginControl.find("HeaderFlatButton");
   expect(Object.keys(button.props()).length).toBe(2);
@@ -86,10 +82,10 @@ it("verifies that props are passed to HeaderFlatButton(Logout) Component", () =>
   expect(handleLogoutSpy).toHaveBeenCalled();
 });
 
-it("verifies that clearAuthenticationInfo is called when handleLogout is called", () => {
+it("verifies that AuthenticationInfo is cleared when handleLogout is called", () => {
   loginControlInstance.handleLogout();
 
-  expect(mockClearAuthenticationInfo).toHaveBeenCalledTimes(1);
+  expect(AuthenticationInfo.clear).toHaveBeenCalledTimes(1);
 });
 
 it("verifies that lwa authorization is called when handleLogin is called", () => {

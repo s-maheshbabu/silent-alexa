@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { ChatFeed, Message } from "monkas-chat";
 import ContainerDimensions from "react-container-dimensions";
+import AuthenticationInfo from "AuthenticationInfo";
 
 import ChatBubble from "ChatBubble/ChatBubble";
 import { cannedErrorResponses, customErrorCodes } from "CannedErrorResponses";
@@ -157,12 +158,11 @@ class ChatWindow extends Component {
     this.setState({ userRequestToAlexa: "" });
 
     let access_token;
-    // If authenticationInfo is defined, then access_token is defined.
-    if (this.props.authenticationInfo) {
-      access_token = this.props.authenticationInfo.getAccessToken();
+    if (AuthenticationInfo.isPresent()) {
+      access_token = AuthenticationInfo.getAccessToken();
     } else {
-      // Do not make a call to avs if access_token is undefined. Redirect the user to login screen.
-      this.props.clearAuthenticationInfo();
+      console.log("Access token is missing.");
+      // TODO: Should we redirect user to login page?
       return;
     }
 

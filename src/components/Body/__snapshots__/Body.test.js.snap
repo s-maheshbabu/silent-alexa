@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders Body when isAuthenticationInfoValid returns false 1`] = `<WelcomeScreen />`;
+exports[`renders Body when AuthenticationInfo is not present 1`] = `<WelcomeScreen />`;
 
-exports[`renders Body when isAuthenticationInfoValid returns true 1`] = `
+exports[`renders Body when AuthenticationInfo is present 1`] = `
 Array [
   <MuiThemeProvider
     key="muiThemeProvider"

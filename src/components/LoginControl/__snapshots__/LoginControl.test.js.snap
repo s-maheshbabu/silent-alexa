@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders LoginControl with LoginButton component when isAuthenticationInfoValid returns falsy 1`] = `
+exports[`renders LoginControl with LoginButton component when AuthenticationInfo is not present 1`] = `
 <HeaderFlatButton
   label="Login"
   onClick={[Function]}
 />
 `;
 
-exports[`renders LoginControl with LogoutButton component when isAuthenticationInfoValid returns truthy 1`] = `
+exports[`renders LoginControl with LogoutButton component when AuthenticationInfo is present 1`] = `
 <HeaderFlatButton
   label="Logout"
   onClick={[Function]}

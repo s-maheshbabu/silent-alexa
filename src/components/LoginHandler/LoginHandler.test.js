@@ -1,8 +1,10 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
+import queryString from "query-string";
 import LoginHandler from "./LoginHandler";
+import AuthenticationInfo from "AuthenticationInfo";
 
-const mockUpdateAuthenticationInfo = jest.fn();
+jest.mock("AuthenticationInfo");
 
 beforeEach(() => {
   jest.resetAllMocks();
@@ -16,25 +18,20 @@ it("renders LoginHandler without crashing", () => {
   wrapper.unmount();
 });
 
-it("expects updateAuthenticationInfo to be called when LoginHandler is mounted", () => {
-  const lwaResponse = "access_token=some_access_token&expires_in=30";
-  const routeProps = { location: { hash: lwaResponse } };
-  const wrapper = mount(
-    <LoginHandler
-      updateAuthenticationInfo={mockUpdateAuthenticationInfo}
-      {...routeProps}
-    />
-  );
+it("expects AuthenticationInfo to be persisted when LoginHandler is mounted", () => {
+  const lwaResponseHash = "access_token=some_access_token&expires_in=30";
+  const routeProps = { location: { hash: lwaResponseHash } };
+  const wrapper = mount(<LoginHandler {...routeProps} />);
 
-  expect(mockUpdateAuthenticationInfo).toHaveBeenCalledTimes(1);
-  expect(
-    mockUpdateAuthenticationInfo.mock.calls[0][0].getAccessToken()
-  ).toEqual("some_access_token");
+  expect(AuthenticationInfo.persist).toHaveBeenCalledTimes(1);
+  expect(AuthenticationInfo.persist).toHaveBeenCalledWith(
+    queryString.parse(lwaResponseHash)
+  );
 
   wrapper.unmount();
 });
 
-it("expects updateAuthenticationInfo to not be called when LoginHandler is mounted with invalid parameters", () => {
+it("expects AuthenticationInfo persist to not be called when LoginHandler is mounted with invalid parameters", () => {
   const lwaResponseWithNoAccessToken =
     "error_token=some_access_token&expires_in=30";
   const lwaResponseWithNoExpiresIn = "access_token=some_access_token";
@@ -64,21 +61,14 @@ it("expects updateAuthenticationInfo to not be called when LoginHandler is mount
   ];
 
   allRoutePropsObjects.map(routeProps => {
-    const wrapper = mount(
-      <LoginHandler
-        updateAuthenticationInfo={mockUpdateAuthenticationInfo}
-        {...routeProps}
-      />
-    );
-    expect(mockUpdateAuthenticationInfo).not.toHaveBeenCalled();
+    const wrapper = mount(<LoginHandler {...routeProps} />);
+    expect(AuthenticationInfo.persist).not.toHaveBeenCalled();
     wrapper.unmount();
   });
 });
 
-it("expects updateAuthenticationInfo to not be called when LoginHandler is mounted with invalid parameters", () => {
-  const wrapperWithNoRouteProps = mount(
-    <LoginHandler updateAuthenticationInfo={mockUpdateAuthenticationInfo} />
-  );
-  expect(mockUpdateAuthenticationInfo).not.toHaveBeenCalled();
+it("expects AuthenticationInfo persist to not be called when LoginHandler is mounted without route props", () => {
+  const wrapperWithNoRouteProps = mount(<LoginHandler />);
+  expect(AuthenticationInfo.persist).not.toHaveBeenCalled();
   wrapperWithNoRouteProps.unmount();
 });

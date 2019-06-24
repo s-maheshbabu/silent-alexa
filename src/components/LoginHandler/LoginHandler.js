@@ -16,9 +16,11 @@ export default class LoginHandler extends React.Component {
       lwaResponse = queryString.parse(this.props.location.hash);
     }
     if (this.isLWAResponseValid(lwaResponse)) {
-      this.props.updateAuthenticationInfo(new AuthenticationInfo(lwaResponse));
+      AuthenticationInfo.persist(lwaResponse);
     }
 
+    // TODO: This needs to be tested. Moreover, does this need to be inside one
+    // of the above if conditions?
     if (this.props.history) {
       this.props.history.push("/");
     }

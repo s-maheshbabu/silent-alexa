@@ -7,6 +7,7 @@
     "gh-pages": "^1.1.0",
     "http-message-parser": "0.0.30",
     "immutable": "^4.0.0-rc.9",
+    "js-cookie": "^2.2.0",
     "material-ui": "^0.20.0",
     "monkas-chat": "^1.0.11",
     "npm": "^5.8.0",
