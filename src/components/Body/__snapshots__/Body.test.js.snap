@@ -6,9 +6,11 @@ exports[`renders Body when AuthenticationInfo is present 1`] = `
 Array [
   <MuiThemeProvider
     key="muiThemeProvider"
-/>,
+  >
+    <ChatWindow />
+  </MuiThemeProvider>,
   <RightPanel
     key="rightPanel"
-/>,
+  />,
 ]
 `;

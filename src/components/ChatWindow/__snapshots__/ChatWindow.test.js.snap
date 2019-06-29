@@ -7,7 +7,9 @@ exports[`renders correctly without crashing 1`] = `
   <div
     className="panel-body"
   >
-    <ContainerDimensions />
+    <ContainerDimensions>
+      <Component />
+    </ContainerDimensions>
   </div>
   <div
     id="chat-input"
