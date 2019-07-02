@@ -1,6 +1,15 @@
 {
-  "main.css": "static/css/main.579fee13.css",
-  "main.css.map": "static/css/main.579fee13.css.map",
-  "main.js": "static/js/main.cd367a23.js",
-  "main.js.map": "static/js/main.cd367a23.js.map"
+  "files": {
+    "main.css": "/silent-alexa/static/css/main.66a40dd8.chunk.css",
+    "main.js": "/silent-alexa/static/js/main.6b68476a.chunk.js",
+    "main.js.map": "/silent-alexa/static/js/main.6b68476a.chunk.js.map",
+    "runtime~main.js": "/silent-alexa/static/js/runtime~main.d5e29ad6.js",
+    "runtime~main.js.map": "/silent-alexa/static/js/runtime~main.d5e29ad6.js.map",
+    "static/js/2.7f737711.chunk.js": "/silent-alexa/static/js/2.7f737711.chunk.js",
+    "static/js/2.7f737711.chunk.js.map": "/silent-alexa/static/js/2.7f737711.chunk.js.map",
+    "index.html": "/silent-alexa/index.html",
+    "precache-manifest.c17fb1295369e04f8c3a6471b8eee9af.js": "/silent-alexa/precache-manifest.c17fb1295369e04f8c3a6471b8eee9af.js",
+    "service-worker.js": "/silent-alexa/service-worker.js",
+    "static/css/main.66a40dd8.chunk.css.map": "/silent-alexa/static/css/main.66a40dd8.chunk.css.map"
+  }
 }
