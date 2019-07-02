@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/silent-alexa/precache-manifest.f3c9021b43d926392ed4c6ba955887a5.js"
+  "/silent-alexa/precache-manifest.101b3f07ce519ca5f14a855030266c2d.js"
 );
 
 self.addEventListener('message', (event) => {
