@@ -18,37 +18,37 @@ exports[`renders Footer without crashing 1`] = `
     id="footer-controls"
   >
     <a
-      href=""
+      href="http://example.com"
     >
       Clickable
     </a>
     <a
-      href=""
+      href="http://example.com"
     >
       icons
     </a>
     <a
-      href=""
+      href="http://example.com"
     >
       and
     </a>
     <a
-      href=""
+      href="http://example.com"
     >
       links
     </a>
     <a
-      href=""
+      href="http://example.com"
     >
       can
     </a>
     <a
-      href=""
+      href="http://example.com"
     >
       go
     </a>
     <a
-      href=""
+      href="http://example.com"
     >
       here
     </a>
