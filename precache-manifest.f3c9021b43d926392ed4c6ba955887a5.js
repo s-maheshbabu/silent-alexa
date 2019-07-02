@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "794df63c75084a4f9f547c5a4a02ecce",
+    "revision": "99766a7be45f0de0d2b0ff4066dc8ad3",
     "url": "/silent-alexa/index.html"
   },
   {
-    "revision": "bc99db7c78338b8add35",
+    "revision": "8c181c702d8245f8e4e5",
     "url": "/silent-alexa/static/css/main.66a40dd8.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/silent-alexa/static/js/2.7f737711.chunk.js"
   },
   {
-    "revision": "bc99db7c78338b8add35",
-    "url": "/silent-alexa/static/js/main.6b68476a.chunk.js"
+    "revision": "8c181c702d8245f8e4e5",
+    "url": "/silent-alexa/static/js/main.60e1cd46.chunk.js"
   },
   {
     "revision": "579324bfc9b2577a10bf",
