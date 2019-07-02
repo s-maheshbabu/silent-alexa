@@ -11,8 +11,8 @@ export default function Routes(props) {
         path="/authresponse"
         render={routeProps => <LoginHandler {...routeProps} {...props} />}
       />
-      // TODO: Redirect to NotFound Page for other paths rather than redirecting
-      // to home. https://github.com/s-maheshbabu/silent-alexa/issues/55
+      {/* TODO: Redirect to NotFound Page for other paths rather than redirecting
+         to home. https://github.com/s-maheshbabu/silent-alexa/issues/55 */}
       <Route
         exact
         path="/:foo+"
