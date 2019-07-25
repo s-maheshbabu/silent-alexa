@@ -48,14 +48,14 @@ class AuthenticationInfo {
    * @returns access_token to access Alexa API
    */
   getAccessToken = () => {
-    return Cookies.get(AMAZON_LOGIN_COOKIE);
+    return undefined;
   };
 
   /**
    * @returns deleted the cookie that stores the authentication info
    */
   clear = () => {
-    return Cookies.remove(AMAZON_LOGIN_COOKIE);
+    Cookies.remove(AMAZON_LOGIN_COOKIE);
   };
 }
 

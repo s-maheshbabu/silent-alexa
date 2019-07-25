@@ -7,12 +7,6 @@ import Footer from "Footer/Footer";
 import Routes from "Routes/Routes";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      authenticationInfo: undefined
-    };
-  }
   render() {
     return (
       <div id="page">

@@ -8,9 +8,10 @@ export default function Routes(props) {
     <Switch>
       <Route
         exact
-        path="/authresponse"
+        path={["/silent-alexa/authresponse", "/authresponse"]}
         render={routeProps => <LoginHandler {...routeProps} {...props} />}
       />
+      <Route exact path="/silent-alexa" />
       {/* TODO: Redirect to NotFound Page for other paths rather than redirecting
          to home. https://github.com/s-maheshbabu/silent-alexa/issues/55 */}
       <Route

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ChatFeed, Message } from "monkas-chat";
 import ContainerDimensions from "react-container-dimensions";
-import AuthenticationInfo from "AuthenticationInfo";
+import { AuthContext } from "auth/AuthContext";
 
 import ChatBubble from "ChatBubble/ChatBubble";
 import { cannedErrorResponses, customErrorCodes } from "CannedErrorResponses";
@@ -15,6 +15,8 @@ import AVSGateway from "AVSGateway";
 const avs = new AVSGateway();
 
 class ChatWindow extends Component {
+  static contextType = AuthContext;
+
   constructor() {
     super();
     this.state = {
@@ -158,8 +160,8 @@ class ChatWindow extends Component {
     this.setState({ userRequestToAlexa: "" });
 
     let access_token;
-    if (AuthenticationInfo.isPresent()) {
-      access_token = AuthenticationInfo.getAccessToken();
+    if (this.context.isAuthenticated) {
+      access_token = this.context.getAccessToken();
     } else {
       console.log("Access token is missing.");
       // TODO: Should we redirect user to login page?
