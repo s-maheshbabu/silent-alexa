@@ -65,8 +65,8 @@ export function extractAlexaTextResponses(alexaRawResponse) {
     }
 
     _validateDirective(avsDirective);
-    // Directives that are not Speak directives (for ex, ExpectSpeech** directive) will be skipped for now. If and when we
-    // start supporting voice, non-Speak directives should also be handled.
+    // Directives that are not Speak directives (for ex, ExpectSpeech** directive) will be skipped for now. Tracking
+    // item to handle ExpectSpeech directives - https://github.com/s-maheshbabu/silent-alexa/issues/62
     // ** https://developer.amazon.com/docs/alexa-voice-service/speechrecognizer.html#expectspeech
     if (!_isSpeakDirective(avsDirective)) {
       console.log(
