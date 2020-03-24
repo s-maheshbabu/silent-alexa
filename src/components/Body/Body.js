@@ -11,10 +11,10 @@ export default function Body() {
   console.log(
     util.inspect(useContext(AuthContext), { showHidden: true, depth: null })
   );
-  const { getAccessToken } = useContext(AuthContext);
-  console.log("========" + getAccessToken());
+  const { isAuthenticated } = useContext(AuthContext);
+  console.log("========isAuthenticated " + isAuthenticated);
 
-  if (getAccessToken()) {
+  if (isAuthenticated) {
     return [
       <MuiThemeProvider key="muiThemeProvider">
         <ChatWindow />

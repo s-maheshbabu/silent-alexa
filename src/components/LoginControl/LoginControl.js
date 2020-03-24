@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import HeaderFlatButton from "HeaderFlatButton/HeaderFlatButton";
 import { AuthContext } from "auth/AuthContext";
+import { useHistory } from "react-router-dom";
 
 // Options variable to request for implicit grant.
 // TODO: Logic for assigning 'deviceSerialNumber' needs to be revisited.
@@ -20,9 +21,14 @@ export const REDIRECT_PATH = "/authresponse";
 
 export default function LoginControl() {
   const { clear, isAuthenticated } = useContext(AuthContext);
+  let history = useHistory();
 
   if (isAuthenticated) {
-    return <HeaderFlatButton label="Logout" onClick={clear} />;
+    return <HeaderFlatButton label="Logout" onClick={() => {
+      clear();
+      // TODO Should there be a logout page instead of routing to home page?
+      history.push("/");
+    }} />;
   } else {
     return <HeaderFlatButton label="Login" onClick={handleLogin} />;
   }

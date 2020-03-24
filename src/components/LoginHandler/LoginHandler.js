@@ -37,7 +37,7 @@ function isLWAResponseValid(lwaResponse) {
   ) {
     console.log(
       "Encountered an error on login: " +
-        util.inspect(lwaResponse, { showHidden: true, depth: null })
+      util.inspect(lwaResponse, { showHidden: true, depth: null })
     );
     return false;
   }

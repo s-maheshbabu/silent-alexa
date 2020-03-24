@@ -7,8 +7,11 @@ export const AuthContext = React.createContext();
 
 export const AMAZON_LOGIN_COOKIE = "amazon_Login_accessToken";
 
+// TODO This class is using the presence of AMAZON_LOGIN_COOKIE to mean that the user
+// is authenticated. The assumption is that Cookies.get won't return expired cookies. 
+// Is it true? If not, we should check for expiration of cookies.
 export default ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(Cookies.get(AMAZON_LOGIN_COOKIE) !== undefined);
 
   const defaultContext = {
     setLWAResponse: lwaResponse => {
@@ -20,6 +23,7 @@ export default ({ children }) => {
       return Cookies.get(AMAZON_LOGIN_COOKIE);
     },
     clear: () => {
+      console.log("Auth info cleared========");
       Cookies.remove(AMAZON_LOGIN_COOKIE);
       setIsAuthenticated(false);
     }
@@ -36,7 +40,7 @@ const _persist = lwaResponse => {
 
   if (lwaResponse && lwaResponse.access_token && lwaResponse.expires_in) {
     Cookies.set(AMAZON_LOGIN_COOKIE, lwaResponse.access_token, {
-      expires: lwaResponse.expires_in / numberOfSecondsInADay,
+      expires: lwaResponse.expires_in / numberOfSecondsInADay, // TODO Why are cookies expiring in an hour?
       secure: false // TODO: Change localhost to also use https and then change this to true.
     });
   } else {
