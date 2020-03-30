@@ -1,15 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders LoginControl with LoginButton component when isAuthenticationInfoValid returns falsy 1`] = `
-<HeaderFlatButton
-  label="Login"
-  onClick={[Function]}
-/>
+exports[`renders LoginControl with LoginButton component when the user is not authenticated 1`] = `
+<DocumentFragment>
+  <button
+    class="header-flat-button"
+    style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; height: 36px; line-height: 36px; min-width: 88px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 2px; user-select: none; overflow: hidden; background-color: rgba(0, 0, 0, 0); text-align: center;"
+    tabindex="0"
+    type="button"
+  >
+    <div>
+      <span
+        style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0; text-transform: uppercase; font-weight: 500; font-size: 14px;"
+      >
+        Login
+      </span>
+    </div>
+  </button>
+</DocumentFragment>
 `;
 
-exports[`renders LoginControl with LogoutButton component when isAuthenticationInfoValid returns truthy 1`] = `
-<HeaderFlatButton
-  label="Logout"
-  onClick={[Function]}
-/>
+exports[`renders LoginControl with LogoutButton component when the user is authenticated 1`] = `
+<DocumentFragment>
+  <button
+    class="header-flat-button"
+    style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; height: 36px; line-height: 36px; min-width: 88px; color: rgba(0, 0, 0, 0.87); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 2px; user-select: none; overflow: hidden; background-color: rgba(0, 0, 0, 0); text-align: center;"
+    tabindex="0"
+    type="button"
+  >
+    <div>
+      <span
+        style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0; text-transform: uppercase; font-weight: 500; font-size: 14px;"
+      >
+        Logout
+      </span>
+    </div>
+  </button>
+</DocumentFragment>
 `;

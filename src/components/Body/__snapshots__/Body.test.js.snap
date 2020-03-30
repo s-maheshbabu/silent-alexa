@@ -1,14 +1,996 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders Body when isAuthenticationInfoValid returns false 1`] = `<WelcomeScreen />`;
+exports[`renders Body when user is authenticated  1`] = `
+<DocumentFragment>
+  <div
+    id="leftpanel"
+  >
+    <div
+      class="panel-body"
+    >
+      <div
+        id="chat-panel"
+        style="display: flex; flex-direction: column; flex: 1; overflow: hidden; height: 100%;"
+      >
+        <div
+          class="chat-history"
+          style="overflow: auto; max-height: 0;"
+        >
+          <div
+            class="chat-messages"
+          >
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="width: 80%; display: inline-block; float: right;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: right; background: rgb(100, 106, 114);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hello Alexa!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="margin: 0px; font-size: 14px; font-weight: 400; color: rgb(153, 153, 153); display: inline-block; float: left; width: auto; padding-right: 5px;"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M0,10.0000489 C0,15.0707816 3.77428289,19.2594477 8.66667972,19.9113334 L8.66667972,17.8962718 C8.66667972,17.3281595 8.30829606,16.8174945 7.76974193,16.636736 C4.94690794,15.688512 2.927648,12.9904434 3.00202582,9.8313279 C3.09245359,5.9853886 6.22532565,2.96152397 10.0722248,3.00037678 C13.9049334,3.03913173 16.9999315,6.15812215 16.9999315,10.0000489 C16.9999315,10.087639 16.9977785,10.1747398 16.9945489,10.2614491 C16.9887748,10.4004189 16.9838815,10.4807669 16.9775203,10.5606256 C16.975563,10.5860707 16.9731163,10.611418 16.9707676,10.6367653 C16.9658743,10.692549 16.9601002,10.7479411 16.9538368,10.8032355 C16.9466926,10.8660654 16.9385698,10.928504 16.9298598,10.9906489 C16.9258473,11.01903 16.9220305,11.0475091 16.9177244,11.0756945 C16.0607158,16.7212922 8.70778325,19.8942068 8.66756051,19.9115291 C9.10355154,19.9694658 9.54815475,20 9.99990213,20 C15.5228467,20 20,15.5229227 20,10.0000489 C20,4.47717519 15.5228467,0 9.99990213,0 C4.47715329,0 0,4.47717519 0,10.0000489 Z"
+                    fill="#00ACE0"
+                    transform="translate(2 2)"
+                  />
+                </svg>
+              </div>
+              <div
+                style="width: 80%; display: inline-block; float: left;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: left; background: rgb(0, 172, 224);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hey! Alexa here.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="width: 80%; display: inline-block; float: right;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: right; background: rgb(100, 106, 114);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hello Alexa!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="margin: 0px; font-size: 14px; font-weight: 400; color: rgb(153, 153, 153); display: inline-block; float: left; width: auto; padding-right: 5px;"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M0,10.0000489 C0,15.0707816 3.77428289,19.2594477 8.66667972,19.9113334 L8.66667972,17.8962718 C8.66667972,17.3281595 8.30829606,16.8174945 7.76974193,16.636736 C4.94690794,15.688512 2.927648,12.9904434 3.00202582,9.8313279 C3.09245359,5.9853886 6.22532565,2.96152397 10.0722248,3.00037678 C13.9049334,3.03913173 16.9999315,6.15812215 16.9999315,10.0000489 C16.9999315,10.087639 16.9977785,10.1747398 16.9945489,10.2614491 C16.9887748,10.4004189 16.9838815,10.4807669 16.9775203,10.5606256 C16.975563,10.5860707 16.9731163,10.611418 16.9707676,10.6367653 C16.9658743,10.692549 16.9601002,10.7479411 16.9538368,10.8032355 C16.9466926,10.8660654 16.9385698,10.928504 16.9298598,10.9906489 C16.9258473,11.01903 16.9220305,11.0475091 16.9177244,11.0756945 C16.0607158,16.7212922 8.70778325,19.8942068 8.66756051,19.9115291 C9.10355154,19.9694658 9.54815475,20 9.99990213,20 C15.5228467,20 20,15.5229227 20,10.0000489 C20,4.47717519 15.5228467,0 9.99990213,0 C4.47715329,0 0,4.47717519 0,10.0000489 Z"
+                    fill="#00ACE0"
+                    transform="translate(2 2)"
+                  />
+                </svg>
+              </div>
+              <div
+                style="width: 80%; display: inline-block; float: left;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: left; background: rgb(0, 172, 224);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hey! Alexa here.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="width: 80%; display: inline-block; float: right;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: right; background: rgb(100, 106, 114);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hello Alexa!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="margin: 0px; font-size: 14px; font-weight: 400; color: rgb(153, 153, 153); display: inline-block; float: left; width: auto; padding-right: 5px;"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M0,10.0000489 C0,15.0707816 3.77428289,19.2594477 8.66667972,19.9113334 L8.66667972,17.8962718 C8.66667972,17.3281595 8.30829606,16.8174945 7.76974193,16.636736 C4.94690794,15.688512 2.927648,12.9904434 3.00202582,9.8313279 C3.09245359,5.9853886 6.22532565,2.96152397 10.0722248,3.00037678 C13.9049334,3.03913173 16.9999315,6.15812215 16.9999315,10.0000489 C16.9999315,10.087639 16.9977785,10.1747398 16.9945489,10.2614491 C16.9887748,10.4004189 16.9838815,10.4807669 16.9775203,10.5606256 C16.975563,10.5860707 16.9731163,10.611418 16.9707676,10.6367653 C16.9658743,10.692549 16.9601002,10.7479411 16.9538368,10.8032355 C16.9466926,10.8660654 16.9385698,10.928504 16.9298598,10.9906489 C16.9258473,11.01903 16.9220305,11.0475091 16.9177244,11.0756945 C16.0607158,16.7212922 8.70778325,19.8942068 8.66756051,19.9115291 C9.10355154,19.9694658 9.54815475,20 9.99990213,20 C15.5228467,20 20,15.5229227 20,10.0000489 C20,4.47717519 15.5228467,0 9.99990213,0 C4.47715329,0 0,4.47717519 0,10.0000489 Z"
+                    fill="#00ACE0"
+                    transform="translate(2 2)"
+                  />
+                </svg>
+              </div>
+              <div
+                style="width: 80%; display: inline-block; float: left;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: left; background: rgb(0, 172, 224);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hey! Alexa here.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="width: 80%; display: inline-block; float: right;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: right; background: rgb(100, 106, 114);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hello Alexa!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="margin: 0px; font-size: 14px; font-weight: 400; color: rgb(153, 153, 153); display: inline-block; float: left; width: auto; padding-right: 5px;"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M0,10.0000489 C0,15.0707816 3.77428289,19.2594477 8.66667972,19.9113334 L8.66667972,17.8962718 C8.66667972,17.3281595 8.30829606,16.8174945 7.76974193,16.636736 C4.94690794,15.688512 2.927648,12.9904434 3.00202582,9.8313279 C3.09245359,5.9853886 6.22532565,2.96152397 10.0722248,3.00037678 C13.9049334,3.03913173 16.9999315,6.15812215 16.9999315,10.0000489 C16.9999315,10.087639 16.9977785,10.1747398 16.9945489,10.2614491 C16.9887748,10.4004189 16.9838815,10.4807669 16.9775203,10.5606256 C16.975563,10.5860707 16.9731163,10.611418 16.9707676,10.6367653 C16.9658743,10.692549 16.9601002,10.7479411 16.9538368,10.8032355 C16.9466926,10.8660654 16.9385698,10.928504 16.9298598,10.9906489 C16.9258473,11.01903 16.9220305,11.0475091 16.9177244,11.0756945 C16.0607158,16.7212922 8.70778325,19.8942068 8.66756051,19.9115291 C9.10355154,19.9694658 9.54815475,20 9.99990213,20 C15.5228467,20 20,15.5229227 20,10.0000489 C20,4.47717519 15.5228467,0 9.99990213,0 C4.47715329,0 0,4.47717519 0,10.0000489 Z"
+                    fill="#00ACE0"
+                    transform="translate(2 2)"
+                  />
+                </svg>
+              </div>
+              <div
+                style="width: 80%; display: inline-block; float: left;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: left; background: rgb(0, 172, 224);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hey! Alexa here.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="width: 80%; display: inline-block; float: right;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: right; background: rgb(100, 106, 114);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hello Alexa!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="margin: 0px; font-size: 14px; font-weight: 400; color: rgb(153, 153, 153); display: inline-block; float: left; width: auto; padding-right: 5px;"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M0,10.0000489 C0,15.0707816 3.77428289,19.2594477 8.66667972,19.9113334 L8.66667972,17.8962718 C8.66667972,17.3281595 8.30829606,16.8174945 7.76974193,16.636736 C4.94690794,15.688512 2.927648,12.9904434 3.00202582,9.8313279 C3.09245359,5.9853886 6.22532565,2.96152397 10.0722248,3.00037678 C13.9049334,3.03913173 16.9999315,6.15812215 16.9999315,10.0000489 C16.9999315,10.087639 16.9977785,10.1747398 16.9945489,10.2614491 C16.9887748,10.4004189 16.9838815,10.4807669 16.9775203,10.5606256 C16.975563,10.5860707 16.9731163,10.611418 16.9707676,10.6367653 C16.9658743,10.692549 16.9601002,10.7479411 16.9538368,10.8032355 C16.9466926,10.8660654 16.9385698,10.928504 16.9298598,10.9906489 C16.9258473,11.01903 16.9220305,11.0475091 16.9177244,11.0756945 C16.0607158,16.7212922 8.70778325,19.8942068 8.66756051,19.9115291 C9.10355154,19.9694658 9.54815475,20 9.99990213,20 C15.5228467,20 20,15.5229227 20,10.0000489 C20,4.47717519 15.5228467,0 9.99990213,0 C4.47715329,0 0,4.47717519 0,10.0000489 Z"
+                    fill="#00ACE0"
+                    transform="translate(2 2)"
+                  />
+                </svg>
+              </div>
+              <div
+                style="width: 80%; display: inline-block; float: left;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: left; background: rgb(0, 172, 224);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hey! Alexa here.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="width: 80%; display: inline-block; float: right;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: right; background: rgb(100, 106, 114);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hello Alexa!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="margin: 0px; font-size: 14px; font-weight: 400; color: rgb(153, 153, 153); display: inline-block; float: left; width: auto; padding-right: 5px;"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M0,10.0000489 C0,15.0707816 3.77428289,19.2594477 8.66667972,19.9113334 L8.66667972,17.8962718 C8.66667972,17.3281595 8.30829606,16.8174945 7.76974193,16.636736 C4.94690794,15.688512 2.927648,12.9904434 3.00202582,9.8313279 C3.09245359,5.9853886 6.22532565,2.96152397 10.0722248,3.00037678 C13.9049334,3.03913173 16.9999315,6.15812215 16.9999315,10.0000489 C16.9999315,10.087639 16.9977785,10.1747398 16.9945489,10.2614491 C16.9887748,10.4004189 16.9838815,10.4807669 16.9775203,10.5606256 C16.975563,10.5860707 16.9731163,10.611418 16.9707676,10.6367653 C16.9658743,10.692549 16.9601002,10.7479411 16.9538368,10.8032355 C16.9466926,10.8660654 16.9385698,10.928504 16.9298598,10.9906489 C16.9258473,11.01903 16.9220305,11.0475091 16.9177244,11.0756945 C16.0607158,16.7212922 8.70778325,19.8942068 8.66756051,19.9115291 C9.10355154,19.9694658 9.54815475,20 9.99990213,20 C15.5228467,20 20,15.5229227 20,10.0000489 C20,4.47717519 15.5228467,0 9.99990213,0 C4.47715329,0 0,4.47717519 0,10.0000489 Z"
+                    fill="#00ACE0"
+                    transform="translate(2 2)"
+                  />
+                </svg>
+              </div>
+              <div
+                style="width: 80%; display: inline-block; float: left;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: left; background: rgb(0, 172, 224);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hey! Alexa here.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="width: 80%; display: inline-block; float: right;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: right; background: rgb(100, 106, 114);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hello Alexa!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="margin: 0px; font-size: 14px; font-weight: 400; color: rgb(153, 153, 153); display: inline-block; float: left; width: auto; padding-right: 5px;"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M0,10.0000489 C0,15.0707816 3.77428289,19.2594477 8.66667972,19.9113334 L8.66667972,17.8962718 C8.66667972,17.3281595 8.30829606,16.8174945 7.76974193,16.636736 C4.94690794,15.688512 2.927648,12.9904434 3.00202582,9.8313279 C3.09245359,5.9853886 6.22532565,2.96152397 10.0722248,3.00037678 C13.9049334,3.03913173 16.9999315,6.15812215 16.9999315,10.0000489 C16.9999315,10.087639 16.9977785,10.1747398 16.9945489,10.2614491 C16.9887748,10.4004189 16.9838815,10.4807669 16.9775203,10.5606256 C16.975563,10.5860707 16.9731163,10.611418 16.9707676,10.6367653 C16.9658743,10.692549 16.9601002,10.7479411 16.9538368,10.8032355 C16.9466926,10.8660654 16.9385698,10.928504 16.9298598,10.9906489 C16.9258473,11.01903 16.9220305,11.0475091 16.9177244,11.0756945 C16.0607158,16.7212922 8.70778325,19.8942068 8.66756051,19.9115291 C9.10355154,19.9694658 9.54815475,20 9.99990213,20 C15.5228467,20 20,15.5229227 20,10.0000489 C20,4.47717519 15.5228467,0 9.99990213,0 C4.47715329,0 0,4.47717519 0,10.0000489 Z"
+                    fill="#00ACE0"
+                    transform="translate(2 2)"
+                  />
+                </svg>
+              </div>
+              <div
+                style="width: 80%; display: inline-block; float: left;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: left; background: rgb(0, 172, 224);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hey! Alexa here.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="width: 80%; display: inline-block; float: right;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: right; background: rgb(100, 106, 114);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hello Alexa!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="margin: 0px; font-size: 14px; font-weight: 400; color: rgb(153, 153, 153); display: inline-block; float: left; width: auto; padding-right: 5px;"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M0,10.0000489 C0,15.0707816 3.77428289,19.2594477 8.66667972,19.9113334 L8.66667972,17.8962718 C8.66667972,17.3281595 8.30829606,16.8174945 7.76974193,16.636736 C4.94690794,15.688512 2.927648,12.9904434 3.00202582,9.8313279 C3.09245359,5.9853886 6.22532565,2.96152397 10.0722248,3.00037678 C13.9049334,3.03913173 16.9999315,6.15812215 16.9999315,10.0000489 C16.9999315,10.087639 16.9977785,10.1747398 16.9945489,10.2614491 C16.9887748,10.4004189 16.9838815,10.4807669 16.9775203,10.5606256 C16.975563,10.5860707 16.9731163,10.611418 16.9707676,10.6367653 C16.9658743,10.692549 16.9601002,10.7479411 16.9538368,10.8032355 C16.9466926,10.8660654 16.9385698,10.928504 16.9298598,10.9906489 C16.9258473,11.01903 16.9220305,11.0475091 16.9177244,11.0756945 C16.0607158,16.7212922 8.70778325,19.8942068 8.66756051,19.9115291 C9.10355154,19.9694658 9.54815475,20 9.99990213,20 C15.5228467,20 20,15.5229227 20,10.0000489 C20,4.47717519 15.5228467,0 9.99990213,0 C4.47715329,0 0,4.47717519 0,10.0000489 Z"
+                    fill="#00ACE0"
+                    transform="translate(2 2)"
+                  />
+                </svg>
+              </div>
+              <div
+                style="width: 80%; display: inline-block; float: left;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: left; background: rgb(0, 172, 224);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hey! Alexa here.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="width: 80%; display: inline-block; float: right;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: right; background: rgb(100, 106, 114);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hello Alexa!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="margin: 0px; font-size: 14px; font-weight: 400; color: rgb(153, 153, 153); display: inline-block; float: left; width: auto; padding-right: 5px;"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M0,10.0000489 C0,15.0707816 3.77428289,19.2594477 8.66667972,19.9113334 L8.66667972,17.8962718 C8.66667972,17.3281595 8.30829606,16.8174945 7.76974193,16.636736 C4.94690794,15.688512 2.927648,12.9904434 3.00202582,9.8313279 C3.09245359,5.9853886 6.22532565,2.96152397 10.0722248,3.00037678 C13.9049334,3.03913173 16.9999315,6.15812215 16.9999315,10.0000489 C16.9999315,10.087639 16.9977785,10.1747398 16.9945489,10.2614491 C16.9887748,10.4004189 16.9838815,10.4807669 16.9775203,10.5606256 C16.975563,10.5860707 16.9731163,10.611418 16.9707676,10.6367653 C16.9658743,10.692549 16.9601002,10.7479411 16.9538368,10.8032355 C16.9466926,10.8660654 16.9385698,10.928504 16.9298598,10.9906489 C16.9258473,11.01903 16.9220305,11.0475091 16.9177244,11.0756945 C16.0607158,16.7212922 8.70778325,19.8942068 8.66756051,19.9115291 C9.10355154,19.9694658 9.54815475,20 9.99990213,20 C15.5228467,20 20,15.5229227 20,10.0000489 C20,4.47717519 15.5228467,0 9.99990213,0 C4.47715329,0 0,4.47717519 0,10.0000489 Z"
+                    fill="#00ACE0"
+                    transform="translate(2 2)"
+                  />
+                </svg>
+              </div>
+              <div
+                style="width: 80%; display: inline-block; float: left;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: left; background: rgb(0, 172, 224);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hey! Alexa here.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="width: 80%; display: inline-block; float: right;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: right; background: rgb(100, 106, 114);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hello Alexa!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="margin: 0px; font-size: 14px; font-weight: 400; color: rgb(153, 153, 153); display: inline-block; float: left; width: auto; padding-right: 5px;"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M0,10.0000489 C0,15.0707816 3.77428289,19.2594477 8.66667972,19.9113334 L8.66667972,17.8962718 C8.66667972,17.3281595 8.30829606,16.8174945 7.76974193,16.636736 C4.94690794,15.688512 2.927648,12.9904434 3.00202582,9.8313279 C3.09245359,5.9853886 6.22532565,2.96152397 10.0722248,3.00037678 C13.9049334,3.03913173 16.9999315,6.15812215 16.9999315,10.0000489 C16.9999315,10.087639 16.9977785,10.1747398 16.9945489,10.2614491 C16.9887748,10.4004189 16.9838815,10.4807669 16.9775203,10.5606256 C16.975563,10.5860707 16.9731163,10.611418 16.9707676,10.6367653 C16.9658743,10.692549 16.9601002,10.7479411 16.9538368,10.8032355 C16.9466926,10.8660654 16.9385698,10.928504 16.9298598,10.9906489 C16.9258473,11.01903 16.9220305,11.0475091 16.9177244,11.0756945 C16.0607158,16.7212922 8.70778325,19.8942068 8.66756051,19.9115291 C9.10355154,19.9694658 9.54815475,20 9.99990213,20 C15.5228467,20 20,15.5229227 20,10.0000489 C20,4.47717519 15.5228467,0 9.99990213,0 C4.47715329,0 0,4.47717519 0,10.0000489 Z"
+                    fill="#00ACE0"
+                    transform="translate(2 2)"
+                  />
+                </svg>
+              </div>
+              <div
+                style="width: 80%; display: inline-block; float: left;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: left; background: rgb(0, 172, 224);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hey! Alexa here.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="width: 80%; display: inline-block; float: right;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: right; background: rgb(100, 106, 114);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hello Alexa!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="margin: 0px; font-size: 14px; font-weight: 400; color: rgb(153, 153, 153); display: inline-block; float: left; width: auto; padding-right: 5px;"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                >
+                  <path
+                    d="M0,10.0000489 C0,15.0707816 3.77428289,19.2594477 8.66667972,19.9113334 L8.66667972,17.8962718 C8.66667972,17.3281595 8.30829606,16.8174945 7.76974193,16.636736 C4.94690794,15.688512 2.927648,12.9904434 3.00202582,9.8313279 C3.09245359,5.9853886 6.22532565,2.96152397 10.0722248,3.00037678 C13.9049334,3.03913173 16.9999315,6.15812215 16.9999315,10.0000489 C16.9999315,10.087639 16.9977785,10.1747398 16.9945489,10.2614491 C16.9887748,10.4004189 16.9838815,10.4807669 16.9775203,10.5606256 C16.975563,10.5860707 16.9731163,10.611418 16.9707676,10.6367653 C16.9658743,10.692549 16.9601002,10.7479411 16.9538368,10.8032355 C16.9466926,10.8660654 16.9385698,10.928504 16.9298598,10.9906489 C16.9258473,11.01903 16.9220305,11.0475091 16.9177244,11.0756945 C16.0607158,16.7212922 8.70778325,19.8942068 8.66756051,19.9115291 C9.10355154,19.9694658 9.54815475,20 9.99990213,20 C15.5228467,20 20,15.5229227 20,10.0000489 C20,4.47717519 15.5228467,0 9.99990213,0 C4.47715329,0 0,4.47717519 0,10.0000489 Z"
+                    fill="#00ACE0"
+                    transform="translate(2 2)"
+                  />
+                </svg>
+              </div>
+              <div
+                style="width: 80%; display: inline-block; float: left;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: left; background: rgb(0, 172, 224);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hey! Alexa here.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="margin-top: 10px; margin-bottom: 10px; overflow: auto; position: relative;"
+            >
+              <div
+                style="width: 80%; display: inline-block; float: right;"
+              >
+                <div>
+                  <h5
+                    style="display: inline; vertical-align: text-top;"
+                  >
+                     
+                    <small
+                      style="font-size: 9px; margin-left: 5px;"
+                    >
+                       
+                    </small>
+                  </h5>
+                </div>
+                <div
+                  style="overflow: auto; display: inlin;"
+                >
+                  <div
+                    style="border-radius: 20px; margin: 1px auto 1px auto; max-width: 425px; position: relative; overflow: hidden; padding: 8px 8px 8px 8px; float: right; background: rgb(100, 106, 114);"
+                  >
+                    <p
+                      style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 300; margin: 0px; display: inline-block;"
+                    >
+                      Hello Alexa!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      id="chat-input"
+    >
+      <form>
+        <div
+          style="font-size: 16px; line-height: 24px; width: 256px; height: 48px; display: inline-block; position: relative; background-color: transparent; font-family: Roboto, sans-serif; transition: height 200ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; cursor: auto;"
+        >
+          <div
+            style="position: absolute; opacity: 1; color: rgba(0, 0, 0, 0.3); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; bottom: 12px;"
+          >
+            Type your request for Alexa..
+          </div>
+          <input
+            id="user-request-to-alexa-text-field"
+            style="appearance: textfield; padding: 0px; position: relative; width: 100%; outline: none; background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0.87); cursor: inherit; height: 100%;"
+            type="text"
+            value=""
+          />
+          <div>
+            <hr
+              aria-hidden="true"
+              style="border-bottom-style: solid; border-bottom-width: 1px; border-color: #e0e0e0; bottom: 8px; box-sizing: content-box; margin: 0px; position: absolute; width: 100%;"
+            />
+            <hr
+              aria-hidden="true"
+              style="border-bottom-style: solid; border-bottom-width: 2px; border-color: #00bcd4; bottom: 8px; box-sizing: content-box; margin: 0px; position: absolute; width: 100%; transform: scaleX(0); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div
+    id="rightpanel"
+  >
+    <div
+      class="panel-body"
+    >
+      Right side content
+    </div>
+  </div>
+</DocumentFragment>
+`;
 
-exports[`renders Body when isAuthenticationInfoValid returns true 1`] = `
-Array [
-  <MuiThemeProvider
-    key="muiThemeProvider"
-/>,
-  <RightPanel
-    key="rightPanel"
-/>,
-]
+exports[`renders Body when user is not authenticated 1`] = `
+<DocumentFragment>
+  <div
+    id="welcome-screen"
+  >
+    <h1>
+       WELCOME TO SILENT ALEXA (Under Construction) 
+    </h1>
+    <h1>
+       Login to get started 
+    </h1>
+  </div>
+</DocumentFragment>
 `;

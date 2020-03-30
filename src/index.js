@@ -2,12 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "index.css";
 import App from "App/App";
+import AuthContext from "auth/AuthContextProvider";
 import { BrowserRouter as Router } from "react-router-dom";
 import registerServiceWorker from "registerServiceWorker";
 
 ReactDOM.render(
   <Router>
-    <App />
+    <AuthContext>
+      <App />
+    </AuthContext>
   </Router>,
   document.getElementById("root")
 );

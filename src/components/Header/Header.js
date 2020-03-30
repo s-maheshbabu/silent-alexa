@@ -5,13 +5,8 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import LoginControl from "LoginControl/LoginControl";
 import "./Header.css";
 
-function _LoginControlInHeader(props) {
-  return (
-    <LoginControl
-      isAuthenticationInfoValid={() => props.isAuthenticationInfoValid()}
-      clearAuthenticationInfo={() => props.clearAuthenticationInfo()}
-    />
-  );
+function _LoginControlInHeader() {
+  return <LoginControl />;
 }
 
 export default function Header(props) {

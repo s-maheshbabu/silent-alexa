@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import HeaderFlatButton from "HeaderFlatButton/HeaderFlatButton";
+import { AuthContext } from "auth/AuthContextProvider";
 
 // Options variable to request for implicit grant.
 // TODO: Logic for assigning 'deviceSerialNumber' needs to be revisited.
@@ -15,31 +16,25 @@ export const options = Object.freeze({
 });
 
 // Redirect path to handle the response from LoginWithAmazon
-export const REDIRECT_PATH = "authresponse";
+export const REDIRECT_PATH = "/authresponse";
 
-export default class LoginControl extends React.Component {
-  render() {
-    if (this.props.isAuthenticationInfoValid()) {
-      return (
-        <HeaderFlatButton label="Logout" onClick={() => this.handleLogout()} />
-      );
-    } else {
-      return (
-        <HeaderFlatButton label="Login" onClick={() => this.handleLogin()} />
-      );
-    }
-  }
+export default function LoginControl() {
+  const { clear, isAuthenticated } = useContext(AuthContext);
 
-  handleLogin() {
-    // The authorization service will redirect the user-agent to the redirect path
-    // which will contain an authorization response as a URI fragment
-    window.amazon.Login.authorize(
-      options,
-      window.location.href + REDIRECT_PATH
-    );
+  if (isAuthenticated) {
+    return <HeaderFlatButton label="Logout" onClick={() => {
+      clear();
+    }} />;
+  } else {
+    return <HeaderFlatButton label="Login" onClick={handleLogin} />;
   }
+}
 
-  handleLogout() {
-    this.props.clearAuthenticationInfo();
-  }
+function handleLogin() {
+  // The authorization service will redirect the user-agent to the redirect path
+  // which will contain an authorization response as a URI fragment
+  window.amazon.Login.authorize(
+    options,
+    window.location.href.replace(/\/+$/, "") + REDIRECT_PATH
+  );
 }

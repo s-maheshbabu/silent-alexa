@@ -4,17 +4,9 @@ exports[`renders correctly without crashing 1`] = `
 <div
   id="page"
 >
-  <Routes
-    updateAuthenticationInfo={[Function]}
-  />
-  <Header
-    clearAuthenticationInfo={[Function]}
-    isAuthenticationInfoValid={[Function]}
-  />
-  <Body
-    clearAuthenticationInfo={[Function]}
-    isAuthenticationInfoValid={[Function]}
-  />
+  <Routes />
+  <Header />
+  <Body />
   <Footer />
 </div>
 `;

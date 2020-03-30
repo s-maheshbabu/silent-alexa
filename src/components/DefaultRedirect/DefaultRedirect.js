@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 
 /*
   Component to redirect to home page. This component is currently rendered 
@@ -6,12 +7,6 @@ import React from "react";
 */
 export default class DefaultRedirect extends React.Component {
   render() {
-    return null;
-  }
-
-  componentWillMount() {
-    if (this.props.history) {
-      this.props.history.push("/");
-    }
+    return <Redirect to="/" />;
   }
 }
