@@ -14,6 +14,8 @@ import { chatters, chatterIds } from "Chatters";
 import AVSGateway from "AVSGateway";
 const avs = new AVSGateway();
 
+// TODO: Existing dependency for chat window is not supported. Just making a note of
+// a potentially better supported solution https://github.com/FaridSafi/react-native-gifted-chat
 class ChatWindow extends Component {
   static contextType = AuthContext;
 
