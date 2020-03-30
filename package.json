@@ -31,6 +31,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "@testing-library/react": "^10.0.1",
     "clone": "^2.1.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",

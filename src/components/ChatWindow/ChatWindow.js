@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ChatFeed, Message } from "monkas-chat";
 import ContainerDimensions from "react-container-dimensions";
-import { AuthContext } from "auth/AuthContext";
+import { AuthContext } from "auth/AuthContextProvider";
 
 import ChatBubble from "ChatBubble/ChatBubble";
 import { cannedErrorResponses, customErrorCodes } from "CannedErrorResponses";

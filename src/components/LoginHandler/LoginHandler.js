@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Router, Redirect } from "react-router-dom";
 import queryString from "query-string";
 import util from "util";
-import { AuthContext } from "auth/AuthContext";
+import { AuthContext } from "auth/AuthContextProvider";
 import { hasIn } from "immutable";
 
 export default function LoginHandler(props) {
@@ -15,13 +15,10 @@ export default function LoginHandler(props) {
   const { setLWAResponse } = useContext(AuthContext);
   if (isLWAResponseValid(lwaResponse)) {
     setLWAResponse(lwaResponse);
+    return <Redirect to="/" />;
   }
-
-  // TODO: This needs to be tested. Moreover, does this need to be inside one
-  // of the above if conditions so we redirect only if successful? May be redirect
-  // somewhere else if Login failed?
-  console.log(props.location);
-  return <Redirect to="/" />;
+  else
+    return <Redirect to="/access_denied" />;
 }
 
 /**

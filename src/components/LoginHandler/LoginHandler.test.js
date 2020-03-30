@@ -1,37 +1,36 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
 import queryString from "query-string";
 import LoginHandler from "./LoginHandler";
-import AuthenticationInfo from "AuthenticationInfo";
-
-jest.mock("AuthenticationInfo");
+import { AuthContext } from "auth/AuthContextProvider";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from 'history';
+import { render, cleanup } from '@testing-library/react';
 
 beforeEach(() => {
   jest.resetAllMocks();
 });
 
-it("renders LoginHandler without crashing", () => {
-  const wrapper = mount(<LoginHandler />);
+afterEach(cleanup);
 
-  expect(wrapper).toMatchSnapshot();
+const setLWAResponseSpy = jest.fn();
+const contextValue = {
+  setLWAResponse: setLWAResponseSpy
+};
 
-  wrapper.unmount();
-});
-
-it("expects AuthenticationInfo to be persisted when LoginHandler is mounted", () => {
+it("expects LWA response to be persisted and user routed to the appropriate page in happy case", () => {
   const lwaResponseHash = "access_token=some_access_token&expires_in=30";
   const routeProps = { location: { hash: lwaResponseHash } };
-  const wrapper = mount(<LoginHandler {...routeProps} />);
+  const { history } = renderWithRouter(<LoginHandler {...routeProps} />, contextValue);
 
-  expect(AuthenticationInfo.persist).toHaveBeenCalledTimes(1);
-  expect(AuthenticationInfo.persist).toHaveBeenCalledWith(
+  expect(setLWAResponseSpy).toHaveBeenCalledTimes(1);
+  expect(setLWAResponseSpy).toHaveBeenCalledWith(
     queryString.parse(lwaResponseHash)
   );
 
-  wrapper.unmount();
+  expect(history.location.pathname).toEqual('/');
 });
 
-it("expects AuthenticationInfo persist to not be called when LoginHandler is mounted with invalid parameters", () => {
+it("expects LWA response to not be persisted and user routed to an appropriate page when LWA response is invalid or incomplete", () => {
   const lwaResponseWithNoAccessToken =
     "error_token=some_access_token&expires_in=30";
   const lwaResponseWithNoExpiresIn = "access_token=some_access_token";
@@ -61,14 +60,33 @@ it("expects AuthenticationInfo persist to not be called when LoginHandler is mou
   ];
 
   allRoutePropsObjects.map(routeProps => {
-    const wrapper = mount(<LoginHandler {...routeProps} />);
-    expect(AuthenticationInfo.persist).not.toHaveBeenCalled();
-    wrapper.unmount();
+    const { history } = renderWithRouter(<LoginHandler {...routeProps} />, contextValue);
+
+    expect(history.location.pathname).toEqual('/access_denied');
+    expect(setLWAResponseSpy).not.toHaveBeenCalled();
   });
 });
 
-it("expects AuthenticationInfo persist to not be called when LoginHandler is mounted without route props", () => {
-  const wrapperWithNoRouteProps = mount(<LoginHandler />);
-  expect(AuthenticationInfo.persist).not.toHaveBeenCalled();
-  wrapperWithNoRouteProps.unmount();
+it("expects LWA response to not be persisted when no route props are given", () => {
+  renderWithRouter(<LoginHandler />, contextValue);
+  expect(setLWAResponseSpy).not.toHaveBeenCalled();
 });
+
+function renderWithRouter(
+  ui,
+  contextValue,
+  {
+    route = '/',
+    history = createMemoryHistory({ initialEntries: [route] }),
+  } = {}
+) {
+  return {
+    ...render(
+      <Router history={history}>
+        <AuthContext.Provider value={contextValue}>
+          {ui}
+        </AuthContext.Provider>
+      </Router>),
+    history
+  }
+}

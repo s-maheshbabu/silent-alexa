@@ -6,7 +6,7 @@ import { List, fromJS } from "immutable";
 import { ChatFeed, Message } from "monkas-chat";
 import ChatWindow from "./ChatWindow";
 import { cannedErrorResponses, customErrorCodes } from "CannedErrorResponses";
-import AuthenticationInfo from "AuthenticationInfo";
+import { AuthContext } from "auth/AuthContextProvider";
 
 import {
   mockSendTextMessageEventFunction,
@@ -18,7 +18,7 @@ import { chatters, chatterIds } from "Chatters";
 const CHATFEED_CONTAINER_HEIGHT = 234;
 const CHATFEED_CONTAINER_HEIGHT_DEFAULT = 0;
 
-const setHeightElement = function(height) {
+const setHeightElement = function (height) {
   Element.prototype.getBoundingClientRect = jest.fn(() => {
     return {
       height: height
@@ -27,7 +27,6 @@ const setHeightElement = function(height) {
 };
 
 jest.mock("AVSGateway");
-jest.mock("AuthenticationInfo");
 
 let chatWindow;
 let chatWindowInstance;
@@ -51,7 +50,7 @@ it("passes height of container to ChatFeed component", () => {
   // Set `height` element.
   setHeightElement(CHATFEED_CONTAINER_HEIGHT);
 
-  const wrapper = mount(<ChatWindow />);
+  const wrapper = mountWithContext(<ChatWindow />, {});
   const chatFeed = wrapper.find(ChatFeed);
 
   expect(chatFeed.length).toBe(1);
@@ -116,10 +115,12 @@ it("handles gracefully when pushMessage is called with an empty or null message"
 });
 
 test("that when a user submits the form, we do not call AVSGateway if the access_token is undefined.", () => {
-  const isPresentMock = jest.spyOn(AuthenticationInfo, "isPresent");
-  isPresentMock.mockImplementation(() => false);
-
-  const chatWindow = mount(<ChatWindow />);
+  const contextValue = {
+    isAuthenticated: false
+  };
+  const chatWindow = mount(<AuthContext.Provider value={contextValue}>
+    <ChatWindow />
+  </AuthContext.Provider>);
   const chatWindowInstance = chatWindow.instance();
 
   const userRequestToAlexa = "a dummy user request";
@@ -225,12 +226,11 @@ const testOnUserRequestToAlexaSubmitHandling = (
   done
 ) => {
   const access_token = "a dummy access token";
-  const isPresentMock = jest.spyOn(AuthenticationInfo, "isPresent");
-  isPresentMock.mockImplementation(() => true);
-  const getAccessTokenMock = jest.spyOn(AuthenticationInfo, "getAccessToken");
-  getAccessTokenMock.mockImplementation(() => access_token);
-
-  const chatWindow = mount(<ChatWindow />);
+  const contextValue = {
+    isAuthenticated: true,
+    getAccessToken: () => access_token
+  };
+  const chatWindow = mountWithContext(<ChatWindow />, contextValue);
   const chatWindowInstance = chatWindow.instance();
   const originalState = clone(chatWindowInstance.state);
 
@@ -289,3 +289,10 @@ const testOnUserRequestToAlexaSubmitHandling = (
 afterEach(() => {
   chatWindow.unmount();
 });
+
+const mountWithContext = (component, contextValue) => {
+  return mount(
+    <AuthContext.Provider value={contextValue}>
+      {component}
+    </AuthContext.Provider>)
+}

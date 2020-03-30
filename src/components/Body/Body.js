@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AuthContext } from "auth/AuthContext";
+import { AuthContext } from "auth/AuthContextProvider";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import ChatWindow from "ChatWindow/ChatWindow";
 import RightPanel from "RightPanel/RightPanel";
@@ -12,7 +12,6 @@ export default function Body() {
     util.inspect(useContext(AuthContext), { showHidden: true, depth: null })
   );
   const { isAuthenticated } = useContext(AuthContext);
-  console.log("========isAuthenticated " + isAuthenticated);
 
   if (isAuthenticated) {
     return [

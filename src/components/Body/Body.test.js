@@ -1,42 +1,34 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
 import Body from "./Body";
-import MyAuthContext, { AuthContext } from "auth/AuthContext";
+import { AuthContext } from "auth/AuthContextProvider";
+import { render, cleanup } from '@testing-library/react';
 
-// jest.mock("AuthContext");
+afterEach(cleanup);
 
-beforeEach(() => {
-  jest.resetAllMocks();
+it("renders Body when user is authenticated ", () => {
+  const contextValue = {
+    isAuthenticated: true
+  };
+
+  const { asFragment } = renderWithContext(<Body />, contextValue);
+  expect(asFragment(<Body />)).toMatchSnapshot();
 });
 
-it("renders Body when AuthenticationInfo is present", () => {
-  //const getAccessTokenMock = jest.spyOn(AuthContext, "getAccessToken");
-  //getAccessTokenMock.mockImplementation(() => true);
-  //const testContext = { isAuthenticated: true };
+it("renders Body when user is not authenticated", () => {
+  const contextValue = {
+    isAuthenticated: false
+  };
 
-  const wrapper = shallow(
-    <MyAuthContext>
-      <Body />
-    </MyAuthContext>
-  );
-
-  /*
-  const wrapper = shallow(<Body />, {
-    wrappingComponent: MyAuthContext
-  });
-  */
-  expect(wrapper.find("Body").dive()).toMatchSnapshot();
-  //expect(wrapper).toMatchSnapshot();
-
-  wrapper.unmount();
+  const { asFragment } = renderWithContext(<Body />, contextValue);
+  expect(asFragment(<Body />)).toMatchSnapshot();
 });
 
-it("renders Body when AuthenticationInfo is not present", () => {
-  const isPresentMock = jest.spyOn(AuthenticationInfo, "isPresent");
-  isPresentMock.mockImplementation(() => false);
-
-  const wrapper = shallow(<Body />);
-  expect(wrapper).toMatchSnapshot();
-
-  wrapper.unmount();
-});
+const renderWithContext = (
+  component, contextValue) => {
+  return {
+    ...render(
+      <AuthContext.Provider value={contextValue}>
+        {component}
+      </AuthContext.Provider>)
+  }
+}
