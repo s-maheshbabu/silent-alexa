@@ -9,7 +9,7 @@ import {
   default as LoginControl
 } from "./LoginControl";
 
-const ROOT_PATH = "http://localhost";
+const ORIGIN_PATH = "http://localhost:3000";
 
 const mockLWAModule = jest.fn();
 beforeEach(() => {
@@ -39,6 +39,15 @@ it("renders LoginControl with LogoutButton component when the user is authentica
 });
 
 it("verifies that login button calls the lwa authorizatin procedure", () => {
+  delete global.window.location;
+  global.window = Object.create(window);
+  Object.defineProperty(window, 'location', {
+    value: {
+      origin: ORIGIN_PATH
+    },
+    configurable: true
+  });
+
   const contextValue = {
     isAuthenticated: () => false
   };
@@ -48,7 +57,10 @@ it("verifies that login button calls the lwa authorizatin procedure", () => {
   fireEvent.click(loginButton);
   expect(mockLWAModule).toHaveBeenCalledTimes(1);
   expect(mockLWAModule.mock.calls[0][0]).toBe(options);
-  expect(mockLWAModule.mock.calls[0][1]).toBe(ROOT_PATH + REDIRECT_PATH);
+  expect(mockLWAModule.mock.calls[0][1]).toBe(ORIGIN_PATH + REDIRECT_PATH);
+
+  // Cleanup
+  delete global.window.location;
 });
 
 it("verifies that authentication info is cleared when logout button is clicked", () => {

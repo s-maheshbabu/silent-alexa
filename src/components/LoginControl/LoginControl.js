@@ -35,6 +35,6 @@ function handleLogin() {
   // which will contain an authorization response as a URI fragment
   window.amazon.Login.authorize(
     options,
-    window.location.href.replace(/\/+$/, "") + REDIRECT_PATH
+    window.location.origin + REDIRECT_PATH
   );
 }
