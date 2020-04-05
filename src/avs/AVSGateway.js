@@ -94,7 +94,7 @@ export default class AVSGateway {
       } catch (error) {
         console.log(
           "Encountered an error while trying to parse the speak directive from AVS." +
-            util.inspect(error, { showHidden: true, depth: null })
+          util.inspect(error, { showHidden: true, depth: null })
         );
       }
     }

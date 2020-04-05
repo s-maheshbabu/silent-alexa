@@ -12,6 +12,8 @@ import "./ChatWindow.css";
 import { chatters, chatterIds } from "Chatters";
 
 import AVSGateway from "AVSGateway";
+import { withRouter } from 'react-router-dom';
+
 const avs = new AVSGateway();
 
 // TODO: Existing dependency for chat window is not supported. Just making a note of
@@ -162,11 +164,11 @@ class ChatWindow extends Component {
     this.setState({ userRequestToAlexa: "" });
 
     let access_token;
-    if (this.context.isAuthenticated) {
+    const history = this.props.history;
+    if (this.context.isAuthenticated()) {
       access_token = this.context.getAccessToken();
     } else {
-      console.log("Access token is missing.");
-      // TODO: Should we redirect user to login page?
+      history.push("/access_denied");
       return;
     }
 
@@ -247,4 +249,4 @@ class ChatWindow extends Component {
   }
 }
 
-export default ChatWindow;
+export default withRouter(ChatWindow);

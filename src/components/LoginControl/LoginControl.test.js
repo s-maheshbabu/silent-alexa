@@ -24,7 +24,7 @@ afterEach(cleanup);
 
 it("renders LoginControl with LoginButton component when the user is not authenticated", () => {
   const contextValue = {
-    isAuthenticated: false
+    isAuthenticated: () => false
   };
   const { asFragment } = renderWithContext(<LoginControl />, contextValue);
   expect(asFragment(<LoginControl />)).toMatchSnapshot();
@@ -32,7 +32,7 @@ it("renders LoginControl with LoginButton component when the user is not authent
 
 it("renders LoginControl with LogoutButton component when the user is authenticated", () => {
   const contextValue = {
-    isAuthenticated: true
+    isAuthenticated: () => true
   };
   const { asFragment } = renderWithContext(<LoginControl />, contextValue);
   expect(asFragment(<LoginControl />)).toMatchSnapshot();
@@ -40,7 +40,7 @@ it("renders LoginControl with LogoutButton component when the user is authentica
 
 it("verifies that login button calls the lwa authorizatin procedure", () => {
   const contextValue = {
-    isAuthenticated: false
+    isAuthenticated: () => false
   };
   const { getByText } = renderWithContext(<LoginControl />, contextValue);
   const loginButton = getByText("Login");
@@ -53,7 +53,7 @@ it("verifies that login button calls the lwa authorizatin procedure", () => {
 
 it("verifies that authentication info is cleared when logout button is clicked", () => {
   const contextValue = {
-    isAuthenticated: true,
+    isAuthenticated: () => true,
     clear: jest.fn()
   };
   const mockClear = jest.spyOn(contextValue, "clear");

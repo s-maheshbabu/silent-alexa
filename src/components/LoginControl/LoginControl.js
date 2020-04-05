@@ -21,7 +21,7 @@ export const REDIRECT_PATH = "/authresponse";
 export default function LoginControl() {
   const { clear, isAuthenticated } = useContext(AuthContext);
 
-  if (isAuthenticated) {
+  if (isAuthenticated()) {
     return <HeaderFlatButton label="Logout" onClick={() => {
       clear();
     }} />;

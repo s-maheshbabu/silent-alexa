@@ -13,7 +13,7 @@ export default function Body() {
   );
   const { isAuthenticated } = useContext(AuthContext);
 
-  if (isAuthenticated) {
+  if (isAuthenticated()) {
     return [
       <MuiThemeProvider key="muiThemeProvider">
         <ChatWindow />
