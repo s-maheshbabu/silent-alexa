@@ -37,7 +37,7 @@ beforeEach(() => {
   mockSendTextMessageEventFunction.mockClear();
 
   preventDefaultSpy = jest.fn();
-  chatWindow = shallow(<ChatWindow />);
+  chatWindow = shallow(<ChatWindow.WrappedComponent />);
   chatWindowInstance = chatWindow.instance();
   originalState = clone(chatWindowInstance.state);
 });
@@ -50,7 +50,7 @@ it("passes height of container to ChatFeed component", () => {
   // Set `height` element.
   setHeightElement(CHATFEED_CONTAINER_HEIGHT);
 
-  const wrapper = mountWithContext(<ChatWindow />, {});
+  const wrapper = mountWithContext(<ChatWindow.WrappedComponent />, {});
   const chatFeed = wrapper.find(ChatFeed);
 
   expect(chatFeed.length).toBe(1);
@@ -114,13 +114,13 @@ it("handles gracefully when pushMessage is called with an empty or null message"
   expect(finalState).toEqual(originalState);
 });
 
-test("that when a user submits the form, we do not call AVSGateway if the access_token is undefined.", () => {
+test("that when a user submits the form, we do not call AVSGateway if the user is not authenticated and redirect the user away from the protected chat screen.", () => {
   const contextValue = {
-    isAuthenticated: false
+    isAuthenticated: () => false
   };
-  const chatWindow = mount(<AuthContext.Provider value={contextValue}>
-    <ChatWindow />
-  </AuthContext.Provider>);
+  const history = { push: jest.fn() };
+
+  const chatWindow = mountWithContext(<ChatWindow.WrappedComponent history={history} />, contextValue);
   const chatWindowInstance = chatWindow.instance();
 
   const userRequestToAlexa = "a dummy user request";
@@ -134,6 +134,9 @@ test("that when a user submits the form, we do not call AVSGateway if the access
     .simulate("submit", { preventDefault: preventDefaultSpy });
 
   expect(mockSendTextMessageEventFunction).not.toHaveBeenCalled();
+
+  expect(history.push).toHaveBeenCalledTimes(1);
+  expect(history.push).toHaveBeenCalledWith('/access_denied');
 });
 
 it("handles the user's form submission with request to Alexa and populates the state with the user request and Alexa's response", done => {
@@ -227,10 +230,10 @@ const testOnUserRequestToAlexaSubmitHandling = (
 ) => {
   const access_token = "a dummy access token";
   const contextValue = {
-    isAuthenticated: true,
+    isAuthenticated: () => true,
     getAccessToken: () => access_token
   };
-  const chatWindow = mountWithContext(<ChatWindow />, contextValue);
+  const chatWindow = mountWithContext(<ChatWindow.WrappedComponent />, contextValue);
   const chatWindowInstance = chatWindow.instance();
   const originalState = clone(chatWindowInstance.state);
 

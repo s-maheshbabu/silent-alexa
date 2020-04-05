@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Router, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import queryString from "query-string";
 import util from "util";
 import { AuthContext } from "auth/AuthContextProvider";

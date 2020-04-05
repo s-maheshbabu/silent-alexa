@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import IllegalArgumentError from "errors/IllegalArgumentError";
 import Cookies from "js-cookie";
 import util from "util";
@@ -11,21 +11,17 @@ export const AMAZON_LOGIN_COOKIE = "amazon_Login_accessToken";
 // is authenticated. The assumption is that Cookies.get won't return expired cookies. 
 // Is it true? If not, we should check for expiration of cookies.
 export default ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(Cookies.get(AMAZON_LOGIN_COOKIE) !== undefined);
 
   const defaultContext = {
     setLWAResponse: lwaResponse => {
       _persist(lwaResponse);
-      setIsAuthenticated(Cookies.get(AMAZON_LOGIN_COOKIE) !== undefined);
     },
-    isAuthenticated,
+    isAuthenticated: () => Cookies.get(AMAZON_LOGIN_COOKIE) !== undefined,
     getAccessToken: () => {
       return Cookies.get(AMAZON_LOGIN_COOKIE);
     },
     clear: () => {
-      console.log("Auth info cleared========");
       Cookies.remove(AMAZON_LOGIN_COOKIE);
-      setIsAuthenticated(false);
     }
   };
   return (

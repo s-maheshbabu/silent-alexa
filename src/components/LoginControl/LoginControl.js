@@ -21,7 +21,7 @@ export const REDIRECT_PATH = "/authresponse";
 export default function LoginControl() {
   const { clear, isAuthenticated } = useContext(AuthContext);
 
-  if (isAuthenticated) {
+  if (isAuthenticated()) {
     return <HeaderFlatButton label="Logout" onClick={() => {
       clear();
     }} />;
@@ -35,6 +35,6 @@ function handleLogin() {
   // which will contain an authorization response as a URI fragment
   window.amazon.Login.authorize(
     options,
-    window.location.href.replace(/\/+$/, "") + REDIRECT_PATH
+    window.location.origin + REDIRECT_PATH
   );
 }

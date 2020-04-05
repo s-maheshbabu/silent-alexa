@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<DocumentFragment>
+  <div
+    id="loginfailed-screen"
+  >
+    <h1>
+       Login Failed 
+    </h1>
+    <h1>
+       This is just a placeholder. We might want to redirect the user to the login page or at least have a link here to let the user try again or go home. 
+    </h1>
+  </div>
+</DocumentFragment>
+`;
