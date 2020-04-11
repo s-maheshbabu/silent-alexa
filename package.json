@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://s-maheshbabu.github.io/silent-alexa",
+  "//": [
+    "The jsdom change below can be removed once CRA upgrades here -  https: //github.com/facebook/create-react-app/pull/8362"
+  ],
   "dependencies": {
     "gh-pages": "^1.1.0",
     "http-message-parser": "0.0.30",
@@ -12,11 +15,11 @@
     "monkas-chat": "^1.0.11",
     "npm": "^6.13.4",
     "query-string": "^5.1.1",
-    "react": "^16.8.6",
-    "react-container-dimensions": "^1.3.3",
-    "react-dom": "^16.8.6",
+    "react": "^16.13.1",
+    "react-container-dimensions": "^1.4.1",
+    "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.0.1",
+    "react-scripts": "3.4.1",
     "uuid": "^3.2.1"
   },
   "config": {
@@ -27,16 +30,18 @@
     "deploy": "gh-pages -d build",
     "start": "NODE_PATH=$npm_package_config_nodepath react-scripts start",
     "build": "NODE_PATH=$npm_package_config_nodepath react-scripts build",
-    "test": "NODE_PATH=$npm_package_config_nodepath react-scripts test --env=jsdom",
+    "test": "NODE_PATH=$npm_package_config_nodepath react-scripts test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "@testing-library/react": "^10.0.1",
+    "@testing-library/react": "^10.0.2",
+    "@testing-library/jest-dom": "^5.5.0",
     "clone": "^2.1.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
     "fetch-mock": "^6.1.0",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
     "react-addons-test-utils": "^15.6.2",
     "sprintf-js": "^1.1.1"
   },
