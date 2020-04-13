@@ -5,7 +5,7 @@ import ChatWindow from "ChatWindow/ChatWindow";
 import UserRequestToAlexaForm from "./UserRequestToAlexaForm";
 import TextField from "material-ui/TextField";
 
-import DEFAULT_PLACEHOLDER_VALUE from "Constants";
+import { DEFAULT_PLACEHOLDER_FOR_USER_REQUEST_STRING } from "Constants";
 
 it("renders UserRequestToAlexaForm without crashing", () => {
   const wrapper = shallow(<UserRequestToAlexaForm />);
@@ -22,7 +22,7 @@ it("renders correctly with props (snapshot testing)", () => {
 it("displays the right placeholder message", () => {
   const form = shallow(<UserRequestToAlexaForm />);
   expect(form.find("TextField").prop("hintText")).toEqual(
-    DEFAULT_PLACEHOLDER_VALUE
+    DEFAULT_PLACEHOLDER_FOR_USER_REQUEST_STRING
   );
 });
 

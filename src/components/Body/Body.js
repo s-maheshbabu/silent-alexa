@@ -1,19 +1,16 @@
-import React, { useContext } from "react";
-import { AuthContext } from "auth/AuthContextProvider";
+import React from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import ChatWindow from "ChatWindow/ChatWindow";
 import RightPanel from "RightPanel/RightPanel";
 import WelcomeScreen from "WelcomeScreen/WelcomeScreen";
+import { useCookies } from "react-cookie";
 
-import util from "util";
+import { AMAZON_LOGIN_COOKIE } from "Constants";
 
 export default function Body() {
-  console.log(
-    util.inspect(useContext(AuthContext), { showHidden: true, depth: null })
-  );
-  const { isAuthenticated } = useContext(AuthContext);
+  const [cookies] = useCookies([AMAZON_LOGIN_COOKIE]);
 
-  if (isAuthenticated()) {
+  if (cookies[AMAZON_LOGIN_COOKIE] !== undefined) {
     return [
       <MuiThemeProvider key="muiThemeProvider">
         <ChatWindow />

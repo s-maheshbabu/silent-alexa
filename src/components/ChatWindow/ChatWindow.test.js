@@ -6,7 +6,9 @@ import { List, fromJS } from "immutable";
 import { ChatFeed, Message } from "monkas-chat";
 import ChatWindow from "./ChatWindow";
 import { cannedErrorResponses, customErrorCodes } from "CannedErrorResponses";
-import { AuthContext } from "auth/AuthContextProvider";
+import { Cookies } from 'react-cookie';
+
+import { AMAZON_LOGIN_COOKIE } from "Constants";
 
 import {
   mockSendTextMessageEventFunction,
@@ -32,6 +34,7 @@ let chatWindow;
 let chatWindowInstance;
 let originalState;
 let preventDefaultSpy;
+let cookies;
 
 beforeEach(() => {
   mockSendTextMessageEventFunction.mockClear();
@@ -40,6 +43,8 @@ beforeEach(() => {
   chatWindow = shallow(<ChatWindow.WrappedComponent />);
   chatWindowInstance = chatWindow.instance();
   originalState = clone(chatWindowInstance.state);
+
+  cookies = new Cookies();
 });
 
 it("renders correctly without crashing", () => {
@@ -50,7 +55,7 @@ it("passes height of container to ChatFeed component", () => {
   // Set `height` element.
   setHeightElement(CHATFEED_CONTAINER_HEIGHT);
 
-  const wrapper = mountWithContext(<ChatWindow.WrappedComponent />, {});
+  const wrapper = mount(<ChatWindow.WrappedComponent />, {});
   const chatFeed = wrapper.find(ChatFeed);
 
   expect(chatFeed.length).toBe(1);
@@ -115,12 +120,9 @@ it("handles gracefully when pushMessage is called with an empty or null message"
 });
 
 test("that when a user submits the form, we do not call AVSGateway if the user is not authenticated and redirect the user away from the protected chat screen.", () => {
-  const contextValue = {
-    isAuthenticated: () => false
-  };
   const history = { push: jest.fn() };
 
-  const chatWindow = mountWithContext(<ChatWindow.WrappedComponent history={history} />, contextValue);
+  const chatWindow = mount(<ChatWindow.WrappedComponent history={history} cookies={cookies} />);
   const chatWindowInstance = chatWindow.instance();
 
   const userRequestToAlexa = "a dummy user request";
@@ -229,11 +231,9 @@ const testOnUserRequestToAlexaSubmitHandling = (
   done
 ) => {
   const access_token = "a dummy access token";
-  const contextValue = {
-    isAuthenticated: () => true,
-    getAccessToken: () => access_token
-  };
-  const chatWindow = mountWithContext(<ChatWindow.WrappedComponent />, contextValue);
+  cookies.set(AMAZON_LOGIN_COOKIE, access_token, { path: '/' });
+
+  const chatWindow = mount(<ChatWindow.WrappedComponent cookies={cookies} />);
   const chatWindowInstance = chatWindow.instance();
   const originalState = clone(chatWindowInstance.state);
 
@@ -292,10 +292,3 @@ const testOnUserRequestToAlexaSubmitHandling = (
 afterEach(() => {
   chatWindow.unmount();
 });
-
-const mountWithContext = (component, contextValue) => {
-  return mount(
-    <AuthContext.Provider value={contextValue}>
-      {component}
-    </AuthContext.Provider>)
-}

@@ -1,33 +1,29 @@
 import React from "react";
 import Body from "./Body";
-import { AuthContext } from "auth/AuthContextProvider";
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, act } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from "react-router-dom";
+import { CookiesProvider, Cookies } from 'react-cookie';
 
-afterEach(cleanup);
+import { AMAZON_LOGIN_COOKIE } from "Constants";
+
+let cookies;
 
 it("renders Body when user is authenticated ", () => {
-  const contextValue = {
-    isAuthenticated: () => true
-  };
+  cookies.set(AMAZON_LOGIN_COOKIE, 'access token is present', { path: '/' });
 
-  const { asFragment } = renderWithRouter(<Body />, contextValue);
+  const { asFragment } = renderWithRouter(<Body />, cookies);
   expect(asFragment(<Body />)).toMatchSnapshot();
 });
 
-it("renders Body when user is not authenticated", () => {
-  const contextValue = {
-    isAuthenticated: () => false
-  };
-
-  const { asFragment } = renderWithRouter(<Body />, contextValue);
+it("renders Body when user is not authenticated", async () => {
+  const { asFragment } = renderWithRouter(<Body />, cookies);
   expect(asFragment(<Body />)).toMatchSnapshot();
 });
 
 function renderWithRouter(
   component,
-  contextValue,
+  cookies,
   {
     route = '/',
     history = createMemoryHistory({ initialEntries: [route] }),
@@ -36,10 +32,17 @@ function renderWithRouter(
   return {
     ...render(
       <Router history={history}>
-        <AuthContext.Provider value={contextValue}>
+        <CookiesProvider cookies={cookies}>
           {component}
-        </AuthContext.Provider>
-      </Router>),
+        </CookiesProvider>
+      </Router >),
     history
   }
 }
+
+beforeEach(() => { cookies = new Cookies() });
+
+afterEach(() => {
+  cleanup();
+  act(() => cookies.remove(AMAZON_LOGIN_COOKIE, { path: '/' }));
+});

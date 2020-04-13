@@ -5,12 +5,15 @@ import App from "App/App";
 import AuthContext from "auth/AuthContextProvider";
 import { BrowserRouter as Router } from "react-router-dom";
 import registerServiceWorker from "registerServiceWorker";
+import { CookiesProvider } from 'react-cookie';
 
 ReactDOM.render(
   <Router>
-    <AuthContext>
-      <App />
-    </AuthContext>
+    <CookiesProvider>
+      <AuthContext>
+        <App />
+      </AuthContext>
+    </CookiesProvider>
   </Router>,
   document.getElementById("root")
 );

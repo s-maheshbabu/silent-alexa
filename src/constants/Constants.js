@@ -1,4 +1,4 @@
-const DEFAULT_PLACEHOLDER_FOR_USER_REQUEST_STRING =
+export const DEFAULT_PLACEHOLDER_FOR_USER_REQUEST_STRING =
   "Type your request for Alexa..";
 
-module.exports = DEFAULT_PLACEHOLDER_FOR_USER_REQUEST_STRING;
+export const AMAZON_LOGIN_COOKIE = "amazon_Login_accessToken";

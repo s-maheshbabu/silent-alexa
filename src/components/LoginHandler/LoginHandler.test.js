@@ -1,31 +1,33 @@
 import React from "react";
-import queryString from "query-string";
 import LoginHandler from "./LoginHandler";
-import { AuthContext } from "auth/AuthContextProvider";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from 'history';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, act } from '@testing-library/react';
 
-beforeEach(() => {
-  jest.resetAllMocks();
-});
+import { AMAZON_LOGIN_COOKIE } from "Constants";
 
-afterEach(cleanup);
+jest.mock('react-cookie');
+import { useCookies } from 'react-cookie';
+const { CookiesProvider, Cookies } = jest.requireActual('react-cookie');
 
-const setLWAResponseSpy = jest.fn();
-const contextValue = {
-  setLWAResponse: setLWAResponseSpy
-};
+const setCookieMock = jest.fn();
+let cookies;
 
 it("expects LWA response to be persisted and user routed to the appropriate page in happy case", () => {
-  const lwaResponseHash = "access_token=some_access_token&expires_in=30";
+  const access_token = "some access token";
+  const expires_in = 30;
+  const lwaResponseHash = `access_token=${access_token}&expires_in=${expires_in}`;
   const routeProps = { location: { hash: lwaResponseHash } };
-  const { history } = renderWithRouter(<LoginHandler {...routeProps} />, contextValue);
+  const { history } = renderWithRouter(<LoginHandler {...routeProps} />, cookies);
 
-  expect(setLWAResponseSpy).toHaveBeenCalledTimes(1);
-  expect(setLWAResponseSpy).toHaveBeenCalledWith(
-    queryString.parse(lwaResponseHash)
-  );
+  expect(setCookieMock).toHaveBeenCalledTimes(1);
+  expect(setCookieMock.mock.calls[0][0]).toBe(AMAZON_LOGIN_COOKIE);
+  expect(setCookieMock.mock.calls[0][1]).toBe(access_token);
+  expect(setCookieMock.mock.calls[0][2]).toStrictEqual({
+    maxAge: expires_in,
+    secure: false,
+    path: "/"
+  });
 
   expect(history.location.pathname).toEqual('/');
 });
@@ -60,21 +62,19 @@ it("expects LWA response to not be persisted and user routed to an appropriate p
   ];
 
   allRoutePropsObjects.map(routeProps => {
-    const { history } = renderWithRouter(<LoginHandler {...routeProps} />, contextValue);
+    const { history } = renderWithRouter(<LoginHandler {...routeProps} />, cookies);
 
     expect(history.location.pathname).toEqual('/access_denied');
-    expect(setLWAResponseSpy).not.toHaveBeenCalled();
   });
 });
 
 it("expects LWA response to not be persisted when no route props are given", () => {
-  renderWithRouter(<LoginHandler />, contextValue);
-  expect(setLWAResponseSpy).not.toHaveBeenCalled();
+  renderWithRouter(<LoginHandler />, cookies);
 });
 
 function renderWithRouter(
-  ui,
-  contextValue,
+  component,
+  cookies,
   {
     route = '/',
     history = createMemoryHistory({ initialEntries: [route] }),
@@ -83,10 +83,22 @@ function renderWithRouter(
   return {
     ...render(
       <Router history={history}>
-        <AuthContext.Provider value={contextValue}>
-          {ui}
-        </AuthContext.Provider>
+        <CookiesProvider cookies={cookies}>
+          {component}
+        </CookiesProvider>
       </Router>),
     history
   }
 }
+
+beforeEach(() => {
+  jest.resetAllMocks();
+  cookies = new Cookies();
+
+  useCookies.mockReturnValue([cookies, setCookieMock]);
+});
+
+afterEach(() => {
+  cleanup();
+  act(() => cookies.remove(AMAZON_LOGIN_COOKIE, { path: '/' }));
+});

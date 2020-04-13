@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ChatFeed, Message } from "monkas-chat";
 import ContainerDimensions from "react-container-dimensions";
-import { AuthContext } from "auth/AuthContextProvider";
+import { instanceOf } from 'prop-types';
 
 import ChatBubble from "ChatBubble/ChatBubble";
 import { cannedErrorResponses, customErrorCodes } from "CannedErrorResponses";
@@ -13,13 +13,17 @@ import { chatters, chatterIds } from "Chatters";
 
 import AVSGateway from "AVSGateway";
 import { withRouter } from 'react-router-dom';
+import { withCookies, Cookies } from "react-cookie";
 
+import { AMAZON_LOGIN_COOKIE } from "Constants";
 const avs = new AVSGateway();
 
 // TODO: Existing dependency for chat window is not supported. Just making a note of
 // a potentially better supported solution https://github.com/FaridSafi/react-native-gifted-chat
 class ChatWindow extends Component {
-  static contextType = AuthContext;
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
+  };
 
   constructor() {
     super();
@@ -160,14 +164,14 @@ class ChatWindow extends Component {
       this.setState({ userRequestToAlexa: "" });
       return;
     }
+
     this.pushMessage(chatterIds.USER, userRequestToAlexa);
     this.setState({ userRequestToAlexa: "" });
 
-    let access_token;
     const history = this.props.history;
-    if (this.context.isAuthenticated()) {
-      access_token = this.context.getAccessToken();
-    } else {
+    const { cookies } = this.props;
+    const access_token = cookies.get(AMAZON_LOGIN_COOKIE);
+    if (access_token === undefined) {
       history.push("/access_denied");
       return;
     }
@@ -249,4 +253,6 @@ class ChatWindow extends Component {
   }
 }
 
-export default withRouter(ChatWindow);
+// TODO: Use Recomponse to make it more readable. Even better if we can make this class
+// a function so we can just use hooks.
+export default withRouter(withCookies(ChatWindow));
