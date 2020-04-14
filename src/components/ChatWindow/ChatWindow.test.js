@@ -38,13 +38,12 @@ let cookies;
 
 beforeEach(() => {
   mockSendTextMessageEventFunction.mockClear();
+  cookies = new Cookies();
 
   preventDefaultSpy = jest.fn();
-  chatWindow = shallow(<ChatWindow.WrappedComponent />);
+  chatWindow = shallow(<ChatWindow.WrappedComponent cookies={cookies} />);
   chatWindowInstance = chatWindow.instance();
   originalState = clone(chatWindowInstance.state);
-
-  cookies = new Cookies();
 });
 
 it("renders correctly without crashing", () => {
@@ -55,7 +54,7 @@ it("passes height of container to ChatFeed component", () => {
   // Set `height` element.
   setHeightElement(CHATFEED_CONTAINER_HEIGHT);
 
-  const wrapper = mount(<ChatWindow.WrappedComponent />, {});
+  const wrapper = mount(<ChatWindow.WrappedComponent cookies={cookies} />, {});
   const chatFeed = wrapper.find(ChatFeed);
 
   expect(chatFeed.length).toBe(1);
@@ -122,6 +121,9 @@ it("handles gracefully when pushMessage is called with an empty or null message"
 test("that when a user submits the form, we do not call AVSGateway if the user is not authenticated and redirect the user away from the protected chat screen.", () => {
   const history = { push: jest.fn() };
 
+  cookies = new Cookies();
+  const mockCookiesRemove = cookies.remove = jest.fn();
+
   const chatWindow = mount(<ChatWindow.WrappedComponent history={history} cookies={cookies} />);
   const chatWindowInstance = chatWindow.instance();
 
@@ -136,6 +138,15 @@ test("that when a user submits the form, we do not call AVSGateway if the user i
     .simulate("submit", { preventDefault: preventDefaultSpy });
 
   expect(mockSendTextMessageEventFunction).not.toHaveBeenCalled();
+
+  expect(mockCookiesRemove).toHaveBeenCalledTimes(1);
+  expect(mockCookiesRemove.mock.calls[0][0]).toBe(AMAZON_LOGIN_COOKIE);
+  expect(mockCookiesRemove.mock.calls[0][1]).toBe(undefined);
+  expect(mockCookiesRemove.mock.calls[0][2]).toStrictEqual({
+    maxAge: 0,
+    secure: false,
+    path: "/"
+  });
 
   expect(history.push).toHaveBeenCalledTimes(1);
   expect(history.push).toHaveBeenCalledWith('/access_denied');

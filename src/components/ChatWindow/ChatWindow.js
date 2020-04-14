@@ -172,6 +172,12 @@ class ChatWindow extends Component {
     const { cookies } = this.props;
     const access_token = cookies.get(AMAZON_LOGIN_COOKIE);
     if (access_token === undefined) {
+      cookies.remove(AMAZON_LOGIN_COOKIE, undefined, {
+        maxAge: 0,
+        secure: false, // TODO: Change localhost to also use https and then change this to true.
+        path: "/"
+      });
+
       history.push("/access_denied");
       return;
     }
