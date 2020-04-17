@@ -17,8 +17,8 @@ it("integration test to verify the actions to be taken when a currently authenti
   const { getByText, getByRole, queryByText, queryByRole } = renderWithProviders(<App />, cookies);
   const logoutButton = getByText("Logout");
   const chatInputTextBox = getByRole("textbox");
-  expect(logoutButton).not.toBeUndefined();
-  expect(chatInputTextBox).not.toBeUndefined();
+  expect(logoutButton).toBeInTheDocument();
+  expect(chatInputTextBox).toBeInTheDocument();
 
   fireEvent.click(logoutButton);
 
