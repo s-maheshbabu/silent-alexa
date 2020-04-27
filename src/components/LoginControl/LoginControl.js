@@ -2,16 +2,18 @@ import React from "react";
 import HeaderFlatButton from "HeaderFlatButton/HeaderFlatButton";
 import { useCookies } from "react-cookie";
 
-import { AMAZON_LOGIN_COOKIE } from "Constants";
+import { AMAZON_LOGIN_COOKIE, PRODUCT_ID } from "Constants";
 
 // TODO: Logic for assigning 'deviceSerialNumber' needs to be revisited.
+const DSN = "12345";
+
 // LWA options to request implicit grant.
 export const options = Object.freeze({
   scope: ["alexa:all", "profile"],
   scope_data: {
     "alexa:all": {
-      productID: "Silent_Alexa",
-      productInstanceAttributes: { deviceSerialNumber: "12345" }
+      productID: PRODUCT_ID,
+      productInstanceAttributes: { deviceSerialNumber: DSN }
     }
   },
   popup: false

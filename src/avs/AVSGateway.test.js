@@ -1,4 +1,3 @@
-import React from "react";
 import { List } from "immutable";
 
 import AVSGateway, { EVENTS_URL } from "./AVSGateway";
@@ -8,6 +7,7 @@ import { cannedErrorResponses, customErrorCodes } from "CannedErrorResponses";
 import { cannedResponses } from "CannedResponses";
 
 import testData from "./test-data/multipart-response-test-data";
+import addOrUpdateReportTestData from "./test-data/EventProcessedDirective";
 
 // A mock parser that uses the real implementation by default.
 jest.mock("SpeakDirectiveParser", () => {
@@ -22,7 +22,6 @@ const parser = require("SpeakDirectiveParser");
 jest.mock("uuid/v4", () => {
   return jest.fn(() => "mock-uuid-generated-for-testing");
 });
-import uuid from "uuid/v4";
 
 import fetchMock from "fetch-mock";
 
@@ -32,11 +31,11 @@ afterEach(() => {
   fetchMock.restore();
 });
 
-test("that sending a testRequest throws if the message itself is null, empty or undefined.", async () => {
+test("that sending a textRequest throws if the message itself is null, empty or undefined.", async () => {
   expect.assertions(3);
 
-  const testMessage = "";
-  await expect(unitUnderTest.sendTextMessageEvent(testMessage)).rejects.toEqual(
+  const textMessage = "";
+  await expect(unitUnderTest.sendTextMessageEvent(textMessage)).rejects.toEqual(
     expect.any(IllegalArgumentError)
   );
 
@@ -50,7 +49,7 @@ test("that sending a testRequest throws if the message itself is null, empty or 
   );
 });
 
-test("that sending a testRequest throws if the accessToken is null, empty or undefined.", async () => {
+test("that sending a textRequest throws if the accessToken is null, empty or undefined.", async () => {
   expect.assertions(3);
 
   const userRequestToAlexa = "user request to Alexa";
@@ -212,7 +211,7 @@ or responds with nothing (can happen when user says something senseless like 'dr
   for (let emptyResponse of emptyishResponses) {
     fetchMock.post(
       EVENTS_URL,
-      new Promise(function(resolve, reject) {
+      new Promise(function (resolve) {
         resolve(emptyResponse);
       }),
       {
@@ -230,6 +229,40 @@ or responds with nothing (can happen when user says something senseless like 'dr
 
     const requestOptionsUsed = fetchMock.lastOptions();
     expect(requestOptionsUsed).toMatchSnapshot();
+  }
+});
+
+it("calls fetch with the right options and return true when trying to send a happy case AddOrUpdateReport event", async () => {
+  const access_token = "a mock access_token";
+
+  fetchMock.postOnce(EVENTS_URL, addOrUpdateReportTestData.happy_case);
+
+  await unitUnderTest
+    .sendAddOrUpdateReportEvent(access_token)
+    .then(alexaResponse => {
+      expect(alexaResponse).toBe(true);
+    });
+
+  const requestOptionsUsed = fetchMock.lastOptions();
+  expect(requestOptionsUsed).toMatchSnapshot();
+});
+
+it("handles gracefully if AVS returns an error", async () => {
+  const access_token = "a mock access_token";
+  const error_codes = [400, 401, 403, 415, 429, 500, 503];
+
+  for (let errorCode of error_codes) {
+    fetchMock.postOnce(EVENTS_URL, {
+      status: errorCode
+    });
+
+    await unitUnderTest
+      .sendAddOrUpdateReportEvent(access_token)
+      .then(alexaResponse => {
+        expect(alexaResponse).toBe(false);
+      });
+
+    fetchMock.restore();
   }
 });
 

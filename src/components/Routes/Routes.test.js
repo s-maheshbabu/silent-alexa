@@ -2,11 +2,13 @@ import React from "react";
 import Routes from "./Routes";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from 'history';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, waitFor } from '@testing-library/react';
 import { AuthContext } from "auth/AuthContextProvider";
 
+jest.mock("AVSGateway");
+
 beforeEach(() => {
-  jest.resetAllMocks();
+  setLWAResponseSpy.mockClear();
 });
 
 afterEach(cleanup);
@@ -16,7 +18,7 @@ const contextValue = {
   setLWAResponse: setLWAResponseSpy
 };
 
-it("redirects to / if path is /authresponse and user logged in successfully", () => {
+it("redirects to / if path is /authresponse and user logged in successfully", async () => {
   const lwaResponseHash = "access_token=some_access_token&expires_in=30";
   const routeProps = { location: { hash: lwaResponseHash } };
 
@@ -25,16 +27,21 @@ it("redirects to / if path is /authresponse and user logged in successfully", ()
     createMemoryHistory({ initialEntries: ['/authresponse'] })
   );
 
-  expect(history.location.pathname).toEqual('/');
+  await waitFor(() => {
+    expect(history.location.pathname).toEqual('/');
+  });
 });
 
-it("redirects to /access_denied if path is /authresponse and the login attempt failed", () => {
+it("redirects to /access_denied if path is /authresponse and the login attempt failed", async () => {
   const { history } = renderWithRouter(
     <Routes />, contextValue,
     createMemoryHistory({ initialEntries: ['/authresponse'] })
   );
 
-  expect(history.location.pathname).toEqual('/access_denied');
+  await waitFor(() => {
+    expect(history.location.pathname).toEqual('/access_denied');
+  });
+
 });
 
 it("redirects to / if path is not /authresponse", () => {

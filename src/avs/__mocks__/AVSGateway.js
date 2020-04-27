@@ -11,8 +11,15 @@ export const mockSendTextMessageEventFunction = jest.fn(() =>
   Promise.resolve(mockAlexaSuccessResponses)
 );
 
+// Mock implementation that always resolves to a successful response from AVS.
+export const mockSendAddOrUpdateReportEventFunction = jest.fn(() => Promise.resolve(true)
+);
+
 const mockAVSGateway = jest.fn(() => {
-  return { sendTextMessageEvent: mockSendTextMessageEventFunction };
+  return {
+    sendTextMessageEvent: mockSendTextMessageEventFunction,
+    sendAddOrUpdateReportEvent: mockSendAddOrUpdateReportEventFunction
+  };
 });
 
 export default mockAVSGateway;

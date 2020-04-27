@@ -9,6 +9,8 @@ import { hasIn, List } from "immutable";
 import uuid from "uuid/v4";
 import util from "util";
 
+import { PRODUCT_ID, CLIENT_ID } from "Constants";
+
 const sprintf = require("sprintf-js").sprintf;
 
 const AVS_REQUEST_BODY = `--silent-alexa-http-boundary
@@ -48,11 +50,11 @@ export default class AVSGateway {
       );
     }
 
-    const testMessageEvent = JSON.stringify(
+    const textMessageEvent = JSON.stringify(
       this.buildTextMessageEvent(userRequestToAlexa)
     );
     const requestOptions = this.buildTextMessageFetchRequestOptions(
-      testMessageEvent,
+      textMessageEvent,
       accessToken
     );
 
@@ -102,6 +104,37 @@ export default class AVSGateway {
     return List.of(this.convertErrorToHumanReadableMessage(payload));
   }
 
+  /**
+   * Sends the AddOrUpdateReport event to AVS. This event is meant to proactively
+   * inform Alexa about the endpoint.
+   * 
+   * @returns true if the event has been successfully processed by Alexa and
+   * false otherwise. Alexa requires that no other events should be sent if this
+   * event is not processed successfully.
+   */
+  // TODO: We should probably retry three times before propagating failures.
+  async sendAddOrUpdateReportEvent(accessToken) {
+    const addOrUpdateReportEvent = JSON.stringify(
+      this.buildAddOrUpdateReportEvent(accessToken)
+    );
+    const requestOptions = this.buildAddOrUpdateReportEventFetchRequestOptions(
+      addOrUpdateReportEvent,
+      accessToken
+    );
+
+    let isOk = false;
+    await fetch(EVENTS_URL, requestOptions)
+      .then(response => {
+        if (response.ok) {
+          isOk = true;
+        }
+      }).catch(error => {
+        console.log(util.inspect(error, { showHidden: true, depth: null }));
+      });;
+
+    return isOk;
+  }
+
   convertErrorToHumanReadableMessage(errorPayload) {
     let errorCode;
     if (hasIn(errorPayload, ["payload", "code"]))
@@ -114,8 +147,8 @@ export default class AVSGateway {
     );
   }
 
-  buildTextMessageFetchRequestOptions(testMessageEvent, accessToken) {
-    const data = sprintf(AVS_REQUEST_BODY, testMessageEvent);
+  buildTextMessageFetchRequestOptions(textMessageEvent, accessToken) {
+    const data = sprintf(AVS_REQUEST_BODY, textMessageEvent);
 
     return {
       body: data,
@@ -139,6 +172,70 @@ export default class AVSGateway {
         },
         payload: {
           textMessage: requestString
+        }
+      }
+    };
+  }
+
+  buildAddOrUpdateReportEventFetchRequestOptions(addOrUpdateReportEvent, accessToken) {
+    const data = sprintf(AVS_REQUEST_BODY, addOrUpdateReportEvent);
+
+    return {
+      body: data,
+      headers: {
+        Authorization: "Bearer " + accessToken,
+        "content-type":
+          "multipart/form-data; boundary=silent-alexa-http-boundary"
+      },
+      cache: "no-store", // Alexa often responds differently to the same request and so we don't want to cache anything.
+      method: "POST"
+    };
+  }
+
+  buildAddOrUpdateReportEvent(accessToken) {
+    // TODO: Logic for assigning 'deviceSerialNumber' needs to be revisited.
+    const DSN = "12345";
+
+    return {
+      event: {
+        header: {
+          namespace: "Alexa.Discovery",
+          name: "AddOrUpdateReport",
+          payloadVersion: "3",
+          messageId: uuid(),
+          eventCorrelationToken: uuid()
+        },
+        payload: {
+          scope: {
+            type: "BearerToken",
+            token: accessToken
+          },
+          endpoints: [
+            {
+              endpointId: `${CLIENT_ID}::${PRODUCT_ID}::${DSN}`,
+              registration: {
+                productId: PRODUCT_ID,
+                deviceSerialNumber: DSN
+              },
+              manufacturerName: "Silent Voice Assistants",
+              description: "Interact with voice assistants without having to talk to them.",
+              friendlyName: "Silent Alexa",
+              displayCategories: ["COMPUTER", "LAPTOP", "TABLET"],
+              capabilities: [
+                {
+                  type: "AlexaInterface",
+                  interface: "SpeechSynthesizer",
+                  version: "1.0"
+                }
+              ],
+              connections: [
+                {
+                  type: "UNKNOWN",
+                  value: DSN //TODO: Is it reasonable to use a DSN here?
+                }
+              ]
+            }
+          ]
         }
       }
     };
