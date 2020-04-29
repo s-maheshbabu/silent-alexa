@@ -5,6 +5,7 @@ import util from "util";
 import { hasIn } from "immutable";
 import { useCookies } from "react-cookie";
 import AVSGateway from "AVSGateway";
+import LoadingAnimation from "LoadingAnimation/LoadingAnimation";
 
 import { AMAZON_LOGIN_COOKIE } from "Constants";
 
@@ -46,8 +47,7 @@ export default function LoginHandler(props) {
 
   // This is the state where we are still in the process of posting AddOrUpdateReportEvent.
   if (isAddOrUpdateReportEventPosted === undefined) {
-    const LoadingComponent = () => <div> TODO: Loading Component Placeholder. Need to have a proper solution for loading state. </div>
-    return <LoadingComponent /> // -or- return <div/>
+    return <LoadingAnimation type="bars" color="red" />
   }
 
   // AddOrUpdateReportEvent was posted successfully.

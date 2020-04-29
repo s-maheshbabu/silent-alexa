@@ -3,6 +3,7 @@ import LoginHandler from "./LoginHandler";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from 'history';
 import { render, cleanup, act, waitFor } from '@testing-library/react';
+import LoadingAnimation from "LoadingAnimation/LoadingAnimation";
 
 import { AMAZON_LOGIN_COOKIE } from "Constants";
 
@@ -77,6 +78,22 @@ it("expects LWA response to not be persisted and user routed to an appropriate p
     await waitFor(() => {
       expect(history.location.pathname).toEqual('/access_denied');
     });
+  });
+});
+
+it("expects an interim loading animation to be presented while in the process of posting the AddOrUpdateReport and eventually to route to the login success page", async () => {
+  const access_token = "some access token";
+  const expires_in = 30;
+  const lwaResponseHash = `access_token=${access_token}&expires_in=${expires_in}`;
+  const routeProps = { location: { hash: lwaResponseHash } };
+
+  mockSendAddOrUpdateReportEventFunction.mockImplementation(() => Promise.resolve(true));
+
+  const { history, asFragment } = renderWithRouter(<LoginHandler {...routeProps} />, cookies);
+
+  expect(asFragment(<LoadingAnimation />)).toMatchSnapshot();
+  await waitFor(() => {
+    expect(history.location.pathname).toEqual('/');
   });
 });
 
