@@ -24,7 +24,7 @@ it("expects LWA response to be persisted and user routed to the appropriate page
   const expires_in = 30;
   const lwaResponseHash = `access_token=${access_token}&expires_in=${expires_in}`;
   const routeProps = { location: { hash: lwaResponseHash } };
-  const { history } = renderWithRouter(<LoginHandler {...routeProps} />, cookies);
+  const { history } = renderWithRouter(<LoginHandler.WrappedComponent {...routeProps} />, cookies);
 
   expect(mockSendAddOrUpdateReportEventFunction).toHaveBeenCalledTimes(1);
   expect(mockSendAddOrUpdateReportEventFunction.mock.calls[0][0]).toBe(access_token);
@@ -89,7 +89,7 @@ it("expects an interim loading animation to be presented while in the process of
 
   mockSendAddOrUpdateReportEventFunction.mockImplementation(() => Promise.resolve(true));
 
-  const { history, asFragment } = renderWithRouter(<LoginHandler {...routeProps} />, cookies);
+  const { history, asFragment } = renderWithRouter(<LoginHandler.WrappedComponent {...routeProps} />, cookies);
 
   expect(asFragment(<LoadingAnimation />)).toMatchSnapshot();
   await waitFor(() => {

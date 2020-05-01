@@ -6,6 +6,7 @@ import { hasIn } from "immutable";
 import { useCookies } from "react-cookie";
 import AVSGateway from "AVSGateway";
 import LoadingAnimation from "LoadingAnimation/LoadingAnimation";
+import { withRouter } from 'react-router-dom';
 
 import { AMAZON_LOGIN_COOKIE } from "Constants";
 
@@ -18,7 +19,7 @@ This component handles the LWAResponse and takes one of the following actions -
 posting the AddOrUpdateReportEvent, we render a component to indicate to the user that they need to wait.
 3. In the happy case, save the LWAResponse access token to Cookies and route the user to the home screen.
 */
-export default function LoginHandler(props) {
+function LoginHandler(props) {
   const [, setCookie] = useCookies([AMAZON_LOGIN_COOKIE]);
   const [isAddOrUpdateReportEventPosted, setIsAddOrUpdateReportEventPosted] = useState(undefined);
 
@@ -78,3 +79,5 @@ function isLWAResponseValid(lwaResponse) {
   }
   return true;
 }
+
+export default withRouter(LoginHandler);

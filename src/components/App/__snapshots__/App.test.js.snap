@@ -4,7 +4,6 @@ exports[`renders correctly without crashing 1`] = `
 <div
   id="page"
 >
-  <Routes />
   <Header />
   <Body />
   <Footer />
