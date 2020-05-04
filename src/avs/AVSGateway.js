@@ -94,7 +94,7 @@ export default class AVSGateway {
 
         return textResponsesFromAlexa;
       } catch (error) {
-        console.log(
+        console.error(
           "Encountered an error while trying to parse the speak directive from AVS." +
           util.inspect(error, { showHidden: true, depth: null })
         );
@@ -225,7 +225,7 @@ export default class AVSGateway {
                 {
                   type: "AlexaInterface",
                   interface: "SpeechSynthesizer",
-                  version: "1.0"
+                  version: "1.3"
                 }
               ],
               connections: [

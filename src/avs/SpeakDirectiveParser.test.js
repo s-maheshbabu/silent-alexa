@@ -55,6 +55,12 @@ it("handles the invalid case where the directive in the AVS response is well for
   );
 });
 
+it("handles the invalid case where the caption is in an invalid format.", () => {
+  testIllegalArgumentHandling(
+    testData.caption_invalid_format.rawData
+  );
+});
+
 it("does not include non-text parts in Alexa's response", () => {
   const testObject = testData.multi_part_with_different_content_types;
 
@@ -83,11 +89,18 @@ it("extracts Alexa's response in the happy case", () => {
   expect(alexaTextResponses).toEqual(testObject.alexaResponses);
 });
 
-it("handles gracefully when Alexa doesn't say anything in her response. For ex, when user says 'stop'", () => {
-  const testObject = testData.happy_case_when_alexa_responds_with_empty_message;
+it("handles gracefully when Alexa doesn't say anything in her webvtt response. For ex, when user says 'stop'", () => {
+  const testObject = testData.happy_case_when_alexa_responds_with_empty_webvtt_message;
 
   const alexaTextResponses = parser(testObject.rawData);
-  expect(alexaTextResponses).toEqual(testObject.alexaResponses);
+  expect(alexaTextResponses.size).toBe(0);
+});
+
+it("handles gracefully when Alexa returns a caption type that is not supported", () => {
+  const testObject = testData.happy_case_unknown_caption_type;
+
+  const alexaTextResponses = parser(testObject.rawData);
+  expect(alexaTextResponses.size).toBe(0);
 });
 
 /**

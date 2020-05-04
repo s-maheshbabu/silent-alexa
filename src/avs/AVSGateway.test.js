@@ -204,7 +204,7 @@ or responds with nothing (can happen when user says something senseless like 'dr
   const access_token = "a mock access_token";
 
   const emptyishResponses = [
-    testData.happy_case_when_alexa_responds_with_empty_message.rawData,
+    testData.happy_case_when_alexa_responds_with_empty_webvtt_message.rawData,
     testData.happy_case_when_alexa_responds_with_nothing.rawData
   ];
 

@@ -5,7 +5,7 @@ const { List } = require("immutable");
   const rawData = String.raw`--------abcde123
 Content-Type: application/json; charset=UTF-8
 
-{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"caption","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\ncaption", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
 `;
 
   exports.multi_part_with_just_one_part = {
@@ -54,7 +54,7 @@ second-part-of-multi-part-message
   const rawData = String.raw`--------abcde123
 Content-Type: application/json; charset=UTF-8
 
-{"${anyKeyThatIsNot_directive}":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"caption","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+{"${anyKeyThatIsNot_directive}":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\ncaption", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: application/octet-stream
@@ -73,7 +73,7 @@ second-part-of-multi-part-message
   const rawData = String.raw`--------abcde123
 Content-Type: application/json; charset=UTF-8
 
-{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"${anyKeyThatIsNot_payload}":{"caption":"caption","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"${anyKeyThatIsNot_payload}":{"caption":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\ncaption", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: application/octet-stream
@@ -92,7 +92,7 @@ second-part-of-multi-part-message
   const rawData = String.raw`--------abcde123
 Content-Type: application/json; charset=UTF-8
 
-{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"${anyKeyThatIsNot_caption}":"caption","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"${anyKeyThatIsNot_caption}":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\ncaption", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: application/octet-stream
@@ -111,7 +111,7 @@ first-part-of-multi-part-message
   const rawData = String.raw`--------abcde123
 Content-Type: application/json; charset=UTF-8
 
-{"directive":{"${anyKeyThatIsNot_header}":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"caption","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+{"directive":{"${anyKeyThatIsNot_header}":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\ncaption", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: application/octet-stream
@@ -130,7 +130,7 @@ first-part-of-multi-part-message
   const rawData = String.raw`--------abcde123
 Content-Type: application/json; charset=UTF-8
 
-{"directive":{"header":{"namespace":"SpeechSynthesizer","${anyKeyThatIsNot_name}":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"caption","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+{"directive":{"header":{"namespace":"SpeechSynthesizer","${anyKeyThatIsNot_name}":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\ncaption", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: application/octet-stream
@@ -139,6 +139,24 @@ first-part-of-multi-part-message
 --------abcde123--`;
 
   exports.name_key_doesnt_exist_in_avs_directive = {
+    rawData: rawData
+  };
+}
+
+// Invalid case where the caption is in an invalid format (timestamps in the caption are invalid in this test case)
+{
+  const rawData = String.raw`--------abcde123
+Content-Type: application/json; charset=UTF-8
+
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":{"content": "WEBVTT\n\n1\n00:h0.000 --> 1b:11.1111\nsome-caption", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">some-caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+--------abcde123
+Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
+Content-Type: application/octet-stream
+
+second-part-of-multi-part-message
+--------abcde123--`;
+
+  exports.caption_invalid_format = {
     rawData: rawData
   };
 }
@@ -154,7 +172,7 @@ first-part-of-multi-part-message
   const rawData = String.raw`--------abcde123
 Content-Type: ${validTextResponseContentType}
 
-{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"${alexaResponse}","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponse}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\n${alexaResponse}", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponse}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: ${validNonTextResponseContentType}
@@ -189,7 +207,7 @@ fifth-part-of-multi-part-message
   const rawData = String.raw`--------abcde123
 Content-Type: application/json; charset=UTF-8
 
-{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"${alexaResponseFirstPart}","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponseFirstPart}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\n${alexaResponseFirstPart}", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponseFirstPart}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: application/octet-stream
@@ -198,7 +216,7 @@ first-audio-part-of-multi-part-message
 --------abcde123
 Content-Type: application/json; charset=UTF-8
 
-{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"${alexaResponseSecondPart}","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponseSecondPart}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\n${alexaResponseSecondPart}", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponseSecondPart}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: application/octet-stream
@@ -224,7 +242,7 @@ Content-Type: application/json; charset=UTF-8
 --------abcde123
 Content-Type: application/json; charset=UTF-8
 
-{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"${alexaResponse}","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponse}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\n${alexaResponse}", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponse}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: application/octet-stream
@@ -244,7 +262,7 @@ second-part-of-multi-part-message
   const rawData = String.raw`--------abcde123
 Content-Type: application/json; charset=UTF-8
 
-{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"${alexaResponse}","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponse}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\n${alexaResponse}", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponse}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: application/octet-stream
@@ -258,13 +276,53 @@ second-part-of-multi-part-message
   };
 }
 
-// Happy case where Alexa chooses to remain silent. For ex, when the user says 'shutup'.
+// Happy case multi-part message with a combination and of WEBVTT and plain string captions
 {
-  const alexaResponse = "";
+  const alexaResponseFirstPartFisrtLineWebvttFormat = "alexa success response first part first line in WEBVTT format";
+  const alexaResponseFirstPartSecondLineWebvttFormat = "alexa success response first part second line in WEBVTT format";
+  const alexaResponseSecondPartPlainStringFormat = "alexa success response second part in plain string format";
+  const alexaResponseThirdParttWebvttFormat = "alexa success response third part in WEBVTT format";
   const rawData = String.raw`--------abcde123
 Content-Type: application/json; charset=UTF-8
 
-{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"c7f315f3-6de6-40c1-807e-8d69ef41d78e"},"payload":{"caption":"${alexaResponse}","url":"cid:GlobalDomain_ActionableAbandon_2b259d35-1caf-432b-ab63-009447af88e6_545084105","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Alexa:Notification#ACRI#GlobalDomain_ActionableAbandon_2b259d35-1caf-432b-ab63-009447af88e6","ssml":"<speak><prosody volume=\"x-loud\"><audio src=\"system_state_active_end.wav\"/></prosody><metadata><promptMetadata><promptId>Error.NLU.Abandoned</promptId><namespace>Platform</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>e04169f9-7a10-4705-8714-8a853817915a</variant><condition/><weight>1</weight><stageVersion>Adm-20140919_230517-32</stageVersion></promptMetadata></metadata></speak>"}}}
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\n${alexaResponseFirstPartFisrtLineWebvttFormat}\n\n1\n22:22.222 --> 33:33.333\n${alexaResponseFirstPartSecondLineWebvttFormat}", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponseFirstPartFisrtLineWebvttFormat}${alexaResponseFirstPartSecondLineWebvttFormat}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+--------abcde123
+Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
+Content-Type: application/octet-stream
+
+first-audio-part-of-multi-part-message
+--------abcde123
+Content-Type: application/json; charset=UTF-8
+
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":"${alexaResponseSecondPartPlainStringFormat}","url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponseSecondPartPlainStringFormat}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+--------abcde123
+Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
+Content-Type: application/octet-stream
+
+second-audio-part-of-multi-part-message
+--------abcde123--
+Content-Type: application/json; charset=UTF-8
+
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\n${alexaResponseThirdParttWebvttFormat}", "type": "WEBVTT"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">${alexaResponseThirdParttWebvttFormat}</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+--------abcde123
+Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
+Content-Type: application/octet-stream
+
+third-audio-part-of-multi-part-message
+--------abcde123`;
+
+  exports.multi_part_with_just_three_parts = {
+    rawData: rawData,
+    alexaResponses: List.of(alexaResponseFirstPartFisrtLineWebvttFormat, alexaResponseFirstPartSecondLineWebvttFormat, alexaResponseSecondPartPlainStringFormat, alexaResponseThirdParttWebvttFormat)
+  };
+}
+
+// Happy case where Alexa chooses to remain silent and returns an empty WEBVTT. For ex, when the user says 'shutup'.
+{
+  const rawData = String.raw`--------abcde123
+Content-Type: application/json; charset=UTF-8
+
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"c7f315f3-6de6-40c1-807e-8d69ef41d78e"},"payload":{"caption":{"content": "WEBVTT\n\n", "type": "WEBVTT"},"url":"cid:GlobalDomain_ActionableAbandon_2b259d35-1caf-432b-ab63-009447af88e6_545084105","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Alexa:Notification#ACRI#GlobalDomain_ActionableAbandon_2b259d35-1caf-432b-ab63-009447af88e6","ssml":"<speak><prosody volume=\"x-loud\"><audio src=\"system_state_active_end.wav\"/></prosody><metadata><promptMetadata><promptId>Error.NLU.Abandoned</promptId><namespace>Platform</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>e04169f9-7a10-4705-8714-8a853817915a</variant><condition/><weight>1</weight><stageVersion>Adm-20140919_230517-32</stageVersion></promptMetadata></metadata></speak>"}}}
 --------abcde123
 Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
 Content-Type: application/octet-stream
@@ -272,9 +330,27 @@ Content-Type: application/octet-stream
 second-part-of-multi-part-message
 --------abcde123--`;
 
-  exports.happy_case_when_alexa_responds_with_empty_message = {
-    rawData: rawData,
-    alexaResponses: List.of(alexaResponse)
+  exports.happy_case_when_alexa_responds_with_empty_webvtt_message = {
+    rawData: rawData
+  };
+}
+
+// Happy case where the caption is of an unknown type.
+{
+  const anyCaptionTypeThatIsNotWebvtt = "anyCaptionTypeThatIsNotWebvtt";
+  const rawData = String.raw`--------abcde123
+Content-Type: application/json; charset=UTF-8
+
+{"directive":{"header":{"namespace":"SpeechSynthesizer","name":"Speak","messageId":"67ba4c5a-211e-4722-a53d-44c9728f5377"},"payload":{"caption":{"content": "WEBVTT\n\n1\n00:00.000 --> 11:11.111\ncaption", "type": "${anyCaptionTypeThatIsNotWebvtt}"},"url":"cid:f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545","format":"AUDIO_MPEG","token":"amzn1.as-ct.v1.Domain:Application:Knowledge#ACRI#f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV","ssml":"<speak><prosody volume=\"x-loud\"><p xmlns:amazon=\"https://amazon.com/ssml/2017-01-01/\" xmlns:ivona=\"http://www.ivona.com/2009/12/ssml\">caption</p></prosody><metadata><promptMetadata><promptId>AnswerSsml</promptId><namespace>SmartDJ.MusicQA</namespace><locale>en_US</locale><overrideId>default</overrideId><variant>809dfcd2-2807-4eaf-93e9-1130c2db01fa</variant><condition/><weight>1</weight><stageVersion>Adm-20141203_202706-183</stageVersion></promptMetadata></metadata></speak>"}}}
+--------abcde123
+Content-ID: <f17ff476-0960-443d-9805-3f5d398a3c5d#TextClient:1.0/2018/03/10/09/e59eab82b4da42b684ea5ed33b1955a7/04:05::TNIH_2V.f7f5577a-9b52-41d4-a273-c0796379590fZXV_1490666545>
+Content-Type: application/octet-stream
+
+second-part-of-multi-part-message
+--------abcde123--`;
+
+  exports.happy_case_unknown_caption_type = {
+    rawData: rawData
   };
 }
 
