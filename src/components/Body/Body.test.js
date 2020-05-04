@@ -46,13 +46,12 @@ it("renders login-failed view when user navigates to /authresponse and user fail
   });
 });
 
-it("redirects to / for unknown paths", () => {
-  const { history, asFragment } = renderWithRouter(
+it("renders 404 for unknown paths", () => {
+  const { asFragment } = renderWithRouter(
     <Body />, cookies,
     { route: "/a/random/path" }
   );
 
-  expect(history.location.pathname).toEqual('/');
   expect(asFragment()).toMatchSnapshot();
 });
 
