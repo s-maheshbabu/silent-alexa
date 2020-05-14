@@ -40,9 +40,7 @@ export default function Body() {
       <Route exact path={["/"]}  >
         {componentToRender}
       </Route>
-      <Route exact path="/:foo+">
-        <PageNotFoundScreen />
-      </Route>
+      <Route component={PageNotFoundScreen} />
     </Switch>
   );
 }
