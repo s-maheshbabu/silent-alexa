@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`redirects to / for unknown paths 1`] = `
+exports[`renders 404 for unknown paths 1`] = `
 <DocumentFragment>
   <div
-    id="welcome-screen"
+    id="pagenotfound-screen"
   >
     <h1>
-       WELCOME TO SILENT ALEXA (Under Construction) 
+       404 
     </h1>
     <h1>
-       Login to get started 
+       This is just a placeholder. We might want to have a link here to let the user try logging in again or go home. 
     </h1>
   </div>
 </DocumentFragment>

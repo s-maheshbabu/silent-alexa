@@ -8,7 +8,7 @@ import { useCookies } from "react-cookie";
 
 import { Route, Switch } from "react-router-dom";
 import LoginHandler from "LoginHandler/LoginHandler";
-import DefaultRedirect from "DefaultRedirect/DefaultRedirect";
+import PageNotFoundScreen from "../PageNotFoundScreen/PageNotFoundScreen";
 import LoginFailedScreen from "../LoginFailedScreen/LoginFailedScreen";
 
 import { AMAZON_LOGIN_COOKIE } from "Constants";
@@ -40,9 +40,7 @@ export default function Body() {
       <Route exact path={["/"]}  >
         {componentToRender}
       </Route>
-      <Route exact path="/:foo+">
-        <DefaultRedirect />
-      </Route>
+      <Route component={PageNotFoundScreen} />
     </Switch>
   );
 }

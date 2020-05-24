@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<DocumentFragment>
+  <div
+    id="pagenotfound-screen"
+  >
+    <h1>
+       404 
+    </h1>
+    <h1>
+       This is just a placeholder. We might want to have a link here to let the user try logging in again or go home. 
+    </h1>
+  </div>
+</DocumentFragment>
+`;
