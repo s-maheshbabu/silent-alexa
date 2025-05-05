@@ -22,7 +22,7 @@
     "react-dom": "^16.13.1",
     "react-loading": "^2.0.3",
     "react-router-dom": "^7.5.2",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "uuid": "^3.2.1"
   },
   "config": {
